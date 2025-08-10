@@ -8,8 +8,16 @@ public class ChatterStats : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<SimpleHealth>().maxHealth += power * 20; GetComponent<SimpleHealth>().Heal(power * 20);
-        GetComponent<SimpleHealth>().SyncSlider();
-        Debug.Log(power);
+        var health = GetComponent<SimpleHealth>();
+        if (health != null)
+        {
+            int baseMaxHealth = health.maxHealth; // store original
+            int bonusFromPercent = Mathf.RoundToInt(baseMaxHealth * 0.075f * power);
+            int bonusFromFlat = 0;
+
+            health.maxHealth += bonusFromPercent + bonusFromFlat;
+            health.Heal(bonusFromPercent + bonusFromFlat);
+            health.SyncSlider();
+        }
     }
 }

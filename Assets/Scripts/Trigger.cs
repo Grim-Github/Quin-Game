@@ -21,8 +21,14 @@ public class Trigger2DEvent : MonoBehaviour
         col.isTrigger = true;
     }
 
+    public void PlaySoundAtPlayer(AudioClip sfx)
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>().PlayOneShot(sfx);
+    }
+
     public void XPOrb(int value)
     {
+
         GameObject.FindGameObjectWithTag("GameController").GetComponent<XpSystem>().AddExperience(Random.Range(value, value * 2));
     }
 

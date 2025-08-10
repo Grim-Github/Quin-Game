@@ -30,8 +30,18 @@ public class AccessoriesUpgrades : MonoBehaviour
 
     private void OnValidate()
     {
+        // Auto-set icon from parent's Accessory if available
+        if (transform.parent != null && transform.parent.TryGetComponent(out Accessory accessory))
+        {
+            if (accessory.icon != null && Upgrade != null)
+            {
+                Upgrade.powerUpIcon = accessory.icon;
+            }
+        }
+
         // Keep next wired live in the editor as you reorder children
         AutoAssignNextUpgrade();
+
     }
 
     private void OnTransformParentChanged()

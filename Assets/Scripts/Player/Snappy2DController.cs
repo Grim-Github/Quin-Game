@@ -8,7 +8,7 @@ public class Snappy2DController : MonoBehaviour
     [SerializeField] private bool allowDiagonal = true;
 
     [Header("Feel")]
-    [Tooltip("If true: movement is instant (snappy). If false: velocity eases toward target using acceleration.")]
+    [Tooltip("If true: movement is instant (snappy). If false: velocity eases toward target using acceleration. Higher = snappier.")]
     [SerializeField] private bool instant = true;
     [Tooltip("When not instant: how fast velocity moves toward target. Higher = snappier.")]
     [SerializeField] private float acceleration = 50f;
@@ -17,6 +17,9 @@ public class Snappy2DController : MonoBehaviour
     [SerializeField] private float dashSpeed = 12f;
     [SerializeField] private float dashDuration = 0.15f;
     [SerializeField] private float dashCooldown = 0.5f;
+
+    [Header("Visuals")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private Rigidbody2D rb;
     private Vector2 input;
@@ -33,12 +36,14 @@ public class Snappy2DController : MonoBehaviour
     public float DashDuration => dashDuration;
     public float DashCooldown => dashCooldown;
 
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
         rb.gravityScale = 0f;
+
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Update()
@@ -72,11 +77,28 @@ public class Snappy2DController : MonoBehaviour
             input = input.normalized;
             targetVelocity = input * moveSpeed;
         }
+
+        // Flip sprite based on horizontal movement
+        if (spriteRenderer != null && input.x != 0)
+            spriteRenderer.flipX = input.x < 0;
     }
+
     public void IncreaseMoveSpeed(float amount)
     {
         if (amount == 0f) return;
         moveSpeed = Mathf.Max(0f, moveSpeed + amount);
+    }
+
+    public void IncreaseDashSpeed(float amount) // FIXED
+    {
+        if (amount == 0f) return;
+        dashSpeed = Mathf.Max(0f, dashSpeed + amount);
+    }
+
+    public void IncreaseDashCooldown(float amount) // FIXED
+    {
+        if (amount == 0f) return;
+        dashCooldown = Mathf.Max(0f, dashCooldown + amount);
     }
 
     private void FixedUpdate()
@@ -84,11 +106,8 @@ public class Snappy2DController : MonoBehaviour
         if (isDashing)
         {
             rb.linearVelocity = dashDirection * dashSpeed;
-
             if (Time.time >= dashEndTime)
-            {
                 isDashing = false;
-            }
             return;
         }
 

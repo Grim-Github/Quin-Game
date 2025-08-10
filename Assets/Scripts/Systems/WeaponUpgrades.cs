@@ -241,6 +241,37 @@ public class WeaponUpgrades : MonoBehaviour
     {
         if (Upgrade == null) return;
 
+
+        // Auto-set icon from parent's weapon sprite if available
+        if (transform.parent != null)
+        {
+            // Check SimpleShooter
+            if (transform.parent.TryGetComponent(out SimpleShooter shooter))
+            {
+                var shooterSprite = shooter.GetType()
+                    .GetField("weaponSprite", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public)
+                    ?.GetValue(shooter) as Sprite;
+                if (shooterSprite != null)
+                {
+                    icon = shooterSprite;
+                    Upgrade.powerUpIcon = shooterSprite;
+                }
+            }
+            // Check Knife
+            else if (transform.parent.TryGetComponent(out Knife knife))
+            {
+                var knifeSprite = knife.GetType()
+                    .GetField("weaponSprite", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public)
+                    ?.GetValue(knife) as Sprite;
+                if (knifeSprite != null)
+                {
+                    icon = knifeSprite;
+                    Upgrade.powerUpIcon = knifeSprite;
+                }
+            }
+        }
+
+
         switch (upgradeType)
         {
             // ------------- KNIFE -------------
@@ -358,6 +389,13 @@ public class WeaponUpgrades : MonoBehaviour
                 Upgrade.powerUpDescription = "This upgrade slot is empty.";
                 break;
         }
+
+        // Append parent transform name to the upgrade title
+        if (!string.IsNullOrEmpty(Upgrade.powerUpName) && transform.parent != null)
+        {
+            Upgrade.powerUpName = $"{transform.parent.name} - {Upgrade.powerUpName}";
+        }
+
     }
 
     public void ApplyUpgrade()

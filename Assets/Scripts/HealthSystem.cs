@@ -124,7 +124,7 @@ public class SimpleHealth : MonoBehaviour
     {
         if (statsTextInstance != null)
         {
-            float referenceDamage = 10f;
+            float referenceDamage = lastDamageTaken;
             float currentMitigation = 0f;
 
             if (armor > 0f && armorScaling > 0f)
@@ -185,8 +185,10 @@ public class SimpleHealth : MonoBehaviour
             _flashRoutine = StartCoroutine(FlashRedCoroutine());
         }
 
-
-
+        if (transform.CompareTag("Player"))
+        {
+            FindAnyObjectByType<OrthoScrollZoom>().CameraShake(0.1f, 2f);
+        }
 
         if (currentHealth <= 0)
             Die();

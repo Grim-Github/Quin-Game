@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class PowerUpSelectionUI : MonoBehaviour
@@ -14,6 +15,13 @@ public class PowerUpSelectionUI : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private PowerUpChooser powerUpChooser;
+    [SerializeField] private Volume slowMoVolume;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip openSFX;
+
+    [SerializeField] private AudioClip closeSFX;
 
     [Header("Defaults")]
     [Tooltip("Default icon to use when a power-up has no icon.")]
@@ -34,6 +42,11 @@ public class PowerUpSelectionUI : MonoBehaviour
             selectButtons[i].onClick.RemoveAllListeners();
             selectButtons[i].onClick.AddListener(() => SelectPowerUp(idx));
         }
+    }
+    private void PlaySFX(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+            audioSource.PlayOneShot(clip);
     }
 
     public void ShowSelection()
@@ -66,9 +79,17 @@ public class PowerUpSelectionUI : MonoBehaviour
             return;
         }
 
-        Time.timeScale = 0f;
-        if (selectionPanel != null) selectionPanel.SetActive(true);
 
+        if (slowMoVolume)
+        {
+            Debug.Log("[PowerUpSelectionUI] Slowing time for selection.");
+            slowMoVolume.weight = 1f;
+        }
+
+        Time.timeScale = 0f;
+
+        if (selectionPanel != null) selectionPanel.SetActive(true);
+        PlaySFX(openSFX);
         int slotCount = Mathf.Min(3, selectButtons.Length, candidates.Count);
         shownIndices = PickRandomUnique(candidates, slotCount);
 
@@ -87,8 +108,22 @@ public class PowerUpSelectionUI : MonoBehaviour
             {
                 var pu = powerUpChooser.powerUps[shownIndices[i]];
 
+                string newName = pu.powerUpName;
+
+                // Check if the powerUpObject exists and has Shooter or Knife component
+                if (pu.powerUpObject != null)
+                {
+                    if (pu.powerUpObject.GetComponent<SimpleShooter>() != null)
+                        newName += " (Ranged)";
+                    else if (pu.powerUpObject.GetComponent<Knife>() != null)
+                        newName += " (Melee)";
+                }
+
                 if (nameTexts != null && i < nameTexts.Length && nameTexts[i] != null)
+                {
                     nameTexts[i].text = pu.powerUpName;
+                    nameTexts[i].gameObject.name = newName; // rename the TMP_Text GameObject
+                }
 
                 if (descriptionTexts != null && i < descriptionTexts.Length && descriptionTexts[i] != null)
                     descriptionTexts[i].text = pu.powerUpDescription;
@@ -98,8 +133,6 @@ public class PowerUpSelectionUI : MonoBehaviour
                 {
                     var img = iconImages[i];
                     Sprite spriteToUse = pu.powerUpIcon != null ? pu.powerUpIcon : defaultIcon;
-
-                    // Assign and ensure visible
                     img.sprite = spriteToUse;
                     img.enabled = true;
                     img.gameObject.SetActive(true);
@@ -111,6 +144,7 @@ public class PowerUpSelectionUI : MonoBehaviour
                     selectButtons[i].gameObject.SetActive(true);
                 }
             }
+
             else
             {
                 // Hide unused slots entirely
@@ -156,7 +190,10 @@ public class PowerUpSelectionUI : MonoBehaviour
     private void ClosePanel()
     {
         if (selectionPanel != null) selectionPanel.SetActive(false);
+        PlaySFX(closeSFX);
         Time.timeScale = 1f;
+        if (slowMoVolume) slowMoVolume.weight = 0f;
+
         shownIndices = null;
     }
     private int[] PickRandomUnique(List<int> source, int count)

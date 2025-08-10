@@ -22,10 +22,17 @@ public class FollowNearest2D : MonoBehaviour
     [Tooltip("Use Rigidbody2D.MovePosition if available.")]
     public bool useRigidbodyMovement = true;
 
+    [Header("Coordination")]
+    [Tooltip("Other followers to avoid duplicating targets with.")]
+    public FollowNearest2D[] otherFollowers;
+
     private Transform target;
     private Transform playerTransform;
     private float nextUpdateTime = 0f;
     private Rigidbody2D rb2d;
+
+    // Expose current target read-only so teammates can check it
+    public Transform CurrentTarget => target;
 
     private void Start()
     {
@@ -84,14 +91,27 @@ public class FollowNearest2D : MonoBehaviour
         Vector3 searchCenter = playerTransform != null ? playerTransform.position : transform.position;
         Collider2D[] hits = Physics2D.OverlapCircleAll(searchCenter, searchRadius, targetLayer);
 
+        // Build the set of claimed targets from teammates
+        System.Collections.Generic.HashSet<Transform> claimed = new System.Collections.Generic.HashSet<Transform>();
+        if (otherFollowers != null)
+        {
+            foreach (var f in otherFollowers)
+            {
+                if (f == null || f == this) continue;
+                if (f.CurrentTarget != null) claimed.Add(f.CurrentTarget);
+            }
+        }
+
         float closestDistance = Mathf.Infinity;
         Transform closestTarget = null;
 
         foreach (Collider2D hit in hits)
         {
             if (hit == null) continue;
-            // skip self if we’re on the same layer/query
-            if (hit.transform == transform) continue;
+            if (hit.transform == transform) continue; // skip self
+
+            // Skip targets already being followed by any teammate
+            if (claimed.Contains(hit.transform)) continue;
 
             float distance = Vector2.Distance(searchCenter, hit.transform.position);
             if (distance < closestDistance)
@@ -101,7 +121,7 @@ public class FollowNearest2D : MonoBehaviour
             }
         }
 
-        target = closestTarget; // always reassign, even if same as before
+        target = closestTarget; // if none available (all claimed), becomes null
     }
 
     // Draw the search radius in Scene view

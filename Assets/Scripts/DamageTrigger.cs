@@ -8,7 +8,7 @@ public class BulletDamageTrigger : MonoBehaviour
     [Header("Damage")]
     [SerializeField] public int damageAmount = 10;
     [Tooltip("How many successful damage hits this bullet can apply before it is destroyed.")]
-    [SerializeField] private int penetration = 1;
+    [SerializeField] public int penetration = 1;
 
     [Header("Filters")]
     [Tooltip("Only objects on these layers will be damaged.")]

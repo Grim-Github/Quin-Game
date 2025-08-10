@@ -33,6 +33,9 @@ public class TwitchListener : MonoBehaviour
     [Tooltip("How much to increase max spawn count each interval")]
     [SerializeField, Min(1)] private int spawnIncreaseAmount = 1;
 
+    public int minPower = 0; // Minimum power level for chatters to spawn
+    public float chanceToUpgradeMinPower = 0.6f; // Chance to upgrade chatter power on spawn
+
     // Track time for next increase
     private float nextSpawnIncreaseTime = 0f;
 
@@ -80,6 +83,12 @@ public class TwitchListener : MonoBehaviour
             // Check if it's time to increase spawn cap
             if (spawnIncreaseInterval > 0f && elapsedSeconds >= nextSpawnIncreaseTime)
             {
+                if (Random.Range(0, 1) < chanceToUpgradeMinPower)
+                {
+                    minPower++;
+                }
+
+
                 maxSpawnCount += spawnIncreaseAmount;
                 nextSpawnIncreaseTime = elapsedSeconds + spawnIncreaseInterval;
                 Debug.Log($"[TwitchListener] Max spawn count increased to {maxSpawnCount}");
@@ -155,7 +164,7 @@ public class TwitchListener : MonoBehaviour
         {
             stats.nameGUI.text = chatter.tags.displayName;
             stats.nameGUI.color = chatter.GetNameColor();
-            stats.power = chatter.tags.badges.Length;
+            stats.power = chatter.tags.badges.Length + minPower;
         }
 
         Debug.Log($"<color=#fef83e><b>[MESSAGE]</b></color> Spawned ({prefab.name}) for {chatter.tags.displayName} at {spawnPos}");

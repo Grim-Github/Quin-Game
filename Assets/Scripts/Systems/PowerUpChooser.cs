@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [System.Serializable]
@@ -27,7 +28,6 @@ public class PowerUp
     public float weight = 1f;
 }
 
-
 public class PowerUpChooser : MonoBehaviour
 {
     [Header("Available & Selected")]
@@ -38,8 +38,35 @@ public class PowerUpChooser : MonoBehaviour
     [Min(0)] public int maxAccessories = 1;
     [Min(0)] public int maxWeapons = 1;
 
-    public int RemainingAccessorySlots => Mathf.Max(0, maxAccessories - CountSelected(p => p.IsAccessory));
-    public int RemainingWeaponSlots => Mathf.Max(0, maxWeapons - CountSelected(p => p.IsWeapon));
+    [Header("Stats UI")]
+    [Tooltip("Optional: TextMeshProUGUI that will show 'Accessories: cur/max' and 'Weapons: cur/max'.")]
+    [SerializeField] private TextMeshProUGUI statsSummaryText;
+
+    public int CurrentAccessories => CountSelected(p => p.IsAccessory);
+    public int CurrentWeapons => CountSelected(p => p.IsWeapon);
+    public int MaxAccessories => maxAccessories;
+    public int MaxWeapons => maxWeapons;
+
+    public int RemainingAccessorySlots => Mathf.Max(0, maxAccessories - CurrentAccessories);
+    public int RemainingWeaponSlots => Mathf.Max(0, maxWeapons - CurrentWeapons);
+
+    private void Awake()
+    {
+        RefreshStatsText();
+    }
+
+    private void OnEnable()
+    {
+        RefreshStatsText();
+    }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        // Keep UI in sync when tweaking in the inspector
+        RefreshStatsText();
+    }
+#endif
 
     public bool CanSelect(PowerUp pu)
     {
@@ -49,7 +76,8 @@ public class PowerUpChooser : MonoBehaviour
         return true;
     }
 
-    public bool CanSelectByIndex(int index) => index >= 0 && index < powerUps.Count && CanSelect(powerUps[index]);
+    public bool CanSelectByIndex(int index) =>
+        index >= 0 && index < powerUps.Count && CanSelect(powerUps[index]);
 
     /// <summary>
     /// Attempts to choose the power-up at index. Spawns/enables its object,
@@ -72,6 +100,9 @@ public class PowerUpChooser : MonoBehaviour
 
         selectedPowerUps.Add(selected);
         powerUps.RemoveAt(index);
+
+        // Update UI after selection
+        RefreshStatsText();
         return true;
     }
 
@@ -81,5 +112,17 @@ public class PowerUpChooser : MonoBehaviour
         for (int i = 0; i < selectedPowerUps.Count; i++)
             if (predicate(selectedPowerUps[i])) c++;
         return c;
+    }
+
+    /// <summary>
+    /// Updates the bound TextMeshProUGUI with current/max counts.
+    /// </summary>
+    public void RefreshStatsText()
+    {
+        if (statsSummaryText == null) return;
+
+        statsSummaryText.text =
+            $"Accessories: {CurrentAccessories}/{MaxAccessories}\n" +
+            $"Weapons: {CurrentWeapons}/{MaxWeapons}";
     }
 }
