@@ -1,0 +1,871 @@
+fileFormatVersion: 2
+guid: 44a0299f0e6836a42a8a0fc00a9ce0ee
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4738937231328622949
+    second: splattersplash_3_0
+  - first:
+      213: -6123020768261446792
+    second: splattersplash_3_1
+  - first:
+      213: -3272661812133958342
+    second: splattersplash_3_2
+  - first:
+      213: 8637870259488678849
+    second: splattersplash_3_3
+  - first:
+      213: 2139764743035685681
+    second: splattersplash_3_4
+  - first:
+      213: -2229294022088715084
+    second: splattersplash_3_5
+  - first:
+      213: 2747559637573730241
+    second: splattersplash_3_6
+  - first:
+      213: -4073442851581814763
+    second: splattersplash_3_7
+  - first:
+      213: -8320233725493470504
+    second: splattersplash_3_8
+  - first:
+      213: -3206582170020481127
+    second: splattersplash_3_9
+  - first:
+      213: -3046615566583273173
+    second: splattersplash_3_10
+  - first:
+      213: -3050430336074903105
+    second: splattersplash_3_11
+  - first:
+      213: 7011800808804992884
+    second: splattersplash_3_12
+  - first:
+      213: -4746473290959321487
+    second: splattersplash_3_13
+  - first:
+      213: 5543845818091535124
+    second: splattersplash_3_14
+  - first:
+      213: -3872285690670698595
+    second: splattersplash_3_15
+  - first:
+      213: -3477566030094960281
+    second: splattersplash_3_16
+  - first:
+      213: -6738982384180903104
+    second: splattersplash_3_17
+  - first:
+      213: -5783499662887849785
+    second: splattersplash_3_18
+  - first:
+      213: 3684648075584529905
+    second: splattersplash_3_19
+  - first:
+      213: 6050026894530416431
+    second: splattersplash_3_20
+  - first:
+      213: 1262547467588359939
+    second: splattersplash_3_21
+  - first:
+      213: -1537487694184513366
+    second: splattersplash_3_22
+  - first:
+      213: 4519544699045623919
+    second: splattersplash_3_23
+  - first:
+      213: 4971239843455851488
+    second: splattersplash_3_24
+  - first:
+      213: -7883607395872114085
+    second: splattersplash_3_25
+  - first:
+      213: 3806602924011103506
+    second: splattersplash_3_26
+  - first:
+      213: 4840874307612028700
+    second: splattersplash_3_27
+  - first:
+      213: -1002362591260953773
+    second: splattersplash_3_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: splattersplash_3_0
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 563
+        width: 35
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 569373ecd4614c140800000000000000
+      internalID: 4738937231328622949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_1
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 421
+        width: 41
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 873ef6b6d09a60ba0800000000000000
+      internalID: -6123020768261446792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_2
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 452
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3de4c1db6b2592d0800000000000000
+      internalID: -3272661812133958342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_3
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 396
+        width: 65
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c3ebb05c31efd770800000000000000
+      internalID: 8637870259488678849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_4
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 346
+        width: 98
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13b0c8362b8f1bd10800000000000000
+      internalID: 2139764743035685681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_5
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 342
+        width: 76
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b41081f5e4ff01e0800000000000000
+      internalID: -2229294022088715084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_6
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 301
+        width: 49
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cf78c4eeea412620800000000000000
+      internalID: 2747559637573730241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_7
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 330
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5189c9afe493877c0800000000000000
+      internalID: -4073442851581814763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_8
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 239
+        width: 54
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8da9cb75287988c80800000000000000
+      internalID: -8320233725493470504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_9
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 282
+        width: 15
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 997f3dc618eef73d0800000000000000
+      internalID: -3206582170020481127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_10
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 288
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b29e0aaa84f38b5d0800000000000000
+      internalID: -3046615566583273173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_11
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 301
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb11e2e65c1baa5d0800000000000000
+      internalID: -3050430336074903105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_12
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 265
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4774e9c7fabee4160800000000000000
+      internalID: 7011800808804992884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_13
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 242
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1768d7490b3212eb0800000000000000
+      internalID: -4746473290959321487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_14
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 232
+        width: 13
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41b71e42662bfec40800000000000000
+      internalID: 5543845818091535124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_15
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 191
+        width: 29
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9faeba3ea0e24ac0800000000000000
+      internalID: -3872285690670698595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_16
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 154
+        width: 17
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 769793dde143dbfc0800000000000000
+      internalID: -3477566030094960281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_17
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 204
+        width: 71
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 043484be9335a72a0800000000000000
+      internalID: -6738982384180903104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_18
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 166
+        width: 83
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c07afae2b1ecbfa0800000000000000
+      internalID: -5783499662887849785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_19
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 198
+        width: 27
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f5ea8317ef722330800000000000000
+      internalID: 3684648075584529905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_20
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 209
+        width: 23
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2f8b0af76306f350800000000000000
+      internalID: 6050026894530416431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_21
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 172
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3075ca58b38758110800000000000000
+      internalID: 1262547467588359939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_22
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 197
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa0099d861fb9aae0800000000000000
+      internalID: -1537487694184513366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_23
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 170
+        width: 25
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f683d1d45f5a8be30800000000000000
+      internalID: 4519544699045623919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_24
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 136
+        width: 27
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eb54728c446df440800000000000000
+      internalID: 4971239843455851488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_25
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 185
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5a7664b7dcc79290800000000000000
+      internalID: -7883607395872114085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_26
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 170
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21525aee035c3d430800000000000000
+      internalID: 3806602924011103506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_27
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 151
+        width: 37
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1fa783e88d3e2340800000000000000
+      internalID: 4840874307612028700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: splattersplash_3_28
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 125
+        width: 83
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35330c3b884e612f0800000000000000
+      internalID: -1002362591260953773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      splattersplash_3_0: 4738937231328622949
+      splattersplash_3_1: -6123020768261446792
+      splattersplash_3_10: -3046615566583273173
+      splattersplash_3_11: -3050430336074903105
+      splattersplash_3_12: 7011800808804992884
+      splattersplash_3_13: -4746473290959321487
+      splattersplash_3_14: 5543845818091535124
+      splattersplash_3_15: -3872285690670698595
+      splattersplash_3_16: -3477566030094960281
+      splattersplash_3_17: -6738982384180903104
+      splattersplash_3_18: -5783499662887849785
+      splattersplash_3_19: 3684648075584529905
+      splattersplash_3_2: -3272661812133958342
+      splattersplash_3_20: 6050026894530416431
+      splattersplash_3_21: 1262547467588359939
+      splattersplash_3_22: -1537487694184513366
+      splattersplash_3_23: 4519544699045623919
+      splattersplash_3_24: 4971239843455851488
+      splattersplash_3_25: -7883607395872114085
+      splattersplash_3_26: 3806602924011103506
+      splattersplash_3_27: 4840874307612028700
+      splattersplash_3_28: -1002362591260953773
+      splattersplash_3_3: 8637870259488678849
+      splattersplash_3_4: 2139764743035685681
+      splattersplash_3_5: -2229294022088715084
+      splattersplash_3_6: 2747559637573730241
+      splattersplash_3_7: -4073442851581814763
+      splattersplash_3_8: -8320233725493470504
+      splattersplash_3_9: -3206582170020481127
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

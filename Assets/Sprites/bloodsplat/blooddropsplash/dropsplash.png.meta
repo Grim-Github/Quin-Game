@@ -1,0 +1,3029 @@
+fileFormatVersion: 2
+guid: 8450253859dc5b54da5cdc164f9d3df3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8407964915344666480
+    second: dropsplash_0
+  - first:
+      213: 6739785926543370856
+    second: dropsplash_1
+  - first:
+      213: -6733717633552874965
+    second: dropsplash_2
+  - first:
+      213: 8385949671489123425
+    second: dropsplash_3
+  - first:
+      213: 5391506181022086892
+    second: dropsplash_4
+  - first:
+      213: -1105797116022636597
+    second: dropsplash_5
+  - first:
+      213: -3640661767169786317
+    second: dropsplash_6
+  - first:
+      213: -1762557650546594124
+    second: dropsplash_7
+  - first:
+      213: -4388402649189719704
+    second: dropsplash_8
+  - first:
+      213: 2416408701603764372
+    second: dropsplash_9
+  - first:
+      213: 8367875509947138688
+    second: dropsplash_10
+  - first:
+      213: -4396050307795933394
+    second: dropsplash_11
+  - first:
+      213: -2151832153113509110
+    second: dropsplash_12
+  - first:
+      213: -1167707352652536242
+    second: dropsplash_13
+  - first:
+      213: 3077258429160437535
+    second: dropsplash_14
+  - first:
+      213: -2382787912948823113
+    second: dropsplash_15
+  - first:
+      213: 1920444098849049515
+    second: dropsplash_16
+  - first:
+      213: 294598906606130156
+    second: dropsplash_17
+  - first:
+      213: 6087117700414155767
+    second: dropsplash_18
+  - first:
+      213: 1515546874436384521
+    second: dropsplash_19
+  - first:
+      213: -4026382638173348354
+    second: dropsplash_20
+  - first:
+      213: 5754596369261754421
+    second: dropsplash_21
+  - first:
+      213: -1785611165175763033
+    second: dropsplash_22
+  - first:
+      213: -255805176662852439
+    second: dropsplash_23
+  - first:
+      213: -78433043303182797
+    second: dropsplash_24
+  - first:
+      213: 6243755990230009340
+    second: dropsplash_25
+  - first:
+      213: -8156174085929594527
+    second: dropsplash_26
+  - first:
+      213: 7544140254487646617
+    second: dropsplash_27
+  - first:
+      213: 4226925348706652858
+    second: dropsplash_28
+  - first:
+      213: -7386212032334809706
+    second: dropsplash_29
+  - first:
+      213: 2942426921971107644
+    second: dropsplash_30
+  - first:
+      213: 9217801506206575972
+    second: dropsplash_31
+  - first:
+      213: -2340347319103997808
+    second: dropsplash_32
+  - first:
+      213: 2401360317299398812
+    second: dropsplash_33
+  - first:
+      213: 5262433264498114289
+    second: dropsplash_34
+  - first:
+      213: 1977210553621098439
+    second: dropsplash_35
+  - first:
+      213: -3285802625148873670
+    second: dropsplash_36
+  - first:
+      213: -6551669109081886969
+    second: dropsplash_37
+  - first:
+      213: 4981895014177326524
+    second: dropsplash_38
+  - first:
+      213: -7661785665098566855
+    second: dropsplash_39
+  - first:
+      213: 3940257047923531771
+    second: dropsplash_40
+  - first:
+      213: -5641210254788815328
+    second: dropsplash_41
+  - first:
+      213: 244043161260102560
+    second: dropsplash_42
+  - first:
+      213: 4439677005652617014
+    second: dropsplash_43
+  - first:
+      213: 2755072401119188078
+    second: dropsplash_44
+  - first:
+      213: -7788945093988215539
+    second: dropsplash_45
+  - first:
+      213: -5872699171510887988
+    second: dropsplash_46
+  - first:
+      213: 8507172005622171265
+    second: dropsplash_47
+  - first:
+      213: 6429847849316728374
+    second: dropsplash_48
+  - first:
+      213: 8851115445328563340
+    second: dropsplash_49
+  - first:
+      213: 1293728105958749592
+    second: dropsplash_50
+  - first:
+      213: -1749641728136821024
+    second: dropsplash_51
+  - first:
+      213: 2434521882651149451
+    second: dropsplash_52
+  - first:
+      213: 514101366959815393
+    second: dropsplash_53
+  - first:
+      213: 6780934448958572699
+    second: dropsplash_54
+  - first:
+      213: 1492597886455961299
+    second: dropsplash_55
+  - first:
+      213: -3497725896038073775
+    second: dropsplash_56
+  - first:
+      213: -2040008421656432401
+    second: dropsplash_57
+  - first:
+      213: -526575085981090291
+    second: dropsplash_58
+  - first:
+      213: -6144676119508001561
+    second: dropsplash_59
+  - first:
+      213: 4310592120112080935
+    second: dropsplash_60
+  - first:
+      213: -4380421442612150694
+    second: dropsplash_61
+  - first:
+      213: -6920716916084078889
+    second: dropsplash_62
+  - first:
+      213: -1806954181749453419
+    second: dropsplash_63
+  - first:
+      213: -985920797670561791
+    second: dropsplash_64
+  - first:
+      213: 5482354617954429826
+    second: dropsplash_65
+  - first:
+      213: -3046422645109398911
+    second: dropsplash_66
+  - first:
+      213: 3233545152328196018
+    second: dropsplash_67
+  - first:
+      213: -7243018663038038942
+    second: dropsplash_68
+  - first:
+      213: 6637928978872194963
+    second: dropsplash_69
+  - first:
+      213: -2649541033205574833
+    second: dropsplash_70
+  - first:
+      213: -4761470568164224395
+    second: dropsplash_71
+  - first:
+      213: -2038774455498676660
+    second: dropsplash_72
+  - first:
+      213: -1146095501443259728
+    second: dropsplash_73
+  - first:
+      213: -308537637263138154
+    second: dropsplash_74
+  - first:
+      213: 854980013564356814
+    second: dropsplash_75
+  - first:
+      213: -1898902643196633177
+    second: dropsplash_76
+  - first:
+      213: 4564631123087302400
+    second: dropsplash_77
+  - first:
+      213: -5169360951721243699
+    second: dropsplash_78
+  - first:
+      213: -6280481748234734664
+    second: dropsplash_79
+  - first:
+      213: -8162770479856697017
+    second: dropsplash_80
+  - first:
+      213: -5815041717388970665
+    second: dropsplash_81
+  - first:
+      213: -6825381996230175019
+    second: dropsplash_82
+  - first:
+      213: 2453897568453693128
+    second: dropsplash_83
+  - first:
+      213: -881083447581796477
+    second: dropsplash_84
+  - first:
+      213: -8691769863169982046
+    second: dropsplash_85
+  - first:
+      213: 723555995474293524
+    second: dropsplash_86
+  - first:
+      213: 7561879162393763528
+    second: dropsplash_87
+  - first:
+      213: -6713014029083810619
+    second: dropsplash_88
+  - first:
+      213: -4433058303300662319
+    second: dropsplash_89
+  - first:
+      213: -4890971748533152783
+    second: dropsplash_90
+  - first:
+      213: -1594240566182147315
+    second: dropsplash_91
+  - first:
+      213: -5659887082984132921
+    second: dropsplash_92
+  - first:
+      213: -4916797108143744674
+    second: dropsplash_93
+  - first:
+      213: -7011353862193262979
+    second: dropsplash_94
+  - first:
+      213: 7376061019511942949
+    second: dropsplash_95
+  - first:
+      213: -6925633322812878295
+    second: dropsplash_96
+  - first:
+      213: 7957419762404247199
+    second: dropsplash_97
+  - first:
+      213: 5239458698031022492
+    second: dropsplash_98
+  - first:
+      213: -4424964116763260122
+    second: dropsplash_99
+  - first:
+      213: 7548928289290964788
+    second: dropsplash_100
+  - first:
+      213: -8319594722430169784
+    second: dropsplash_101
+  - first:
+      213: 4821515629554372336
+    second: dropsplash_102
+  - first:
+      213: 6488279209967216108
+    second: dropsplash_103
+  - first:
+      213: -4522219812771070235
+    second: dropsplash_104
+  - first:
+      213: -5366186422889800540
+    second: dropsplash_105
+  - first:
+      213: -8475369542621166905
+    second: dropsplash_106
+  - first:
+      213: 2365876055859245351
+    second: dropsplash_107
+  - first:
+      213: -623660542135865222
+    second: dropsplash_108
+  - first:
+      213: 6528764501500905315
+    second: dropsplash_109
+  - first:
+      213: -2916353079353343631
+    second: dropsplash_110
+  - first:
+      213: 2360502521872996639
+    second: dropsplash_111
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dropsplash_0
+      rect:
+        serializedVersion: 2
+        x: 1580
+        y: 1096
+        width: 66
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0901fe0f478e05b80800000000000000
+      internalID: -8407964915344666480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_1
+      rect:
+        serializedVersion: 2
+        x: 1641
+        y: 1174
+        width: 14
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86a6bcd5797888d50800000000000000
+      internalID: 6739785926543370856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_2
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 1114
+        width: 16
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b220c423d770d82a0800000000000000
+      internalID: -6733717633552874965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_3
+      rect:
+        serializedVersion: 2
+        x: 1042
+        y: 1108
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 164b969abc0e06470800000000000000
+      internalID: 8385949671489123425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_4
+      rect:
+        serializedVersion: 2
+        x: 1073
+        y: 1050
+        width: 46
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce6f4246e4a72da40800000000000000
+      internalID: 5391506181022086892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_5
+      rect:
+        serializedVersion: 2
+        x: 1414
+        y: 1090
+        width: 90
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcfb1d9b16b67a0f0800000000000000
+      internalID: -1105797116022636597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_6
+      rect:
+        serializedVersion: 2
+        x: 1594
+        y: 1004
+        width: 166
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33ebf7c6965c97dc0800000000000000
+      internalID: -3640661767169786317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_7
+      rect:
+        serializedVersion: 2
+        x: 1699
+        y: 998
+        width: 174
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bee50fb7232a87e0800000000000000
+      internalID: -1762557650546594124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_8
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 1071
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 861e9a39a034913c0800000000000000
+      internalID: -4388402649189719704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_9
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 913
+        width: 506
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 498514359eec88120800000000000000
+      internalID: 2416408701603764372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_10
+      rect:
+        serializedVersion: 2
+        x: 1494
+        y: 1005
+        width: 73
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 082071ff07aa02470800000000000000
+      internalID: 8367875509947138688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_11
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 1007
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e27a31d49871ef2c0800000000000000
+      internalID: -4396050307795933394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_12
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 915
+        width: 300
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a03c761ce082322e0800000000000000
+      internalID: -2151832153113509110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_13
+      rect:
+        serializedVersion: 2
+        x: 1323
+        y: 942
+        width: 156
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e46a88b79587bcfe0800000000000000
+      internalID: -1167707352652536242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_14
+      rect:
+        serializedVersion: 2
+        x: 1633
+        y: 1005
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f173f20cc3e94ba20800000000000000
+      internalID: 3077258429160437535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_15
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 965
+        width: 140
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bb47998403aeeed0800000000000000
+      internalID: -2382787912948823113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_16
+      rect:
+        serializedVersion: 2
+        x: 1628
+        y: 996
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bab84e2abb9c6aa10800000000000000
+      internalID: 1920444098849049515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_17
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 989
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce31a7b0520a61400800000000000000
+      internalID: 294598906606130156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_18
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 932
+        width: 71
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fbad2f2c49c97450800000000000000
+      internalID: 6087117700414155767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_19
+      rect:
+        serializedVersion: 2
+        x: 1512
+        y: 926
+        width: 36
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 907fb334add480510800000000000000
+      internalID: 1515546874436384521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_20
+      rect:
+        serializedVersion: 2
+        x: 1575
+        y: 937
+        width: 27
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efd90e1c25a6f18c0800000000000000
+      internalID: -4026382638173348354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_21
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 563
+        width: 35
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 538799f98ee6cdf40800000000000000
+      internalID: 5754596369261754421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_22
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 421
+        width: 41
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7af2ab81b1c3837e0800000000000000
+      internalID: -1785611165175763033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_23
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 460
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9acfd411c82337cf0800000000000000
+      internalID: -255805176662852439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_24
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 468
+        width: 55
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33ec24b009959eef0800000000000000
+      internalID: -78433043303182797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_25
+      rect:
+        serializedVersion: 2
+        x: 1631
+        y: 460
+        width: 47
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf580e50ef646a650800000000000000
+      internalID: 6243755990230009340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_26
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 452
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1619be1d1e27fce80800000000000000
+      internalID: -8156174085929594527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_27
+      rect:
+        serializedVersion: 2
+        x: 477
+        y: 396
+        width: 65
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9911674479b22b860800000000000000
+      internalID: 7544140254487646617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_28
+      rect:
+        serializedVersion: 2
+        x: 973
+        y: 421
+        width: 11
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab211cd953e09aa30800000000000000
+      internalID: 4226925348706652858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_29
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 421
+        width: 11
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 695b7f85a47ee7990800000000000000
+      internalID: -7386212032334809706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_30
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 346
+        width: 98
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3742a522b995d820800000000000000
+      internalID: 2942426921971107644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_31
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 342
+        width: 76
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46de083c1a53cef70800000000000000
+      internalID: 9217801506206575972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_32
+      rect:
+        serializedVersion: 2
+        x: 701
+        y: 352
+        width: 31
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 098b4c1538a658fd0800000000000000
+      internalID: -2340347319103997808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_33
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 348
+        width: 43
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9899525c78535120800000000000000
+      internalID: 2401360317299398812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_34
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 350
+        width: 89
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fefb982c2be70940800000000000000
+      internalID: 5262433264498114289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_35
+      rect:
+        serializedVersion: 2
+        x: 1342
+        y: 352
+        width: 31
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cf2db6d586707b10800000000000000
+      internalID: 1977210553621098439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_36
+      rect:
+        serializedVersion: 2
+        x: 1387
+        y: 348
+        width: 43
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3494fddbeb7662d0800000000000000
+      internalID: -3285802625148873670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_37
+      rect:
+        serializedVersion: 2
+        x: 1678
+        y: 334
+        width: 13
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70f264358abc315a0800000000000000
+      internalID: -6551669109081886969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_38
+      rect:
+        serializedVersion: 2
+        x: 1717
+        y: 330
+        width: 146
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb54454ce1f332540800000000000000
+      internalID: 4981895014177326524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_39
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 301
+        width: 49
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 933be9e088edba590800000000000000
+      internalID: -7661785665098566855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_40
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 330
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bff1631a8ea9ea630800000000000000
+      internalID: 3940257047923531771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_41
+      rect:
+        serializedVersion: 2
+        x: 1076
+        y: 330
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0269504692566b1b0800000000000000
+      internalID: -5641210254788815328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_42
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 239
+        width: 54
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a395c056f3036300800000000000000
+      internalID: 244043161260102560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_43
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 282
+        width: 15
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 637e467d6b6ec9d30800000000000000
+      internalID: 4439677005652617014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_44
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 288
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e64113770cbfb3620800000000000000
+      internalID: 2755072401119188078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_45
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 301
+        width: 36
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d059fc164bb18e390800000000000000
+      internalID: -7788945093988215539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_46
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 285
+        width: 23
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc9dc59e73bff7ea0800000000000000
+      internalID: -5872699171510887988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_47
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 301
+        width: 27
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 186c14ebddb8f0670800000000000000
+      internalID: 8507172005622171265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_48
+      rect:
+        serializedVersion: 2
+        x: 963
+        y: 239
+        width: 54
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63e355a5d886b3950800000000000000
+      internalID: 6429847849316728374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_49
+      rect:
+        serializedVersion: 2
+        x: 1093
+        y: 282
+        width: 15
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8c48c03a9a75da70800000000000000
+      internalID: 8851115445328563340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_50
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 288
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8953c9f9bde34f110800000000000000
+      internalID: 1293728105958749592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_51
+      rect:
+        serializedVersion: 2
+        x: 1445
+        y: 301
+        width: 27
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e644364e1608b7e0800000000000000
+      internalID: -1749641728136821024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_52
+      rect:
+        serializedVersion: 2
+        x: 1604
+        y: 239
+        width: 54
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b84465de0c829c120800000000000000
+      internalID: 2434521882651149451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_53
+      rect:
+        serializedVersion: 2
+        x: 1734
+        y: 282
+        width: 15
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1eabe2c2874722700800000000000000
+      internalID: 514101366959815393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_54
+      rect:
+        serializedVersion: 2
+        x: 1794
+        y: 288
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b98826354f7ba1e50800000000000000
+      internalID: 6780934448958572699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_55
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 265
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d6d4be9ed5c6b410800000000000000
+      internalID: 1492597886455961299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_56
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 266
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15a37fc44d4957fc0800000000000000
+      internalID: -3497725896038073775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_57
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 234
+        width: 24
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe0fc50262f60b3e0800000000000000
+      internalID: -2040008421656432401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_58
+      rect:
+        serializedVersion: 2
+        x: 1496
+        y: 266
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0eb68ccfba31b8f0800000000000000
+      internalID: -526575085981090291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_59
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 242
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ec56ec00a9b9baa0800000000000000
+      internalID: -6144676119508001561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_60
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 242
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 728e0ead1bc42db30800000000000000
+      internalID: 4310592120112080935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_61
+      rect:
+        serializedVersion: 2
+        x: 1340
+        y: 242
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5e399a08ed9533c0800000000000000
+      internalID: -4380421442612150694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_62
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 232
+        width: 13
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d685c1e1aca4ff90800000000000000
+      internalID: -6920716916084078889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_63
+      rect:
+        serializedVersion: 2
+        x: 722
+        y: 232
+        width: 13
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59dca6fceb86ce6e0800000000000000
+      internalID: -1806954181749453419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_64
+      rect:
+        serializedVersion: 2
+        x: 1363
+        y: 232
+        width: 13
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1082d26124e4152f0800000000000000
+      internalID: -985920797670561791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_65
+      rect:
+        serializedVersion: 2
+        x: 1871
+        y: 209
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28b65ef6a7c351c40800000000000000
+      internalID: 5482354617954429826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_66
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 154
+        width: 17
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1826c82bebee8b5d0800000000000000
+      internalID: -3046422645109398911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_67
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 204
+        width: 71
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bf55b91f2cdfdc20800000000000000
+      internalID: 3233545152328196018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_68
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 209
+        width: 23
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26cc710b6e0ab7b90800000000000000
+      internalID: -7243018663038038942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_69
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 204
+        width: 71
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 397d2fdac39ae1c50800000000000000
+      internalID: 6637928978872194963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_70
+      rect:
+        serializedVersion: 2
+        x: 1236
+        y: 209
+        width: 23
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f43d5f9d770fa3bd0800000000000000
+      internalID: -2649541033205574833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_71
+      rect:
+        serializedVersion: 2
+        x: 1433
+        y: 217
+        width: 13
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5721810eebbdbedb0800000000000000
+      internalID: -4761470568164224395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_72
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 172
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c466cd24f61d4b3e0800000000000000
+      internalID: -2038774455498676660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_73
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 191
+        width: 29
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b22dc5b6304810f0800000000000000
+      internalID: -1146095501443259728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_74
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 197
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 692a71357aad7bbf0800000000000000
+      internalID: -308537637263138154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_75
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 166
+        width: 83
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec8ef8edacf7ddb00800000000000000
+      internalID: 854980013564356814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_76
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 198
+        width: 27
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7afd6395b1eb5a5e0800000000000000
+      internalID: -1898902643196633177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_77
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 170
+        width: 25
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00f9f4e62d3d85f30800000000000000
+      internalID: 4564631123087302400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_78
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 191
+        width: 29
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcb41e45a9db248b0800000000000000
+      internalID: -5169360951721243699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_79
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 196
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b3f42a102f37d8a0800000000000000
+      internalID: -6280481748234734664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_80
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 197
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 741c81d2f7308be80800000000000000
+      internalID: -8162770479856697017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_81
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 166
+        width: 83
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 755f3f01e52dc4fa0800000000000000
+      internalID: -5815041717388970665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_82
+      rect:
+        serializedVersion: 2
+        x: 1206
+        y: 198
+        width: 27
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d69a52ac3f5741a0800000000000000
+      internalID: -6825381996230175019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_83
+      rect:
+        serializedVersion: 2
+        x: 1374
+        y: 191
+        width: 40
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ce80e256defd0220800000000000000
+      internalID: 2453897568453693128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_84
+      rect:
+        serializedVersion: 2
+        x: 1433
+        y: 197
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3871969c543c5c3f0800000000000000
+      internalID: -881083447581796477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_85
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 145
+        width: 32
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a1ce444c51a06780800000000000000
+      internalID: -8691769863169982046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_86
+      rect:
+        serializedVersion: 2
+        x: 1723
+        y: 148
+        width: 85
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 413795528569a0a00800000000000000
+      internalID: 723555995474293524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_87
+      rect:
+        serializedVersion: 2
+        x: 1847
+        y: 198
+        width: 27
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ce98ec980131f860800000000000000
+      internalID: 7561879162393763528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_88
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 136
+        width: 27
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c4ee30ce4596d2a0800000000000000
+      internalID: -6713014029083810619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_89
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 185
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1db0b23e5fc9a72c0800000000000000
+      internalID: -4433058303300662319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_90
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 179
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f3d532bb17cf1cb0800000000000000
+      internalID: -4890971748533152783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_91
+      rect:
+        serializedVersion: 2
+        x: 1228
+        y: 185
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0b0236d6ae10e9e0800000000000000
+      internalID: -1594240566182147315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_92
+      rect:
+        serializedVersion: 2
+        x: 1340
+        y: 186
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cea8e57faa0471b0800000000000000
+      internalID: -5659887082984132921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_93
+      rect:
+        serializedVersion: 2
+        x: 1575
+        y: 179
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e599c68941704cbb0800000000000000
+      internalID: -4916797108143744674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_94
+      rect:
+        serializedVersion: 2
+        x: 1869
+        y: 185
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7e48616fcaa2be90800000000000000
+      internalID: -7011353862193262979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_95
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 151
+        width: 37
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52f6d9dca680d5660800000000000000
+      internalID: 7376061019511942949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_96
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 170
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 922512dbf2533ef90800000000000000
+      internalID: -6925633322812878295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_97
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 152
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9647ca1d1f6e6e60800000000000000
+      internalID: 7957419762404247199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_98
+      rect:
+        serializedVersion: 2
+        x: 917
+        y: 136
+        width: 44
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c91487f0deb46b840800000000000000
+      internalID: 5239458698031022492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_99
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 151
+        width: 25
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62bc97c849e5792c0800000000000000
+      internalID: -4424964116763260122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_100
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 170
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43fc51e784e23c860800000000000000
+      internalID: 7548928289290964788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_101
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 163
+        width: 28
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84dc556ddacda8c80800000000000000
+      internalID: -8319594722430169784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_102
+      rect:
+        serializedVersion: 2
+        x: 1290
+        y: 154
+        width: 14
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fe059a6be679e240800000000000000
+      internalID: 4821515629554372336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_103
+      rect:
+        serializedVersion: 2
+        x: 1820
+        y: 162
+        width: 27
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce5e5a9a09ffa0a50800000000000000
+      internalID: 6488279209967216108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_104
+      rect:
+        serializedVersion: 2
+        x: 1861
+        y: 164
+        width: 23
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5eefb8f3a09dd31c0800000000000000
+      internalID: -4522219812771070235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_105
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 138
+        width: 40
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ac112131e97785b0800000000000000
+      internalID: -5366186422889800540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_106
+      rect:
+        serializedVersion: 2
+        x: 1373
+        y: 141
+        width: 106
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c286ef2e40716a80800000000000000
+      internalID: -8475369542621166905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_107
+      rect:
+        serializedVersion: 2
+        x: 1512
+        y: 125
+        width: 90
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 721b714ecb745d020800000000000000
+      internalID: 2365876055859245351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_108
+      rect:
+        serializedVersion: 2
+        x: 1670
+        y: 149
+        width: 21
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a70709d8a005857f0800000000000000
+      internalID: -623660542135865222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_109
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 125
+        width: 83
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 367442629b4da9a50800000000000000
+      internalID: 6528764501500905315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_110
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 125
+        width: 83
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 171078963580787d0800000000000000
+      internalID: -2916353079353343631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dropsplash_111
+      rect:
+        serializedVersion: 2
+        x: 1286
+        y: 134
+        width: 20
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1957a3898032c020800000000000000
+      internalID: 2360502521872996639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      dropsplash_0: -8407964915344666480
+      dropsplash_1: 6739785926543370856
+      dropsplash_10: 8367875509947138688
+      dropsplash_100: 7548928289290964788
+      dropsplash_101: -8319594722430169784
+      dropsplash_102: 4821515629554372336
+      dropsplash_103: 6488279209967216108
+      dropsplash_104: -4522219812771070235
+      dropsplash_105: -5366186422889800540
+      dropsplash_106: -8475369542621166905
+      dropsplash_107: 2365876055859245351
+      dropsplash_108: -623660542135865222
+      dropsplash_109: 6528764501500905315
+      dropsplash_11: -4396050307795933394
+      dropsplash_110: -2916353079353343631
+      dropsplash_111: 2360502521872996639
+      dropsplash_12: -2151832153113509110
+      dropsplash_13: -1167707352652536242
+      dropsplash_14: 3077258429160437535
+      dropsplash_15: -2382787912948823113
+      dropsplash_16: 1920444098849049515
+      dropsplash_17: 294598906606130156
+      dropsplash_18: 6087117700414155767
+      dropsplash_19: 1515546874436384521
+      dropsplash_2: -6733717633552874965
+      dropsplash_20: -4026382638173348354
+      dropsplash_21: 5754596369261754421
+      dropsplash_22: -1785611165175763033
+      dropsplash_23: -255805176662852439
+      dropsplash_24: -78433043303182797
+      dropsplash_25: 6243755990230009340
+      dropsplash_26: -8156174085929594527
+      dropsplash_27: 7544140254487646617
+      dropsplash_28: 4226925348706652858
+      dropsplash_29: -7386212032334809706
+      dropsplash_3: 8385949671489123425
+      dropsplash_30: 2942426921971107644
+      dropsplash_31: 9217801506206575972
+      dropsplash_32: -2340347319103997808
+      dropsplash_33: 2401360317299398812
+      dropsplash_34: 5262433264498114289
+      dropsplash_35: 1977210553621098439
+      dropsplash_36: -3285802625148873670
+      dropsplash_37: -6551669109081886969
+      dropsplash_38: 4981895014177326524
+      dropsplash_39: -7661785665098566855
+      dropsplash_4: 5391506181022086892
+      dropsplash_40: 3940257047923531771
+      dropsplash_41: -5641210254788815328
+      dropsplash_42: 244043161260102560
+      dropsplash_43: 4439677005652617014
+      dropsplash_44: 2755072401119188078
+      dropsplash_45: -7788945093988215539
+      dropsplash_46: -5872699171510887988
+      dropsplash_47: 8507172005622171265
+      dropsplash_48: 6429847849316728374
+      dropsplash_49: 8851115445328563340
+      dropsplash_5: -1105797116022636597
+      dropsplash_50: 1293728105958749592
+      dropsplash_51: -1749641728136821024
+      dropsplash_52: 2434521882651149451
+      dropsplash_53: 514101366959815393
+      dropsplash_54: 6780934448958572699
+      dropsplash_55: 1492597886455961299
+      dropsplash_56: -3497725896038073775
+      dropsplash_57: -2040008421656432401
+      dropsplash_58: -526575085981090291
+      dropsplash_59: -6144676119508001561
+      dropsplash_6: -3640661767169786317
+      dropsplash_60: 4310592120112080935
+      dropsplash_61: -4380421442612150694
+      dropsplash_62: -6920716916084078889
+      dropsplash_63: -1806954181749453419
+      dropsplash_64: -985920797670561791
+      dropsplash_65: 5482354617954429826
+      dropsplash_66: -3046422645109398911
+      dropsplash_67: 3233545152328196018
+      dropsplash_68: -7243018663038038942
+      dropsplash_69: 6637928978872194963
+      dropsplash_7: -1762557650546594124
+      dropsplash_70: -2649541033205574833
+      dropsplash_71: -4761470568164224395
+      dropsplash_72: -2038774455498676660
+      dropsplash_73: -1146095501443259728
+      dropsplash_74: -308537637263138154
+      dropsplash_75: 854980013564356814
+      dropsplash_76: -1898902643196633177
+      dropsplash_77: 4564631123087302400
+      dropsplash_78: -5169360951721243699
+      dropsplash_79: -6280481748234734664
+      dropsplash_8: -4388402649189719704
+      dropsplash_80: -8162770479856697017
+      dropsplash_81: -5815041717388970665
+      dropsplash_82: -6825381996230175019
+      dropsplash_83: 2453897568453693128
+      dropsplash_84: -881083447581796477
+      dropsplash_85: -8691769863169982046
+      dropsplash_86: 723555995474293524
+      dropsplash_87: 7561879162393763528
+      dropsplash_88: -6713014029083810619
+      dropsplash_89: -4433058303300662319
+      dropsplash_9: 2416408701603764372
+      dropsplash_90: -4890971748533152783
+      dropsplash_91: -1594240566182147315
+      dropsplash_92: -5659887082984132921
+      dropsplash_93: -4916797108143744674
+      dropsplash_94: -7011353862193262979
+      dropsplash_95: 7376061019511942949
+      dropsplash_96: -6925633322812878295
+      dropsplash_97: 7957419762404247199
+      dropsplash_98: 5239458698031022492
+      dropsplash_99: -4424964116763260122
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,611 @@
+fileFormatVersion: 2
+guid: 1ad53ae57806c3648a95b871e0cf6d7e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3862148671810973165
+    second: bloodtrail_6_0
+  - first:
+      213: -6105469346375947285
+    second: bloodtrail_6_1
+  - first:
+      213: -4853325001663268262
+    second: bloodtrail_6_2
+  - first:
+      213: -1720136418489393037
+    second: bloodtrail_6_3
+  - first:
+      213: 2408720614885204659
+    second: bloodtrail_6_4
+  - first:
+      213: -1893814210917740910
+    second: bloodtrail_6_5
+  - first:
+      213: 2541195421313847860
+    second: bloodtrail_6_6
+  - first:
+      213: 5501721635291326997
+    second: bloodtrail_6_7
+  - first:
+      213: 6888334076394192205
+    second: bloodtrail_6_8
+  - first:
+      213: -5941306213528398180
+    second: bloodtrail_6_9
+  - first:
+      213: 6005928045374196980
+    second: bloodtrail_6_10
+  - first:
+      213: -1188480075403765830
+    second: bloodtrail_6_11
+  - first:
+      213: -553159760287324423
+    second: bloodtrail_6_12
+  - first:
+      213: -5107318683201785375
+    second: bloodtrail_6_13
+  - first:
+      213: 4375771212935001473
+    second: bloodtrail_6_14
+  - first:
+      213: -6516800419901240805
+    second: bloodtrail_6_15
+  - first:
+      213: 1352977055140614686
+    second: bloodtrail_6_16
+  - first:
+      213: 6506411664373131716
+    second: bloodtrail_6_17
+  - first:
+      213: 2121754550555096552
+    second: bloodtrail_6_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bloodtrail_6_0
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 89
+        width: 45
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 312d5fade34e66ac0800000000000000
+      internalID: -3862148671810973165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_1
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 105
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: beba9364af3054ba0800000000000000
+      internalID: -6105469346375947285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_2
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 103
+        width: 26
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5ab65000a685acb0800000000000000
+      internalID: -4853325001663268262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_3
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 108
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3702ab28a09d028e0800000000000000
+      internalID: -1720136418489393037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_4
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 107
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b2a46523ae7d6120800000000000000
+      internalID: 2408720614885204659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_5
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 96
+        width: 22
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29e49af4202d7b5e0800000000000000
+      internalID: -1893814210917740910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_6
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 101
+        width: 14
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 432d24895c3244320800000000000000
+      internalID: 2541195421313847860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_7
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 61
+        width: 55
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51aee9c8daa0a5c40800000000000000
+      internalID: 5501721635291326997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_8
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 89
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4db1b5b857489f50800000000000000
+      internalID: 6888334076394192205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_9
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 90
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9691d82a7d3c8da0800000000000000
+      internalID: -5941306213528398180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_10
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 88
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fcc51b8cb7595350800000000000000
+      internalID: 6005928045374196980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_11
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 84
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab7dde21baba18fe0800000000000000
+      internalID: -1188480075403765830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_12
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 70
+        width: 45
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f6a808f028c258f0800000000000000
+      internalID: -553159760287324423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_13
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 70
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e1ba05a7b82f19b0800000000000000
+      internalID: -5107318683201785375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_14
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 79
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 185fe5dfbbcd9bc30800000000000000
+      internalID: 4375771212935001473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_15
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 5
+        width: 45
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1a8babab8caf85a0800000000000000
+      internalID: -6516800419901240805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_16
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 57
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1219e8967db6c210800000000000000
+      internalID: 1352977055140614686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_17
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 4
+        width: 16
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c92b61bfea6b4a50800000000000000
+      internalID: 6506411664373131716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bloodtrail_6_18
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 26
+        width: 25
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e5b76ea58cf17d10800000000000000
+      internalID: 2121754550555096552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bloodtrail_6_0: -3862148671810973165
+      bloodtrail_6_1: -6105469346375947285
+      bloodtrail_6_10: 6005928045374196980
+      bloodtrail_6_11: -1188480075403765830
+      bloodtrail_6_12: -553159760287324423
+      bloodtrail_6_13: -5107318683201785375
+      bloodtrail_6_14: 4375771212935001473
+      bloodtrail_6_15: -6516800419901240805
+      bloodtrail_6_16: 1352977055140614686
+      bloodtrail_6_17: 6506411664373131716
+      bloodtrail_6_18: 2121754550555096552
+      bloodtrail_6_2: -4853325001663268262
+      bloodtrail_6_3: -1720136418489393037
+      bloodtrail_6_4: 2408720614885204659
+      bloodtrail_6_5: -1893814210917740910
+      bloodtrail_6_6: 2541195421313847860
+      bloodtrail_6_7: 5501721635291326997
+      bloodtrail_6_8: 6888334076394192205
+      bloodtrail_6_9: -5941306213528398180
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
