@@ -17,6 +17,15 @@ public class SimpleHealth : MonoBehaviour
     [Tooltip("Health regenerated per second. Can be fractional.")]
     [SerializeField] private float regenRate = 0f;
 
+    [Header("Armor (Small-hit mitigation)")]
+    [Tooltip("Flat armor rating. More armor = more mitigation on small hits.")]
+    [SerializeField] private float armor = 0f;
+    [Tooltip("How quickly mitigation falls off as the hit gets bigger. Higher = big hits bypass sooner.")]
+    [SerializeField] private float armorScaling = 10f;
+    [Tooltip("Cap the maximum mitigation fraction (0..0.95). 0.8 = up to 80% reduction on tiny hits.")]
+    [Range(0f, 0.95f)]
+    [SerializeField] private float maxMitigation = 0.8f;
+
     [Header("UI")]
     [Tooltip("Optional slider to show current health.")]
     [SerializeField] private Slider healthSlider;
@@ -72,14 +81,12 @@ public class SimpleHealth : MonoBehaviour
 
     private void OnEnable()
     {
-        // Ensure color is sane when object re-enables
         if (_hasOriginalColor && spriteRenderer != null)
             spriteRenderer.color = _originalColor;
     }
 
     private void OnDisable()
     {
-        // Restore color if we get disabled during a flash
         if (_hasOriginalColor && spriteRenderer != null)
             spriteRenderer.color = _originalColor;
         _flashRoutine = null;
@@ -98,7 +105,12 @@ public class SimpleHealth : MonoBehaviour
     {
         if (amount <= 0 || isInvulnerable || currentHealth <= 0) return;
 
-        currentHealth = Mathf.Clamp(currentHealth - amount, 0, maxHealth);
+        // --- Armor mitigation here ---
+        int mitigated = ApplyArmor(amount);
+        if (mitigated <= 0) return; // fully absorbed -> no effects
+        // -----------------------------
+
+        currentHealth = Mathf.Clamp(currentHealth - mitigated, 0, maxHealth);
         SyncSlider();
 
         // Blood effect
@@ -126,9 +138,22 @@ public class SimpleHealth : MonoBehaviour
         }
     }
 
+    // Mitigation decays with hit size: small hits reduced a lot; big hits barely reduced.
+    private int ApplyArmor(int rawDamage)
+    {
+        if (rawDamage <= 0 || armor <= 0f || armorScaling <= 0f) return rawDamage;
+
+        // Mitigation fraction m in [0,1): increases with armor, decreases with hit size
+        float m = armor / (armor + armorScaling * rawDamage);
+        if (maxMitigation > 0f) m = Mathf.Min(m, maxMitigation);
+
+        float reduced = rawDamage * (1f - m);
+        int result = Mathf.Max(0, Mathf.RoundToInt(reduced));
+        return result;
+    }
+
     private System.Collections.IEnumerator FlashRedCoroutine()
     {
-        // Keep original alpha
         var c = spriteRenderer.color;
         var target = new Color(hitColor.r, hitColor.g, hitColor.b, c.a);
 
@@ -162,7 +187,6 @@ public class SimpleHealth : MonoBehaviour
 
     private void Die()
     {
-        // Play death sound from a temporary object so it isn't cut off
         if (deathClip != null)
         {
             GameObject tempAudio = new GameObject("DeathSound");
@@ -175,7 +199,7 @@ public class SimpleHealth : MonoBehaviour
         if (dropItem != null)
             Instantiate(dropItem, transform.position, Quaternion.identity);
 
-        Destroy(gameObject); // Destroy entity instantly
+        Destroy(gameObject);
     }
 
     public void SyncSlider()
@@ -195,7 +219,7 @@ public class SimpleHealth : MonoBehaviour
     private System.Collections.IEnumerator InvulnerabilityCoroutine()
     {
         isInvulnerable = true;
-        yield return new WaitForSeconds(invulnerabilityDuration); // obeys timeScale (pause-friendly)
+        yield return new WaitForSeconds(invulnerabilityDuration);
         isInvulnerable = false;
     }
 }
