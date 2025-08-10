@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,18 +23,19 @@ public class XpSystem : MonoBehaviour
     [SerializeField] private AnimationCurve customNextLevelXp = AnimationCurve.Linear(1, 100, 100, 1000);
 
     [Header("UI Display")]
-    [Tooltip("Optional: TextMeshProUGUI element to display XP progress as 'current/needed'.")]
+    [Tooltip("Optional: slider showing current XP progress in this level.")]
     [SerializeField] private Slider xpSliderUI;
-    [SerializeField]
-    private TextMeshProUGUI levelText
-        ;
-
+    [SerializeField] private TextMeshProUGUI levelText;
 
     [Serializable] public class LevelUpEvent : UnityEvent<int> { }
     public LevelUpEvent OnLevelUp;
 
     private GameObject playerObject;
     private PowerUpSelectionUI PUSUI;
+
+    // Selection queue machinery
+    private int pendingSelections = 0;
+    private Coroutine selectionRunner;
 
     public int CurrentLevel => currentLevel;
     public int CurrentXpInLevel => currentXpInLevel;
@@ -43,7 +45,9 @@ public class XpSystem : MonoBehaviour
 
     private void Awake()
     {
-        PUSUI = GameObject.FindGameObjectWithTag("GameController").GetComponent<PowerUpSelectionUI>();
+        var gc = GameObject.FindGameObjectWithTag("GameController");
+        if (gc != null) PUSUI = gc.GetComponent<PowerUpSelectionUI>();
+
         playerObject = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -52,20 +56,29 @@ public class XpSystem : MonoBehaviour
         UpdateXpUI();
     }
 
+    /// <summary>
+    /// Your per-level reward. Still called once per level gained.
+    /// </summary>
     public void LevelUp()
     {
-        playerObject.GetComponent<SimpleHealth>().maxHealth += 10;
-        playerObject.GetComponent<SimpleHealth>().Heal(10);
+        if (playerObject != null && playerObject.TryGetComponent(out SimpleHealth hp))
+        {
+            hp.maxHealth += 10;
+            hp.Heal(10);
+            hp.SyncSlider();
+        }
     }
 
+    /// <summary>
+    /// Adds XP, handles multi-level gains, and queues one selection per level.
+    /// Returns how many levels were gained.
+    /// </summary>
     public int AddExperience(int amount)
     {
         if (amount <= 0 || IsMaxLevel) return 0;
 
         int levelsGained = 0;
         int safety = 1000;
-
-
 
         while (amount > 0 && !IsMaxLevel && safety-- > 0)
         {
@@ -79,15 +92,27 @@ public class XpSystem : MonoBehaviour
                 break;
             }
 
+            // consume enough XP to finish this level
             amount -= remaining;
+
+            // level up
             currentLevel = Mathf.Min(currentLevel + 1, maxLevel);
             currentXpInLevel = 0;
-            PUSUI.ShowSelection();
+
             levelsGained++;
-            OnLevelUp?.Invoke(currentLevel); LevelUp();
+            OnLevelUp?.Invoke(currentLevel);
+            LevelUp();
         }
 
         if (IsMaxLevel) currentXpInLevel = 0;
+
+        // Queue exactly one selection per level gained
+        if (levelsGained > 0)
+        {
+            pendingSelections += levelsGained;
+            if (selectionRunner == null)
+                selectionRunner = StartCoroutine(RunSelectionQueue());
+        }
 
         UpdateXpUI();
         return levelsGained;
@@ -138,12 +163,43 @@ public class XpSystem : MonoBehaviour
 
     private void UpdateXpUI()
     {
-        levelText.text = "Level " + currentLevel;
+        if (levelText != null)
+            levelText.text = "Level " + currentLevel;
 
         if (xpSliderUI != null)
         {
             xpSliderUI.maxValue = XpNeededThisLevel;
             xpSliderUI.value = currentXpInLevel;
         }
+    }
+
+    /// <summary>
+    /// Sequentially opens PowerUp selection exactly once per pending level-up.
+    /// Waits for the panel to close (Time.timeScale restored) between opens.
+    /// </summary>
+    private IEnumerator RunSelectionQueue()
+    {
+        // If selection is already open (paused), wait until it closes
+        while (Time.timeScale == 0f) yield return null;
+
+        while (pendingSelections > 0)
+        {
+            if (PUSUI != null)
+            {
+                // Open selection (ShowSelection pauses timeScale = 0)
+                PUSUI.ShowSelection();
+
+                // Wait while open (paused)
+                while (Time.timeScale == 0f)
+                    yield return null;
+
+                // Slight delay to avoid same-frame reopen issues
+                yield return null;
+            }
+
+            pendingSelections--;
+        }
+
+        selectionRunner = null;
     }
 }
