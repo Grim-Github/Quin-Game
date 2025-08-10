@@ -27,6 +27,16 @@ public class TwitchListener : MonoBehaviour
     [Header("Limits")]
     [SerializeField, Min(1)] private int maxSpawnCount = 20;
 
+    [Tooltip("How often to increase max spawn count (seconds)")]
+    [SerializeField, Min(0f)] private float spawnIncreaseInterval = 60f;
+
+    [Tooltip("How much to increase max spawn count each interval")]
+    [SerializeField, Min(1)] private int spawnIncreaseAmount = 1;
+
+    // Track time for next increase
+    private float nextSpawnIncreaseTime = 0f;
+
+
     [Header("Collision Check")]
     [Tooltip("Radius used for checking if spawn position overlaps colliders")]
     [SerializeField] private float spawnCheckRadius = 0.5f;
@@ -66,12 +76,21 @@ public class TwitchListener : MonoBehaviour
         if (Time.timeScale > 0f)
         {
             elapsedSeconds += Time.deltaTime;
+
+            // Check if it's time to increase spawn cap
+            if (spawnIncreaseInterval > 0f && elapsedSeconds >= nextSpawnIncreaseTime)
+            {
+                maxSpawnCount += spawnIncreaseAmount;
+                nextSpawnIncreaseTime = elapsedSeconds + spawnIncreaseInterval;
+                Debug.Log($"[TwitchListener] Max spawn count increased to {maxSpawnCount}");
+            }
         }
 
         // Update stopwatch UI
         if (stopwatchText != null)
             stopwatchText.text = FormatTime(elapsedSeconds);
     }
+
 
     private void OnDestroy()
     {

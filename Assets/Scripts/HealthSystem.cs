@@ -31,30 +31,37 @@ public class SimpleHealth : MonoBehaviour
     [SerializeField] private Slider healthSlider;
     [SerializeField] private TextMeshProUGUI healthText;
 
+    [Header("Stats Display")]
+    [SerializeField] private TextMeshProUGUI statsTextPrefab;
+    [SerializeField] private Transform uiParent;
+    [TextArea][SerializeField] private string extraTextField;
+    [Tooltip("Sprite to show above the stats text.")]
+    [SerializeField] private Sprite iconSprite;
+
     [Header("SFX")]
-    [SerializeField] private GameObject[] bloodPool; // (not used here but kept for compatibility)
+    [SerializeField] private GameObject[] bloodPool;
     [SerializeField] private AudioClip damageClip;
     [SerializeField] private AudioClip deathClip;
     [SerializeField] private GameObject bloodSFX;
     [SerializeField] private GameObject dropItem;
 
     [Header("Hit Flash")]
-    [Tooltip("Renderer to flash when taking damage. If null, auto-finds in children.")]
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [Tooltip("Color used during hit flash (alpha is ignored; original alpha kept).")]
     [SerializeField] private Color hitColor = new Color(1f, 0.5f, 0.5f, 1f);
-    [Tooltip("Duration of the hit flash (unscaled time).")]
     [SerializeField] private float hitFlashDuration = 0.1f;
 
     private AudioSource soundSource;
-
     private float currentHealth;
     private bool isInvulnerable;
 
-    // Flash bookkeeping
     private Color _originalColor;
     private bool _hasOriginalColor;
     private Coroutine _flashRoutine;
+    private int lastDamageTaken = 0;
+    private Snappy2DController movementController; // cache movement script
+
+    private TextMeshProUGUI statsTextInstance;
+    private Image iconImage;
 
     public bool IsAlive => currentHealth > 0f;
     public bool IsInvulnerable => isInvulnerable;
@@ -66,7 +73,7 @@ public class SimpleHealth : MonoBehaviour
         if (startingHealth <= 0) startingHealth = maxHealth;
         currentHealth = Mathf.Clamp(startingHealth, 0, maxHealth);
         SyncSlider();
-
+        movementController = GetComponent<Snappy2DController>();
         soundSource = GetComponent<AudioSource>();
 
         if (spriteRenderer == null)
@@ -76,6 +83,16 @@ public class SimpleHealth : MonoBehaviour
         {
             _originalColor = spriteRenderer.color;
             _hasOriginalColor = true;
+        }
+
+        // Create stats display
+        if (statsTextPrefab != null && uiParent != null)
+        {
+            statsTextInstance = Instantiate(statsTextPrefab, uiParent);
+            statsTextInstance.text = "";
+            iconImage = statsTextInstance.GetComponentInChildren<Image>(true);
+            if (iconImage != null && iconSprite != null)
+                iconImage.sprite = iconSprite;
         }
     }
 
@@ -99,64 +116,97 @@ public class SimpleHealth : MonoBehaviour
             currentHealth = Mathf.Min(currentHealth + regenRate * Time.deltaTime, maxHealth);
             SyncSlider();
         }
+
+        UpdateStatsText();
     }
+
+    private void UpdateStatsText()
+    {
+        if (statsTextInstance != null)
+        {
+            float referenceDamage = 10f;
+            float currentMitigation = 0f;
+
+            if (armor > 0f && armorScaling > 0f)
+            {
+                currentMitigation = armor / (armor + armorScaling * referenceDamage);
+                currentMitigation = Mathf.Min(currentMitigation, maxMitigation);
+            }
+
+            // Build the health/armor part
+            string text =
+                $"<b>{transform.name} Stats</b>\n" +
+                $"Max Health: {maxHealth}\n" +
+                $"Current Health: {CurrentHealth}\n" +
+                $"Regen Rate: {regenRate:F2}/s\n" +
+                $"Armor: {armor}\n" +
+                $"Approx Mitigation: {(currentMitigation * 100f):F1}% " +
+                $"(Max: {(maxMitigation * 100f):F0}%)\n" +
+                $"Last Hit Damage: {lastDamageTaken}\n";
+
+            // Add Snappy2DController stats if available
+            if (movementController != null)
+            {
+                text +=
+                    $"Move Speed: {movementController.MoveSpeed:F2}\n" +
+                    $"Dash Speed: {movementController.DashSpeed:F2}\n" +
+                    $"Dash Duration: {movementController.DashDuration:F2}s\n" +
+                    $"Dash Cooldown: {movementController.DashCooldown:F2}s\n";
+            }
+
+            // Append any extra text field
+            text += extraTextField;
+
+            statsTextInstance.text = text;
+        }
+    }
+
+
 
     public void TakeDamage(int amount)
     {
         if (amount <= 0 || isInvulnerable || currentHealth <= 0) return;
 
-        // --- Armor mitigation here ---
         int mitigated = ApplyArmor(amount);
-        if (mitigated <= 0) return; // fully absorbed -> no effects
-        // -----------------------------
-
+        if (mitigated <= 0) return;
+        lastDamageTaken = mitigated; // store how much damage was actually dealt
         currentHealth = Mathf.Clamp(currentHealth - mitigated, 0, maxHealth);
         SyncSlider();
 
-        // Blood effect
         if (bloodSFX != null)
             Instantiate(bloodSFX, transform.position, Quaternion.identity);
 
-        // Damage sound
         if (soundSource != null && damageClip != null)
             soundSource.PlayOneShot(damageClip);
 
-        // Flash (uses unscaled time so it always reverts even if timeScale = 0)
         if (spriteRenderer != null)
         {
             if (_flashRoutine != null) StopCoroutine(_flashRoutine);
             _flashRoutine = StartCoroutine(FlashRedCoroutine());
         }
 
+
+
+
         if (currentHealth <= 0)
-        {
             Die();
-        }
         else
-        {
             StartCoroutine(InvulnerabilityCoroutine());
-        }
     }
 
-    // Mitigation decays with hit size: small hits reduced a lot; big hits barely reduced.
     private int ApplyArmor(int rawDamage)
     {
         if (rawDamage <= 0 || armor <= 0f || armorScaling <= 0f) return rawDamage;
-
-        // Mitigation fraction m in [0,1): increases with armor, decreases with hit size
         float m = armor / (armor + armorScaling * rawDamage);
         if (maxMitigation > 0f) m = Mathf.Min(m, maxMitigation);
-
         float reduced = rawDamage * (1f - m);
-        int result = Mathf.Max(0, Mathf.RoundToInt(reduced));
-        return result;
+        return Mathf.Max(0, Mathf.RoundToInt(reduced));
     }
 
     private System.Collections.IEnumerator FlashRedCoroutine()
     {
         var c = spriteRenderer.color;
         var target = new Color(hitColor.r, hitColor.g, hitColor.b, c.a);
-
         spriteRenderer.color = target;
         yield return new WaitForSecondsRealtime(hitFlashDuration);
         if (_hasOriginalColor) spriteRenderer.color = _originalColor;
@@ -166,7 +216,6 @@ public class SimpleHealth : MonoBehaviour
     public void Heal(int amount)
     {
         if (amount <= 0 || currentHealth <= 0) return;
-
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         SyncSlider();
     }
@@ -209,11 +258,14 @@ public class SimpleHealth : MonoBehaviour
             healthSlider.maxValue = maxHealth;
             healthSlider.value = currentHealth;
         }
-
         if (healthText != null)
-        {
             healthText.text = $"{Mathf.RoundToInt(currentHealth)}/{maxHealth}";
-        }
+    }
+
+    public void GiveArmor(float amount)
+    {
+        if (amount == 0f) return;
+        armor = Mathf.Max(0f, armor + amount);
     }
 
     private System.Collections.IEnumerator InvulnerabilityCoroutine()

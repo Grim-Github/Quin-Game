@@ -21,9 +21,9 @@ public class Trigger2DEvent : MonoBehaviour
         col.isTrigger = true;
     }
 
-    public void XPOrb()
+    public void XPOrb(int value)
     {
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<XpSystem>().AddExperience(Random.Range(1, 11));
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<XpSystem>().AddExperience(Random.Range(value, value * 2));
     }
 
     private void OnTriggerEnter2D(Collider2D other)
