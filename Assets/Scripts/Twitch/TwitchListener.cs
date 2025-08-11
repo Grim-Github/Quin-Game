@@ -1,4 +1,5 @@
 using Lexone.UnityTwitchChat;
+using NaughtyAttributes;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class TwitchListener : MonoBehaviour
     [System.Serializable]
     public class ChatterSpawnEntry
     {
-        public GameObject prefab;
+        [ShowAssetPreview] public GameObject prefab;
 
         [Min(0f)] public float weight = 1f;
 
