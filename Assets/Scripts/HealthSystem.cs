@@ -50,6 +50,12 @@ public class SimpleHealth : MonoBehaviour
     [SerializeField] private Color hitColor = new Color(1f, 0.5f, 0.5f, 1f);
     [SerializeField] private float hitFlashDuration = 0.1f;
 
+    [Header("Damage Popup")]
+    [Tooltip("Prefab with a TextMeshProUGUI to display damage taken.")]
+    [SerializeField] private GameObject damagePopupPrefab;
+    [Tooltip("Offset from entity position when spawning damage popup.")]
+    [SerializeField] private Vector3 popupOffset = new Vector3(0f, 1f, 0f);
+
     private AudioSource soundSource;
     private float currentHealth;
     private bool isInvulnerable;
@@ -58,7 +64,7 @@ public class SimpleHealth : MonoBehaviour
     private bool _hasOriginalColor;
     private Coroutine _flashRoutine;
     private int lastDamageTaken = 0;
-    private Snappy2DController movementController; // cache movement script
+    private Snappy2DController movementController;
 
     private TextMeshProUGUI statsTextInstance;
     private Image iconImage;
@@ -85,7 +91,6 @@ public class SimpleHealth : MonoBehaviour
             _hasOriginalColor = true;
         }
 
-        // Create stats display
         if (statsTextPrefab != null && uiParent != null)
         {
             statsTextInstance = Instantiate(statsTextPrefab, uiParent);
@@ -133,7 +138,6 @@ public class SimpleHealth : MonoBehaviour
                 currentMitigation = Mathf.Min(currentMitigation, maxMitigation);
             }
 
-            // Build the health/armor part
             string text =
                 $"<b>{transform.name} Stats</b>\n" +
                 $"Max Health: {maxHealth}\n" +
@@ -144,7 +148,6 @@ public class SimpleHealth : MonoBehaviour
                 $"(Max: {(maxMitigation * 100f):F0}%)\n" +
                 $"Last Hit Damage: {lastDamageTaken}\n";
 
-            // Add Snappy2DController stats if available
             if (movementController != null)
             {
                 text +=
@@ -154,14 +157,11 @@ public class SimpleHealth : MonoBehaviour
                     $"Dash Cooldown: {movementController.DashCooldown:F2}s\n";
             }
 
-            // Append any extra text field
             text += extraTextField;
 
             statsTextInstance.text = text;
         }
     }
-
-
 
     public void TakeDamage(int amount)
     {
@@ -169,9 +169,23 @@ public class SimpleHealth : MonoBehaviour
 
         int mitigated = ApplyArmor(amount);
         if (mitigated <= 0) return;
-        lastDamageTaken = mitigated; // store how much damage was actually dealt
+        lastDamageTaken = mitigated;
         currentHealth = Mathf.Clamp(currentHealth - mitigated, 0, maxHealth);
         SyncSlider();
+
+        // Spawn damage popup
+        if (damagePopupPrefab != null)
+        {
+            GameObject popup = Instantiate(damagePopupPrefab, transform.position + popupOffset, Quaternion.identity);
+            if (popup.TryGetComponent<TextMeshPro>(out var popupText))
+            {
+                popupText.text = mitigated.ToString();
+            }
+            else if (popup.GetComponentInChildren<TextMeshPro>() is TextMeshPro childText)
+            {
+                childText.text = mitigated.ToString();
+            }
+        }
 
         if (bloodSFX != null)
             Instantiate(bloodSFX, transform.position, Quaternion.identity);
@@ -187,7 +201,7 @@ public class SimpleHealth : MonoBehaviour
 
         if (transform.CompareTag("Player"))
         {
-            FindAnyObjectByType<OrthoScrollZoom>().CameraShake(0.1f, 2f);
+            FindAnyObjectByType<OrthoScrollZoom>()?.CameraShake(0.1f, 2f);
         }
 
         if (currentHealth <= 0)

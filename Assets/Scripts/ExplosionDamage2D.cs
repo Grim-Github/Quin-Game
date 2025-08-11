@@ -4,8 +4,8 @@ using UnityEngine;
 public class ExplosionDamage2D : MonoBehaviour
 {
     [Header("Explosion")]
-    [SerializeField] private float radius = 2f;
-    [SerializeField] private int baseDamage = 20;
+    [SerializeField] public float radius = 2f;
+    [SerializeField] public int baseDamage = 20;
     [SerializeField] private bool useDistanceFalloff = true;
 
     [Header("Visuals")]

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 [RequireComponent(typeof(Collider2D))]
 public class BulletDamageTrigger : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class BulletDamageTrigger : MonoBehaviour
 
     [Header("Filters")]
     [Tooltip("Only objects on these layers will be damaged.")]
-    [SerializeField] private LayerMask damageLayers;
+    [SerializeField] private LayerMask damageLayers = ~0;
     [Tooltip("If the bullet touches any of these layers, it is destroyed immediately (e.g., walls/obstacles).")]
     [SerializeField] private LayerMask destroyOnTouchLayers;
 
@@ -27,10 +28,22 @@ public class BulletDamageTrigger : MonoBehaviour
     // Track which healths we already hit (avoid duplicate damage on multi-collider targets)
     private readonly HashSet<SimpleHealth> _alreadyHit = new();
 
+    private Collider2D _col;
+
+    private void Awake()
+    {
+        _col = GetComponent<Collider2D>();
+        if (_col != null) _col.isTrigger = true;
+
+        // IMPORTANT: Don't touch impactPrefab's components here.
+        // Shooter sets 'damageAmount' (incl. crit) AFTER Instantiate.
+        // We will copy 'damageAmount' to the *spawned impact instance* at spawn time.
+    }
+
     private void Reset()
     {
         var col = GetComponent<Collider2D>();
-        col.isTrigger = true;
+        if (col != null) col.isTrigger = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -80,7 +93,13 @@ public class BulletDamageTrigger : MonoBehaviour
         }
         catch { /* ignore */ }
 
-        Instantiate(impactPrefab, hitPos, Quaternion.identity);
+        // Instantiate the impact and copy the *current* bullet damage to it (if it has ExplosionDamage2D)
+        var impactInstance = Instantiate(impactPrefab, hitPos, Quaternion.identity);
+        if (impactInstance.TryGetComponent<ExplosionDamage2D>(out var explosionInstance))
+        {
+            // Use current damageAmount (already includes crits if SimpleShooter set it)
+            explosionInstance.baseDamage = damageAmount;
+        }
     }
 
     private static bool IsInLayerMask(GameObject go, LayerMask mask)

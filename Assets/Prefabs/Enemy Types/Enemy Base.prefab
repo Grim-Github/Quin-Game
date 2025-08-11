@@ -251,6 +251,8 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   hitColor: {r: 1, g: 0.07075471, b: 0.07075471, a: 1}
   hitFlashDuration: 0.5
+  damagePopupPrefab: {fileID: 2924289727893196464, guid: a8aea507684d95a4c8b9545db21cf2cd, type: 3}
+  popupOffset: {x: 0, y: 1, z: 0}
 --- !u!61 &4859893581985587488
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -423,7 +425,7 @@ MonoBehaviour:
   m_ShadowGroup: 0
   m_Priority: 0
   m_ComponentVersion: 5
-  m_HasRenderer: 0
+  m_HasRenderer: 1
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 0
@@ -451,10 +453,10 @@ MonoBehaviour:
     m_FlipY: 0
     m_InitialTrim: 0.04
   m_CastingOption: 1
-  m_PreviousTrimEdge: 0
-  m_PreviousEdgeProcessing: -1
-  m_PreviousShadowCastingSource: -1
-  m_PreviousShadowShape2DSource: {fileID: 0}
+  m_PreviousTrimEdge: 0.04
+  m_PreviousEdgeProcessing: 1
+  m_PreviousShadowCastingSource: 2
+  m_PreviousShadowShape2DSource: {fileID: 562924106362761922}
   references:
     version: 2
     RefIds:
@@ -907,6 +909,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   maxTargetsPerTick: 0
+  splashRadius: 0
+  splashDamagePercent: 0.5
   lifestealPercent: 0
   critChance: 0
   critMultiplier: 2
@@ -914,10 +918,14 @@ MonoBehaviour:
   shootClip: {fileID: 0}
   stabClip: {fileID: 8300000, guid: 95c906fdaf654834fb592c668a587250, type: 3}
   slashEffect: {fileID: 0}
+  selfSfxObject: {fileID: 0}
   statsTextPrefab: {fileID: 0}
   uiParent: {fileID: 0}
   extraTextField: 
   weaponSprite: {fileID: 0}
+  rangeRenderer: {fileID: 0}
+  visualPadding: 0
+  autoScaleRangeVisual: 1
 --- !u!82 &5533731223449276409
 AudioSource:
   m_ObjectHideFlags: 0

@@ -474,6 +474,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   maxTargetsPerTick: 1
+  splashRadius: 0.5
+  splashDamagePercent: 0.5
   lifestealPercent: 0
   critChance: 0
   critMultiplier: 2
@@ -481,10 +483,14 @@ MonoBehaviour:
   shootClip: {fileID: 8300000, guid: b1abb9547cde4ba43bbf932cdc804719, type: 3}
   stabClip: {fileID: 8300000, guid: 95c906fdaf654834fb592c668a587250, type: 3}
   slashEffect: {fileID: 2990082284754955125, guid: 3c7fa9ceb543b3b4e874935cce42a793, type: 3}
+  selfSfxObject: {fileID: 0}
   statsTextPrefab: {fileID: 1372085629432807414, guid: 890a4bca294df43468ac696383a99644, type: 3}
   uiParent: {fileID: 3771470944807517528}
   extraTextField: 
   weaponSprite: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+  rangeRenderer: {fileID: 0}
+  visualPadding: 0
+  autoScaleRangeVisual: 1
 --- !u!82 &2550362612929724823
 AudioSource:
   m_ObjectHideFlags: 0
@@ -793,6 +799,8 @@ GameObject:
   - component: {fileID: 7754715335682866526}
   - component: {fileID: 4683568674584910072}
   - component: {fileID: 7141420854634069839}
+  - component: {fileID: 1126478190232524420}
+  - component: {fileID: 4854709494538077290}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -864,7 +872,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3599408220458379179, guid: 00687d7d51223214d9620c82f7ae808d, type: 3}
+  m_Sprite: {fileID: -1622541350213435999, guid: 8b6d88f9a5114fe46b7173b0a73839a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -891,7 +899,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 96b3b4cd68ce3ae41a296436a8e86e24, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -921,7 +929,8 @@ MonoBehaviour:
   dashSpeed: 12
   dashDuration: 0.15
   dashCooldown: 0.5
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 30405735645601086}
+  invertSpriteFlip: 1
 --- !u!114 &5791096993671492205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -993,7 +1002,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0572687, y: 1.3656387}
+    oldSize: {x: 0.7109375, y: 0.9296875}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1134,7 +1143,7 @@ MonoBehaviour:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
       m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0.36862183, y: 0.5228119, z: 0}
+      m_Extent: {x: 0.19546509, y: 0.3048401, z: 0}
     m_EdgeProcessing: 1
     m_TrimEdge: 0.16
     m_FlipX: 0
@@ -1151,6 +1160,41 @@ MonoBehaviour:
     - rid: 8693280127084134493
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!95 &1126478190232524420
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227099894277660166}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8e4b88cef8ee72b41a920ae9dc1f4131, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4854709494538077290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227099894277660166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7528032b0d41815419557057fcf04bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1126478190232524420}
 --- !u!1 &1310081954859382914
 GameObject:
   m_ObjectHideFlags: 0
@@ -3845,7 +3889,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 12.700001, y: 12.700001, z: 12.700001}
+  m_LocalScale: {x: 13.333333, y: 13.333333, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1711483935615806107}
@@ -3899,12 +3943,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417756cd4c94eef498d4c38e016c552b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 1.76
+  radius: 2
   damage: 2
   targetMask:
     serializedVersion: 2
     m_Bits: 128
   maxTargetsPerTick: 0
+  splashRadius: 0
+  splashDamagePercent: 0
   lifestealPercent: 0
   critChance: 0
   critMultiplier: 2
@@ -3912,10 +3958,14 @@ MonoBehaviour:
   shootClip: {fileID: 0}
   stabClip: {fileID: 0}
   slashEffect: {fileID: 0}
+  selfSfxObject: {fileID: 0}
   statsTextPrefab: {fileID: 1372085629432807414, guid: 890a4bca294df43468ac696383a99644, type: 3}
   uiParent: {fileID: 3771470944807517528}
   extraTextField: 
   weaponSprite: {fileID: 3794317029188430971, guid: e95f3c2f1016aca409c82ca77489a1d3, type: 3}
+  rangeRenderer: {fileID: 1441732132248051218}
+  visualPadding: 0
+  autoScaleRangeVisual: 1
 --- !u!82 &6091402884572149298
 AudioSource:
   m_ObjectHideFlags: 0

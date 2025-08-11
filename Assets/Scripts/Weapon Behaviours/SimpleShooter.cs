@@ -8,7 +8,6 @@ public class SimpleShooter : MonoBehaviour
     public GameObject bulletPrefab;
     public float shootForce = 10f;
     public int damage = 15;
-
     public float bulletLifetime = 5f;
 
     [Header("Criticals")]
@@ -17,6 +16,7 @@ public class SimpleShooter : MonoBehaviour
 
     [Header("Shot Pattern")]
     public int projectileCount = 1;
+    [Tooltip("Total cone in degrees. Each projectile gets a random angle within [-spread/2, +spread/2].")]
     public float spreadAngle = 0f;
 
     [Header("SFX")]
@@ -28,8 +28,6 @@ public class SimpleShooter : MonoBehaviour
     [TextArea][SerializeField] private string extraTextField = " ";
     [Tooltip("Sprite to show above the stats text.")]
     [SerializeField] private Sprite weaponSprite;
-
-
 
     private WeaponTick wt;
     private TextMeshProUGUI statsTextInstance;
@@ -75,6 +73,20 @@ public class SimpleShooter : MonoBehaviour
         if (statsTextInstance != null)
         {
             string delay = wt != null ? $"{wt.interval:F1}s" : "N/A";
+
+            string penetrationInfo = "N/A";
+            if (bulletPrefab != null)
+            {
+                if (bulletPrefab.TryGetComponent<BulletDamageTrigger>(out var bullet))
+                {
+                    penetrationInfo = bullet.penetration.ToString();
+                }
+                else if (bulletPrefab.TryGetComponent<ExplosionDamage2D>(out var explosion))
+                {
+                    penetrationInfo = $"Radius: {explosion.radius:F1}";
+                }
+            }
+
             statsTextInstance.text =
                 $"<b>{transform.name} Stats</b>\n" +
                 $"Damage: {damage}\n" +
@@ -82,13 +94,11 @@ public class SimpleShooter : MonoBehaviour
                 $"Proj Speed: {shootForce:F1}\n" +
                 $"Lifetime: {bulletLifetime:F1}s\n" +
                 $"Projectile Count: {projectileCount}\n" +
-                $"Penetration: {bulletPrefab.GetComponent<BulletDamageTrigger>().penetration}\n" +
+                $"Penetration/Explosion: {penetrationInfo}\n" +
                 $"Crit: {(Mathf.Clamp01(critChance) * 100f):F0}% x{critMultiplier:F2}\n" +
                 extraTextField;
         }
     }
-
-
 
     // --- Shooting API ---
 
@@ -96,66 +106,67 @@ public class SimpleShooter : MonoBehaviour
     {
         if (target == null || bulletPrefab == null) return;
 
-        // Get direction to target
-        Vector2 direction = (target.position - transform.position).normalized;
+        Vector2 dir = (target.position - transform.position);
+        if (dir.sqrMagnitude < 0.0001f) dir = Vector2.right; // fallback
+        dir.Normalize();
 
-        // Shoot in that direction
-        Shoot(direction);
+        Shoot(dir);
     }
 
     public void Shoot(Vector2 direction)
     {
         if (bulletPrefab == null) return;
 
+        // Normalize and guard zero
+        if (direction.sqrMagnitude < 0.0001f) direction = Vector2.right;
+        direction.Normalize();
+
         // Play shoot sound
         if (shootClip != null && shootSource != null)
             shootSource.PlayOneShot(shootClip);
 
-        // Spawn bullets
-        for (int i = 0; i < projectileCount; i++)
+        float halfSpread = spreadAngle * 0.5f;
+
+        for (int i = 0; i < Mathf.Max(1, projectileCount); i++)
         {
-            // Calculate spread angle for this bullet
-            float angle = 0f;
-            if (projectileCount > 1 && spreadAngle > 0f)
-            {
-                float step = spreadAngle / (projectileCount - 1);
-                angle = (-spreadAngle * 0.5f) + (step * i);
-            }
+            // Completely random spread per projectile, even if projectileCount == 1
+            float angle = (spreadAngle > 0f)
+                ? Random.Range(-halfSpread, halfSpread)
+                : 0f;
 
             // Rotate direction by angle
-            Vector2 shootDirection = direction;
-            if (angle != 0f)
-            {
-                float rad = angle * Mathf.Deg2Rad;
-                float cos = Mathf.Cos(rad);
-                float sin = Mathf.Sin(rad);
-                shootDirection = new Vector2(
-                    direction.x * cos - direction.y * sin,
-                    direction.x * sin + direction.y * cos
-                );
-            }
+            float rad = angle * Mathf.Deg2Rad;
+            float cos = Mathf.Cos(rad);
+            float sin = Mathf.Sin(rad);
+            Vector2 shootDirection = new Vector2(
+                direction.x * cos - direction.y * sin,
+                direction.x * sin + direction.y * cos
+            );
 
-            // Create bullet
+            // Create projectile
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
-            // Point bullet in shoot direction
+            // Point projectile
             float rotationAngle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
             bullet.transform.rotation = Quaternion.Euler(0, 0, rotationAngle);
 
-            // Calculate damage (with crit chance)
+            // Calculate damage (with crit)
             int finalDamage = damage;
             if (Random.value < critChance)
                 finalDamage = Mathf.RoundToInt(damage * critMultiplier);
 
-            // Set bullet damage
+            // Apply damage to the correct component type
             if (bullet.TryGetComponent<BulletDamageTrigger>(out var bulletDamage))
                 bulletDamage.damageAmount = finalDamage;
 
-            // Move bullet
+            if (bullet.TryGetComponent<ExplosionDamage2D>(out var explosionDamage))
+                explosionDamage.baseDamage = finalDamage;
+
+            // Move projectile (2D)
             if (bullet.TryGetComponent<Rigidbody2D>(out var rb))
                 rb.linearVelocity = shootDirection * shootForce;
 
-            // Destroy after lifetime
+            // Lifetime
             if (bulletLifetime > 0f)
                 Destroy(bullet, bulletLifetime);
         }
@@ -164,7 +175,6 @@ public class SimpleShooter : MonoBehaviour
     // --- Debug Helpers ---
     private void OnDrawGizmos()
     {
-        // Draw debug lines to help visualize shooting direction
         if (Application.isPlaying)
         {
             Gizmos.color = Color.red;

@@ -20,6 +20,8 @@ public class Snappy2DController : MonoBehaviour
 
     [Header("Visuals")]
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [Tooltip("If true, flips the sprite in the opposite direction.")]
+    [SerializeField] private bool invertSpriteFlip = false;
 
     private Rigidbody2D rb;
     private Vector2 input;
@@ -80,7 +82,11 @@ public class Snappy2DController : MonoBehaviour
 
         // Flip sprite based on horizontal movement
         if (spriteRenderer != null && input.x != 0)
-            spriteRenderer.flipX = input.x < 0;
+        {
+            bool flip = input.x < 0;
+            if (invertSpriteFlip) flip = !flip;
+            spriteRenderer.flipX = flip;
+        }
     }
 
     public void IncreaseMoveSpeed(float amount)
@@ -89,13 +95,13 @@ public class Snappy2DController : MonoBehaviour
         moveSpeed = Mathf.Max(0f, moveSpeed + amount);
     }
 
-    public void IncreaseDashSpeed(float amount) // FIXED
+    public void IncreaseDashSpeed(float amount)
     {
         if (amount == 0f) return;
         dashSpeed = Mathf.Max(0f, dashSpeed + amount);
     }
 
-    public void IncreaseDashCooldown(float amount) // FIXED
+    public void IncreaseDashCooldown(float amount)
     {
         if (amount == 0f) return;
         dashCooldown = Mathf.Max(0f, dashCooldown + amount);
