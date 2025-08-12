@@ -61,12 +61,7 @@ public class XpSystem : MonoBehaviour
     /// </summary>
     public void LevelUp()
     {
-        if (playerObject != null && playerObject.TryGetComponent(out SimpleHealth hp))
-        {
-            hp.maxHealth += 10;
-            hp.Heal(10);
-            hp.SyncSlider();
-        }
+
     }
 
     /// <summary>

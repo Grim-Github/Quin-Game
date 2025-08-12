@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 5020424717495316485}
   - component: {fileID: -6411856879609721089}
   - component: {fileID: 8522411498283610141}
+  - component: {fileID: 5771517332839581349}
   m_Layer: 7
   m_Name: Enemy Base
   m_TagString: Untagged
@@ -249,7 +250,7 @@ MonoBehaviour:
   damageClip: {fileID: 8300000, guid: b9c384eeb299c1b4fb0785c2b1d9cac3, type: 3}
   deathClip: {fileID: 8300000, guid: 6855793d09d7aa444a323331fd00ff39, type: 3}
   bloodSFX: {fileID: 5688528864766040321, guid: ab01d19b0799ef34fb9cb0524be1a66c, type: 3}
-  dropItem: {fileID: 4469264671267830397, guid: f1158209e40541646a5fc348d2910d00, type: 3}
+  loot: {fileID: 5771517332839581349}
   spriteRenderer: {fileID: 0}
   hitColor: {r: 1, g: 0.07075471, b: 0.07075471, a: 1}
   hitFlashDuration: 0.5
@@ -412,6 +413,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameGUI: {fileID: 4184141167979861600}
   power: 0
+  rarityBiasPerPower: 0.02
+  statRangeMultPerPower: 0.015
+  cadenceBoostPerPower: 0.01
+  maxRangeMultiplier: 25
+  maxRarityBiasFactor: 30
 --- !u!114 &5020424717495316485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,7 +459,7 @@ MonoBehaviour:
     m_TrimEdge: 0.04
     m_FlipX: 0
     m_FlipY: 0
-    m_InitialTrim: 0.04
+    m_InitialTrim: 0
   m_CastingOption: 1
   m_PreviousTrimEdge: 0.04
   m_PreviousEdgeProcessing: 1
@@ -477,39 +483,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb9065a6616ec8e44bfb41893b50bd5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollOnAwake: 1
+  rollOnStart: 1
   rarity: 0
   weightCommon: 60
   weightUncommon: 25
   weightRare: 12
   weightLegendary: 3
-  allowKnifeReflection: 1
-  allowHealthReflection: 1
   hpFlatAdd: {x: 15, y: 60}
   hpMult: {x: 1.1, y: 1.35}
   regenAdd: {x: 0.2, y: 2}
   armorAdd: {x: 1, y: 6}
-  armorScalingReduceFrac: {x: 0.1, y: 0.35}
-  maxMitigationAdd: {x: 0.02, y: 0.1}
-  invulnReduceFrac: {x: 0.1, y: 0.4}
   moveSpeedAdd: {x: 0.5, y: 2.5}
-  stopDistanceReduce: {x: 0.05, y: 0.35}
-  mayTuneReachEvent: 1
   atkSpeedFracAll: {x: 0.08, y: 0.25}
-  knifeDamageFlat: {x: 2, y: 12}
-  knifeDamageMult: {x: 1.08, y: 1.3}
-  knifeRadiusMult: {x: 1.1, y: 1.35}
-  knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-  knifeLifestealAdd: {x: 0.03, y: 0.15}
-  knifeMaxTargetsAdd: {x: 1, y: 3}
-  knifeCritChanceAdd: {x: 0.05, y: 0.2}
-  knifeCritMultAdd: {x: 0.2, y: 0.8}
+  KnifeDamageFlat: {x: 2, y: 12}
+  KnifeDamageMult: {x: 1.08, y: 1.3}
+  KnifeLifestealAdd: {x: 0.03, y: 0.15}
+  KnifeCritChanceAdd: {x: 0.05, y: 0.2}
+  KnifeCritMultAdd: {x: 0.2, y: 0.8}
   shooterDamageFlat: {x: 2, y: 12}
   shooterDamageMult: {x: 1.08, y: 1.3}
-  shooterLifetimeAdd: {x: 0.5, y: 2}
-  shooterForceAdd: {x: 1, y: 4}
   shooterProjectilesAdd: {x: 1, y: 2}
-  shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
 --- !u!114 &8522411498283610141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,6 +516,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
+--- !u!114 &5771517332839581349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684754638328981509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f625d28d97ba43d4db917ebaeb8b4660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entries:
+  - prefab: {fileID: 4469264671267830397, guid: f1158209e40541646a5fc348d2910d00, type: 3}
+    weight: 10
+  - prefab: {fileID: 4469264671267830397, guid: f52a96bea7c97ca4a8abfa172c19f043, type: 3}
+    weight: 1
+  rollOnAwake: 0
+  seed: 0
+  spawnPoint: {fileID: 5887235733221618242}
+  zPosition: 0
+  useSpawnPointZ: 1
+  parent: {fileID: 0}
+  lastSelectedIndex: -1
+  lastSpawned: {fileID: 0}
 --- !u!1 &6227486896796405968
 GameObject:
   m_ObjectHideFlags: 0

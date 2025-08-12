@@ -258,15 +258,15 @@ public class WeaponUpgrades : MonoBehaviour
                 }
             }
             // Check Knife
-            else if (transform.parent.TryGetComponent(out Knife knife))
+            else if (transform.parent.TryGetComponent(out Knife Knife))
             {
-                var knifeSprite = knife.GetType()
+                var KnifeSprite = Knife.GetType()
                     .GetField("weaponSprite", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public)
-                    ?.GetValue(knife) as Sprite;
-                if (knifeSprite != null)
+                    ?.GetValue(Knife) as Sprite;
+                if (KnifeSprite != null)
                 {
-                    icon = knifeSprite;
-                    Upgrade.powerUpIcon = knifeSprite;
+                    icon = KnifeSprite;
+                    Upgrade.powerUpIcon = KnifeSprite;
                 }
             }
         }
@@ -274,7 +274,7 @@ public class WeaponUpgrades : MonoBehaviour
 
         switch (upgradeType)
         {
-            // ------------- KNIFE -------------
+            // ------------- Knife -------------
             case UpgradeType.KnifeDamageFlat:
                 Upgrade.powerUpName = $"Knife Damage +{Mathf.RoundToInt(value)}";
                 Upgrade.powerUpDescription = $"Increase Knife damage by {Mathf.RoundToInt(value)}.";
@@ -400,7 +400,7 @@ public class WeaponUpgrades : MonoBehaviour
 
     public void ApplyUpgrade()
     {
-        // ---------------- KNIFE ----------------
+        // ---------------- Knife ----------------
         switch (upgradeType)
         {
             case UpgradeType.KnifeDamageFlat:

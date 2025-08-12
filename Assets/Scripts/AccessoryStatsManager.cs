@@ -61,7 +61,9 @@ public class AccessoryStatsManager : MonoBehaviour
         var seen = new HashSet<string>();
 
         // 1) AccessoriesUpgrades (uses PowerUp data)
-        var upgrades = FindObjectsOfType<AccessoriesUpgrades>(includeInactive: false);
+        var upgrades = Object.FindObjectsByType<AccessoriesUpgrades>(
+            FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+
         foreach (var acc in upgrades)
         {
             if (acc == null || !acc.isActiveAndEnabled) continue;
@@ -79,7 +81,9 @@ public class AccessoryStatsManager : MonoBehaviour
         }
 
         // 2) Accessory (uses AccesoryDescription from the component)
-        var plainAccessories = FindObjectsOfType<Accessory>(includeInactive: false);
+        var plainAccessories = Object.FindObjectsByType<Accessory>(
+            FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+
         foreach (var a in plainAccessories)
         {
             if (a == null || !a.isActiveAndEnabled) continue;
@@ -103,7 +107,6 @@ public class AccessoryStatsManager : MonoBehaviour
 
         statsText.text = sb.ToString().TrimEnd();
     }
-
 
     private void EnsureTextRef()
     {

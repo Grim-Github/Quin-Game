@@ -11,7 +11,7 @@ public class EnemyChaser : MonoBehaviour
 
     [Header("Movement")]
     [Tooltip("Speed in units per second.")]
-    [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] public float moveSpeed = 3f;
     [Tooltip("How close to the target before stopping.")]
     [SerializeField] private float stoppingDistance = 0.5f;
 

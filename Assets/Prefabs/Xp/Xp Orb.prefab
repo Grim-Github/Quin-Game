@@ -226,13 +226,14 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
-  moveSpeed: 1
-  searchRadius: 2
+  moveSpeed: 2
+  searchRadius: 4
   updateInterval: 1
   playerTag: Player
   stopDistance: 0.5
   decelerationRadius: 2
   useRigidbodyMovement: 1
+  otherFollowers: []
 --- !u!114 &7267073111414755011
 MonoBehaviour:
   m_ObjectHideFlags: 0

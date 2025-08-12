@@ -34,11 +34,12 @@ public class TwitchListener : MonoBehaviour
     [Tooltip("How much to increase max spawn count each interval")]
     [SerializeField, Min(1)] private int spawnIncreaseAmount = 1;
 
-    [Header("Power")]
     public int minPower = 0; // Minimum power level for chatters to spawn
-    public float chanceToUpgradeMinPower = 0.6f; // Chance to upgrade chatter power on interval
+    public float chanceToUpgradeMinPower = 0.6f; // Chance to upgrade chatter power on spawn
 
+    // Track time for next increase
     private float nextSpawnIncreaseTime = 0f;
+
 
     [Header("Collision Check")]
     [Tooltip("Radius used for checking if spawn position overlaps colliders")]
@@ -54,12 +55,10 @@ public class TwitchListener : MonoBehaviour
     [Tooltip("Optional: displays stopwatch time (MM:SS)")]
     [SerializeField] private TextMeshProUGUI stopwatchText;
 
+    // Stopwatch time
     private float elapsedSeconds = 0f;
 
-    [Header("Debug / Runtime")]
-    public List<GameObject> spawnedObjects = new(); // Now public for Inspector view
-    private readonly HashSet<string> spawnedChatters = new();
-
+    private HashSet<string> spawnedChatters = new HashSet<string>();
     private int currentSpawnCount = 0;
 
     private void Start()
@@ -72,33 +71,36 @@ public class TwitchListener : MonoBehaviour
             maxSpawnDistance = t;
         }
 
-        nextSpawnIncreaseTime = spawnIncreaseInterval > 0f ? spawnIncreaseInterval : 0f;
-
         IRC.Instance.OnChatMessage += OnChatMessage;
     }
 
     private void Update()
     {
+        // Only update stopwatch if the game isn't paused
         if (Time.timeScale > 0f)
         {
             elapsedSeconds += Time.deltaTime;
 
+            // Check if it's time to increase spawn cap
             if (spawnIncreaseInterval > 0f && elapsedSeconds >= nextSpawnIncreaseTime)
             {
-                if (Random.value < chanceToUpgradeMinPower)
+                if (Random.Range(0, 1) < chanceToUpgradeMinPower)
+                {
                     minPower++;
+                }
+
 
                 maxSpawnCount += spawnIncreaseAmount;
                 nextSpawnIncreaseTime = elapsedSeconds + spawnIncreaseInterval;
-                Debug.Log($"[TwitchListener] Max spawn count increased to {maxSpawnCount} (minPower={minPower})");
+                Debug.Log($"[TwitchListener] Max spawn count increased to {maxSpawnCount}");
             }
         }
 
+        // Update stopwatch UI
         if (stopwatchText != null)
             stopwatchText.text = FormatTime(elapsedSeconds);
-
-        MaintainSpawned();
     }
+
 
     private void OnDestroy()
     {
@@ -114,104 +116,12 @@ public class TwitchListener : MonoBehaviour
         var prefab = PickWeightedPrefab();
         if (prefab == null) return;
 
-        string display = chatter.tags.displayName;
-        string nameKey = display.ToLowerInvariant();
-
+        string nameKey = chatter.tags.displayName.ToLowerInvariant();
         if (spawnedChatters.Contains(nameKey)) return;
 
         Vector3 spawnPos;
-        if (!TryFindSafeSpawnPosition(out spawnPos))
-        {
-            Debug.LogWarning("[TwitchListener] Could not find safe spawn position for chatter.");
-            return;
-        }
-
-        GameObject go = Instantiate(prefab, spawnPos, Quaternion.identity);
-        go.name = display; // Set name to chatter display name
-
-        var stats = go.GetComponent<ChatterStats>();
-        if (stats != null)
-        {
-            stats.nameGUI.text = display;
-            stats.nameGUI.color = chatter.GetNameColor();
-            stats.power = chatter.tags.badges.Length + minPower;
-        }
-
-        spawnedChatters.Add(nameKey);
-        spawnedObjects.Add(go);
-        currentSpawnCount++;
-
-        Debug.Log($"<color=#fef83e><b>[MESSAGE]</b></color> Spawned ({prefab.name}) for {display} at {spawnPos}");
-    }
-
-    private GameObject PickWeightedPrefab()
-    {
-        float now = elapsedSeconds;
-
-        float total = 0f;
-        foreach (var e in chatterPrefabs)
-        {
-            if (e != null && e.prefab != null && e.weight > 0f && now >= e.timeSpawn)
-                total += e.weight;
-        }
-        if (total <= 0f) return null;
-
-        float roll = Random.value * total;
-        float acc = 0f;
-
-        foreach (var e in chatterPrefabs)
-        {
-            if (e == null || e.prefab == null || e.weight <= 0f) continue;
-            if (now < e.timeSpawn) continue;
-
-            acc += e.weight;
-            if (roll <= acc)
-                return e.prefab;
-        }
-
-        foreach (var e in chatterPrefabs)
-        {
-            if (e?.prefab != null && now >= e.timeSpawn) return e.prefab;
-        }
-        return null;
-    }
-
-    public void RemoveChatter(string nameKey)
-    {
-        nameKey = (nameKey ?? "").ToLowerInvariant();
-
-        if (spawnedChatters.Remove(nameKey))
-            currentSpawnCount = Mathf.Max(0, currentSpawnCount - 1);
-    }
-
-    private void MaintainSpawned()
-    {
-        for (int i = spawnedObjects.Count - 1; i >= 0; i--)
-        {
-            GameObject go = spawnedObjects[i];
-            if (go == null)
-            {
-                spawnedObjects.RemoveAt(i);
-                continue;
-            }
-
-            if (player != null && maxDistanceFromPlayer > 0f)
-            {
-                float dist = Vector2.Distance(go.transform.position, player.position);
-                if (dist > maxDistanceFromPlayer)
-                {
-                    Vector3 newPos = FindSafePositionNearPlayer();
-                    go.transform.position = newPos;
-                }
-            }
-        }
-    }
-
-    private bool TryFindSafeSpawnPosition(out Vector3 spawnPos)
-    {
         int safetyCounter = 0;
         const int maxAttempts = 20;
-
         do
         {
             safetyCounter++;
@@ -223,22 +133,160 @@ public class TwitchListener : MonoBehaviour
             spawnPos = player.position + offset;
             spawnPos.z += zOffset;
 
-            if (Physics2D.OverlapCircle(spawnPos, spawnCheckRadius, avoidLayers) == null)
-                return true;
+        } while (Physics2D.OverlapCircle(spawnPos, spawnCheckRadius, avoidLayers) != null
+                 && safetyCounter < maxAttempts);
 
-        } while (safetyCounter < maxAttempts);
+        if (safetyCounter >= maxAttempts)
+        {
+            Debug.LogWarning("Could not find safe spawn position for chatter.");
+            return;
+        }
 
-        spawnPos = player.position;
-        return false;
+        spawnedChatters.Add(nameKey);
+        currentSpawnCount++;
+
+        GameObject instantiatedChatter = Instantiate(prefab, spawnPos, Quaternion.identity);
+
+        var tracker = instantiatedChatter.AddComponent<ChatterTracker>();
+        tracker.Init(
+            listener: this,
+            nameKey: nameKey,
+            player: player,
+            minSpawnDistance: minSpawnDistance,
+            maxSpawnDistance: maxSpawnDistance,
+            zOffset: zOffset,
+            avoidLayers: avoidLayers,
+            spawnCheckRadius: spawnCheckRadius,
+            maxDistanceFromPlayer: maxDistanceFromPlayer
+        );
+
+        var stats = instantiatedChatter.GetComponent<ChatterStats>();
+        if (stats != null)
+        {
+            stats.nameGUI.text = chatter.tags.displayName;
+            stats.nameGUI.color = chatter.GetNameColor();
+            stats.power = chatter.tags.badges.Length + minPower;
+        }
+
+        Debug.Log($"<color=#fef83e><b>[MESSAGE]</b></color> Spawned ({prefab.name}) for {chatter.tags.displayName} at {spawnPos}");
     }
 
-    private Vector3 FindSafePositionNearPlayer()
+    private GameObject PickWeightedPrefab()
     {
-        Vector3 pos;
-        if (TryFindSafeSpawnPosition(out pos))
-            return pos;
+        float now = elapsedSeconds; // use stopwatch time for gating
 
-        return player.position + new Vector3(minSpawnDistance, 0f, zOffset);
+        // Compute total weight only among eligible entries
+        float total = 0f;
+        foreach (var e in chatterPrefabs)
+        {
+            if (e != null && e.prefab != null && e.weight > 0f && now >= e.timeSpawn)
+                total += e.weight;
+        }
+        if (total <= 0f) return null; // nothing eligible yet
+
+        float roll = Random.value * total;
+        float acc = 0f;
+
+        foreach (var e in chatterPrefabs)
+        {
+            if (e == null || e.prefab == null || e.weight <= 0f) continue;
+            if (now < e.timeSpawn) continue; // gate by time
+
+            acc += e.weight;
+            if (roll <= acc)
+                return e.prefab;
+        }
+
+        // Fallback (eligible first)
+        foreach (var e in chatterPrefabs)
+        {
+            if (e?.prefab != null && now >= e.timeSpawn) return e.prefab;
+        }
+        return null;
+    }
+
+    public void RemoveChatter(string nameKey)
+    {
+        if (spawnedChatters.Remove(nameKey))
+            currentSpawnCount = Mathf.Max(0, currentSpawnCount - 1);
+    }
+
+    private class ChatterTracker : MonoBehaviour
+    {
+        private TwitchListener listener;
+        private string nameKey;
+
+        private Transform player;
+        private float minSpawnDistance;
+        private float maxSpawnDistance;
+        private float zOffset;
+        private LayerMask avoidLayers;
+        private float spawnCheckRadius;
+        private float maxDistanceFromPlayer;
+
+        public void Init(
+            TwitchListener listener,
+            string nameKey,
+            Transform player,
+            float minSpawnDistance,
+            float maxSpawnDistance,
+            float zOffset,
+            LayerMask avoidLayers,
+            float spawnCheckRadius,
+            float maxDistanceFromPlayer)
+        {
+            this.listener = listener;
+            this.nameKey = nameKey;
+
+            this.player = player;
+            this.minSpawnDistance = minSpawnDistance;
+            this.maxSpawnDistance = maxSpawnDistance;
+            this.zOffset = zOffset;
+            this.avoidLayers = avoidLayers;
+            this.spawnCheckRadius = spawnCheckRadius;
+            this.maxDistanceFromPlayer = maxDistanceFromPlayer;
+        }
+
+        private void Update()
+        {
+            if (player == null) return;
+
+            float dist = Vector2.Distance(transform.position, player.position);
+            if (dist > maxDistanceFromPlayer)
+            {
+                // Teleport back near player using the same safe spawn logic
+                Vector3 newPos = FindSafePositionNearPlayer();
+                transform.position = newPos;
+            }
+        }
+
+        private Vector3 FindSafePositionNearPlayer()
+        {
+            Vector3 spawnPos = player.position;
+            int safetyCounter = 0;
+            const int maxAttempts = 20;
+
+            do
+            {
+                safetyCounter++;
+                float angle = Random.value * Mathf.PI * 2f;
+                float r = Mathf.Sqrt(Mathf.Lerp(minSpawnDistance * minSpawnDistance,
+                                                maxSpawnDistance * maxSpawnDistance,
+                                                Random.value));
+                Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * r;
+                spawnPos = player.position + offset;
+                spawnPos.z += zOffset;
+
+            } while (Physics2D.OverlapCircle(spawnPos, spawnCheckRadius, avoidLayers) != null
+                     && safetyCounter < maxAttempts);
+
+            return spawnPos;
+        }
+
+        private void OnDestroy()
+        {
+            listener?.RemoveChatter(nameKey);
+        }
     }
 
     private static string FormatTime(float seconds)

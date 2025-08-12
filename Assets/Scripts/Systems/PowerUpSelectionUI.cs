@@ -115,9 +115,9 @@ public class PowerUpSelectionUI : MonoBehaviour
                 if (pu.powerUpObject != null)
                 {
                     if (pu.powerUpObject.GetComponent<SimpleShooter>() != null)
-                        newName += " (Ranged)";
+                        newName += " (SimpleShooter)";
                     else if (pu.powerUpObject.GetComponent<Knife>() != null)
-                        newName += " (Melee)";
+                        newName += " (Knife)";
                 }
 
                 if (nameTexts != null && i < nameTexts.Length && nameTexts[i] != null)

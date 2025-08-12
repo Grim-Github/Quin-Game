@@ -533,6 +533,7 @@ GameObject:
   - component: {fileID: 6721967264053730172}
   - component: {fileID: 8955573920365390618}
   - component: {fileID: 2550362612929724823}
+  - component: {fileID: 5912186355098419825}
   m_Layer: 6
   m_Name: Knife
   m_TagString: Untagged
@@ -554,6 +555,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5275943110638038707}
+  - {fileID: 977729874839342573}
   - {fileID: 893505022041302612}
   - {fileID: 6488690948797804823}
   m_Father: {fileID: 5833988517266502027}
@@ -724,6 +726,105 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5912186355098419825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703362848269068923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollOnAwake: 1
+  rarity: 0
+  weightCommon: 60
+  weightUncommon: 25
+  weightRare: 12
+  weightLegendary: 3
+  damageMultRange: {x: 1.1, y: 1.3}
+  damageFlatAddRange: {x: 3, y: 12}
+  atkSpeedFracRange: {x: 0.1, y: 0.25}
+  critChanceAddRange: {x: 0.05, y: 0.2}
+  critMultAddRange: {x: 0.25, y: 1}
+  knifeRadiusMultRange: {x: 1.1, y: 1.3}
+  knifeSplashRadiusMultRange: {x: 1.1, y: 1.3}
+  knifeLifestealAddRange: {x: 0.05, y: 0.2}
+  knifeMaxTargetsAddRange: {x: 1, y: 3}
+  shooterLifetimeAddRange: {x: 0.5, y: 2}
+  shooterForceAddRange: {x: 1, y: 4}
+  shooterProjectilesAddRange: {x: 1, y: 2}
+  shooterSpreadReduceFracRange: {x: 0.1, y: 0.35}
+--- !u!1 &763878338640954299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1420364789606767436}
+  - component: {fileID: 7754145506774124050}
+  m_Layer: 6
+  m_Name: Life Ring
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1420364789606767436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763878338640954299}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 650610495478738920}
+  - {fileID: 8525945580026163909}
+  - {fileID: 3327934143211622554}
+  - {fileID: 5542149509927961313}
+  - {fileID: 3933465274283251422}
+  - {fileID: 234910448361184192}
+  m_Father: {fileID: 5432253268087408168}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7754145506774124050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763878338640954299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryDescription: +10 Max Health
+  icon: {fileID: -3829404428989594871, guid: 143f7645e4c79644ab93253bc2898b96, type: 3}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: IncreaseMaxHealth
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 5
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 2231107383271472083}
 --- !u!1 &840774589059925939
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,9 +884,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -816,15 +917,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.15
-  m_fontSizeBase: 0
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 10.8
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -872,6 +973,7 @@ GameObject:
   - component: {fileID: 6445105607666689829}
   - component: {fileID: 4878801837443715330}
   - component: {fileID: 5121767651809893251}
+  - component: {fileID: 1737309924204432557}
   m_Layer: 6
   m_Name: Longshot Railgun
   m_TagString: Untagged
@@ -1055,6 +1157,121 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1737309924204432557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884068369506667744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollOnAwake: 1
+  rarity: 0
+  weightCommon: 60
+  weightUncommon: 25
+  weightRare: 12
+  weightLegendary: 3
+  damageMultRange: {x: 1.1, y: 1.3}
+  damageFlatAddRange: {x: 3, y: 12}
+  atkSpeedFracRange: {x: 0.1, y: 0.25}
+  critChanceAddRange: {x: 0.05, y: 0.2}
+  critMultAddRange: {x: 0.25, y: 1}
+  knifeRadiusMultRange: {x: 1.1, y: 1.3}
+  knifeSplashRadiusMultRange: {x: 1.1, y: 1.3}
+  knifeLifestealAddRange: {x: 0.05, y: 0.2}
+  knifeMaxTargetsAddRange: {x: 1, y: 3}
+  shooterLifetimeAddRange: {x: 0.5, y: 2}
+  shooterForceAddRange: {x: 1, y: 4}
+  shooterProjectilesAddRange: {x: 1, y: 2}
+  shooterSpreadReduceFracRange: {x: 0.1, y: 0.35}
+--- !u!1 &1216054553433728835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3933465274283251422}
+  - component: {fileID: 853247300304075296}
+  - component: {fileID: 2734466829036011345}
+  m_Layer: 6
+  m_Name: Upgrade 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3933465274283251422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216054553433728835}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1420364789606767436}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &853247300304075296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216054553433728835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Extra Life
+    powerUpDescription: +10 Max Health
+    powerUpObject: {fileID: 1216054553433728835}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -3829404428989594871, guid: 143f7645e4c79644ab93253bc2898b96, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 8810217557203297635}
+--- !u!114 &2734466829036011345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216054553433728835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryDescription: +10 Max Health
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: IncreaseMaxHealth
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 15
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 0}
 --- !u!1 &1227099894277660166
 GameObject:
   m_ObjectHideFlags: 0
@@ -1232,12 +1449,13 @@ MonoBehaviour:
   damageClip: {fileID: 8300000, guid: 6f33120208e684c4596a2ffdbf3abd26, type: 3}
   deathClip: {fileID: 0}
   bloodSFX: {fileID: 5688528864766040321, guid: ab01d19b0799ef34fb9cb0524be1a66c, type: 3}
-  dropItem: {fileID: 0}
+  loot: {fileID: 0}
   spriteRenderer: {fileID: 0}
   hitColor: {r: 1, g: 0.5, b: 0.5, a: 1}
   hitFlashDuration: 0.1
   damagePopupPrefab: {fileID: 2924289727893196464, guid: a8aea507684d95a4c8b9545db21cf2cd, type: 3}
   popupOffset: {x: 0, y: 1, z: 0}
+  currentHealth: 0
 --- !u!61 &7754715335682866526
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2112,10 +2330,10 @@ RectTransform:
   - {fileID: 8435157743959155424}
   m_Father: {fileID: 493180743653363522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 313.15002, y: -695.175}
-  m_SizeDelta: {x: 626.3, y: 203.91}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7503051585762891076
 CanvasRenderer:
@@ -2984,7 +3202,7 @@ GameObject:
   - component: {fileID: 893505022041302612}
   - component: {fileID: 7329696752922098720}
   m_Layer: 6
-  m_Name: Upgrade 2
+  m_Name: Upgrade 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3165,6 +3383,7 @@ GameObject:
   - component: {fileID: 5345358480155470672}
   - component: {fileID: 4084026499351623075}
   - component: {fileID: 3858332326528905797}
+  - component: {fileID: 5573656500350240030}
   m_Layer: 6
   m_Name: Shotgun
   m_TagString: Untagged
@@ -3347,6 +3566,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5573656500350240030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383175445945189892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollOnAwake: 1
+  rarity: 0
+  weightCommon: 60
+  weightUncommon: 25
+  weightRare: 12
+  weightLegendary: 3
+  damageMultRange: {x: 1.1, y: 1.3}
+  damageFlatAddRange: {x: 3, y: 12}
+  atkSpeedFracRange: {x: 0.1, y: 0.25}
+  critChanceAddRange: {x: 0.05, y: 0.2}
+  critMultAddRange: {x: 0.25, y: 1}
+  knifeRadiusMultRange: {x: 1.1, y: 1.3}
+  knifeSplashRadiusMultRange: {x: 1.1, y: 1.3}
+  knifeLifestealAddRange: {x: 0.05, y: 0.2}
+  knifeMaxTargetsAddRange: {x: 1, y: 3}
+  shooterLifetimeAddRange: {x: 0.5, y: 2}
+  shooterForceAddRange: {x: 1, y: 4}
+  shooterProjectilesAddRange: {x: 1, y: 2}
+  shooterSpreadReduceFracRange: {x: 0.1, y: 0.35}
 --- !u!1 &3401677938551974219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3657,6 +3907,7 @@ GameObject:
   - component: {fileID: 510655762241045428}
   - component: {fileID: 7451574539655885478}
   - component: {fileID: 2276651533655993843}
+  - component: {fileID: 3623756317604507379}
   m_Layer: 6
   m_Name: Phantom Aegis
   m_TagString: Untagged
@@ -3910,6 +4161,37 @@ MonoBehaviour:
   target: {fileID: 3579689267263183337}
   distance: 2
   speed: 25
+--- !u!114 &3623756317604507379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3988581583061731246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollOnAwake: 1
+  rarity: 0
+  weightCommon: 60
+  weightUncommon: 25
+  weightRare: 12
+  weightLegendary: 3
+  damageMultRange: {x: 1.1, y: 1.3}
+  damageFlatAddRange: {x: 3, y: 12}
+  atkSpeedFracRange: {x: 0.1, y: 0.25}
+  critChanceAddRange: {x: 0.05, y: 0.2}
+  critMultAddRange: {x: 0.25, y: 1}
+  knifeRadiusMultRange: {x: 1.1, y: 1.3}
+  knifeSplashRadiusMultRange: {x: 1.1, y: 1.3}
+  knifeLifestealAddRange: {x: 0.05, y: 0.2}
+  knifeMaxTargetsAddRange: {x: 1, y: 3}
+  shooterLifetimeAddRange: {x: 0.5, y: 2}
+  shooterForceAddRange: {x: 1, y: 4}
+  shooterProjectilesAddRange: {x: 1, y: 2}
+  shooterSpreadReduceFracRange: {x: 0.1, y: 0.35}
 --- !u!1 &4027086555354802241
 GameObject:
   m_ObjectHideFlags: 0
@@ -4209,6 +4491,7 @@ GameObject:
   - component: {fileID: 3394777697855366977}
   - component: {fileID: 6091402884572149298}
   - component: {fileID: 1441732132248051218}
+  - component: {fileID: 8456241343151704209}
   m_Layer: 6
   m_Name: Demon Aura
   m_TagString: Untagged
@@ -4455,6 +4738,121 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8456241343151704209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4630656443800585593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollOnAwake: 1
+  rarity: 0
+  weightCommon: 60
+  weightUncommon: 25
+  weightRare: 12
+  weightLegendary: 3
+  damageMultRange: {x: 1.1, y: 1.3}
+  damageFlatAddRange: {x: 3, y: 12}
+  atkSpeedFracRange: {x: 0.1, y: 0.25}
+  critChanceAddRange: {x: 0.05, y: 0.2}
+  critMultAddRange: {x: 0.25, y: 1}
+  knifeRadiusMultRange: {x: 1.1, y: 1.3}
+  knifeSplashRadiusMultRange: {x: 1.1, y: 1.3}
+  knifeLifestealAddRange: {x: 0.05, y: 0.2}
+  knifeMaxTargetsAddRange: {x: 1, y: 3}
+  shooterLifetimeAddRange: {x: 0.5, y: 2}
+  shooterForceAddRange: {x: 1, y: 4}
+  shooterProjectilesAddRange: {x: 1, y: 2}
+  shooterSpreadReduceFracRange: {x: 0.1, y: 0.35}
+--- !u!1 &4742506975030521964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5542149509927961313}
+  - component: {fileID: 6371496717713720112}
+  - component: {fileID: 6003350747660481715}
+  m_Layer: 6
+  m_Name: Upgrade 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5542149509927961313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4742506975030521964}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1420364789606767436}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6371496717713720112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4742506975030521964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Extra Life
+    powerUpDescription: +10 Max Health
+    powerUpObject: {fileID: 4742506975030521964}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -3829404428989594871, guid: 143f7645e4c79644ab93253bc2898b96, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 853247300304075296}
+--- !u!114 &6003350747660481715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4742506975030521964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryDescription: +10 Max Health
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: IncreaseMaxHealth
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 15
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 0}
 --- !u!1 &4812046350524802839
 GameObject:
   m_ObjectHideFlags: 0
@@ -4991,10 +5389,10 @@ RectTransform:
   - {fileID: 4929518531840862509}
   m_Father: {fileID: 493180743653363522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 313.15002, y: -101.955}
-  m_SizeDelta: {x: 626.3, y: 203.91}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8327535359230160213
 CanvasRenderer:
@@ -5258,6 +5656,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5702712710036007540}
+  - {fileID: 1420364789606767436}
   - {fileID: 1432232446246633481}
   - {fileID: 9147439597678959549}
   m_Father: {fileID: 3579689267263183337}
@@ -6425,6 +6824,90 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &6907909290511598061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8525945580026163909}
+  - component: {fileID: 1602962855853603578}
+  - component: {fileID: 2056882034727749982}
+  m_Layer: 6
+  m_Name: Upgrade 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8525945580026163909
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6907909290511598061}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1420364789606767436}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1602962855853603578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6907909290511598061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Extra Life
+    powerUpDescription: +10 Max Health
+    powerUpObject: {fileID: 6907909290511598061}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -3829404428989594871, guid: 143f7645e4c79644ab93253bc2898b96, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 3478786327083596618}
+--- !u!114 &2056882034727749982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6907909290511598061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryDescription: +10 Max Health
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: IncreaseMaxHealth
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 15
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 0}
 --- !u!1 &6917393764121337987
 GameObject:
   m_ObjectHideFlags: 0
@@ -6461,10 +6944,10 @@ RectTransform:
   - {fileID: 473129638425191953}
   m_Father: {fileID: 493180743653363522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 313.15002, y: -398.565}
-  m_SizeDelta: {x: 626.3, y: 203.91}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4410814435797816065
 CanvasRenderer:
@@ -6770,6 +7253,90 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7718795412781081265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 234910448361184192}
+  - component: {fileID: 8810217557203297635}
+  - component: {fileID: 349057750166067180}
+  m_Layer: 6
+  m_Name: Upgrade 6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &234910448361184192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718795412781081265}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1420364789606767436}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8810217557203297635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718795412781081265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Extra Life
+    powerUpDescription: +5 Max Health
+    powerUpObject: {fileID: 7718795412781081265}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -3829404428989594871, guid: 143f7645e4c79644ab93253bc2898b96, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 0}
+--- !u!114 &349057750166067180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718795412781081265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryDescription: +5 Max Health
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: IncreaseMaxHealth
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 15
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 0}
 --- !u!1 &7847374846165817178
 GameObject:
   m_ObjectHideFlags: 0
@@ -6882,6 +7449,174 @@ MonoBehaviour:
   icon: {fileID: 6111340093450583523, guid: ae3514c3d4872734d95c16961626559b, type: 3}
   upgradeType: 10
   value: 5
+--- !u!1 &8105162575760502260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3327934143211622554}
+  - component: {fileID: 3478786327083596618}
+  - component: {fileID: 8982113524508753575}
+  m_Layer: 6
+  m_Name: Upgrade 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3327934143211622554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105162575760502260}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1420364789606767436}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3478786327083596618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105162575760502260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Extra Life
+    powerUpDescription: +10 Max Health
+    powerUpObject: {fileID: 8105162575760502260}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -3829404428989594871, guid: 143f7645e4c79644ab93253bc2898b96, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 6371496717713720112}
+--- !u!114 &8982113524508753575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105162575760502260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryDescription: +10 Max Health
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: IncreaseMaxHealth
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 15
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 0}
+--- !u!1 &8201105541926267591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 650610495478738920}
+  - component: {fileID: 2231107383271472083}
+  - component: {fileID: 2983291043851822158}
+  m_Layer: 6
+  m_Name: Upgrade 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &650610495478738920
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8201105541926267591}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1420364789606767436}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2231107383271472083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8201105541926267591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Extra Life
+    powerUpDescription: +10 Max Health
+    powerUpObject: {fileID: 8201105541926267591}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -3829404428989594871, guid: 143f7645e4c79644ab93253bc2898b96, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 1602962855853603578}
+--- !u!114 &2983291043851822158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8201105541926267591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryDescription: +10 Max Health
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: IncreaseMaxHealth
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 15
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 0}
 --- !u!1 &8232056550720580965
 GameObject:
   m_ObjectHideFlags: 0
@@ -6957,6 +7692,62 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &8429005387526368443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 977729874839342573}
+  - component: {fileID: 3380080085700406463}
+  m_Layer: 6
+  m_Name: Upgrade 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &977729874839342573
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8429005387526368443}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5526111780517100950}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3380080085700406463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8429005387526368443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Knife - Knife Crit Chance +30%
+    powerUpDescription: Increase Knife critical hit chance by 30%.
+    powerUpObject: {fileID: 8429005387526368443}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 7329696752922098720}
+  icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+  upgradeType: 8
+  value: 0.3
 --- !u!1 &8429739856138232991
 GameObject:
   m_ObjectHideFlags: 0
@@ -7002,17 +7793,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Knife - Knife Crit Chance +10%
-    powerUpDescription: Increase Knife critical hit chance by 10%.
+    powerUpName: Knife - Knife Damage +4
+    powerUpDescription: Increase Knife damage by 4.
     powerUpObject: {fileID: 8429739856138232991}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
     weight: 50
-  nextUpgrade: {fileID: 7329696752922098720}
+  nextUpgrade: {fileID: 3380080085700406463}
   icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
-  upgradeType: 8
-  value: 0.1
+  upgradeType: 1
+  value: 4
 --- !u!1 &8469624348420130493
 GameObject:
   m_ObjectHideFlags: 0
@@ -7109,6 +7900,7 @@ GameObject:
   - component: {fileID: 162288307590474621}
   - component: {fileID: 1635838341153099583}
   - component: {fileID: 6140848450053751762}
+  - component: {fileID: 4334082768228367615}
   m_Layer: 6
   m_Name: Burstfire Sidearm
   m_TagString: Untagged
@@ -7292,6 +8084,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4334082768228367615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8497159287504080187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollOnAwake: 1
+  rarity: 0
+  weightCommon: 60
+  weightUncommon: 25
+  weightRare: 12
+  weightLegendary: 3
+  damageMultRange: {x: 1.1, y: 1.3}
+  damageFlatAddRange: {x: 3, y: 12}
+  atkSpeedFracRange: {x: 0.1, y: 0.25}
+  critChanceAddRange: {x: 0.05, y: 0.2}
+  critMultAddRange: {x: 0.25, y: 1}
+  knifeRadiusMultRange: {x: 1.1, y: 1.3}
+  knifeSplashRadiusMultRange: {x: 1.1, y: 1.3}
+  knifeLifestealAddRange: {x: 0.05, y: 0.2}
+  knifeMaxTargetsAddRange: {x: 1, y: 3}
+  shooterLifetimeAddRange: {x: 0.5, y: 2}
+  shooterForceAddRange: {x: 1, y: 4}
+  shooterProjectilesAddRange: {x: 1, y: 2}
+  shooterSpreadReduceFracRange: {x: 0.1, y: 0.35}
 --- !u!1 &8596700537061007026
 GameObject:
   m_ObjectHideFlags: 0
@@ -7532,7 +8355,7 @@ GameObject:
   - component: {fileID: 6488690948797804823}
   - component: {fileID: 2818028153591757128}
   m_Layer: 6
-  m_Name: Upgrade 3
+  m_Name: Upgrade 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7631,13 +8454,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9172262383249102849}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.16470589}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -7668,6 +8491,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipPanel: {fileID: 9172262383249102849}
   tooltipText: {fileID: 5269669559767013907}
+  padding: {x: 20, y: 30}
+  tooltipLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  autoHideWhenNoTarget: 1
+  hideDelay: 0.35
 --- !u!1001 &7642483930619205459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7678,7 +8507,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1372085629432807414, guid: 890a4bca294df43468ac696383a99644, type: 3}
       propertyPath: m_text
-      value: <b>Accessories</b>
+      value: <b>Buffs from accessories</b>
       objectReference: {fileID: 0}
     - target: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
       propertyPath: m_Name

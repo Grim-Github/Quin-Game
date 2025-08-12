@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
 using UnityEngine;
 
@@ -31,7 +30,6 @@ public class MonsterRarity : MonoBehaviour
     // === Movement (EnemyChaser) ===
     [Header("Chase / Movement Rolls")]
     [SerializeField] private Vector2 moveSpeedAdd = new Vector2(0.5f, 2.5f);
-    [SerializeField] private bool mayTuneReachEvent = true;
 
     // === Global cadence (WeaponTick) ===
     [Header("Global Attack Cadence (WeaponTick)")]
@@ -39,12 +37,12 @@ public class MonsterRarity : MonoBehaviour
 
     // === Knife rolls (public fields) ===
     [Header("Knife Rolls")]
-    [SerializeField] private Vector2Int knifeDamageFlat = new Vector2Int(2, 12);
-    [SerializeField] private Vector2 knifeDamageMult = new Vector2(1.08f, 1.30f);
-    [SerializeField] private Vector2 knifeLifestealAdd = new Vector2(0.03f, 0.15f);
-    [SerializeField] private Vector2Int knifeMaxTargetsAdd = new Vector2Int(1, 3);
-    [SerializeField] private Vector2 knifeCritChanceAdd = new Vector2(0.05f, 0.20f);
-    [SerializeField] private Vector2 knifeCritMultAdd = new Vector2(0.20f, 0.80f);
+    [SerializeField] private Vector2Int KnifeDamageFlat = new Vector2Int(2, 12);
+    [SerializeField] private Vector2 KnifeDamageMult = new Vector2(1.08f, 1.30f);
+    [SerializeField] private Vector2 KnifeLifestealAdd = new Vector2(0.03f, 0.15f);
+    // NOTE: removed KnifeMaxTargetsAdd (per request)
+    [SerializeField] private Vector2 KnifeCritChanceAdd = new Vector2(0.05f, 0.20f);
+    [SerializeField] private Vector2 KnifeCritMultAdd = new Vector2(0.20f, 0.80f);
 
     // === Shooter rolls (public fields) ===
     [Header("Shooter Rolls")]
@@ -53,18 +51,19 @@ public class MonsterRarity : MonoBehaviour
     [SerializeField] private Vector2Int shooterProjectilesAdd = new Vector2Int(1, 2);
 
     // Cached refs
-    private SimpleHealth health;
-    private EnemyChaser chaser;
-    private Knife[] knives;
-    private SimpleShooter[] shooters;
-    private WeaponTick[] ticks;
+    private SimpleHealth health;        // needs public: int maxHealth, int currentHealth, float regenRate, float armor;
+                                        // public UnityEngine.UI.Slider healthSlider; public TMPro.TextMeshProUGUI healthText;
+                                        // public string extraTextField; public void Heal(int amt); public void UpdateStatsText();
+    private EnemyChaser chaser;         // needs public: float moveSpeed;
+    private Knife[] knives;             // must have public fields used below
+    private SimpleShooter[] shooters;   // must have public fields used below
+    private WeaponTick[] ticks;         // needs public: float interval; public void ResetAndStart();
 
     // Visible notes (pre-styled lines)
     private readonly List<string> notesEnemy = new();
     private readonly List<string> notesWeapons = new();
 
     // ===== UI Colors (TMP rich text) =====
-    // tweak if you want different palette
     private const string C_HEADER = "#8BD3FF";   // headers
     private const string C_LABEL = "#EAEAEA";   // label text
     private const string C_VALUE = "#FFD24D";   // numbers
@@ -137,29 +136,28 @@ public class MonsterRarity : MonoBehaviour
         // Restart WeaponTick safely
         foreach (var t in ticks)
             if (t && t.isActiveAndEnabled)
-                CallPublicIfExists(t, "ResetAndStart");
+                t.ResetAndStart();
 
         // === Write EVERYTHING to parent entity’s UI ===
         WriteIntoParentUI();
     }
 
-    // ===== Candidate pool (REMOVED: 5,6,7,10,14,15,23,24) =====
+    // ===== Candidate pool =====
     private List<Action> BuildCandidates()
     {
         var list = new List<Action>();
 
         if (health)
         {
-            list.Add(Up_HP_Flat);          // +flat max HP
-            list.Add(Up_HP_Mult);          // x% max HP
-            list.Add(Up_Regen_Add);        // +regen
-            list.Add(Up_Armor_Add);        // +armor
+            list.Add(Up_HP_Flat);
+            list.Add(Up_HP_Mult);
+            list.Add(Up_Regen_Add);
+            list.Add(Up_Armor_Add);
         }
 
         if (chaser)
         {
-            list.Add(Up_MoveSpeed_Add);    // +move speed
-            if (mayTuneReachEvent) list.Add(Up_ReachEvent_Tune); // reach cadence
+            list.Add(Up_MoveSpeed_Add);
         }
 
         if (knives != null && knives.Length > 0)
@@ -167,9 +165,7 @@ public class MonsterRarity : MonoBehaviour
             list.Add(Up_Knife_Dmg_Flat);
             list.Add(Up_Knife_Dmg_Mult);
             list.Add(Up_Knife_Lifesteal_Add);
-            list.Add(Up_Knife_MaxTargets_Add);
-            list.Add(Up_Knife_CritChance_Add);
-            list.Add(Up_Knife_CritMult_Add);
+            list.Add(Up_Knife_Crit_Both);
         }
 
         if (shooters != null && shooters.Length > 0)
@@ -186,96 +182,66 @@ public class MonsterRarity : MonoBehaviour
     private void Up_HP_Flat()
     {
         if (!health) return;
+
         int add = UnityEngine.Random.Range(hpFlatAdd.x, hpFlatAdd.y + 1);
+        health.maxHealth += add;
+        health.currentHealth = health.maxHealth; // full heal
 
-        if (TryGetPrivate(health, "maxHealth", out int maxHP))
-        {
-            int newMax = Mathf.Max(1, maxHP + add);
-            TrySetPrivate(health, "maxHealth", newMax);
-
-            if (TryGetPrivate(health, "currentHealth", out int cur))
-                TrySetPrivate(health, "currentHealth", Mathf.Clamp(cur + add, 0, newMax));
-
-            EN("Max Health", $"+{add}");
-            UpdateHealthUIImmediate();
-        }
+        EN("Max Health", $"+{add}");
+        health.UpdateStatsText();
     }
 
     private void Up_HP_Mult()
     {
         if (!health) return;
-        float m = UnityEngine.Random.Range(hpMult.x, hpMult.y);
 
-        if (TryGetPrivate(health, "maxHealth", out int maxHP))
-        {
-            int newMax = Mathf.Max(1, Mathf.RoundToInt(maxHP * m));
-            int newCur = 0;
-            bool hasCur = TryGetPrivate(health, "currentHealth", out int cur);
-            if (hasCur) newCur = Mathf.Clamp(Mathf.RoundToInt(cur * m), 0, newMax);
+        float mult = UnityEngine.Random.Range(hpMult.x, hpMult.y);
+        health.maxHealth = Mathf.RoundToInt(health.maxHealth * mult);
+        health.currentHealth = health.maxHealth; // full heal
 
-            TrySetPrivate(health, "maxHealth", newMax);
-            if (hasCur) TrySetPrivate(health, "currentHealth", newCur);
-
-            EN("Max Health", $"×{m:F2}");
-            UpdateHealthUIImmediate();
-        }
+        EN("Max Health", $"×{mult:F2}");
+        health.UpdateStatsText();
     }
 
     private void Up_Regen_Add()
     {
         if (!health) return;
         float add = UnityEngine.Random.Range(regenAdd.x, regenAdd.y);
-        if (TryGetPrivate(health, "regenRate", out float before))
-        {
-            TrySetPrivate(health, "regenRate", Mathf.Max(0f, before + add));
-            EN("Regen", $"+{add:F2}/s");
-            UpdateHealthUIImmediate();
-        }
+        health.regenRate = Mathf.Max(0f, health.regenRate + add);
+        EN("Regen", $"+{add:F2}/s");
+        health.UpdateStatsText();
     }
 
     private void Up_Armor_Add()
     {
         if (!health) return;
-        if (TryGetPrivate(health, "armor", out float before))
-        {
-            float add = UnityEngine.Random.Range(armorAdd.x, armorAdd.y);
-            TrySetPrivate(health, "armor", Mathf.Max(0f, before + add));
-            EN("Armor", $"+{add:F1}");
-        }
+        float add = UnityEngine.Random.Range(armorAdd.x, armorAdd.y);
+        health.armor = Mathf.Max(0f, health.armor + add);
+        EN("Armor", $"+{add:F1}");
     }
 
     // ===== Movement (EnemyChaser) =====
     private void Up_MoveSpeed_Add()
     {
         if (!chaser) return;
-        if (TryGetPrivate(chaser, "moveSpeed", out float before))
-        {
-            float add = UnityEngine.Random.Range(moveSpeedAdd.x, moveSpeedAdd.y);
-            TrySetPrivate(chaser, "moveSpeed", Mathf.Max(0f, before + add));
-            EN("Move Speed", $"+{add:F1}");
-        }
-    }
-
-    private void Up_ReachEvent_Tune()
-    {
-        if (!chaser) return;
-        TrySetPrivate(chaser, "repeatEvent", true);
-        if (TryGetPrivate(chaser, "resetBuffer", out float buf))
-            TrySetPrivate(chaser, "resetBuffer", Mathf.Max(0.05f, buf * 0.7f));
-        EN("Reach Event", "More frequent");
+        float add = UnityEngine.Random.Range(moveSpeedAdd.x, moveSpeedAdd.y);
+        chaser.moveSpeed = Mathf.Max(0f, chaser.moveSpeed + add);
+        EN("Move Speed", $"+{add:F1}");
     }
 
     // ===== Global cadence =====
     private void Upgrade_AllWeaponTickSpeed()
     {
         float frac = UnityEngine.Random.Range(atkSpeedFracAll.x, atkSpeedFracAll.y);
+        if (ticks == null) return;
+
         foreach (var t in ticks)
         {
             if (!t) continue;
-            if (!TryGetPrivate(t, "interval", out float before)) continue;
+            float before = t.interval;
             float after = Mathf.Max(0.01f, before * (1f - frac));
-            TrySetPrivate(t, "interval", after);
-            if (t.isActiveAndEnabled) CallPublicIfExists(t, "ResetAndStart");
+            t.interval = after;
+            if (t.isActiveAndEnabled) t.ResetAndStart();
         }
         WN("Attack Interval (All)", $"-{frac * 100f:F0}%");
     }
@@ -283,47 +249,39 @@ public class MonsterRarity : MonoBehaviour
     // ===== Knife (public fields) =====
     private void Up_Knife_Dmg_Flat()
     {
-        int add = UnityEngine.Random.Range(knifeDamageFlat.x, knifeDamageFlat.y + 1);
+        int add = UnityEngine.Random.Range(KnifeDamageFlat.x, KnifeDamageFlat.y + 1);
         foreach (var k in knives) if (k) k.damage = Mathf.Max(0, k.damage + add);
         WN("Knife Damage", $"+{add}");
     }
 
     private void Up_Knife_Dmg_Mult()
     {
-        float m = UnityEngine.Random.Range(knifeDamageMult.x, knifeDamageMult.y);
+        float m = UnityEngine.Random.Range(KnifeDamageMult.x, KnifeDamageMult.y);
         foreach (var k in knives) if (k) k.damage = Mathf.RoundToInt(k.damage * m);
         WN("Knife Damage", $"×{m:F2}");
     }
 
     private void Up_Knife_Lifesteal_Add()
     {
-        float add = UnityEngine.Random.Range(knifeLifestealAdd.x, knifeLifestealAdd.y);
+        float add = UnityEngine.Random.Range(KnifeLifestealAdd.x, KnifeLifestealAdd.y);
         foreach (var k in knives) if (k) k.lifestealPercent = Mathf.Clamp01(k.lifestealPercent + add);
         WN("Knife Lifesteal", $"+{add * 100f:F0}%");
     }
 
-    private void Up_Knife_MaxTargets_Add()
+    private void Up_Knife_Crit_Both()
     {
-        int add = UnityEngine.Random.Range(knifeMaxTargetsAdd.x, knifeMaxTargetsAdd.y + 1);
-        foreach (var k in knives) if (k) k.maxTargetsPerTick = Mathf.Max(0, k.maxTargetsPerTick + add);
-        WN("Knife Max Targets", $"+{add}");
+        float addChance = UnityEngine.Random.Range(KnifeCritChanceAdd.x, KnifeCritChanceAdd.y);
+        float addMult = UnityEngine.Random.Range(KnifeCritMultAdd.x, KnifeCritMultAdd.y);
+        foreach (var k in knives)
+        {
+            if (!k) continue;
+            k.critChance = Mathf.Clamp01(k.critChance + addChance);
+            k.critMultiplier = Mathf.Max(1f, k.critMultiplier + addMult);
+        }
+        WN("Knife Crit (Chance & Mult)", $"+{addChance * 100f:F0}% / +{addMult:F2}x");
     }
 
-    private void Up_Knife_CritChance_Add()
-    {
-        float add = UnityEngine.Random.Range(knifeCritChanceAdd.x, knifeCritChanceAdd.y);
-        foreach (var k in knives) if (k) k.critChance = Mathf.Clamp01(k.critChance + add);
-        WN("Knife Crit Chance", $"+{add * 100f:F0}%");
-    }
-
-    private void Up_Knife_CritMult_Add()
-    {
-        float add = UnityEngine.Random.Range(knifeCritMultAdd.x, knifeCritMultAdd.y);
-        foreach (var k in knives) if (k) k.critMultiplier = Mathf.Max(1f, k.critMultiplier + add);
-        WN("Knife Crit Mult", $"+{add:F2}x");
-    }
-
-    // ===== Shooter (public fields already) =====
+    // ===== Shooter (public fields) =====
     private void Up_Shooter_Dmg_Flat()
     {
         int add = UnityEngine.Random.Range(shooterDamageFlat.x, shooterDamageFlat.y + 1);
@@ -383,53 +341,16 @@ public class MonsterRarity : MonoBehaviour
         string block = $"{C(C_TEXT, $"<size=85%>{sb}</size>")}";
 
         // Replace previous rarity block in SimpleHealth.extraTextField
-        if (!TryGetPrivate(health, "extraTextField", out string cur)) cur = "";
+        string cur = health.extraTextField ?? "";
         string cleaned = RemoveRaritySection(cur);
         string combined = string.IsNullOrWhiteSpace(cleaned) ? block : $"{cleaned}\n{block}";
-        TrySetPrivate(health, "extraTextField", combined);
+        health.extraTextField = combined;
 
-        CallPrivateOrPublic(health, "UpdateStatsText");
-        UpdateHealthUIImmediate();
+        // Update UI (method assumed public)
+        try { health.UpdateStatsText(); } catch { /* ignore if not present */ }
     }
 
-    private void UpdateHealthUIImmediate()
-    {
-        if (!health) return;
 
-        if (TryGetPrivate(health, "maxHealth", out int maxHP))
-        {
-            int curHP = 0;
-            bool hasCur = TryGetPrivate(health, "currentHealth", out int curField);
-            if (hasCur) curHP = curField;
-            else
-            {
-                var prop = health.GetType().GetProperty("CurrentHealth", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                if (prop != null && prop.PropertyType == typeof(int))
-                    curHP = (int)prop.GetValue(health, null);
-            }
-
-            // Slider
-            var fSlider = health.GetType().GetField("healthSlider", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            if (fSlider != null)
-            {
-                var slider = fSlider.GetValue(health) as UnityEngine.UI.Slider;
-                if (slider != null)
-                {
-                    slider.maxValue = maxHP;
-                    slider.value = Mathf.Clamp(curHP, 0, maxHP);
-                }
-            }
-
-            // Text
-            var fText = health.GetType().GetField("healthText", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            if (fText != null)
-            {
-                var tmp = fText.GetValue(health) as TMPro.TextMeshProUGUI;
-                if (tmp != null)
-                    tmp.text = $"{curHP}/{maxHP}";
-            }
-        }
-    }
 
     // ===== Formatting helpers =====
     private static string C(string hex, string text) => $"<color={hex}>{text}</color>";
@@ -462,41 +383,5 @@ public class MonsterRarity : MonoBehaviour
             int j = UnityEngine.Random.Range(i, list.Count);
             (list[i], list[j]) = (list[j], list[i]);
         }
-    }
-
-    // ===== tiny reflection helpers for enemy/chaser/WT only =====
-    private static bool TryGetPrivate<T>(object obj, string fieldName, out T value)
-    {
-        value = default;
-        if (obj == null) return false;
-        var f = obj.GetType().GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-        if (f == null || !typeof(T).IsAssignableFrom(f.FieldType)) return false;
-        object val = f.GetValue(obj);
-        if (val is T cast) { value = cast; return true; }
-        return false;
-    }
-
-    private static bool TrySetPrivate<T>(object obj, string fieldName, T value)
-    {
-        if (obj == null) return false;
-        var f = obj.GetType().GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-        if (f == null || !f.FieldType.IsAssignableFrom(typeof(T))) return false;
-        f.SetValue(obj, value);
-        return true;
-    }
-
-    private static void CallPublicIfExists(object obj, string method)
-    {
-        if (obj == null) return;
-        var mi = obj.GetType().GetMethod(method, BindingFlags.Instance | BindingFlags.Public);
-        mi?.Invoke(obj, null);
-    }
-
-    private void CallPrivateOrPublic(object obj, string method)
-    {
-        if (obj == null) return;
-        var miPriv = obj.GetType().GetMethod(method, BindingFlags.Instance | BindingFlags.NonPublic);
-        var miPub = obj.GetType().GetMethod(method, BindingFlags.Instance | BindingFlags.Public);
-        (miPriv ?? miPub)?.Invoke(obj, null);
     }
 }

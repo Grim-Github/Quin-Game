@@ -25,7 +25,7 @@ public class SimpleShooter : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI statsTextPrefab;
     [SerializeField] private Transform uiParent;
-    [TextArea][SerializeField] private string extraTextField = " ";
+    [TextArea][SerializeField] public string extraTextField = " ";
     [Tooltip("Sprite to show above the stats text.")]
     [SerializeField] private Sprite weaponSprite;
 
@@ -66,6 +66,14 @@ public class SimpleShooter : MonoBehaviour
     private void Update()
     {
         UpdateStatsText();
+    }
+    public void RemoveStatsText()
+    {
+        if (statsTextInstance != null)
+        {
+            Destroy(statsTextInstance.gameObject);
+            statsTextInstance = null;
+        }
     }
 
     private void UpdateStatsText()

@@ -114,7 +114,6 @@ public class AccessoriesUpgrades : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    // ---------- Minimal custom Inspector: show read-only next + refresh ----------
     [UnityEditor.CustomEditor(typeof(AccessoriesUpgrades))]
     private class AccessoriesUpgradesEditor : UnityEditor.Editor
     {
@@ -123,22 +122,25 @@ public class AccessoriesUpgrades : MonoBehaviour
             var au = (AccessoriesUpgrades)target;
             var so = serializedObject;
 
-            so.Update();
+            // Always refresh wiring while the inspector is visible
+            au.AutoAssignNextUpgrade();
 
+            so.Update();
             UnityEditor.EditorGUILayout.PropertyField(so.FindProperty("Upgrade"));
 
             using (new UnityEditor.EditorGUI.DisabledScope(true))
             {
-                UnityEditor.EditorGUILayout.ObjectField("Next Upgrade (auto)", au.nextUpgrade, typeof(AccessoriesUpgrades), true);
-            }
-            if (UnityEngine.GUILayout.Button("Refresh Next"))
-            {
-                au.AutoAssignNextUpgrade();
-                UnityEditor.EditorUtility.SetDirty(au);
+                UnityEditor.EditorGUILayout.ObjectField(
+                    "Next Upgrade (auto)",
+                    au.nextUpgrade,
+                    typeof(AccessoriesUpgrades),
+                    true
+                );
             }
 
             so.ApplyModifiedProperties();
         }
     }
 #endif
+
 }
