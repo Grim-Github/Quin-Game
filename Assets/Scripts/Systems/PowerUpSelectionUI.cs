@@ -13,6 +13,9 @@ public class PowerUpSelectionUI : MonoBehaviour
     [SerializeField] private Button[] selectButtons;
     [SerializeField] private Image[] iconImages;
 
+    [Header("Extra Buttons")]
+    [SerializeField] private Button skipButton; // NEW
+
     [Header("References")]
     [SerializeField] private PowerUpChooser powerUpChooser;
     [SerializeField] private Volume slowMoVolume;
@@ -20,7 +23,6 @@ public class PowerUpSelectionUI : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip openSFX;
-
     [SerializeField] private AudioClip closeSFX;
 
     [Header("Defaults")]
@@ -42,7 +44,15 @@ public class PowerUpSelectionUI : MonoBehaviour
             selectButtons[i].onClick.RemoveAllListeners();
             selectButtons[i].onClick.AddListener(() => SelectPowerUp(idx));
         }
+
+        // Wire up skip button
+        if (skipButton != null)
+        {
+            skipButton.onClick.RemoveAllListeners();
+            skipButton.onClick.AddListener(SkipChoice);
+        }
     }
+
     private void PlaySFX(AudioClip clip)
     {
         if (audioSource != null && clip != null)
@@ -57,7 +67,7 @@ public class PowerUpSelectionUI : MonoBehaviour
             return;
         }
 
-        // Build eligible candidates (only by caps; avoid over-filtering)
+        // Build eligible candidates
         List<int> candidates = new List<int>();
         for (int i = 0; i < powerUpChooser.powerUps.Count; i++)
         {
@@ -71,7 +81,6 @@ public class PowerUpSelectionUI : MonoBehaviour
                 candidates.Add(i);
         }
 
-
         if (candidates.Count == 0)
         {
             Debug.Log("[PowerUpSelectionUI] No eligible power-ups to show (type caps reached).");
@@ -79,13 +88,7 @@ public class PowerUpSelectionUI : MonoBehaviour
             return;
         }
 
-
-        if (slowMoVolume)
-        {
-            Debug.Log("[PowerUpSelectionUI] Slowing time for selection.");
-            slowMoVolume.weight = 1f;
-        }
-
+        if (slowMoVolume) slowMoVolume.weight = 1f;
         Time.timeScale = 0f;
 
         if (selectionPanel != null) selectionPanel.SetActive(true);
@@ -96,7 +99,7 @@ public class PowerUpSelectionUI : MonoBehaviour
         if (defaultIcon == null && !warnedNoDefault)
         {
             warnedNoDefault = true;
-            Debug.LogWarning("[PowerUpSelectionUI] defaultIcon is not assigned. Consider assigning one to guarantee a sprite.");
+            Debug.LogWarning("[PowerUpSelectionUI] defaultIcon is not assigned.");
         }
 
         // Fill visible slots
@@ -107,10 +110,8 @@ public class PowerUpSelectionUI : MonoBehaviour
             if (has)
             {
                 var pu = powerUpChooser.powerUps[shownIndices[i]];
-
                 string newName = pu.powerUpName;
 
-                // Check if the powerUpObject exists and has Shooter or Knife component
                 if (pu.powerUpObject != null)
                 {
                     if (pu.powerUpObject.GetComponent<SimpleShooter>() != null)
@@ -122,13 +123,12 @@ public class PowerUpSelectionUI : MonoBehaviour
                 if (nameTexts != null && i < nameTexts.Length && nameTexts[i] != null)
                 {
                     nameTexts[i].text = pu.powerUpName;
-                    nameTexts[i].gameObject.name = newName; // rename the TMP_Text GameObject
+                    nameTexts[i].gameObject.name = newName;
                 }
 
                 if (descriptionTexts != null && i < descriptionTexts.Length && descriptionTexts[i] != null)
                     descriptionTexts[i].text = pu.powerUpDescription;
 
-                // ICONS: per-powerup icon -> defaultIcon (guaranteed fallback)
                 if (iconImages != null && i < iconImages.Length && iconImages[i] != null)
                 {
                     var img = iconImages[i];
@@ -144,10 +144,8 @@ public class PowerUpSelectionUI : MonoBehaviour
                     selectButtons[i].gameObject.SetActive(true);
                 }
             }
-
             else
             {
-                // Hide unused slots entirely
                 if (nameTexts != null && i < nameTexts.Length && nameTexts[i] != null)
                     nameTexts[i].text = string.Empty;
 
@@ -168,6 +166,9 @@ public class PowerUpSelectionUI : MonoBehaviour
                 }
             }
         }
+
+        // Show skip button
+        if (skipButton != null) skipButton.gameObject.SetActive(true);
     }
 
     private void SelectPowerUp(int buttonSlot)
@@ -187,6 +188,12 @@ public class PowerUpSelectionUI : MonoBehaviour
         ClosePanel();
     }
 
+    private void SkipChoice()
+    {
+        Debug.Log("[PowerUpSelectionUI] Player skipped the power-up selection.");
+        ClosePanel();
+    }
+
     private void ClosePanel()
     {
         if (selectionPanel != null) selectionPanel.SetActive(false);
@@ -195,7 +202,10 @@ public class PowerUpSelectionUI : MonoBehaviour
         if (slowMoVolume) slowMoVolume.weight = 0f;
 
         shownIndices = null;
+
+        if (skipButton != null) skipButton.gameObject.SetActive(false);
     }
+
     private int[] PickRandomUnique(List<int> source, int count)
     {
         List<int> result = new List<int>(count);
@@ -203,12 +213,10 @@ public class PowerUpSelectionUI : MonoBehaviour
 
         for (int picks = 0; picks < count && available.Count > 0; picks++)
         {
-            // Calculate total weight
             float totalWeight = 0f;
             foreach (var idx in available)
                 totalWeight += Mathf.Max(0f, powerUpChooser.powerUps[idx].weight);
 
-            // Roll
             float roll = Random.value * totalWeight;
             float cumulative = 0f;
             int chosenIndex = available[0];
@@ -229,5 +237,4 @@ public class PowerUpSelectionUI : MonoBehaviour
 
         return result.ToArray();
     }
-
 }

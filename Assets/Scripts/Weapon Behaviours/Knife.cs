@@ -6,22 +6,22 @@ public class Knife : MonoBehaviour
 {
     [Header("AOE Damage")]
     [SerializeField, Tooltip("Main hit radius for selecting enemies.")]
-    private float radius = 1f;
+    public float radius = 1f;
     [SerializeField, Tooltip("Base damage dealt to main target.")]
     public int damage = 10;
     [SerializeField, Tooltip("Which layers are considered valid targets.")]
     private LayerMask targetMask = ~0;
     [SerializeField, Tooltip("Maximum number of targets per tick (0 = unlimited).")]
-    private int maxTargetsPerTick = 0;
+    public int maxTargetsPerTick = 0;
 
     [Header("AOE Splash Damage")]
     [SerializeField, Tooltip("Radius around the main target for splash damage. 0 disables splash.")]
-    private float splashRadius = 0;
+    public float splashRadius = 0;
     [SerializeField, Tooltip("Damage dealt to enemies inside splashRadius (percentage of main damage).")]
-    [Range(0f, 1f)] private float splashDamagePercent = 0.5f;
+    [Range(0f, 1f)] public float splashDamagePercent = 0.5f;
 
     [Header("Lifesteal")]
-    [Range(0f, 1f)][SerializeField] private float lifestealPercent = 0.25f;
+    [Range(0f, 1f)][SerializeField] public float lifestealPercent = 0.25f;
 
     [Header("Criticals")]
     [Range(0f, 1f)] public float critChance = 0f;

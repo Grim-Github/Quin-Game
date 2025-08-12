@@ -94,7 +94,7 @@ public class SimpleShooter : MonoBehaviour
                 $"Proj Speed: {shootForce:F1}\n" +
                 $"Lifetime: {bulletLifetime:F1}s\n" +
                 $"Projectile Count: {projectileCount}\n" +
-                $"Penetration/Explosion: {penetrationInfo}\n" +
+                $"Penetration: {penetrationInfo}\n" +
                 $"Crit: {(Mathf.Clamp01(critChance) * 100f):F0}% x{critMultiplier:F2}\n" +
                 extraTextField;
         }

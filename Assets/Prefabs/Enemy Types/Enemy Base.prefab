@@ -92,6 +92,8 @@ GameObject:
   - component: {fileID: 4125131844956272248}
   - component: {fileID: 3942768026182763046}
   - component: {fileID: 5020424717495316485}
+  - component: {fileID: -6411856879609721089}
+  - component: {fileID: 8522411498283610141}
   m_Layer: 7
   m_Name: Enemy Base
   m_TagString: Untagged
@@ -463,6 +465,64 @@ MonoBehaviour:
     - rid: 8693280127084134490
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
+--- !u!114 &-6411856879609721089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684754638328981509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb9065a6616ec8e44bfb41893b50bd5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollOnAwake: 1
+  rarity: 0
+  weightCommon: 60
+  weightUncommon: 25
+  weightRare: 12
+  weightLegendary: 3
+  allowKnifeReflection: 1
+  allowHealthReflection: 1
+  hpFlatAdd: {x: 15, y: 60}
+  hpMult: {x: 1.1, y: 1.35}
+  regenAdd: {x: 0.2, y: 2}
+  armorAdd: {x: 1, y: 6}
+  armorScalingReduceFrac: {x: 0.1, y: 0.35}
+  maxMitigationAdd: {x: 0.02, y: 0.1}
+  invulnReduceFrac: {x: 0.1, y: 0.4}
+  moveSpeedAdd: {x: 0.5, y: 2.5}
+  stopDistanceReduce: {x: 0.05, y: 0.35}
+  mayTuneReachEvent: 1
+  atkSpeedFracAll: {x: 0.08, y: 0.25}
+  knifeDamageFlat: {x: 2, y: 12}
+  knifeDamageMult: {x: 1.08, y: 1.3}
+  knifeRadiusMult: {x: 1.1, y: 1.35}
+  knifeSplashRadiusMult: {x: 1.1, y: 1.3}
+  knifeLifestealAdd: {x: 0.03, y: 0.15}
+  knifeMaxTargetsAdd: {x: 1, y: 3}
+  knifeCritChanceAdd: {x: 0.05, y: 0.2}
+  knifeCritMultAdd: {x: 0.2, y: 0.8}
+  shooterDamageFlat: {x: 2, y: 12}
+  shooterDamageMult: {x: 1.08, y: 1.3}
+  shooterLifetimeAdd: {x: 0.5, y: 2}
+  shooterForceAdd: {x: 1, y: 4}
+  shooterProjectilesAdd: {x: 1, y: 2}
+  shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
+--- !u!114 &8522411498283610141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684754638328981509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0509da9ea8e4264cac6f07d79b68c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipMessage: 
 --- !u!1 &6227486896796405968
 GameObject:
   m_ObjectHideFlags: 0
