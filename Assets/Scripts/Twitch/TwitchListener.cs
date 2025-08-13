@@ -40,12 +40,12 @@ public class TwitchListener : MonoBehaviour
     // Track time for next increase
     private float nextSpawnIncreaseTime = 0f;
 
-
     [Header("Collision Check")]
-    [Tooltip("Radius used for checking if spawn position overlaps colliders")]
+    [Tooltip("Radius used for checking if spawn position is ON these layers (e.g., Ground).")]
     [SerializeField] private float spawnCheckRadius = 0.5f;
-    [Tooltip("Layers to avoid when spawning")]
-    [SerializeField] private LayerMask avoidLayers;
+
+    [Tooltip("Layers the spawn position MUST overlap (e.g., Ground/Walkable).")]
+    [SerializeField] private LayerMask spawnOnLayers;
 
     [Header("Repositioning")]
     [Tooltip("If a chatter drifts farther than this from the player, it will be teleported back near the player.")]
@@ -89,7 +89,6 @@ public class TwitchListener : MonoBehaviour
                     minPower++;
                 }
 
-
                 maxSpawnCount += spawnIncreaseAmount;
                 nextSpawnIncreaseTime = elapsedSeconds + spawnIncreaseInterval;
                 Debug.Log($"[TwitchListener] Max spawn count increased to {maxSpawnCount}");
@@ -100,7 +99,6 @@ public class TwitchListener : MonoBehaviour
         if (stopwatchText != null)
             stopwatchText.text = FormatTime(elapsedSeconds);
     }
-
 
     private void OnDestroy()
     {
@@ -133,12 +131,13 @@ public class TwitchListener : MonoBehaviour
             spawnPos = player.position + offset;
             spawnPos.z += zOffset;
 
-        } while (Physics2D.OverlapCircle(spawnPos, spawnCheckRadius, avoidLayers) != null
+            // NEW: require overlap with spawnOnLayers
+        } while (Physics2D.OverlapCircle(spawnPos, spawnCheckRadius, spawnOnLayers) == null
                  && safetyCounter < maxAttempts);
 
         if (safetyCounter >= maxAttempts)
         {
-            Debug.LogWarning("Could not find safe spawn position for chatter.");
+            Debug.LogWarning("Could not find valid spawn position (no overlap with spawnOnLayers).");
             return;
         }
 
@@ -155,12 +154,14 @@ public class TwitchListener : MonoBehaviour
             minSpawnDistance: minSpawnDistance,
             maxSpawnDistance: maxSpawnDistance,
             zOffset: zOffset,
-            avoidLayers: avoidLayers,
+            spawnOnLayers: spawnOnLayers,
             spawnCheckRadius: spawnCheckRadius,
             maxDistanceFromPlayer: maxDistanceFromPlayer
         );
 
         var stats = instantiatedChatter.GetComponent<ChatterStats>();
+        instantiatedChatter.transform.name = chatter.tags.displayName;
+
         if (stats != null)
         {
             stats.nameGUI.text = chatter.tags.displayName;
@@ -220,7 +221,7 @@ public class TwitchListener : MonoBehaviour
         private float minSpawnDistance;
         private float maxSpawnDistance;
         private float zOffset;
-        private LayerMask avoidLayers;
+        private LayerMask spawnOnLayers;
         private float spawnCheckRadius;
         private float maxDistanceFromPlayer;
 
@@ -231,7 +232,7 @@ public class TwitchListener : MonoBehaviour
             float minSpawnDistance,
             float maxSpawnDistance,
             float zOffset,
-            LayerMask avoidLayers,
+            LayerMask spawnOnLayers,
             float spawnCheckRadius,
             float maxDistanceFromPlayer)
         {
@@ -242,7 +243,7 @@ public class TwitchListener : MonoBehaviour
             this.minSpawnDistance = minSpawnDistance;
             this.maxSpawnDistance = maxSpawnDistance;
             this.zOffset = zOffset;
-            this.avoidLayers = avoidLayers;
+            this.spawnOnLayers = spawnOnLayers;
             this.spawnCheckRadius = spawnCheckRadius;
             this.maxDistanceFromPlayer = maxDistanceFromPlayer;
         }
@@ -254,13 +255,13 @@ public class TwitchListener : MonoBehaviour
             float dist = Vector2.Distance(transform.position, player.position);
             if (dist > maxDistanceFromPlayer)
             {
-                // Teleport back near player using the same safe spawn logic
-                Vector3 newPos = FindSafePositionNearPlayer();
+                // Teleport back near player using the same valid-position logic
+                Vector3 newPos = FindValidPositionNearPlayer();
                 transform.position = newPos;
             }
         }
 
-        private Vector3 FindSafePositionNearPlayer()
+        private Vector3 FindValidPositionNearPlayer()
         {
             Vector3 spawnPos = player.position;
             int safetyCounter = 0;
@@ -277,7 +278,7 @@ public class TwitchListener : MonoBehaviour
                 spawnPos = player.position + offset;
                 spawnPos.z += zOffset;
 
-            } while (Physics2D.OverlapCircle(spawnPos, spawnCheckRadius, avoidLayers) != null
+            } while (Physics2D.OverlapCircle(spawnPos, spawnCheckRadius, spawnOnLayers) == null
                      && safetyCounter < maxAttempts);
 
             return spawnPos;

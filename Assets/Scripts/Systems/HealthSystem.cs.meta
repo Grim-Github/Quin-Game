@@ -3,7 +3,18 @@ guid: fbde2f8b9e5210143a9593e885331f2e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - healthSlider: {instanceID: 0}
+  - healthText: {instanceID: 0}
+  - statsTextPrefab: {instanceID: 0}
+  - uiParent: {instanceID: 0}
+  - iconSprite: {instanceID: 0}
+  - damageClip: {fileID: 8300000, guid: 4da70bf93e7ae9a4fb87d0509942f9c8, type: 3}
+  - deathClip: {instanceID: 0}
+  - bloodSFX: {instanceID: 0}
+  - loot: {instanceID: 0}
+  - spriteRenderer: {instanceID: 0}
+  - damagePopupPrefab: {instanceID: 0}
   executionOrder: -3
   icon: {instanceID: 0}
   userData: 

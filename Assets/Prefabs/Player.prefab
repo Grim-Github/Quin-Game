@@ -607,7 +607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 3
-  damage: 25
+  damage: 20
   targetMask:
     serializedVersion: 2
     m_Bits: 128
