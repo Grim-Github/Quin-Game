@@ -2,8 +2,16 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Button helper that rerolls ONE random weapon in the scene
+/// using the new WeaponRarityController system.
+/// </summary>
 public class WeaponRerollButton : MonoBehaviour
 {
+    [Header("Action")]
+    [Tooltip("If true, calls RerollRarityAndStats(); otherwise RerollStats().")]
+    public bool includeRarity = false;
+
     [Header("Popup Settings")]
     [Tooltip("Prefab with TextMeshPro (3D) or TextMeshProUGUI (UI).")]
     public GameObject rerollPopupPrefab;
@@ -17,64 +25,76 @@ public class WeaponRerollButton : MonoBehaviour
     [Tooltip("If true, spawn at the weapon's parent position when available.")]
     public bool spawnAtParent = true;
 
+    [Tooltip("Optional parent for UI popups (if prefab uses TextMeshProUGUI).")]
+    public Transform uiPopupParent;
+
     // Hook this to your UI Button OnClick
     public void RerollRandomWeapon()
     {
-        // Unity 6 API: fast, no sorting, include inactive (we'll filter)
-        WeaponRarity[] weapons = Object.FindObjectsByType<WeaponRarity>(
+        var controllers = Object.FindObjectsByType<WeaponRarityController>(
             FindObjectsInactive.Include,
             FindObjectsSortMode.None
         );
 
-        if (weapons == null || weapons.Length == 0)
+        WeaponRarityController picked = PickActive(controllers);
+        if (picked == null)
         {
-            Debug.LogWarning("No WeaponRarity found in the scene.");
+            Debug.LogWarning("No active WeaponRarityController found in the scene.");
             return;
         }
 
-        // Filter to active & enabled
-        var active = new List<WeaponRarity>(weapons.Length);
-        foreach (var w in weapons)
-            if (w != null && w.isActiveAndEnabled && w.gameObject.activeInHierarchy)
-                active.Add(w);
+        if (includeRarity) picked.RerollRarityAndStats();
+        else picked.RerollStats();
 
-        if (active.Count == 0)
-        {
-            Debug.LogWarning("No active WeaponRarity found to reroll.");
-            return;
-        }
-
-        // Pick one and reroll stats (not rarity)
-        WeaponRarity selected = active[Random.Range(0, active.Count)];
-        selected.RerollStats();
-        Debug.Log($"Rerolled stats for: {selected.transform.name}");
-
-        SpawnPopup(selected);
+        Debug.Log($"[Reroll] {(includeRarity ? "Rarity+Stats" : "Stats")} for: {picked.transform.name}");
+        SpawnPopup(picked.transform, picked.name);
     }
 
-    private void SpawnPopup(WeaponRarity selected)
+    // ------------------ helpers ------------------
+
+    private static T PickActive<T>(T[] all) where T : Behaviour
     {
-        if (rerollPopupPrefab == null) return;
+        if (all == null || all.Length == 0) return null;
+        var active = new List<T>(all.Length);
+        foreach (var c in all)
+            if (c != null && c.isActiveAndEnabled && c.gameObject.activeInHierarchy)
+                active.Add(c);
+        if (active.Count == 0) return null;
+        return active[Random.Range(0, active.Count)];
+    }
 
-        Vector3 basePos = (spawnAtParent && selected.transform.parent != null)
-            ? selected.transform.parent.position
-            : selected.transform.position;
+    private void SpawnPopup(Transform target, string weaponName)
+    {
+        if (rerollPopupPrefab == null || target == null) return;
 
-        GameObject popup = Instantiate(rerollPopupPrefab, basePos + popupOffset, Quaternion.identity);
+        Vector3 basePos = (spawnAtParent && target.parent != null)
+            ? target.parent.position
+            : target.position;
 
-        // Support either TextMeshPro (world) or TextMeshProUGUI (UI)
-        if (popup.TryGetComponent<TextMeshPro>(out var tmp))
+        GameObject popup;
+
+        // If prefab is UI-based and a parent is provided, spawn under that parent.
+        if (rerollPopupPrefab.GetComponent<TextMeshProUGUI>() != null && uiPopupParent != null)
         {
-            tmp.text = $"Rerolled: {selected.transform.name}";
-        }
-        else if (popup.TryGetComponent<TextMeshProUGUI>(out var tmpUI))
-        {
-            tmpUI.text = $"Rerolled: {selected.transform.name}";
+            popup = Instantiate(rerollPopupPrefab, uiPopupParent, false);
+            if (popup.TryGetComponent<RectTransform>(out var rt))
+            {
+                Vector3 screen = Camera.main ? Camera.main.WorldToScreenPoint(basePos + popupOffset) : (Vector3)Input.mousePosition;
+                rt.position = screen;
+            }
         }
         else
         {
-            Debug.LogWarning("Popup prefab has no TextMeshPro/TextMeshProUGUI component.");
+            popup = Instantiate(rerollPopupPrefab, basePos + popupOffset, Quaternion.identity);
         }
+
+        // Text assignment
+        if (popup.TryGetComponent<TextMeshPro>(out var tmp))
+            tmp.text = $"Rerolled: {weaponName}{(includeRarity ? " (Rarity+Stats)" : " (Stats)")}";
+        else if (popup.TryGetComponent<TextMeshProUGUI>(out var tmpUI))
+            tmpUI.text = $"Rerolled: {weaponName}{(includeRarity ? " (Rarity+Stats)" : " (Stats)")}";
+        else
+            Debug.LogWarning("Popup prefab has no TextMeshPro/TextMeshProUGUI component.");
 
         if (popupLifetime > 0f) Destroy(popup, popupLifetime);
     }

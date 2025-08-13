@@ -38,7 +38,7 @@ public class Knife : MonoBehaviour
     [SerializeField] private GameObject selfSfxObject;
 
     [Header("UI")]
-    [SerializeField] private TextMeshProUGUI statsTextPrefab;
+    [SerializeField] public TextMeshProUGUI statsTextPrefab;
     [SerializeField] private Transform uiParent;
     [TextArea][SerializeField] public string extraTextField;
     [Tooltip("Sprite to show above the stats text.")]
@@ -52,7 +52,7 @@ public class Knife : MonoBehaviour
     [Tooltip("If true, auto-scales the rangeRenderer to match 'radius'.")]
     [SerializeField] private bool autoScaleRangeVisual = true;
 
-    private TextMeshProUGUI statsTextInstance;
+    [HideInInspector] public TextMeshProUGUI statsTextInstance;
     private Image iconImage;
     private AudioSource shootSource;
     private SimpleHealth parentHealth;

@@ -23,14 +23,14 @@ public class SimpleShooter : MonoBehaviour
     [SerializeField] private AudioClip shootClip;
 
     [Header("UI")]
-    [SerializeField] private TextMeshProUGUI statsTextPrefab;
+    [SerializeField] public TextMeshProUGUI statsTextPrefab;
     [SerializeField] private Transform uiParent;
     [TextArea][SerializeField] public string extraTextField = " ";
     [Tooltip("Sprite to show above the stats text.")]
     [SerializeField] private Sprite weaponSprite;
 
     private WeaponTick wt;
-    private TextMeshProUGUI statsTextInstance;
+    [HideInInspector] public TextMeshProUGUI statsTextInstance;
     private Image iconImage;
     private AudioSource shootSource;
     public WeaponUpgrades nextUpgrade;

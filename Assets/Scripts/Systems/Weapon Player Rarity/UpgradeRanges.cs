@@ -1,0 +1,24 @@
+using UnityEngine;
+
+[System.Serializable]
+public class UpgradeRanges
+{
+    [Header("Shared")]
+    public Vector2 damageMult = new Vector2(1.10f, 1.30f);
+    public Vector2Int damageFlatAdd = new Vector2Int(3, 12);
+    public Vector2 atkSpeedFrac = new Vector2(0.10f, 0.25f);
+    public Vector2 critChanceAdd = new Vector2(0.05f, 0.20f);
+    public Vector2 critMultAdd = new Vector2(0.25f, 1.00f);
+
+    [Header("Knife-only")]
+    public Vector2 knifeRadiusMult = new Vector2(1.10f, 1.30f);
+    public Vector2 knifeSplashRadiusMult = new Vector2(1.10f, 1.30f);
+    public Vector2 knifeLifestealAdd = new Vector2(0.05f, 0.20f);
+    public Vector2Int knifeMaxTargetsAdd = new Vector2Int(1, 3);
+
+    [Header("Shooter-only")]
+    public Vector2 shooterLifetimeAdd = new Vector2(0.5f, 2.0f);
+    public Vector2 shooterForceAdd = new Vector2(1.0f, 4.0f);
+    public Vector2Int shooterProjectilesAdd = new Vector2Int(1, 2);
+    public Vector2 shooterSpreadReduceFrac = new Vector2(0.10f, 0.35f);
+}
