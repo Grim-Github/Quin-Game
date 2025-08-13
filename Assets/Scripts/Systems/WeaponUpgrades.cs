@@ -1,11 +1,10 @@
-
 using UnityEngine;
 
-/// <summary>
-/// Handles a single weapon upgrade entry and (optionally) wires the *next* upgrade
-/// to the next sibling WeaponUpgrades component under the same parent.
-/// Also pushes that next upgrade's PowerUp into PowerUpChooser (expects a List&lt;PowerUp&gt;).
-/// </summary>
+//
+// Handles a single weapon upgrade entry and (optionally) wires the *next* upgrade
+// to the next sibling WeaponUpgrades component under the same parent.
+// Also pushes that next upgrade's PowerUp into PowerUpChooser (expects a List<PowerUp>).
+//
 [ExecuteAlways]
 public class WeaponUpgrades : MonoBehaviour
 {
@@ -21,8 +20,8 @@ public class WeaponUpgrades : MonoBehaviour
         KnifeMaxTargetsFlat,
         KnifeLifestealFlat,
         KnifeLifestealPercent,
-        KnifeCritChanceFlat,        // NEW
-        KnifeCritMultiplierFlat,    // NEW
+        KnifeCritChanceFlat,
+        KnifeCritMultiplierFlat,
 
         // --- Shooter ---
         ShooterDamageFlat,
@@ -34,8 +33,8 @@ public class WeaponUpgrades : MonoBehaviour
         ShooterProjectileSpeedPercent,
         ShooterLifetimeFlat,
         ShooterLifetimePercent,
-        ShooterCritChanceFlat,      // NEW
-        ShooterCritMultiplierFlat,  // NEW
+        ShooterCritChanceFlat,
+        ShooterCritMultiplierFlat,
 
         // --- WeaponTick ---
         TickRateFlat,
@@ -43,7 +42,9 @@ public class WeaponUpgrades : MonoBehaviour
         BurstCountFlat,
         BurstCountPercent,
         BurstSpacingFlat,
-        BurstSpacingPercent
+        BurstSpacingPercent,
+
+        Custom
     }
 
     private PowerUpChooser powerUpChooser;
@@ -56,7 +57,7 @@ public class WeaponUpgrades : MonoBehaviour
 
     [Header("Icon (optional)")]
     [Tooltip("If assigned, this sprite will be written into Upgrade.powerUpIcon.")]
-    public Sprite icon; // NEW
+    public Sprite icon;
 
     [Header("Upgrade Settings")]
     public UpgradeType upgradeType = UpgradeType.None;
@@ -70,8 +71,8 @@ public class WeaponUpgrades : MonoBehaviour
     {
         powerUpChooser = GameObject.FindAnyObjectByType<PowerUpChooser>();
 
-        AutoAssignNextUpgrade();      // <- make sure nextUpgrade is always the next sibling with WeaponUpgrades
-        EnqueueNextUpgradeOnce();     // <- push next Upgrade asset into chooser (expects List<PowerUp>)
+        AutoAssignNextUpgrade();      // make sure nextUpgrade is always the next sibling with WeaponUpgrades
+        EnqueueNextUpgradeOnce();     // push next Upgrade asset into chooser (expects List<PowerUp>)
 
         // Ensure icon if provided
         if (Upgrade != null && icon != null)
@@ -147,7 +148,6 @@ public class WeaponUpgrades : MonoBehaviour
 #if UNITY_EDITOR
         if (old != nextUpgrade)
         {
-            // Mark dirty so the inspector shows the refreshed reference
             UnityEditor.EditorUtility.SetDirty(this);
         }
 #endif
@@ -155,7 +155,7 @@ public class WeaponUpgrades : MonoBehaviour
 
     /// <summary>
     /// Adds the nextUpgrade's PowerUp asset to the chooser list once.
-    /// Requires PowerUpChooser.powerUps to be a List&lt;PowerUp&gt;.
+    /// Requires PowerUpChooser.powerUps to be a List<PowerUp>.
     /// Safely avoids duplicates and nulls.
     /// </summary>
     private void EnqueueNextUpgradeOnce()
@@ -163,18 +163,10 @@ public class WeaponUpgrades : MonoBehaviour
         if (powerUpChooser == null) return;
         if (nextUpgrade == null || nextUpgrade.Upgrade == null) return;
 
-        // Use reflection-free guard if powerUps is a List<PowerUp>
-        try
+        var list = powerUpChooser.powerUps;
+        if (list != null && !list.Contains(nextUpgrade.Upgrade))
         {
-            var list = powerUpChooser.powerUps;
-            if (list != null && !list.Contains(nextUpgrade.Upgrade))
-            {
-                list.Add(nextUpgrade.Upgrade);
-            }
-        }
-        catch (System.Exception)
-        {
-            // If user's PowerUpChooser isn't List-backed, ignore silently.
+            list.Add(nextUpgrade.Upgrade);
         }
     }
 
@@ -188,8 +180,8 @@ public class WeaponUpgrades : MonoBehaviour
 
     private bool IsTypeAllowedForParent(UpgradeType type)
     {
-        // None always allowed
-        if (type == UpgradeType.None) return true;
+        // None/Custom always allowed
+        if (type == UpgradeType.None || type == UpgradeType.Custom) return true;
 
         bool hasKnife = HasParent<Knife>();
         bool hasShooter = HasParent<SimpleShooter>();
@@ -241,36 +233,12 @@ public class WeaponUpgrades : MonoBehaviour
     {
         if (Upgrade == null) return;
 
+        // Only set icon from our explicit field (no reflection)
+        if (icon != null)
+            Upgrade.powerUpIcon = icon;
 
-        // Auto-set icon from parent's weapon sprite if available
-        if (transform.parent != null)
-        {
-            // Check SimpleShooter
-            if (transform.parent.TryGetComponent(out SimpleShooter shooter))
-            {
-                var shooterSprite = shooter.GetType()
-                    .GetField("weaponSprite", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public)
-                    ?.GetValue(shooter) as Sprite;
-                if (shooterSprite != null)
-                {
-                    icon = shooterSprite;
-                    Upgrade.powerUpIcon = shooterSprite;
-                }
-            }
-            // Check Knife
-            else if (transform.parent.TryGetComponent(out Knife Knife))
-            {
-                var KnifeSprite = Knife.GetType()
-                    .GetField("weaponSprite", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public)
-                    ?.GetValue(Knife) as Sprite;
-                if (KnifeSprite != null)
-                {
-                    icon = KnifeSprite;
-                    Upgrade.powerUpIcon = KnifeSprite;
-                }
-            }
-        }
-
+        // Custom leaves name/description alone
+        if (upgradeType == UpgradeType.Custom) return;
 
         switch (upgradeType)
         {
@@ -303,16 +271,16 @@ public class WeaponUpgrades : MonoBehaviour
                 Upgrade.powerUpName = $"Lifesteal Boost +{value * 100f:F0}%";
                 Upgrade.powerUpDescription = $"Increase current Knife lifesteal by {value * 100f:F0}%.";
                 break;
-            case UpgradeType.KnifeCritChanceFlat: // NEW
+            case UpgradeType.KnifeCritChanceFlat:
                 Upgrade.powerUpName = $"Knife Crit Chance +{value * 100f:F0}%";
                 Upgrade.powerUpDescription = $"Increase Knife critical hit chance by {value * 100f:F0}%.";
                 break;
-            case UpgradeType.KnifeCritMultiplierFlat: // NEW
+            case UpgradeType.KnifeCritMultiplierFlat:
                 Upgrade.powerUpName = $"Knife Crit Multiplier +{value:F2}x";
                 Upgrade.powerUpDescription = $"Increase Knife critical damage multiplier by {value:F2}x.";
                 break;
 
-            // ------------- SHOOTER -------------
+            // ------------- Shooter -------------
             case UpgradeType.ShooterDamageFlat:
                 Upgrade.powerUpName = $"Shooter Damage +{Mathf.RoundToInt(value)}";
                 Upgrade.powerUpDescription = $"Increase projectile damage by {Mathf.RoundToInt(value)}.";
@@ -349,16 +317,16 @@ public class WeaponUpgrades : MonoBehaviour
                 Upgrade.powerUpName = $"Bullet Lifetime +{value * 100f:F0}%";
                 Upgrade.powerUpDescription = $"Increase projectile lifetime by {value * 100f:F0}%.";
                 break;
-            case UpgradeType.ShooterCritChanceFlat: // NEW
+            case UpgradeType.ShooterCritChanceFlat:
                 Upgrade.powerUpName = $"Shooter Crit Chance +{value * 100f:F0}%";
                 Upgrade.powerUpDescription = $"Increase Shooter critical hit chance by {value * 100f:F0}%.";
                 break;
-            case UpgradeType.ShooterCritMultiplierFlat: // NEW
+            case UpgradeType.ShooterCritMultiplierFlat:
                 Upgrade.powerUpName = $"Shooter Crit Multiplier +{value:F2}x";
                 Upgrade.powerUpDescription = $"Increase Shooter critical damage multiplier by {value:F2}x.";
                 break;
 
-            // ------------- TICK -------------
+            // ------------- Tick -------------
             case UpgradeType.TickRateFlat:
                 Upgrade.powerUpName = $"Attack Speed −{value:F2}s";
                 Upgrade.powerUpDescription = $"Reduce interval between attacks by {value:F2} seconds.";
@@ -390,195 +358,142 @@ public class WeaponUpgrades : MonoBehaviour
                 break;
         }
 
-        // Append parent transform name to the upgrade title
-        if (!string.IsNullOrEmpty(Upgrade.powerUpName) && transform.parent != null)
+        // Append parent name unless Custom (handled above) or no parent
+        if (transform.parent != null && !string.IsNullOrEmpty(Upgrade.powerUpName))
         {
             Upgrade.powerUpName = $"{transform.parent.name} - {Upgrade.powerUpName}";
         }
-
     }
 
     public void ApplyUpgrade()
     {
-        // ---------------- Knife ----------------
-        switch (upgradeType)
+        // CUSTOM: intentionally does nothing
+        if (upgradeType == UpgradeType.Custom || upgradeType == UpgradeType.None)
+            return;
+
+        // ---------------- KNIFE ----------------
+        if (transform.parent != null && transform.parent.TryGetComponent(out Knife knife))
         {
-            case UpgradeType.KnifeDamageFlat:
-                if (transform.parent.TryGetComponent(out Knife k1))
-                    k1.damage += Mathf.RoundToInt(value);
-                break;
+            switch (upgradeType)
+            {
+                case UpgradeType.KnifeDamageFlat:
+                    knife.damage += Mathf.RoundToInt(value);
+                    break;
 
-            case UpgradeType.KnifeDamagePercent:
-                if (transform.parent.TryGetComponent(out Knife k2))
-                    k2.damage = Mathf.RoundToInt(k2.damage * (1f + value));
-                break;
+                case UpgradeType.KnifeDamagePercent:
+                    knife.damage = Mathf.RoundToInt(knife.damage * (1f + value));
+                    break;
 
-            case UpgradeType.KnifeRadiusFlat:
-                if (transform.parent.TryGetComponent(out Knife k3))
-                {
-                    var f = typeof(Knife).GetField("radius", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                    if (f != null) f.SetValue(k3, (float)f.GetValue(k3) + value);
-                }
-                break;
+                case UpgradeType.KnifeRadiusFlat:
+                    knife.radius += value;
+                    break;
 
-            case UpgradeType.KnifeRadiusPercent:
-                if (transform.parent.TryGetComponent(out Knife k4))
-                {
-                    var f = typeof(Knife).GetField("radius", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                    if (f != null) f.SetValue(k4, (float)f.GetValue(k4) * (1f + value));
-                }
-                break;
+                case UpgradeType.KnifeRadiusPercent:
+                    knife.radius *= (1f + value);
+                    break;
 
-            case UpgradeType.KnifeMaxTargetsFlat:
-                if (transform.parent.TryGetComponent(out Knife k5))
-                {
-                    var f = typeof(Knife).GetField("maxTargetsPerTick", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                    if (f != null) f.SetValue(k5, (int)f.GetValue(k5) + Mathf.RoundToInt(value));
-                }
-                break;
+                case UpgradeType.KnifeMaxTargetsFlat:
+                    knife.maxTargetsPerTick += Mathf.RoundToInt(value);
+                    break;
 
-            case UpgradeType.KnifeLifestealFlat:
-                if (transform.parent.TryGetComponent(out Knife k6))
-                {
-                    var f = typeof(Knife).GetField("lifestealPercent", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                    if (f != null) f.SetValue(k6, (float)f.GetValue(k6) + value);
-                }
-                break;
+                case UpgradeType.KnifeLifestealFlat:
+                    knife.lifestealPercent += value;
+                    break;
 
-            case UpgradeType.KnifeLifestealPercent:
-                if (transform.parent.TryGetComponent(out Knife k7))
-                {
-                    var f = typeof(Knife).GetField("lifestealPercent", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                    if (f != null) f.SetValue(k7, (float)f.GetValue(k7) * (1f + value));
-                }
-                break;
+                case UpgradeType.KnifeLifestealPercent:
+                    knife.lifestealPercent *= (1f + value);
+                    break;
 
-            case UpgradeType.KnifeCritChanceFlat: // NEW
-                if (transform.parent.TryGetComponent(out Knife k8))
-                {
-                    var f = typeof(Knife).GetField("critChance", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                    if (f != null) f.SetValue(k8, (float)f.GetValue(k8) + value);
-                }
-                break;
+                case UpgradeType.KnifeCritChanceFlat:
+                    knife.critChance += value;
+                    break;
 
-            case UpgradeType.KnifeCritMultiplierFlat: // NEW
-                if (transform.parent.TryGetComponent(out Knife k9))
-                {
-                    var f = typeof(Knife).GetField("critMultiplier", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                    if (f != null) f.SetValue(k9, (float)f.GetValue(k9) + value);
-                }
-                break;
+                case UpgradeType.KnifeCritMultiplierFlat:
+                    knife.critMultiplier += value;
+                    break;
+            }
         }
 
         // ---------------- SHOOTER ----------------
-        switch (upgradeType)
+        if (transform.parent != null && transform.parent.TryGetComponent(out SimpleShooter shooter))
         {
-            case UpgradeType.ShooterDamageFlat:
-                if (transform.parent.TryGetComponent(out SimpleShooter s1))
-                    s1.damage += Mathf.RoundToInt(value);
-                break;
+            switch (upgradeType)
+            {
+                case UpgradeType.ShooterDamageFlat:
+                    shooter.damage += Mathf.RoundToInt(value);
+                    break;
 
-            case UpgradeType.ShooterDamagePercent:
-                if (transform.parent.TryGetComponent(out SimpleShooter s2))
-                    s2.damage = Mathf.RoundToInt(s2.damage * (1f + value));
-                break;
+                case UpgradeType.ShooterDamagePercent:
+                    shooter.damage = Mathf.RoundToInt(shooter.damage * (1f + value));
+                    break;
 
-            case UpgradeType.ShooterProjectileCount:
-                if (transform.parent.TryGetComponent(out SimpleShooter s3))
-                    s3.projectileCount += Mathf.RoundToInt(value);
-                break;
+                case UpgradeType.ShooterProjectileCount:
+                    shooter.projectileCount += Mathf.RoundToInt(value);
+                    break;
 
-            case UpgradeType.ShooterSpreadAngleFlat:
-                if (transform.parent.TryGetComponent(out SimpleShooter s4))
-                    s4.spreadAngle += value;
-                break;
+                case UpgradeType.ShooterSpreadAngleFlat:
+                    shooter.spreadAngle += value;
+                    break;
 
-            case UpgradeType.ShooterSpreadAnglePercent:
-                if (transform.parent.TryGetComponent(out SimpleShooter s5))
-                    s5.spreadAngle *= (1f + value);
-                break;
+                case UpgradeType.ShooterSpreadAnglePercent:
+                    shooter.spreadAngle *= (1f + value);
+                    break;
 
-            case UpgradeType.ShooterProjectileSpeedFlat:
-                if (transform.parent.TryGetComponent(out SimpleShooter s6))
-                    s6.shootForce += value;
-                break;
+                case UpgradeType.ShooterProjectileSpeedFlat:
+                    shooter.shootForce += value;
+                    break;
 
-            case UpgradeType.ShooterProjectileSpeedPercent:
-                if (transform.parent.TryGetComponent(out SimpleShooter s7))
-                    s7.shootForce *= (1f + value);
-                break;
+                case UpgradeType.ShooterProjectileSpeedPercent:
+                    shooter.shootForce *= (1f + value);
+                    break;
 
-            case UpgradeType.ShooterLifetimeFlat:
-                if (transform.parent.TryGetComponent(out SimpleShooter s8))
-                    s8.bulletLifetime += value;
-                break;
+                case UpgradeType.ShooterLifetimeFlat:
+                    shooter.bulletLifetime += value;
+                    break;
 
-            case UpgradeType.ShooterLifetimePercent:
-                if (transform.parent.TryGetComponent(out SimpleShooter s9))
-                    s9.bulletLifetime *= (1f + value);
-                break;
+                case UpgradeType.ShooterLifetimePercent:
+                    shooter.bulletLifetime *= (1f + value);
+                    break;
 
-            case UpgradeType.ShooterCritChanceFlat: // NEW
-                if (transform.parent.TryGetComponent(out SimpleShooter s10))
-                {
-                    var f = typeof(SimpleShooter).GetField("critChance", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                    if (f != null) f.SetValue(s10, (float)f.GetValue(s10) + value);
-                }
-                break;
+                case UpgradeType.ShooterCritChanceFlat:
+                    shooter.critChance += value;
+                    break;
 
-            case UpgradeType.ShooterCritMultiplierFlat: // NEW
-                if (transform.parent.TryGetComponent(out SimpleShooter s11))
-                {
-                    var f = typeof(SimpleShooter).GetField("critMultiplier", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                    if (f != null) f.SetValue(s11, (float)f.GetValue(s11) + value);
-                }
-                break;
+                case UpgradeType.ShooterCritMultiplierFlat:
+                    shooter.critMultiplier += value;
+                    break;
+            }
         }
 
         // ---------------- TICK ----------------
-        switch (upgradeType)
+        if (transform.parent != null && transform.parent.TryGetComponent(out WeaponTick tick))
         {
-            case UpgradeType.TickRateFlat:
-                if (transform.parent.TryGetComponent(out WeaponTick t1))
-                    t1.interval = Mathf.Max(0.05f, t1.interval - value);
-                break;
+            switch (upgradeType)
+            {
+                case UpgradeType.TickRateFlat:
+                    tick.interval = Mathf.Max(0.05f, tick.interval - value);
+                    break;
 
-            case UpgradeType.TickRatePercent:
-                if (transform.parent.TryGetComponent(out WeaponTick t2))
-                    t2.interval = Mathf.Max(0.05f, t2.interval * (1f - value));
-                break;
+                case UpgradeType.TickRatePercent:
+                    tick.interval = Mathf.Max(0.05f, tick.interval * (1f - value));
+                    break;
 
-            case UpgradeType.BurstCountFlat:
-                if (transform.parent.TryGetComponent(out WeaponTick t3))
-                {
-                    var f = typeof(WeaponTick).GetField("burstCount", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                    if (f != null) f.SetValue(t3, (int)f.GetValue(t3) + Mathf.RoundToInt(value));
-                }
-                break;
+                case UpgradeType.BurstCountFlat:
+                    tick.burstCount += Mathf.RoundToInt(value);
+                    break;
 
-            case UpgradeType.BurstCountPercent:
-                if (transform.parent.TryGetComponent(out WeaponTick t4))
-                {
-                    var f = typeof(WeaponTick).GetField("burstCount", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                    if (f != null) f.SetValue(t4, Mathf.RoundToInt((int)f.GetValue(t4) * (1f + value)));
-                }
-                break;
+                case UpgradeType.BurstCountPercent:
+                    tick.burstCount = Mathf.RoundToInt(tick.burstCount * (1f + value));
+                    break;
 
-            case UpgradeType.BurstSpacingFlat:
-                if (transform.parent.TryGetComponent(out WeaponTick t5))
-                {
-                    var f = typeof(WeaponTick).GetField("burstSpacing", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                    if (f != null) f.SetValue(t5, Mathf.Max(0.01f, (float)f.GetValue(t5) - value));
-                }
-                break;
+                case UpgradeType.BurstSpacingFlat:
+                    tick.burstSpacing = Mathf.Max(0.01f, tick.burstSpacing - value);
+                    break;
 
-            case UpgradeType.BurstSpacingPercent:
-                if (transform.parent.TryGetComponent(out WeaponTick t6))
-                {
-                    var f = typeof(WeaponTick).GetField("burstSpacing", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                    if (f != null) f.SetValue(t6, Mathf.Max(0.01f, (float)f.GetValue(t6) * (1f - value)));
-                }
-                break;
+                case UpgradeType.BurstSpacingPercent:
+                    tick.burstSpacing = Mathf.Max(0.01f, tick.burstSpacing * (1f - value));
+                    break;
+            }
         }
     }
 
@@ -608,7 +523,7 @@ public class WeaponUpgrades : MonoBehaviour
                 UnityEditor.EditorUtility.SetDirty(wu);
             }
 
-            UnityEditor.EditorGUILayout.PropertyField(so.FindProperty("icon")); // NEW
+            UnityEditor.EditorGUILayout.PropertyField(so.FindProperty("icon"));
 
             // Filter choices based on parent components
             var all = (WeaponUpgrades.UpgradeType[])System.Enum.GetValues(typeof(WeaponUpgrades.UpgradeType));

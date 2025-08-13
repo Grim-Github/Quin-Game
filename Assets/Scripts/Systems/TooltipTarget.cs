@@ -7,6 +7,10 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [TextArea] public string tooltipMessage;
     [SerializeField] private bool appendExtraFromHealth = true;
 
+    [Header("Text Appearance")]
+    [Tooltip("Color of the tooltip text.")]
+    [SerializeField] private Color textColor = Color.white;
+
     // Optional: if your TooltipManager wants to follow a specific rect when this is on UI
     [SerializeField] private RectTransform uiAnchorOverride;
 
@@ -32,6 +36,10 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
         }
 
+        // Wrap text in rich text color tag
+        string colorHex = ColorUtility.ToHtmlStringRGB(textColor);
+        full = $"<color=#{colorHex}>{full}</color>";
+
         return full;
     }
 
@@ -43,9 +51,6 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         string full = BuildTooltipText();
         if (string.IsNullOrWhiteSpace(full)) return;
 
-        // If your manager supports anchoring/following a RectTransform for UI elements,
-        // pass 'this' so it can verify liveness, and optionally give it an anchor hint.
-        // (Adjust this call to match your TooltipManager API.)
         mgr.ShowTooltip(full, this, uiAnchorOverride != null ? uiAnchorOverride : null);
     }
 

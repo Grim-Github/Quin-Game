@@ -26,13 +26,13 @@ public class TwitchListener : MonoBehaviour
     [SerializeField] private float zOffset = 0f;
 
     [Header("Limits")]
-    [SerializeField, Min(1)] private int maxSpawnCount = 20;
+    [SerializeField, Min(1)] public int maxSpawnCount = 20;
 
     [Tooltip("How often to increase max spawn count (seconds)")]
-    [SerializeField, Min(0f)] private float spawnIncreaseInterval = 60f;
+    [SerializeField, Min(0f)] public float spawnIncreaseInterval = 60f;
 
     [Tooltip("How much to increase max spawn count each interval")]
-    [SerializeField, Min(1)] private int spawnIncreaseAmount = 1;
+    [SerializeField, Min(1)] public int spawnIncreaseAmount = 1;
 
     public int minPower = 0; // Minimum power level for chatters to spawn
     public float chanceToUpgradeMinPower = 0.6f; // Chance to upgrade chatter power on spawn
@@ -59,7 +59,7 @@ public class TwitchListener : MonoBehaviour
     private float elapsedSeconds = 0f;
 
     private HashSet<string> spawnedChatters = new HashSet<string>();
-    private int currentSpawnCount = 0;
+    [HideInInspector] public int currentSpawnCount = 0;
 
     private void Start()
     {

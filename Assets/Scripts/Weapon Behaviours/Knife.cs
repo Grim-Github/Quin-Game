@@ -104,27 +104,16 @@ public class Knife : MonoBehaviour
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
             sb.AppendLine($"<b>{transform.name} Stats</b>");
+            sb.AppendLine($"Radius: {radius:F2}");
+            sb.AppendLine($"Damage: {damage}");
+            sb.AppendLine($"Splash: {splashRadius:F2} ({splashDamagePercent * 100f:F0}% dmg)");
 
-            if (radius > 0f)
-                sb.AppendLine($"Radius: {radius:F2}");
-
-            if (damage > 0)
-                sb.AppendLine($"Damage: {damage}");
-
-            if (splashRadius > 0f && splashDamagePercent > 0f)
-                sb.AppendLine($"Splash: {splashRadius:F2} ({splashDamagePercent * 100f:F0}% dmg)");
-
-            if (wt != null && wt.interval > 0f)
+            if (wt != null)
                 sb.AppendLine($"Attack Delay: {wt.interval:F1}s");
 
-            if (lifestealPercent > 0f)
-                sb.AppendLine($"Lifesteal: {(lifestealPercent * 100f):F0}%");
-
-            if (critChance > 0f)
-                sb.AppendLine($"Crit: {(critChance * 100f):F0}% x{critMultiplier:F2}");
-
-            if (maxTargetsPerTick > 0)
-                sb.AppendLine($"Max Targets: {maxTargetsPerTick}");
+            sb.AppendLine($"Lifesteal: {(lifestealPercent * 100f):F0}%");
+            sb.AppendLine($"Crit: {(critChance * 100f):F0}% x{critMultiplier:F2}");
+            sb.AppendLine($"Max Targets: {maxTargetsPerTick}");
 
             if (!string.IsNullOrWhiteSpace(extraTextField))
                 sb.AppendLine(extraTextField);
@@ -132,6 +121,7 @@ public class Knife : MonoBehaviour
             statsTextInstance.text = sb.ToString();
         }
     }
+
 
     public void RemoveStatsText()
     {

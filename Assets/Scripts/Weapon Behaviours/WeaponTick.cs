@@ -19,9 +19,9 @@ public class WeaponTick : MonoBehaviour
     [Tooltip("Enable to fire multiple ticks per cycle.")]
     [SerializeField] private bool burstEnabled = false;
     [Tooltip("How many ticks to fire per burst (>= 1).")]
-    [SerializeField] private int burstCount = 3;
+    [SerializeField] public int burstCount = 3;
     [Tooltip("Seconds between ticks inside the burst.")]
-    [SerializeField] private float burstSpacing = 0.1f;
+    [SerializeField] public float burstSpacing = 0.1f;
 
     [Header("Event")]
     public UnityEvent onTick;

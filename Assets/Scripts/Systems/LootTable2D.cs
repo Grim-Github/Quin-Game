@@ -36,6 +36,14 @@ public class LootTable2D : MonoBehaviour
     [Tooltip("Parent for the spawned object. If null, none.")]
     [SerializeField] private Transform parent;
 
+    [Header("Circle Spawn (2D)")]
+    [Tooltip("If true, spawn inside a circle using Random.insideUnitCircle.")]
+    [SerializeField] private bool useCircleSpawn = false;
+    [Tooltip("Radius of the 2D circle area to spawn within.")]
+    [Min(0f)][SerializeField] private float circleRadius = 1f;
+    [Tooltip("Optional center for the circle. If null, uses spawnPoint (or this transform).")]
+    [SerializeField] private Transform circleCenter;
+
     [Header("Debug")]
     [ReadOnly][SerializeField] private int lastSelectedIndex = -1;
     [ReadOnly][SerializeField] private GameObject lastSpawned;
@@ -63,21 +71,31 @@ public class LootTable2D : MonoBehaviour
         }
 
         var entry = entries[idx];
+
+        // Base spawn transform
         var sp = spawnPoint != null ? spawnPoint : transform;
 
-        Vector3 pos = sp.position;
+        // Determine circle center
+        var centerT = circleCenter != null ? circleCenter : sp;
 
+        // Start from center position
+        Vector3 pos = centerT.position;
+
+        // Apply 2D circle offset if enabled
+        if (useCircleSpawn && circleRadius > 0f)
+        {
+            Vector2 offset2D = Random.insideUnitCircle * circleRadius; // X,Y only
+            pos.x += offset2D.x;
+            pos.y += offset2D.y;
+        }
+
+        // Handle Z positioning
         if (!useSpawnPointZ)
             pos.z = zPosition;
 
         lastSpawned = Instantiate(entry.prefab, pos, Quaternion.identity, parent);
-
-        // ✅ Debug message when loot spawns
-        // Debug.Log($"[LootTable2D] Spawned loot '{lastSpawned.name}' from {gameObject.name} at {pos}");
-
         return lastSpawned;
     }
-
 
     public int WeightedPickIndex(List<LootEntry> list)
     {
@@ -135,6 +153,20 @@ public class LootTable2D : MonoBehaviour
     }
 
 #if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        // Visualize circle spawn in Scene view
+        if (!useCircleSpawn) return;
+
+        var sp = spawnPoint != null ? spawnPoint : transform;
+        var centerT = circleCenter != null ? circleCenter : sp;
+
+        Gizmos.color = new Color(0f, 0.6f, 1f, 0.25f);
+        Gizmos.DrawSphere(centerT.position, 0.05f);
+        Handles.color = new Color(0f, 0.6f, 1f, 0.9f);
+        Handles.DrawWireDisc(centerT.position, Vector3.forward, circleRadius);
+    }
+
     private class ReadOnlyInspectorAttribute : PropertyAttribute { }
     [UnityEditor.CustomPropertyDrawer(typeof(ReadOnlyInspectorAttribute))]
     private class ReadOnlyDrawer : UnityEditor.PropertyDrawer

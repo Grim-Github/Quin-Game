@@ -21,13 +21,16 @@ public class WeaponRarity : MonoBehaviour
     [SerializeField] private float weightRare = 12f;
     [SerializeField] private float weightLegendary = 3f;
 
+    // =========================
+    // Base Roll Ranges (pre-tier)
+    // =========================
     [Header("Roll Ranges (per picked upgrade)")]
-    [Tooltip("Percent damage per roll, applied multiplicatively: 1.10 = +10%. Stored and undone as an additive delta.")]
+    [Tooltip("Percent damage per roll, as a multiplier: 1.10 = +10%. We convert to a flat delta for clean undo.")]
     [SerializeField] private Vector2 damageMultRange = new Vector2(1.10f, 1.30f);
     [Tooltip("Flat damage added per roll.")]
     [SerializeField] private Vector2Int damageFlatAddRange = new Vector2Int(3, 12);
 
-    [Tooltip("Attack speed = reduce WeaponTick.interval by this FRACTION per roll (we store actual applied delta and undo by adding it back).")]
+    [Tooltip("Attack speed = reduce WeaponTick.interval by this FRACTION per roll.")]
     [SerializeField] private Vector2 atkSpeedFracRange = new Vector2(0.10f, 0.25f);
     [SerializeField] private Vector2 critChanceAddRange = new Vector2(0.05f, 0.20f);
     [SerializeField] private Vector2 critMultAddRange = new Vector2(0.25f, 1.00f);
@@ -43,10 +46,40 @@ public class WeaponRarity : MonoBehaviour
     [SerializeField] private Vector2 shooterForceAddRange = new Vector2(1.0f, 4.0f);
     [SerializeField] private Vector2Int shooterProjectilesAddRange = new Vector2Int(1, 2);
 
-    // NOTE: accuracy previously used a multiplicative reduce (spread *= 1 - frac).
-    // To guarantee clean undo using only adds/subtracts, we change it to subtract a stored delta:
-    // delta = currentSpread * frac; spread -= delta; undo: spread += delta.
+    // Accuracy: fraction to reduce spread by (we store a delta for clean undo)
     [SerializeField] private Vector2 shooterSpreadReduceFracRange = new Vector2(0.10f, 0.35f);
+
+    // =========================
+    // TIER SYSTEM (1 = strongest, 10 = weakest)
+    // Each tier multiplies that stat's effective roll range.
+    // Default mapping if curve is not used: tier 10 -> 0.5x ... tier 1 -> 2.0x
+    // =========================
+    [Header("Tier Settings (1 = strongest, 10 = weakest)")]
+    [SerializeField, Range(1, 10)] private int tierDamagePercent = 5;
+    [SerializeField, Range(1, 10)] private int tierDamageFlat = 5;
+    [SerializeField, Range(1, 10)] private int tierAttackSpeed = 5;
+    [SerializeField, Range(1, 10)] private int tierCritChance = 5;
+    [SerializeField, Range(1, 10)] private int tierCritMultiplier = 5;
+
+    [Header("Tier Settings • Knife")]
+    [SerializeField, Range(1, 10)] private int tierKnifeRadius = 5;
+    [SerializeField, Range(1, 10)] private int tierKnifeSplashRadius = 5;
+    [SerializeField, Range(1, 10)] private int tierKnifeLifesteal = 5;
+    [SerializeField, Range(1, 10)] private int tierKnifeMaxTargets = 5;
+
+    [Header("Tier Settings • Shooter")]
+    [SerializeField, Range(1, 10)] private int tierShooterLifetime = 5;
+    [SerializeField, Range(1, 10)] private int tierShooterForce = 5;
+    [SerializeField, Range(1, 10)] private int tierShooterProjectiles = 5;
+    [SerializeField, Range(1, 10)] private int tierShooterAccuracy = 5;
+
+    [Header("Tier Curve (optional override)")]
+    [Tooltip("Optional mapping from tier (1..10) to multiplier. X expects normalized (0=Tier10,1=Tier1). Y = multiplier.")]
+    [SerializeField] private AnimationCurve tierMultiplierCurve;
+    [Tooltip("If true and curve has keys, the curve overrides the default 0.5x..2.0x mapping.")]
+    [SerializeField] private bool useTierCurve = false;
+    [Tooltip("Default min/max multipliers when not using curve (Tier10=min, Tier1=max).")]
+    [SerializeField] private Vector2 defaultTierMultiplierRange = new Vector2(0.5f, 2.0f);
 
     // cached
     private Knife knife;
@@ -60,27 +93,27 @@ public class WeaponRarity : MonoBehaviour
     private class AppliedMods
     {
         // Shared
-        public int damageFlatAdded;                 // + to damage (knife/shooter)
-        public int damageFromPercentAdded;          // + to damage computed from % (stored as flat int)
+        public int damageFlatAdded;
+        public int damageFromPercentAdded;
 
         // Tick
-        public float tickIntervalDelta;             // interval reduced by this amount (undo by +delta)
+        public float tickIntervalDelta;
 
         // Crits
-        public float critChanceAdded;               // + to crit chance
-        public float critMultAdded;                 // + to crit multiplier
+        public float critChanceAdded;
+        public float critMultAdded;
 
         // Knife
-        public float knifeLifestealAdded;           // + to lifesteal
-        public float knifeRadiusDelta;              // + to radius (computed from mult; undo by -delta)
-        public float knifeSplashRadiusDelta;        // + to splash radius (computed from mult)
-        public int knifeMaxTargetsAdded;            // + to max targets
+        public float knifeLifestealAdded;
+        public float knifeRadiusDelta;
+        public float knifeSplashRadiusDelta;
+        public int knifeMaxTargetsAdded;
 
         // Shooter
-        public float shooterLifetimeAdded;          // + to bullet lifetime
-        public float shooterForceAdded;             // + to shoot force
-        public int shooterProjectilesAdded;         // + to projectile count
-        public float shooterSpreadDelta;            // amount subtracted from spread (undo by +delta)
+        public float shooterLifetimeAdded;
+        public float shooterForceAdded;
+        public int shooterProjectilesAdded;
+        public float shooterSpreadDelta;
 
         public bool HasAny =>
             damageFlatAdded != 0 || damageFromPercentAdded != 0 ||
@@ -101,7 +134,11 @@ public class WeaponRarity : MonoBehaviour
         tick = GetComponent<WeaponTick>();
 
         if (rollOnAwake)
+        {
             RerollRarity();
+            RollTiers();
+        }
+
     }
 
     public void RerollRarity()
@@ -112,6 +149,9 @@ public class WeaponRarity : MonoBehaviour
 
     public void RerollStats()
     {
+        // ✅ Reroll tiers every time we reroll stats
+        RollTiers();
+
         // Remove previous roll effects (strictly by subtracting what we added last time)
         UndoLastApplied();
 
@@ -164,7 +204,7 @@ public class WeaponRarity : MonoBehaviour
         if (shooter != null)
             shooter.damage -= (last.damageFlatAdded + last.damageFromPercentAdded);
 
-        // Attack Speed (tick interval): we previously decreased interval by tickIntervalDelta; now add it back
+        // Attack Speed (tick interval)
         if (tick != null && !Mathf.Approximately(last.tickIntervalDelta, 0f))
             tick.interval += last.tickIntervalDelta;
 
@@ -195,10 +235,9 @@ public class WeaponRarity : MonoBehaviour
             shooter.bulletLifetime -= last.shooterLifetimeAdded;
             shooter.shootForce -= last.shooterForceAdded;
             shooter.projectileCount -= last.shooterProjectilesAdded;
-            shooter.spreadAngle += last.shooterSpreadDelta; // we subtracted this before, so add back
+            shooter.spreadAngle += last.shooterSpreadDelta; // undo
         }
 
-        // Clear for next round
         Clear(last);
     }
 
@@ -254,23 +293,74 @@ public class WeaponRarity : MonoBehaviour
         return list;
     }
 
-    // ——— Upgrades that record their applied deltas so we can undo later ———
+    // =========================
+    // Tier helpers
+    // =========================
+    private float TierMult(int tier)
+    {
+        tier = Mathf.Clamp(tier, 1, 10);
+
+        if (useTierCurve && tierMultiplierCurve != null && tierMultiplierCurve.length > 0)
+        {
+            // Map Tier10..Tier1 -> 0..1
+            float x = (10 - tier) / 9f; // tier=10 -> 0, tier=1 -> 1
+            return Mathf.Max(0f, tierMultiplierCurve.Evaluate(x));
+        }
+
+        // Default linear mapping: Tier10=min .. Tier1=max
+        float t = (10 - tier) / 9f; // 0..1
+        return Mathf.Lerp(Mathf.Max(0f, defaultTierMultiplierRange.x),
+                          Mathf.Max(0f, defaultTierMultiplierRange.y), t);
+    }
+
+    // Multiply a normal additive range by tier multiplier
+    private Vector2 ScaleRange(Vector2 baseRange, int tier)
+    {
+        float m = TierMult(tier);
+        return new Vector2(baseRange.x * m, baseRange.y * m);
+    }
+
+    private Vector2Int ScaleRange(Vector2Int baseRange, int tier, int minClamp = int.MinValue)
+    {
+        float m = TierMult(tier);
+        int x = Mathf.RoundToInt(baseRange.x * m);
+        int y = Mathf.RoundToInt(baseRange.y * m);
+        if (x > y) (x, y) = (y, x);
+        x = Mathf.Max(minClamp, x);
+        y = Mathf.Max(minClamp, y);
+        return new Vector2Int(x, y);
+    }
+
+    // For multiplier-like ranges around 1 (e.g., 1.10..1.30): scale only the (mult - 1) delta
+    private Vector2 ScaleMultiplierLike(Vector2 baseRange, int tier)
+    {
+        float m = TierMult(tier);
+        float a = 1f + (baseRange.x - 1f) * m;
+        float b = 1f + (baseRange.y - 1f) * m;
+        if (a > b) (a, b) = (b, a);
+        return new Vector2(a, b);
+    }
+
+    // =========================
+    // Upgrades (record applied deltas to enable clean undo)
+    // =========================
 
     private void Upgrade_DamageFlat()
     {
-        int add = UnityEngine.Random.Range(damageFlatAddRange.x, damageFlatAddRange.y + 1);
+        Vector2Int r = ScaleRange(damageFlatAddRange, tierDamageFlat, 0);
+        int add = UnityEngine.Random.Range(r.x, r.y + 1);
         if (knife != null) knife.damage += add;
         if (shooter != null) shooter.damage += add;
         last.damageFlatAdded += add;
-        notes.Add($"+{add} Damage");
+        notes.Add($"+{add} Damage (Tier {ToRoman(tierDamageFlat)})");
     }
 
     private void Upgrade_DamagePercentAsFlatDelta()
     {
-        float mult = UnityEngine.Random.Range(damageMultRange.x, damageMultRange.y);
+        Vector2 r = ScaleMultiplierLike(damageMultRange, tierDamagePercent);
+        float mult = UnityEngine.Random.Range(r.x, r.y);
         float pct = (mult - 1f) * 100f;
 
-        // Convert multiplicative to a flat delta to guarantee clean undo.
         if (knife != null)
         {
             int baseDamage = knife.damage;
@@ -286,22 +376,23 @@ public class WeaponRarity : MonoBehaviour
             last.damageFromPercentAdded += delta;
         }
 
-        notes.Add($"+{pct:F0}% Damage");
+        notes.Add($"+{pct:F0}% Damage (Tier {ToRoman(tierDamagePercent)})");
     }
 
     private void Upgrade_FasterAttack_StoreDelta()
     {
         if (tick == null) return;
 
-        float frac = UnityEngine.Random.Range(atkSpeedFracRange.x, atkSpeedFracRange.y);
+        Vector2 r = ScaleRange(atkSpeedFracRange, tierAttackSpeed);
+        float frac = Mathf.Clamp01(UnityEngine.Random.Range(r.x, r.y));
         float before = tick.interval;
-        float reduceBy = before * frac;                 // subtract a delta
+        float reduceBy = before * frac;
         float newInterval = Mathf.Max(0.05f, before - reduceBy);
-        float actuallyReduced = before - newInterval;   // respect clamp; store what we really changed
+        float actuallyReduced = before - newInterval;
         tick.interval = newInterval;
 
-        last.tickIntervalDelta += actuallyReduced;      // undo by adding this back
-        notes.Add($"+{frac * 100f:F0}% Attack Speed");
+        last.tickIntervalDelta += actuallyReduced;
+        notes.Add($"+{frac * 100f:F0}% Attack Speed (Tier {ToRoman(tierAttackSpeed)})");
     }
 
     private void Upgrade_Crit()
@@ -309,67 +400,74 @@ public class WeaponRarity : MonoBehaviour
         bool buffChance = UnityEngine.Random.value < 0.6f;
         if (buffChance)
         {
-            float add = UnityEngine.Random.Range(critChanceAddRange.x, critChanceAddRange.y);
+            Vector2 r = ScaleRange(critChanceAddRange, tierCritChance);
+            float add = Mathf.Clamp01(UnityEngine.Random.Range(r.x, r.y));
             if (knife != null) knife.critChance = Mathf.Clamp01(knife.critChance + add);
             if (shooter != null) shooter.critChance = Mathf.Clamp01(shooter.critChance + add);
             last.critChanceAdded += add;
-            notes.Add($"+{add * 100f:F0}% Crit Chance");
+            notes.Add($"+{add * 100f:F0}% Crit Chance (Tier {ToRoman(tierCritChance)})");
         }
         else
         {
-            float add = UnityEngine.Random.Range(critMultAddRange.x, critMultAddRange.y);
+            Vector2 r = ScaleRange(critMultAddRange, tierCritMultiplier);
+            float add = UnityEngine.Random.Range(r.x, r.y);
             if (knife != null) knife.critMultiplier += add;
             if (shooter != null) shooter.critMultiplier += add;
             last.critMultAdded += add;
-            notes.Add($"+{add:F2} Crit Mult");
+            notes.Add($"+{add:F2} Crit Mult (Tier {ToRoman(tierCritMultiplier)})");
         }
     }
 
     private void Upgrade_KnifeLifesteal()
     {
-        float add = UnityEngine.Random.Range(knifeLifestealAddRange.x, knifeLifestealAddRange.y);
         if (knife == null) return;
+        Vector2 r = ScaleRange(knifeLifestealAddRange, tierKnifeLifesteal);
+        float add = Mathf.Clamp01(UnityEngine.Random.Range(r.x, r.y));
         knife.lifestealPercent = Mathf.Clamp01(knife.lifestealPercent + add);
         last.knifeLifestealAdded += add;
-        notes.Add($"+{add * 100f:F0}% Lifesteal");
+        notes.Add($"+{add * 100f:F0}% Lifesteal (Tier {ToRoman(tierKnifeLifesteal)})");
     }
 
     private void Upgrade_KnifeMainRadius_AsDelta()
     {
         if (knife == null) return;
-        float mult = UnityEngine.Random.Range(knifeRadiusMultRange.x, knifeRadiusMultRange.y);
-        float delta = knife.radius * (mult - 1f);   // convert to additive change
+        Vector2 r = ScaleMultiplierLike(knifeRadiusMultRange, tierKnifeRadius);
+        float mult = UnityEngine.Random.Range(r.x, r.y);
+        float delta = knife.radius * (mult - 1f);
         knife.radius += delta;
         last.knifeRadiusDelta += delta;
-        notes.Add($"+{(mult - 1f) * 100f:F0}% Range");
+        notes.Add($"+{(mult - 1f) * 100f:F0}% Range (Tier {ToRoman(tierKnifeRadius)})");
     }
 
     private void Upgrade_KnifeSplashRadius_AsDelta()
     {
         if (knife == null) return;
-        float mult = UnityEngine.Random.Range(knifeSplashRadiusMultRange.x, knifeSplashRadiusMultRange.y);
+        Vector2 r = ScaleMultiplierLike(knifeSplashRadiusMultRange, tierKnifeSplashRadius);
+        float mult = UnityEngine.Random.Range(r.x, r.y);
         float delta = knife.splashRadius * (mult - 1f);
         knife.splashRadius += delta;
         last.knifeSplashRadiusDelta += delta;
-        notes.Add($"+{(mult - 1f) * 100f:F0}% AOE");
+        notes.Add($"+{(mult - 1f) * 100f:F0}% AOE (Tier {ToRoman(tierKnifeSplashRadius)})");
     }
 
     private void Upgrade_KnifeMaxTargets()
     {
         if (knife == null) return;
-        int add = UnityEngine.Random.Range(knifeMaxTargetsAddRange.x, knifeMaxTargetsAddRange.y + 1);
+        Vector2Int r = ScaleRange(knifeMaxTargetsAddRange, tierKnifeMaxTargets, 1);
+        int add = Mathf.Max(1, UnityEngine.Random.Range(r.x, r.y + 1));
         knife.maxTargetsPerTick += add;
         last.knifeMaxTargetsAdded += add;
-        notes.Add($"+{add} Max Targets");
+        notes.Add($"+{add} Max Targets (Tier {ToRoman(tierKnifeMaxTargets)})");
     }
 
     private void Upgrade_ShooterProjectiles()
     {
         if (shooter == null) return;
-        int add = UnityEngine.Random.Range(shooterProjectilesAddRange.x, shooterProjectilesAddRange.y + 1);
+        Vector2Int r = ScaleRange(shooterProjectilesAddRange, tierShooterProjectiles, 1);
+        int add = Mathf.Max(1, UnityEngine.Random.Range(r.x, r.y + 1));
         shooter.projectileCount += add;
         last.shooterProjectilesAdded += add;
-        notes.Add($"+{add} Projectiles");
+        notes.Add($"+{add} Projectiles (Tier {ToRoman(tierShooterProjectiles)})");
     }
 
     private void Upgrade_ShooterRange()
@@ -379,17 +477,19 @@ public class WeaponRarity : MonoBehaviour
         bool buffLifetime = UnityEngine.Random.value < 0.5f;
         if (buffLifetime)
         {
-            float add = UnityEngine.Random.Range(shooterLifetimeAddRange.x, shooterLifetimeAddRange.y);
+            Vector2 r = ScaleRange(shooterLifetimeAddRange, tierShooterLifetime);
+            float add = Mathf.Max(0f, UnityEngine.Random.Range(r.x, r.y));
             shooter.bulletLifetime += add;
             last.shooterLifetimeAdded += add;
-            notes.Add($"+{add:F1}s Projectile Lifetime");
+            notes.Add($"+{add:F1}s Projectile Lifetime (Tier {ToRoman(tierShooterLifetime)})");
         }
         else
         {
-            float add = UnityEngine.Random.Range(shooterForceAddRange.x, shooterForceAddRange.y);
+            Vector2 r = ScaleRange(shooterForceAddRange, tierShooterForce);
+            float add = Mathf.Max(0f, UnityEngine.Random.Range(r.x, r.y));
             shooter.shootForce += add;
             last.shooterForceAdded += add;
-            notes.Add($"+{add:F1} Projectile Speed");
+            notes.Add($"+{add:F1} Projectile Speed (Tier {ToRoman(tierShooterForce)})");
         }
     }
 
@@ -397,15 +497,16 @@ public class WeaponRarity : MonoBehaviour
     {
         if (shooter == null) return;
 
-        float frac = UnityEngine.Random.Range(shooterSpreadReduceFracRange.x, shooterSpreadReduceFracRange.y);
+        Vector2 r = ScaleRange(shooterSpreadReduceFracRange, tierShooterAccuracy);
+        float frac = Mathf.Clamp01(UnityEngine.Random.Range(r.x, r.y));
         float before = shooter.spreadAngle;
-        float delta = before * frac;                    // subtract this amount
+        float delta = before * frac;
         float newSpread = Mathf.Max(0f, before - delta);
-        float actuallyReduced = before - newSpread;     // store the true reduction after clamp
+        float actuallyReduced = before - newSpread;
         shooter.spreadAngle = newSpread;
 
-        last.shooterSpreadDelta += actuallyReduced;     // undo by adding this back
-        notes.Add($"+{frac * 100f:F0}% Accuracy");
+        last.shooterSpreadDelta += actuallyReduced;
+        notes.Add($"+{frac * 100f:F0}% Accuracy (Tier {ToRoman(tierShooterAccuracy)})");
     }
 
     // ——— UI helpers ———
@@ -435,9 +536,15 @@ public class WeaponRarity : MonoBehaviour
     private static string RemoveRaritySection(string s)
     {
         if (string.IsNullOrEmpty(s)) return s;
-        int idx = s.IndexOf("<b>Rarity:</b>", StringComparison.OrdinalIgnoreCase);
+
+        // Find start of rarity block by looking for our blue wrapper
+        int idx = s.IndexOf("<color=#00AEEF>", StringComparison.OrdinalIgnoreCase);
+        if (idx < 0)
+            idx = s.IndexOf("<b>Rarity:</b>", StringComparison.OrdinalIgnoreCase); // fallback
+
         return idx >= 0 ? s[..idx].TrimEnd() : s;
     }
+
 
     private static string BlueWrap(string inner) => $"<color=#00AEEF>{inner}</color>";
 
@@ -449,6 +556,44 @@ public class WeaponRarity : MonoBehaviour
         Rarity.Legendary => "<color=#FFB347>Legendary</color>",
         _ => "Common"
     };
+
+    // 1..10 -> Roman numerals
+    private static string ToRoman(int n)
+    {
+        n = Mathf.Clamp(n, 1, 10);
+        return n switch
+        {
+            1 => "I",
+            2 => "II",
+            3 => "III",
+            4 => "IV",
+            5 => "V",
+            6 => "VI",
+            7 => "VII",
+            8 => "VIII",
+            9 => "IX",
+            _ => "X"
+        };
+    }
+    private void RollTiers()
+    {
+        // Rolls 1–10 for each tier variable
+        tierDamagePercent = UnityEngine.Random.Range(1, 11);
+        tierDamageFlat = UnityEngine.Random.Range(1, 11);
+        tierAttackSpeed = UnityEngine.Random.Range(1, 11);
+        tierCritChance = UnityEngine.Random.Range(1, 11);
+        tierCritMultiplier = UnityEngine.Random.Range(1, 11);
+
+        tierKnifeRadius = UnityEngine.Random.Range(1, 11);
+        tierKnifeSplashRadius = UnityEngine.Random.Range(1, 11);
+        tierKnifeLifesteal = UnityEngine.Random.Range(1, 11);
+        tierKnifeMaxTargets = UnityEngine.Random.Range(1, 11);
+
+        tierShooterLifetime = UnityEngine.Random.Range(1, 11);
+        tierShooterForce = UnityEngine.Random.Range(1, 11);
+        tierShooterProjectiles = UnityEngine.Random.Range(1, 11);
+        tierShooterAccuracy = UnityEngine.Random.Range(1, 11);
+    }
 
     private static void Shuffle<T>(IList<T> list)
     {

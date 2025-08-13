@@ -91,7 +91,11 @@ PrefabInstance:
     - target: {fileID: 6236155870447016850, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: stabClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: a48d189864b251141897f4520fa898f3, type: 3}
+    - target: {fileID: 6236155870447016850, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: shootClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d06883949264952458a8ce760a84bc46, type: 3}
     - target: {fileID: 6236155870447016850, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: critChance
       value: 0.2

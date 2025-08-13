@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NaughtyAttributes;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ public class PowerUp
 
     [Header("Visuals")]
     [Tooltip("Icon representing this power-up. If null, UI will use its default icon.")]
-    public Sprite powerUpIcon;
+    [ShowAssetPreview] public Sprite powerUpIcon;
 
     [Header("Spawn Weight")]
     [Tooltip("Relative chance for this power-up to appear in selection. Higher = more common.")]
