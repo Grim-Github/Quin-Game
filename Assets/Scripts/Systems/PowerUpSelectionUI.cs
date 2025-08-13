@@ -14,7 +14,7 @@ public class PowerUpSelectionUI : MonoBehaviour
     [SerializeField] private Image[] iconImages;
 
     [Header("Extra Buttons")]
-    [SerializeField] private Button skipButton; // NEW
+    [SerializeField] private Button[] skipButton;
 
     [Header("References")]
     [SerializeField] private PowerUpChooser powerUpChooser;
@@ -36,21 +36,28 @@ public class PowerUpSelectionUI : MonoBehaviour
     {
         if (selectionPanel != null) selectionPanel.SetActive(false);
 
-        // Wire up buttons safely
-        for (int i = 0; i < selectButtons.Length; i++)
+        // Wire up selection buttons safely
+        if (selectButtons != null)
         {
-            if (selectButtons[i] == null) continue;
-            int idx = i; // capture
-            selectButtons[i].onClick.RemoveAllListeners();
-            selectButtons[i].onClick.AddListener(() => SelectPowerUp(idx));
+            for (int i = 0; i < selectButtons.Length; i++)
+            {
+                if (selectButtons[i] == null) continue;
+                int idx = i; // capture
+                selectButtons[i].onClick.RemoveAllListeners();
+                selectButtons[i].onClick.AddListener(() => SelectPowerUp(idx));
+            }
         }
 
-        // Wire up skip button
         if (skipButton != null)
         {
-            skipButton.onClick.RemoveAllListeners();
-            skipButton.onClick.AddListener(SkipChoice);
+            foreach (var btn in skipButton)
+            {
+                if (btn == null) continue;
+                btn.onClick.AddListener(SkipChoice);
+                btn.gameObject.SetActive(false); // hide initially
+            }
         }
+
     }
 
     private void PlaySFX(AudioClip clip)
@@ -64,6 +71,12 @@ public class PowerUpSelectionUI : MonoBehaviour
         if (powerUpChooser == null || powerUpChooser.powerUps == null || powerUpChooser.powerUps.Count == 0)
         {
             Debug.LogWarning("[PowerUpSelectionUI] No power-ups available!");
+            return;
+        }
+
+        if (selectButtons == null || selectButtons.Length == 0)
+        {
+            Debug.LogWarning("[PowerUpSelectionUI] No select buttons assigned.");
             return;
         }
 
@@ -93,6 +106,7 @@ public class PowerUpSelectionUI : MonoBehaviour
 
         if (selectionPanel != null) selectionPanel.SetActive(true);
         PlaySFX(openSFX);
+
         int slotCount = Mathf.Min(3, selectButtons.Length, candidates.Count);
         shownIndices = PickRandomUnique(candidates, slotCount);
 
@@ -107,68 +121,50 @@ public class PowerUpSelectionUI : MonoBehaviour
         {
             bool has = i < shownIndices.Length;
 
-            if (has)
+            // Name
+            if (nameTexts != null && i < nameTexts.Length && nameTexts[i] != null)
+                nameTexts[i].text = has ? powerUpChooser.powerUps[shownIndices[i]].powerUpName : string.Empty;
+
+            // Description
+            if (descriptionTexts != null && i < descriptionTexts.Length && descriptionTexts[i] != null)
+                descriptionTexts[i].text = has ? powerUpChooser.powerUps[shownIndices[i]].powerUpDescription : string.Empty;
+
+            // Icon
+            if (iconImages != null && i < iconImages.Length && iconImages[i] != null)
             {
-                var pu = powerUpChooser.powerUps[shownIndices[i]];
-                string newName = pu.powerUpName;
-
-                if (pu.powerUpObject != null)
+                var img = iconImages[i];
+                if (has)
                 {
-                    if (pu.powerUpObject.GetComponent<SimpleShooter>() != null)
-                        newName += " (SimpleShooter)";
-                    else if (pu.powerUpObject.GetComponent<Knife>() != null)
-                        newName += " (Knife)";
-                }
-
-                if (nameTexts != null && i < nameTexts.Length && nameTexts[i] != null)
-                {
-                    nameTexts[i].text = pu.powerUpName;
-                    nameTexts[i].gameObject.name = newName;
-                }
-
-                if (descriptionTexts != null && i < descriptionTexts.Length && descriptionTexts[i] != null)
-                    descriptionTexts[i].text = pu.powerUpDescription;
-
-                if (iconImages != null && i < iconImages.Length && iconImages[i] != null)
-                {
-                    var img = iconImages[i];
-                    Sprite spriteToUse = pu.powerUpIcon != null ? pu.powerUpIcon : defaultIcon;
-                    img.sprite = spriteToUse;
+                    var pu = powerUpChooser.powerUps[shownIndices[i]];
+                    img.sprite = pu.powerUpIcon != null ? pu.powerUpIcon : defaultIcon;
                     img.enabled = true;
                     img.gameObject.SetActive(true);
                 }
-
-                if (selectButtons[i] != null)
+                else
                 {
-                    selectButtons[i].interactable = true;
-                    selectButtons[i].gameObject.SetActive(true);
+                    img.sprite = null;
+                    img.enabled = false;
+                    img.gameObject.SetActive(false);
                 }
             }
-            else
+
+            // Button
+            if (selectButtons[i] != null)
             {
-                if (nameTexts != null && i < nameTexts.Length && nameTexts[i] != null)
-                    nameTexts[i].text = string.Empty;
-
-                if (descriptionTexts != null && i < descriptionTexts.Length && descriptionTexts[i] != null)
-                    descriptionTexts[i].text = string.Empty;
-
-                if (iconImages != null && i < iconImages.Length && iconImages[i] != null)
-                {
-                    iconImages[i].sprite = null;
-                    iconImages[i].enabled = false;
-                    iconImages[i].gameObject.SetActive(false);
-                }
-
-                if (selectButtons[i] != null)
-                {
-                    selectButtons[i].interactable = false;
-                    selectButtons[i].gameObject.SetActive(false);
-                }
+                selectButtons[i].interactable = has;
+                selectButtons[i].gameObject.SetActive(has);
             }
         }
 
         // Show skip button
-        if (skipButton != null) skipButton.gameObject.SetActive(true);
+        if (skipButton != null)
+        {
+            foreach (var btn in skipButton)
+            {
+                if (btn != null) btn.gameObject.SetActive(true);
+            }
+        }
+
     }
 
     private void SelectPowerUp(int buttonSlot)
@@ -203,13 +199,20 @@ public class PowerUpSelectionUI : MonoBehaviour
 
         shownIndices = null;
 
-        if (skipButton != null) skipButton.gameObject.SetActive(false);
+        if (skipButton != null)
+        {
+            foreach (var btn in skipButton)
+            {
+                if (btn != null) btn.gameObject.SetActive(false);
+            }
+        }
+
     }
 
     private int[] PickRandomUnique(List<int> source, int count)
     {
-        List<int> result = new List<int>(count);
-        List<int> available = new List<int>(source);
+        var result = new List<int>(count);
+        var available = new List<int>(source);
 
         for (int picks = 0; picks < count && available.Count > 0; picks++)
         {

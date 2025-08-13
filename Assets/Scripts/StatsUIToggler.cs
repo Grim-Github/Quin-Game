@@ -6,6 +6,9 @@ public class StatsUIToggler : MonoBehaviour
     [Tooltip("UI object to show when holding the key.")]
     [SerializeField] private GameObject statsUI;
 
+    [Tooltip("Another UI element to hide when stats UI is shown.")]
+    [SerializeField] private GameObject otherUI;
+
     [Tooltip("Key to hold to show stats.")]
     [SerializeField] private KeyCode toggleKey = KeyCode.Tab;
 
@@ -16,43 +19,68 @@ public class StatsUIToggler : MonoBehaviour
     [SerializeField] private Volume slowMoVolume;
 
     private float defaultTimeScale;
+    private bool wasOtherUIActive;
 
     private void Start()
     {
         if (statsUI != null)
             statsUI.SetActive(false);
-        if (slowMoVolume) slowMoVolume.weight = 0f;
+
+        if (slowMoVolume)
+            slowMoVolume.weight = 0f;
 
         defaultTimeScale = Time.timeScale;
     }
 
     private void Update()
     {
-        // Block toggler when ShowSelection (or any full pause) is active.
-        if (Mathf.Approximately(Time.timeScale, 0f))
-        {
-            if (statsUI && statsUI.activeSelf) statsUI.SetActive(false);
-            if (slowMoVolume) slowMoVolume.weight = 0f;
-            return;
-        }
+        bool externallyPaused = Mathf.Approximately(Time.timeScale, 0f);
 
         if (Input.GetKey(toggleKey))
         {
             if (statsUI && !statsUI.activeSelf)
             {
                 statsUI.SetActive(true);
-                Time.timeScale = slowTimeScale;
+
+                // Only hide otherUI if it’s currently active
+                if (otherUI && otherUI.activeSelf)
+                {
+                    wasOtherUIActive = true;
+                    otherUI.SetActive(false);
+                }
+                else
+                {
+                    wasOtherUIActive = false;
+                }
             }
-            if (slowMoVolume) slowMoVolume.weight = 1f;
+
+            // Only apply slow-mo if not externally paused
+            if (!externallyPaused)
+            {
+                Time.timeScale = slowTimeScale;
+                if (slowMoVolume) slowMoVolume.weight = 1f;
+            }
         }
         else
         {
             if (statsUI && statsUI.activeSelf)
             {
                 statsUI.SetActive(false);
-                Time.timeScale = defaultTimeScale;
+
+                // Only reactivate otherUI if we hid it
+                if (otherUI && wasOtherUIActive)
+                {
+                    otherUI.SetActive(true);
+                    wasOtherUIActive = false;
+                }
             }
-            if (slowMoVolume) slowMoVolume.weight = 0f;
+
+            // Only restore time scale if not externally paused
+            if (!externallyPaused)
+            {
+                Time.timeScale = defaultTimeScale;
+                if (slowMoVolume) slowMoVolume.weight = 0f;
+            }
         }
     }
 }

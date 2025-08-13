@@ -1,10 +1,14 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(Collider2D))]
-public class TooltipTarget : MonoBehaviour
+[DisallowMultipleComponent]
+public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [TextArea] public string tooltipMessage;
     [SerializeField] private bool appendExtraFromHealth = true;
+
+    // Optional: if your TooltipManager wants to follow a specific rect when this is on UI
+    [SerializeField] private RectTransform uiAnchorOverride;
 
     private SimpleHealth health;
 
@@ -13,16 +17,14 @@ public class TooltipTarget : MonoBehaviour
         health = GetComponent<SimpleHealth>();
     }
 
-    private void OnMouseEnter()
+    // ===== Shared =====
+    private string BuildTooltipText()
     {
-        var mgr = TooltipManager.Instance;
-        if (mgr == null) return;
-
         string full = tooltipMessage;
 
         if (appendExtraFromHealth && health != null)
         {
-            string extra = health.extraTextField; // public field now
+            string extra = health.extraTextField; // assumes public on your SimpleHealth
             if (!string.IsNullOrWhiteSpace(extra))
             {
                 if (!string.IsNullOrWhiteSpace(full)) full += "\n\n";
@@ -30,25 +32,38 @@ public class TooltipTarget : MonoBehaviour
             }
         }
 
-        if (string.IsNullOrWhiteSpace(full)) return; // nothing to show
-        mgr.ShowTooltip(full, this); // pass target so manager can verify liveness
+        return full;
     }
 
-    private void OnMouseExit()
+    private void ShowTooltipInternal()
+    {
+        var mgr = TooltipManager.Instance;
+        if (mgr == null) return;
+
+        string full = BuildTooltipText();
+        if (string.IsNullOrWhiteSpace(full)) return;
+
+        // If your manager supports anchoring/following a RectTransform for UI elements,
+        // pass 'this' so it can verify liveness, and optionally give it an anchor hint.
+        // (Adjust this call to match your TooltipManager API.)
+        mgr.ShowTooltip(full, this, uiAnchorOverride != null ? uiAnchorOverride : null);
+    }
+
+    private void HideTooltipInternal()
     {
         var mgr = TooltipManager.Instance;
         if (mgr != null) mgr.HideTooltip();
     }
 
-    private void OnDisable()
-    {
-        var mgr = TooltipManager.Instance;
-        if (mgr != null) mgr.HideTooltip();
-    }
+    // ===== World objects (needs Collider or Collider2D) =====
+    private void OnMouseEnter() => ShowTooltipInternal();
+    private void OnMouseExit() => HideTooltipInternal();
 
-    private void OnDestroy()
-    {
-        var mgr = TooltipManager.Instance;
-        if (mgr != null) mgr.HideTooltip();
-    }
+    // ===== uGUI elements =====
+    public void OnPointerEnter(PointerEventData eventData) => ShowTooltipInternal();
+    public void OnPointerExit(PointerEventData eventData) => HideTooltipInternal();
+
+    // ===== Lifecycle safety =====
+    private void OnDisable() => HideTooltipInternal();
+    private void OnDestroy() => HideTooltipInternal();
 }

@@ -73,7 +73,7 @@ public class LootTable2D : MonoBehaviour
         lastSpawned = Instantiate(entry.prefab, pos, Quaternion.identity, parent);
 
         // ✅ Debug message when loot spawns
-        Debug.Log($"[LootTable2D] Spawned loot '{lastSpawned.name}' from {gameObject.name} at {pos}");
+        // Debug.Log($"[LootTable2D] Spawned loot '{lastSpawned.name}' from {gameObject.name} at {pos}");
 
         return lastSpawned;
     }
