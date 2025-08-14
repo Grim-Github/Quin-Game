@@ -187,36 +187,53 @@ public class WeaponRarityController : MonoBehaviour
     }
 
 
-    // === Add exactly one UNIQUE upgrade; never duplicate; respect rarity cap ===
     public bool AddRandomUpgrade(bool preferUnique = true)
     {
         int maxAllowed = RollsFor(current);
-        if (applied.Count >= maxAllowed) return false; // already full
+
+        // Already at max — replace one upgrade with another type
+        if (applied.Count >= maxAllowed)
+        {
+            if (applied.Count > 0)
+            {
+                int index = UnityEngine.Random.Range(0, applied.Count);
+                return RerollStatIntoAnotherAt(index);
+            }
+            return false;
+        }
 
         var ctx = BuildContext();
         var cands = BuildCandidates(ctx);
         if (cands == null || cands.Count == 0) return false;
 
-        // Types already taken
+        // Track existing upgrade types
         var existing = new HashSet<System.Type>();
         for (int i = 0; i < applied.Count; i++)
             if (applied[i].upgrade != null)
                 existing.Add(applied[i].upgrade.GetType());
 
-        // Only consider types not already present
+        // Find upgrades not already applied (unique)
         var uniqueBag = new List<UpgradeWeightProvider.Candidate>(cands.Count);
-        for (int i = 0; i < cands.Count; i++)
+        foreach (var cand in cands)
         {
-            var up = cands[i].upgrade;
-            if (up == null) continue;
-            if (!up.IsApplicable(ctx)) continue;
-            if (existing.Contains(up.GetType())) continue; // enforce uniqueness
-            uniqueBag.Add(cands[i]);
+            if (cand.upgrade == null) continue;
+            if (!cand.upgrade.IsApplicable(ctx)) continue;
+            if (existing.Contains(cand.upgrade.GetType())) continue;
+            uniqueBag.Add(cand);
         }
 
-        if (uniqueBag.Count == 0) return false; // nothing unique left to add
+        // If no unique left, just replace one existing upgrade with another type
+        if (uniqueBag.Count == 0)
+        {
+            if (applied.Count > 0)
+            {
+                int index = UnityEngine.Random.Range(0, applied.Count);
+                return RerollStatIntoAnotherAt(index);
+            }
+            return false;
+        }
 
-        // Pick one
+        // Pick a new upgrade and apply
         IUpgrade picked = null;
         if (upgradeWeights != null)
         {
@@ -230,7 +247,6 @@ public class WeaponRarityController : MonoBehaviour
             picked = uniqueBag[0].upgrade;
         }
 
-        // Apply & record
         var sb = new StringBuilder();
         var undo = picked.Apply(ctx, sb);
         applied.Add(new AppliedUpgrade(picked, undo, sb.ToString().Trim()));
@@ -239,6 +255,8 @@ public class WeaponRarityController : MonoBehaviour
         tick?.ResetAndStartIfPlaying();
         return true;
     }
+
+
 
 
 
