@@ -547,9 +547,134 @@ public class WeaponRarityController : MonoBehaviour
 
         return list;
     }
+    // === Formatting helpers (class-level; safe on older C#) ===
+    private static string RngF(Vector2 v, int d = 1)
+    {
+        return v.x.ToString("F" + d) + "–" + v.y.ToString("F" + d);
+    }
+    private static string RngInt(Vector2Int v)
+    {
+        return v.x + "–" + v.y;
+    }
+    private static string PctFromFrac(Vector2 v, int d = 0)
+    {
+        return (v.x * 100f).ToString("F" + d) + "%–" + (v.y * 100f).ToString("F" + d) + "%";
+    }
+    private static string PctFromMult(Vector2 v, int d = 0)
+    {
+        return ((v.x - 1f) * 100f).ToString("F" + d) + "%–" + ((v.y - 1f) * 100f).ToString("F" + d) + "%";
+    }
+
+    public string GetRollableRangesSummary()
+    {
+        var sb = new System.Text.StringBuilder();
+
+        for (int i = 0; i < applied.Count; i++)
+        {
+            var a = applied[i];
+            var up = a.upgrade;
+            var note = a.note ?? string.Empty;
+
+            if (up is DamageFlatUpgrade)
+            {
+                var r = tiers.Scale(ranges.damageFlatAdd, tiers.damageFlat);
+                sb.AppendLine("+Damage: " + RngInt(r));
+                continue;
+            }
+            if (up is DamagePercentAsFlatUpgrade)
+            {
+                var r = tiers.ScaleMultiplierLike(ranges.damageMult, tiers.damagePercent);
+                sb.AppendLine("+Damage%: " + PctFromMult(r, 0));
+                continue;
+            }
+            if (up is AttackSpeedUpgrade)
+            {
+                var r = tiers.Scale(ranges.atkSpeedFrac, tiers.attackSpeed);
+                sb.AppendLine("+Attack Speed: " + PctFromFrac(r, 0));
+                continue;
+            }
+            if (up is CritUpgrade)
+            {
+                if (note.IndexOf("Crit Chance", System.StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    var r = tiers.Scale(ranges.critChanceAdd, tiers.critChance);
+                    sb.AppendLine("+Crit Chance: " + PctFromFrac(r, 0));
+                }
+                else
+                {
+                    var r = tiers.Scale(ranges.critMultAdd, tiers.critMultiplier);
+                    sb.AppendLine("+Crit Mult: " + RngF(r, 2) + "x");
+                }
+                continue;
+            }
+            if (up is StatusEffectDurationUpgrade)
+            {
+                var r = tiers.Scale(ranges.statusDurationAdd, tiers.statusDuration);
+                sb.AppendLine("+Status Duration: " + RngF(r, 1) + "s");
+                continue;
+            }
+
+            // Knife-only
+            if (up is KnifeLifestealUpgrade)
+            {
+                var r = tiers.Scale(ranges.knifeLifestealAdd, tiers.knifeLifesteal);
+                sb.AppendLine("+Lifesteal: " + PctFromFrac(r, 0));
+                continue;
+            }
+            if (up is KnifeRadiusUpgrade)
+            {
+                var r = tiers.ScaleMultiplierLike(ranges.knifeRadiusMult, tiers.knifeRadius);
+                sb.AppendLine("+Range: " + PctFromMult(r, 0));
+                continue;
+            }
+            if (up is KnifeSplashUpgrade)
+            {
+                var r = tiers.ScaleMultiplierLike(ranges.knifeSplashRadiusMult, tiers.knifeSplashRadius);
+                sb.AppendLine("+AOE: " + PctFromMult(r, 0));
+                continue;
+            }
+            if (up is KnifeMaxTargetsUpgrade)
+            {
+                var r = tiers.Scale(ranges.knifeMaxTargetsAdd, tiers.knifeMaxTargets, 1);
+                sb.AppendLine("+Max Targets: " + RngInt(r));
+                continue;
+            }
+
+            // Shooter-only
+            if (up is ShooterProjectilesUpgrade)
+            {
+                var r = tiers.Scale(ranges.shooterProjectilesAdd, tiers.shooterProjectiles, 1);
+                sb.AppendLine("+Projectiles: " + RngInt(r));
+                continue;
+            }
+            if (up is ShooterRangeUpgrade)
+            {
+                if (note.IndexOf("Lifetime", System.StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    var r = tiers.Scale(ranges.shooterLifetimeAdd, tiers.shooterLifetime);
+                    sb.AppendLine("+Lifetime: " + RngF(r, 1) + "s");
+                }
+                else
+                {
+                    var r = tiers.Scale(ranges.shooterForceAdd, tiers.shooterForce);
+                    sb.AppendLine("+Projectile Speed: " + RngF(r, 1));
+                }
+                continue;
+            }
+            if (up is ShooterAccuracyUpgrade)
+            {
+                var r = tiers.Scale(ranges.shooterSpreadReduceFrac, tiers.shooterAccuracy);
+                sb.AppendLine("+Accuracy: " + PctFromFrac(r, 0));
+                continue;
+            }
+        }
+
+        return sb.ToString().TrimEnd();
+    }
 
 
-    // ===================== UI (single writer, no size tags) =====================
+
+
 
     private void RebuildUIFromApplied()
     {

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using TMPro; // optional, only if you show labels with TMP
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,6 +24,9 @@ public class WeaponRerollUIHelper : MonoBehaviour
     // Cached active controllers
     private readonly List<WeaponRarityController> controllers = new List<WeaponRarityController>();
     private int index = -1;
+
+    // Track CTRL display state to avoid unnecessary UI churn
+    private bool lastCtrlHeld = false;
 
     private void Awake()
     {
@@ -60,6 +64,18 @@ public class WeaponRerollUIHelper : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        // Detect CTRL state (either left or right)
+        bool ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
+        if (ctrl != lastCtrlHeld)
+        {
+            lastCtrlHeld = ctrl;
+            // Rebuild the selection UI text according to the new CTRL state
+            UpdateSelectionUI();
+        }
+    }
+
     [ContextMenu("Refresh Controllers")]
     public void RefreshControllers()
     {
@@ -70,11 +86,14 @@ public class WeaponRerollUIHelper : MonoBehaviour
 
         controllers.AddRange(found);
 
-        if (controllers.Count == 0) index = -1;
+        if (controllers.Count == 0)
+        {
+            index = -1;
+        }
         else
         {
-            if (index < 0) index = 0;
-            if (index >= controllers.Count) index = controllers.Count - 1;
+            if (index < 0 || index >= controllers.Count)
+                index = 0; // Auto-select first if none
         }
     }
 
@@ -84,10 +103,16 @@ public class WeaponRerollUIHelper : MonoBehaviour
         return controllers[index];
     }
 
+
     private void OnEnable()
     {
         RefreshControllers();
-        SelectNext();
+
+        // Auto-select if nothing selected but we have weapons
+        if (index < 0 && controllers.Count > 0)
+            index = 0;
+
+        UpdateSelectionUI();
     }
 
     public void SelectPrev()
@@ -107,12 +132,24 @@ public class WeaponRerollUIHelper : MonoBehaviour
     private void UpdateSelectionUI()
     {
         var target = CurrentTarget();
+        bool ctrl = lastCtrlHeld;
 
         if (selectedNameLabel != null)
             selectedNameLabel.text = target ? target.name : "<none>";
 
         if (selectedExtraLabel != null)
-            selectedExtraLabel.text = target ? GetExtraText(target) : "";
+        {
+            if (!target)
+            {
+                selectedExtraLabel.text = "";
+            }
+            else
+            {
+                // When CTRL is held: show RARITY + RANGE SUMMARY (only applied upgrades, per your controller impl)
+                // When CTRL not held: show the weapon's normal extra text
+                selectedExtraLabel.text = ctrl ? GetCtrlOverlayText(target) : GetExtraText(target);
+            }
+        }
 
         if (selectedIcon != null)
             selectedIcon.sprite = target ? GetWeaponSprite(target) : null;
@@ -155,6 +192,69 @@ public class WeaponRerollUIHelper : MonoBehaviour
             // No automatic text setting; you control button visuals in the Inspector
         }
     }
+
+    private string GetCtrlOverlayText(WeaponRarityController controller)
+    {
+        // Rarity + ranges (ranges come from controller.GetRollableRangesSummary()).
+        // Rarity is fetched by reflection (controller keeps it private).
+        string rarity = GetRarityText(controller);
+        string ranges = SafeGetRangesSummary(controller);
+
+        if (!string.IsNullOrEmpty(rarity) && !string.IsNullOrEmpty(ranges))
+            return $"<b>Rarity:</b> {rarity}\n{ranges}";
+        if (!string.IsNullOrEmpty(rarity))
+            return $"<b>Rarity:</b> {rarity}";
+        return ranges ?? "";
+    }
+
+    private string SafeGetRangesSummary(WeaponRarityController controller)
+    {
+        if (!controller) return "";
+        try
+        {
+            // Requires the public API you added on the controller
+            return controller.GetRollableRangesSummary();
+        }
+        catch
+        {
+            // If not present, fall back to nothing
+            return "";
+        }
+    }
+
+    private string GetRarityText(WeaponRarityController controller)
+    {
+        if (!controller) return "";
+        try
+        {
+            var field = typeof(WeaponRarityController)
+                .GetField("current", BindingFlags.Instance | BindingFlags.NonPublic);
+            if (field != null)
+            {
+                var val = field.GetValue(controller);
+                if (val != null)
+                {
+                    // Use your existing rarity formatter so colors match rarity type
+                    var method = typeof(WeaponContext)
+                        .GetMethod("FormatRarity", BindingFlags.Public | BindingFlags.Static);
+                    if (method != null)
+                    {
+                        return (string)method.Invoke(null, new object[] { val }) ?? "";
+                    }
+                    else
+                    {
+                        // Fallback: just return the enum name
+                        return val.ToString();
+                    }
+                }
+            }
+        }
+        catch { }
+        return "";
+    }
+
+
+
 
     private string GetExtraText(WeaponRarityController controller)
     {
