@@ -1,6 +1,6 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI; // Added for Image
+using UnityEngine.UI; // For Image
 
 public class SimpleShooter : MonoBehaviour
 {
@@ -23,11 +23,12 @@ public class SimpleShooter : MonoBehaviour
     [SerializeField] private AudioClip shootClip;
 
     [Header("UI")]
-    [SerializeField] public TextMeshProUGUI statsTextPrefab;
+    [Tooltip("Prefab root GameObject that contains a TextMeshProUGUI somewhere in its children.")]
+    [SerializeField] public GameObject statsTextPrefab;
     [SerializeField] private Transform uiParent;
     [TextArea][SerializeField] public string extraTextField = " ";
     [Tooltip("Sprite to show above the stats text.")]
-    [SerializeField] private Sprite weaponSprite;
+    [SerializeField] public Sprite weaponSprite;
 
     private WeaponTick wt;
     [HideInInspector] public TextMeshProUGUI statsTextInstance;
@@ -50,13 +51,20 @@ public class SimpleShooter : MonoBehaviour
 
         if (statsTextPrefab != null && uiParent != null)
         {
-            statsTextInstance = Instantiate(statsTextPrefab, uiParent);
-            statsTextInstance.text = "";
+            // Instantiate the prefab root
+            var go = Instantiate(statsTextPrefab, uiParent);
+            // Find the TMP text anywhere under it
+            statsTextInstance = go.GetComponentInChildren<TextMeshProUGUI>(true);
+            if (statsTextInstance != null) statsTextInstance.text = "";
 
-            // Find Image in parent and assign sprite
-            iconImage = statsTextInstance.GetComponentInChildren<Image>(true);
+            // Find child GameObject named "Icon" and get its Image
+            var iconObj = go.transform.Find("Icon");
+            if (iconObj != null)
+                iconImage = iconObj.GetComponent<Image>();
+
             if (iconImage != null && weaponSprite != null)
                 iconImage.sprite = weaponSprite;
+
         }
 
         wt = GetComponent<WeaponTick>();
@@ -67,11 +75,12 @@ public class SimpleShooter : MonoBehaviour
     {
         UpdateStatsText();
     }
+
     public void RemoveStatsText()
     {
         if (statsTextInstance != null)
         {
-            Destroy(statsTextInstance.gameObject);
+            Destroy(statsTextInstance.gameObject.transform.root.gameObject);
             statsTextInstance = null;
         }
     }

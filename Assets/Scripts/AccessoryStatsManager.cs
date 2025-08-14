@@ -60,39 +60,18 @@ public class AccessoryStatsManager : MonoBehaviour
         var lines = new List<string>();
         var seen = new HashSet<string>();
 
-        // 1) AccessoriesUpgrades (uses PowerUp data)
-        var upgrades = Object.FindObjectsByType<AccessoriesUpgrades>(
+        // Only search for Accessory.cs
+        var accessories = Object.FindObjectsByType<Accessory>(
             FindObjectsInactive.Exclude, FindObjectsSortMode.None);
 
-        foreach (var acc in upgrades)
-        {
-            if (acc == null || !acc.isActiveAndEnabled) continue;
-            if (acc.Upgrade == null) continue;
-
-            string name = acc.Upgrade.powerUpName;
-            string desc = acc.Upgrade.powerUpDescription;
-            if (string.IsNullOrWhiteSpace(desc)) continue;
-
-            string line = showName && !string.IsNullOrWhiteSpace(name)
-                ? $"{bullet}{name}: {desc}"
-                : $"{bullet}{desc}";
-
-            if (seen.Add(line)) lines.Add(line);
-        }
-
-        // 2) Accessory (uses AccesoryDescription from the component)
-        var plainAccessories = Object.FindObjectsByType<Accessory>(
-            FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-
-        foreach (var a in plainAccessories)
+        foreach (var a in accessories)
         {
             if (a == null || !a.isActiveAndEnabled) continue;
 
-            // NOTE: Using the field name exactly as defined: AccesoryDescription
             string desc = a.AccesoryDescription;
             if (string.IsNullOrWhiteSpace(desc)) continue;
 
-            string name = showName ? a.gameObject.name : null;
+            string name = showName ? a.AccesoryName : null;
             string line = showName && !string.IsNullOrWhiteSpace(name)
                 ? $"{bullet}{name}: {desc}"
                 : $"{bullet}{desc}";
@@ -102,8 +81,16 @@ public class AccessoryStatsManager : MonoBehaviour
 
         var sb = new StringBuilder();
         if (showHeader) sb.AppendLine(headerText);
-        for (int i = 0; i < lines.Count; i++)
-            sb.AppendLine(lines[i]);
+
+        if (lines.Count > 0)
+        {
+            for (int i = 0; i < lines.Count; i++)
+                sb.AppendLine(lines[i]);
+        }
+        else
+        {
+            sb.AppendLine("<none>");
+        }
 
         statsText.text = sb.ToString().TrimEnd();
     }
@@ -112,7 +99,6 @@ public class AccessoryStatsManager : MonoBehaviour
     {
         if (statsText != null) return;
 
-        // Try direct name lookup first (active only)
         var go = GameObject.Find("Accessory Stats");
         if (go) statsText = go.GetComponent<TextMeshProUGUI>();
     }

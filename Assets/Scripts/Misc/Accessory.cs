@@ -5,6 +5,7 @@ public class Accessory : MonoBehaviour
 {
 
     [Header("Power-Up")]
+    public string AccesoryName;
     public string AccesoryDescription;
     public Sprite icon;
 

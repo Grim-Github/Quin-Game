@@ -21,6 +21,8 @@ public class Trigger2DEvent : MonoBehaviour
         col.isTrigger = true;
     }
 
+
+
     public void PlaySoundAtPlayer(AudioClip sfx)
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>().PlayOneShot(sfx);

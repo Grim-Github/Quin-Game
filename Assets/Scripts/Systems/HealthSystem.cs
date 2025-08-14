@@ -32,7 +32,8 @@ public class SimpleHealth : MonoBehaviour
     [SerializeField] public TextMeshProUGUI healthText;
 
     [Header("Stats Display")]
-    [SerializeField] private TextMeshProUGUI statsTextPrefab;
+    [Tooltip("Prefab root GameObject that contains a TextMeshProUGUI somewhere in its children.")]
+    [SerializeField] private GameObject statsTextPrefab; // CHANGED: now a prefab root like Knife.cs
     [SerializeField] private Transform uiParent;
     [TextArea][SerializeField] public string extraTextField;
     [Tooltip("Sprite to show above the stats text.")]
@@ -69,7 +70,8 @@ public class SimpleHealth : MonoBehaviour
     private int lastDamageTaken = 0;
     private Snappy2DController movementController;
 
-    private TextMeshProUGUI statsTextInstance;
+    // Stats UI (now matches Knife.cs pattern)
+    [HideInInspector] public TextMeshProUGUI statsTextInstance;
     private Image iconImage;
 
     public bool IsAlive => currentHealth > 0f;
@@ -95,11 +97,17 @@ public class SimpleHealth : MonoBehaviour
             _hasOriginalColor = true;
         }
 
+        // Instantiate prefab root (like Knife.cs) and wire up text + icon
         if (statsTextPrefab != null && uiParent != null)
         {
-            statsTextInstance = Instantiate(statsTextPrefab, uiParent);
-            statsTextInstance.text = "";
-            iconImage = statsTextInstance.GetComponentInChildren<Image>(true);
+            var go = Instantiate(statsTextPrefab, uiParent);
+            statsTextInstance = go.GetComponentInChildren<TextMeshProUGUI>(true);
+            if (statsTextInstance != null) statsTextInstance.text = string.Empty;
+
+            var iconObj = go.transform.Find("Icon");
+            if (iconObj != null)
+                iconImage = iconObj.GetComponent<Image>();
+
             if (iconImage != null && iconSprite != null)
                 iconImage.sprite = iconSprite;
         }
@@ -107,7 +115,6 @@ public class SimpleHealth : MonoBehaviour
 
     private void Start()
     {
-        // Reset to max at start
         ResetHealth();
     }
 
@@ -137,41 +144,38 @@ public class SimpleHealth : MonoBehaviour
 
     public void UpdateStatsText()
     {
-        if (statsTextInstance != null)
+        if (statsTextInstance == null) return;
+
+        float referenceDamage = Mathf.Max(1, lastDamageTaken);
+        float currentMitigation = 0f;
+
+        if (armor > 0f && armorScaling > 0f)
         {
-            float referenceDamage = Mathf.Max(1, lastDamageTaken); // avoid divide-by-zero visualization
-            float currentMitigation = 0f;
-
-            if (armor > 0f && armorScaling > 0f)
-            {
-                currentMitigation = armor / (armor + armorScaling * referenceDamage);
-                currentMitigation = Mathf.Min(currentMitigation, maxMitigation);
-            }
-
-            string text =
-                $"<b>{transform.name} Stats</b>\n" +
-                $"Max Health: {maxHealth}\n" +
-                $"Current Health: {CurrentHealth}\n" +
-                $"Regen Rate: {regenRate:F2}/s\n" +
-                $"Armor: {armor}\n" +
-                $"Approx Mitigation: {(currentMitigation * 100f):F1}% " +
-                $"(Max: {(maxMitigation * 100f):F0}%)\n" +
-                $"Last Hit Damage: {lastDamageTaken}\n";
-
-            if (movementController != null)
-            {
-                // Assumes these properties exist in your controller.
-                text +=
-                    $"Move Speed: {movementController.MoveSpeed:F2}\n" +
-                    $"Dash Speed: {movementController.DashSpeed:F2}\n" +
-                    $"Dash Duration: {movementController.DashDuration:F2}s\n" +
-                    $"Dash Cooldown: {movementController.DashCooldown:F2}s\n";
-            }
-
-            text += extraTextField;
-
-            statsTextInstance.text = text;
+            currentMitigation = armor / (armor + armorScaling * referenceDamage);
+            currentMitigation = Mathf.Min(currentMitigation, maxMitigation);
         }
+
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine($"<b>{transform.name} Stats</b>");
+        sb.AppendLine($"Max Health: {maxHealth}");
+        sb.AppendLine($"Current Health: {CurrentHealth}");
+        sb.AppendLine($"Regen Rate: {regenRate:F2}/s");
+        sb.AppendLine($"Armor: {armor}");
+        sb.AppendLine($"Approx Mitigation: {(currentMitigation * 100f):F1}% (Max: {(maxMitigation * 100f):F0}%)");
+        sb.AppendLine($"Last Hit Damage: {lastDamageTaken}");
+
+        if (movementController != null)
+        {
+            sb.AppendLine($"Move Speed: {movementController.MoveSpeed:F2}");
+            sb.AppendLine($"Dash Speed: {movementController.DashSpeed:F2}");
+            sb.AppendLine($"Dash Duration: {movementController.DashDuration:F2}s");
+            sb.AppendLine($"Dash Cooldown: {movementController.DashCooldown:F2}s");
+        }
+
+        if (!string.IsNullOrWhiteSpace(extraTextField))
+            sb.AppendLine(extraTextField);
+
+        statsTextInstance.text = sb.ToString();
     }
 
     public void TakeDamage(int amount)
@@ -187,11 +191,10 @@ public class SimpleHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth - mitigated, 0, maxHealth);
         SyncSlider();
 
-        // Spawn damage popup
+        // Damage popup
         if (damagePopupPrefab != null)
         {
             GameObject popup = Instantiate(damagePopupPrefab, transform.position + popupOffset, Quaternion.identity);
-            // Try both TMP types
             if (popup.TryGetComponent<TextMeshPro>(out var tmpWorld))
             {
                 tmpWorld.text = mitigated.ToString();
@@ -278,7 +281,6 @@ public class SimpleHealth : MonoBehaviour
 
     private void Die()
     {
-        // Deaths SFX
         if (deathClip != null)
         {
             GameObject tempAudio = new GameObject("DeathSound");
@@ -288,17 +290,10 @@ public class SimpleHealth : MonoBehaviour
             Destroy(tempAudio, deathClip.length);
         }
 
-        // Roll & spawn from loot table (if present)
         if (loot != null)
         {
-            try
-            {
-                loot.RollAndSpawn();
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogWarning($"[SimpleHealth] Loot roll failed on {name}: {e.Message}");
-            }
+            try { loot.RollAndSpawn(); }
+            catch (System.Exception e) { Debug.LogWarning($"[SimpleHealth] Loot roll failed on {name}: {e.Message}"); }
         }
 
         Destroy(gameObject);
@@ -320,7 +315,7 @@ public class SimpleHealth : MonoBehaviour
         if (amount <= 0) return;
 
         maxHealth += amount;
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth); // heal gained HP only
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         SyncSlider();
     }
 
