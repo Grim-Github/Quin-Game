@@ -135,7 +135,7 @@ public class WeaponRerollUIHelper : MonoBehaviour
             () => { RefreshControllers(); CurrentTarget()?.RerollStats(); UpdateSelectionUI(); },
             () => { RefreshControllers(); CurrentTarget()?.RerollRandomStat(); UpdateSelectionUI(); },
             () => { RefreshControllers(); CurrentTarget()?.RerollRandomStatIntoAnother(); UpdateSelectionUI(); },
-            () => { RefreshControllers(); CurrentTarget()?.UpgradeRandomTier(1, true); UpdateSelectionUI(); },
+            () => { RefreshControllers(); CurrentTarget()?.RandomizeRandomTier(true); UpdateSelectionUI(); },
             () => { RefreshControllers(); CurrentTarget()?.UpgradeRarityKeepStats(); UpdateSelectionUI(); },
 
             // NEW 6: Remove a random applied upgrade

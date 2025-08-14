@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8639102625082144121}
   - component: {fileID: 305872218719834409}
   - component: {fileID: 223877959965296366}
-  - component: {fileID: 7267073111414755011}
+  - component: {fileID: 1738280694578222404}
   m_Layer: 2
   m_Name: Xp Orb
   m_TagString: Untagged
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8863805844844204432, guid: d1288301f0b32784aade4ec9bfbda8c4, type: 3}
+  m_Sprite: {fileID: -4211026242377960818, guid: 5825a1074038f044d9262db4ca878465, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -130,7 +130,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5714286, y: 0.5714286}
+    oldSize: {x: 0.42, y: 0.36}
     newSize: {x: 1, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -234,7 +234,7 @@ MonoBehaviour:
   decelerationRadius: 2
   useRigidbodyMovement: 1
   otherFollowers: []
---- !u!114 &7267073111414755011
+--- !u!114 &1738280694578222404
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -250,9 +250,9 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.41960788, g: 0.76470596, b: 0.77647066, a: 1}
-  m_Intensity: 0.48
-  m_LightVolumeIntensity: 1
+  m_Color: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+  m_Intensity: 0.4
+  m_LightVolumeIntensity: 0.17
   m_LightVolumeEnabled: 1
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}

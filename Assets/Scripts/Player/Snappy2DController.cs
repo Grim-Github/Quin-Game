@@ -124,7 +124,18 @@ public class Snappy2DController : MonoBehaviour
         else
         {
             velocity = Vector2.MoveTowards(velocity, targetVelocity, acceleration * Time.fixedDeltaTime);
-            rb.linearVelocity = velocity;
+
+            if (TryGetComponent<StatusEffectSystem>(out StatusEffectSystem ses))
+            {
+                if (!ses.HasStatus(StatusEffectSystem.StatusType.Stun))
+                {
+                    rb.linearVelocity = velocity;
+                }
+                else
+                {
+                    rb.linearVelocity = Vector2.zero; // Stop moving if stunned
+                }
+            }
         }
     }
 }

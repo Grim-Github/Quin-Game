@@ -91,7 +91,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 2
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -162,7 +162,7 @@ TextureImporter:
         width: 42
         height: 36
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -184,7 +184,7 @@ TextureImporter:
         width: 92
         height: 117
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -206,7 +206,7 @@ TextureImporter:
         width: 88
         height: 88
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -228,7 +228,7 @@ TextureImporter:
         width: 101
         height: 114
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -250,7 +250,7 @@ TextureImporter:
         width: 119
         height: 102
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -263,319 +263,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: bits_5
-      rect:
-        serializedVersion: 2
-        x: 79
-        y: 75
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4a4e581507ff892f0800000000000000
-      internalID: -965741262201822044
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bits_6
-      rect:
-        serializedVersion: 2
-        x: 213
-        y: 75
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 89aa644d7abd0c990800000000000000
-      internalID: -7367647476510709096
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bits_7
-      rect:
-        serializedVersion: 2
-        x: 238
-        y: 74
-        width: 27
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8ed0deb30895561a0800000000000000
-      internalID: -6816944053659300376
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bits_8
-      rect:
-        serializedVersion: 2
-        x: 264
-        y: 74
-        width: 28
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0c029f661e6d8f260800000000000000
-      internalID: 7131686273524768960
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bits_9
-      rect:
-        serializedVersion: 2
-        x: 361
-        y: 75
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ce6f5b4d2d27a5310800000000000000
-      internalID: 1394553284461983468
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bits_10
-      rect:
-        serializedVersion: 2
-        x: 385
-        y: 74
-        width: 28
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6432c25265c5f0f90800000000000000
-      internalID: -6985262971967757498
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bits_11
-      rect:
-        serializedVersion: 2
-        x: 412
-        y: 74
-        width: 27
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 78804f8d9d04da300800000000000000
-      internalID: 264939257476679815
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bits_12
-      rect:
-        serializedVersion: 2
-        x: 438
-        y: 74
-        width: 27
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bfc6d5a0c149a7eb0800000000000000
-      internalID: -4721298411190653701
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bits_13
-      rect:
-        serializedVersion: 2
-        x: 519
-        y: 74
-        width: 81
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dfbf838c1db959660800000000000000
-      internalID: 7391985688708185085
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bits_14
-      rect:
-        serializedVersion: 2
-        x: 599
-        y: 74
-        width: 27
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b549c2105ee14c320800000000000000
-      internalID: 2577218855678809179
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bits_15
-      rect:
-        serializedVersion: 2
-        x: 677
-        y: 75
-        width: 19
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2507bfe10a59eb570800000000000000
-      internalID: 8484383262959693906
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bits_16
-      rect:
-        serializedVersion: 2
-        x: 701
-        y: 74
-        width: 28
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 80777279423857a40800000000000000
-      internalID: 5365338724259821320
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bits_17
-      rect:
-        serializedVersion: 2
-        x: 728
-        y: 74
-        width: 27
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ddf84c3cfc063a150800000000000000
-      internalID: 5882651983734935517
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bits_18
-      rect:
-        serializedVersion: 2
-        x: 754
-        y: 74
-        width: 54
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a8217de5d06df1aa0800000000000000
-      internalID: -6187992010069699958
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4e2222a70c98f13438d875bb960090e6
     internalID: 0
     vertices: []
     indices: 
@@ -596,6 +288,7 @@ TextureImporter:
       bits_16: 5365338724259821320
       bits_17: 5882651983734935517
       bits_18: -6187992010069699958
+      bits_19: -1192741865
       bits_2: -2222597342954421968
       bits_3: 7946688564104882144
       bits_4: 5177354695488130645

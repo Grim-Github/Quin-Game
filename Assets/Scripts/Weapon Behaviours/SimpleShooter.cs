@@ -77,6 +77,16 @@ public class SimpleShooter : MonoBehaviour
         UpdateStatsText();
     }
 
+    public void ChangeBullet(GameObject newBullet)
+    {
+        bulletPrefab = newBullet;
+        if (statsTextInstance != null)
+        {
+            UpdateStatsText();
+        }
+
+    }
+
     private void Update()
     {
         UpdateStatsText();

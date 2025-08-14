@@ -245,7 +245,7 @@ public class MonsterRarity : MonoBehaviour
         }
 
         // Gamey name & positive stat wording
-        WN("Attack Speed (All)", $"+{frac * 100f:F0}%");
+        WN("Attack Speed ", $"+{frac * 100f:F0}%");
     }
 
 
@@ -254,21 +254,21 @@ public class MonsterRarity : MonoBehaviour
     {
         int add = UnityEngine.Random.Range(KnifeDamageFlat.x, KnifeDamageFlat.y + 1);
         foreach (var k in knives) if (k) k.damage = Mathf.Max(0, k.damage + add);
-        WN("Knife Damage", $"+{add}");
+        WN("Melee Damage", $"+{add}");
     }
 
     private void Up_Knife_Dmg_Mult()
     {
         float m = UnityEngine.Random.Range(KnifeDamageMult.x, KnifeDamageMult.y);
         foreach (var k in knives) if (k) k.damage = Mathf.RoundToInt(k.damage * m);
-        WN("Knife Damage", $"×{m:F2}");
+        WN("Melee Damage", $"×{m:F2}");
     }
 
     private void Up_Knife_Lifesteal_Add()
     {
         float add = UnityEngine.Random.Range(KnifeLifestealAdd.x, KnifeLifestealAdd.y);
         foreach (var k in knives) if (k) k.lifestealPercent = Mathf.Clamp01(k.lifestealPercent + add);
-        WN("Knife Lifesteal", $"+{add * 100f:F0}%");
+        WN("Melee Lifesteal", $"+{add * 100f:F0}%");
     }
 
     private void Up_Knife_Crit_Both()
@@ -281,7 +281,7 @@ public class MonsterRarity : MonoBehaviour
             k.critChance = Mathf.Clamp01(k.critChance + addChance);
             k.critMultiplier = Mathf.Max(1f, k.critMultiplier + addMult);
         }
-        WN("Knife Crit (Chance & Mult)", $"+{addChance * 100f:F0}% / +{addMult:F2}x");
+        WN("Melee Crit (Chance & Mult)", $"+{addChance * 100f:F0}% / +{addMult:F2}x");
     }
 
     // ===== Shooter (public fields) =====
@@ -289,21 +289,21 @@ public class MonsterRarity : MonoBehaviour
     {
         int add = UnityEngine.Random.Range(shooterDamageFlat.x, shooterDamageFlat.y + 1);
         foreach (var s in shooters) if (s) s.damage = Mathf.Max(0, s.damage + add);
-        WN("Shooter Damage", $"+{add}");
+        WN("Ranged Damage", $"+{add}");
     }
 
     private void Up_Shooter_Dmg_Mult()
     {
         float m = UnityEngine.Random.Range(shooterDamageMult.x, shooterDamageMult.y);
         foreach (var s in shooters) if (s) s.damage = Mathf.RoundToInt(s.damage * m);
-        WN("Shooter Damage", $"×{m:F2}");
+        WN("Ranged Damage", $"×{m:F2}");
     }
 
     private void Up_Shooter_Projectiles_Add()
     {
         int add = UnityEngine.Random.Range(shooterProjectilesAdd.x, shooterProjectilesAdd.y + 1);
         foreach (var s in shooters) if (s) s.projectileCount = Mathf.Max(1, s.projectileCount + add);
-        WN("Shooter Projectiles", $"+{add}");
+        WN("Ranged Projectiles", $"+{add}");
     }
 
     // ===== Rarity & UI =====
@@ -331,14 +331,15 @@ public class MonsterRarity : MonoBehaviour
         {
             sb.AppendLine(C(C_HEADER, "<b>Enemy Mods</b>"));
             foreach (var line in notesEnemy) sb.AppendLine(line);
+            // Weapon section
+            if (notesWeapons.Count > 0)
+            {
+                foreach (var line in notesWeapons) sb.AppendLine(line);
+            }
+
         }
 
-        // Weapon section
-        if (notesWeapons.Count > 0)
-        {
-            sb.AppendLine(C(C_HEADER, "<b>Weapon Mods</b>"));
-            foreach (var line in notesWeapons) sb.AppendLine(line);
-        }
+
 
         // Wrap with base text color and slightly smaller size for compactness
         string block = $"{C(C_TEXT, $"<size=85%>{sb}</size>")}";

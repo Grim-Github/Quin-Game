@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 6292461430747482891}
   m_Layer: 7
   m_Name: Enemy Base
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -521,6 +521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipMessage: 
   appendExtraFromHealth: 1
+  appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
   uiAnchorOverride: {fileID: 0}
 --- !u!114 &5771517332839581349

@@ -135,12 +135,15 @@ public class WeaponRarityController : MonoBehaviour
     }
 
 
-    /// <summary>Rerolls a single stat at <paramref name="index"/> keeping the same upgrade type.</summary>
-    public bool RerollStatAt(int index)
+    /// <summary>Rerolls a single stat at <paramref name="index"/>. 
+    /// If <paramref name="rerollTiers"/> is true, tiers are re-rolled first.</summary>
+    public bool RerollStatAt(int index, bool rerollTiers = true)
     {
         if (!IsValidIndex(index)) return false;
 
-        tiers.RollAll(rng);
+        if (rerollTiers)
+            tiers.RollAll(rng);
+
         var ctx = BuildContext();
 
         var prev = applied[index];
@@ -155,13 +158,15 @@ public class WeaponRarityController : MonoBehaviour
         return true;
     }
 
-    /// <summary>Rerolls ONE random stat among the selected upgrades (same upgrade type).</summary>
+
+    /// <summary>Rerolls ONE random stat without changing tiers (keeps current tiers).</summary>
     public bool RerollRandomStat()
     {
         if (applied.Count == 0) return false;
         int idx = NextInt(rng, 0, applied.Count);
-        return RerollStatAt(idx);
+        return RerollStatAt(idx, false); // <-- no tier reroll for index 2 button
     }
+
 
     /// <summary>
     /// Removes one random applied upgrade (undoing its effect).
@@ -347,7 +352,19 @@ public class WeaponRarityController : MonoBehaviour
         return true;
     }
 
+    public bool RandomizeRandomTier(bool rerollOneAppliedStat = true)
+    {
+        // 13 tier slots indexed 0..12
+        int slot = NextInt(rng, 0, 13);
+        bool changed = RandomizeTierSlot(slot);
 
+        if (!changed) return false;
+
+        if (rerollOneAppliedStat && applied.Count > 0)
+            RerollStatAt(NextInt(rng, 0, applied.Count), true); // reroll stat range using new tier
+
+        return true;
+    }
 
     /// <summary>
     /// Upgrades rarity by one step (max Legendary) without adding any new upgrades.
@@ -382,6 +399,7 @@ public class WeaponRarityController : MonoBehaviour
 
     // ===================== Internal helpers =====================
 
+
     private bool ImproveTierSlot(int slotIndex, int steps)
     {
         switch (slotIndex)
@@ -401,6 +419,35 @@ public class WeaponRarityController : MonoBehaviour
             case 12: return ClampTier(ref tiers.shooterAccuracy, steps);
             default: return false;
         }
+    }
+
+    private bool RandomizeTierSlot(int slotIndex)
+    {
+        int newTier = rng.Next(1, 11); // inclusive 1..10
+        switch (slotIndex)
+        {
+            case 0: return SetTier(ref tiers.damagePercent, newTier);
+            case 1: return SetTier(ref tiers.damageFlat, newTier);
+            case 2: return SetTier(ref tiers.attackSpeed, newTier);
+            case 3: return SetTier(ref tiers.critChance, newTier);
+            case 4: return SetTier(ref tiers.critMultiplier, newTier);
+            case 5: return SetTier(ref tiers.knifeRadius, newTier);
+            case 6: return SetTier(ref tiers.knifeSplashRadius, newTier);
+            case 7: return SetTier(ref tiers.knifeLifesteal, newTier);
+            case 8: return SetTier(ref tiers.knifeMaxTargets, newTier);
+            case 9: return SetTier(ref tiers.shooterLifetime, newTier);
+            case 10: return SetTier(ref tiers.shooterForce, newTier);
+            case 11: return SetTier(ref tiers.shooterProjectiles, newTier);
+            case 12: return SetTier(ref tiers.shooterAccuracy, newTier);
+            default: return false;
+        }
+    }
+
+    private static bool SetTier(ref int tierField, int newValue)
+    {
+        int before = tierField;
+        tierField = Mathf.Clamp(newValue, 1, 10);
+        return tierField != before;
     }
 
     private static bool ClampTier(ref int tierField, int steps)

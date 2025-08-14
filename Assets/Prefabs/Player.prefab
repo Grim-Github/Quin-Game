@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Aegis - Extra Projectiles +1
-    powerUpDescription: Fire 1 more projectile(s) per shot.
+    powerUpName: Phantom Aegis - Shooter Crit Chance +23%
+    powerUpDescription: Increase Shooter critical hit chance by 23%.
     powerUpObject: {fileID: 54310342836127045}
     IsAccessory: 0
     IsWeapon: 0
@@ -54,8 +54,11 @@ MonoBehaviour:
     weight: 50
   nextUpgrade: {fileID: 0}
   icon: {fileID: 2413123233239279179, guid: c88de95292f601e45a7201a73044aae7, type: 3}
-  upgradeType: 12
-  value: 1
+  upgradeType: 19
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 0.23
 --- !u!1 &68772939556683932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,8 +1457,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 10.8
@@ -1470,7 +1473,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1492,7 +1495,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 4.44, y: 4.44, z: 4.44, w: 4.44}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1512,7 +1515,7 @@ GameObject:
   - component: {fileID: 5121767651809893251}
   - component: {fileID: 1737309924204432557}
   m_Layer: 6
-  m_Name: Longshot Railgun
+  m_Name: Longshot Crossbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1887,6 +1890,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 8448744338105514670}
   icon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
   upgradeType: 4
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 0.1
 --- !u!1 &1195527525412635196
 GameObject:
@@ -3295,16 +3301,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Burstfire Sidearm - Shooter Damage +5
+    powerUpName: Burstfire Bow - Shooter Damage +5
     powerUpDescription: Increase projectile damage by 5.
     powerUpObject: {fileID: 1617304167826018044}
     IsAccessory: 0
     IsWeapon: 0
-    powerUpIcon: {fileID: 6111340093450583523, guid: ae3514c3d4872734d95c16961626559b, type: 3}
+    powerUpIcon: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
     weight: 50
   nextUpgrade: {fileID: 7837450647182704434}
-  icon: {fileID: 6111340093450583523, guid: ae3514c3d4872734d95c16961626559b, type: 3}
+  icon: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
   upgradeType: 10
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 5
 --- !u!1 &1692478988163126978
 GameObject:
@@ -3993,6 +4002,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 1708445618590470888}
   icon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
   upgradeType: 4
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 0.1
 --- !u!1 &2302453346357717577
 GameObject:
@@ -4049,6 +4061,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 5835820862633346808}
   icon: {fileID: 3794317029188430971, guid: e95f3c2f1016aca409c82ca77489a1d3, type: 3}
   upgradeType: 1
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 1
 --- !u!1 &2463701314012228658
 GameObject:
@@ -4095,7 +4110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Longshot Railgun - Attack Speed +10%
+    powerUpName: Longshot Crossbow - Attack Speed +10%
     powerUpDescription: Reduce attack interval by 10%.
     powerUpObject: {fileID: 2463701314012228658}
     IsAccessory: 0
@@ -4105,6 +4120,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 0}
   icon: {fileID: 5583272366953621293, guid: 9c929be9fa68d654e999a40812345349, type: 3}
   upgradeType: 22
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 0.1
 --- !u!1 &2552549081488545481
 GameObject:
@@ -4463,6 +4481,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 765475432437154029}
   icon: {fileID: 5277064335182829214, guid: f56be5f1b4060a842be9ec36996d9cc7, type: 3}
   upgradeType: 13
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: -40
 --- !u!1 &2788035005924163531
 GameObject:
@@ -5444,6 +5465,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 0}
   icon: {fileID: 5277064335182829214, guid: f56be5f1b4060a842be9ec36996d9cc7, type: 3}
   upgradeType: 12
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 1
 --- !u!1 &3203538148253821362
 GameObject:
@@ -5500,6 +5524,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 2818028153591757128}
   icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
   upgradeType: 5
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 1
 --- !u!1 &3225408923022260791
 GameObject:
@@ -6762,6 +6789,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 227623854461044620}
   icon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
   upgradeType: 4
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 0.1
 --- !u!1 &4043540297873490012
 GameObject:
@@ -7152,6 +7182,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 3181845477372944175}
   icon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
   upgradeType: 4
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 0.1
 --- !u!1 &4545335021469969581
 GameObject:
@@ -7863,7 +7896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Longshot Railgun - Shooter Damage +5
+    powerUpName: Longshot Crossbow - Shooter Damage +5
     powerUpDescription: Increase projectile damage by 5.
     powerUpObject: {fileID: 4863514102701704072}
     IsAccessory: 0
@@ -7873,6 +7906,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 2864675131091241564}
   icon: {fileID: 5583272366953621293, guid: 9c929be9fa68d654e999a40812345349, type: 3}
   upgradeType: 10
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 5
 --- !u!1 &4876473530018108558
 GameObject:
@@ -8466,7 +8502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Longshot Railgun - Shooter Damage +10
+    powerUpName: Longshot Crossbow - Shooter Damage +10
     powerUpDescription: Increase projectile damage by 10.
     powerUpObject: {fileID: 5317122567970793903}
     IsAccessory: 0
@@ -8476,6 +8512,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 2890122289841820389}
   icon: {fileID: 5583272366953621293, guid: 9c929be9fa68d654e999a40812345349, type: 3}
   upgradeType: 10
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 10
 --- !u!1 &5391139574326203493
 GameObject:
@@ -8768,6 +8807,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 0}
   icon: {fileID: 3794317029188430971, guid: e95f3c2f1016aca409c82ca77489a1d3, type: 3}
   upgradeType: 3
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 0.5
 --- !u!1 &5757101292670275809
 GameObject:
@@ -8937,6 +8979,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 793763298106340619}
   icon: {fileID: 2413123233239279179, guid: c88de95292f601e45a7201a73044aae7, type: 3}
   upgradeType: 10
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 5
 --- !u!1 &6126120192382749192
 GameObject:
@@ -9100,6 +9145,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 7800380701126326079}
   icon: {fileID: 2413123233239279179, guid: c88de95292f601e45a7201a73044aae7, type: 3}
   upgradeType: 10
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 5
 --- !u!1 &6278243993951913938
 GameObject:
@@ -10774,6 +10822,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 7716795965288129474}
   icon: {fileID: 3794317029188430971, guid: e95f3c2f1016aca409c82ca77489a1d3, type: 3}
   upgradeType: 1
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 1
 --- !u!1 &7853639094291776377
 GameObject:
@@ -11147,6 +11198,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 0}
   icon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
   upgradeType: 4
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 0.1
 --- !u!1 &8075213717505226598
 GameObject:
@@ -11193,16 +11247,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Burstfire Sidearm - Shooter Damage +5
+    powerUpName: Burstfire Bow - Shooter Damage +5
     powerUpDescription: Increase projectile damage by 5.
     powerUpObject: {fileID: 8075213717505226598}
     IsAccessory: 0
     IsWeapon: 0
-    powerUpIcon: {fileID: 6111340093450583523, guid: ae3514c3d4872734d95c16961626559b, type: 3}
+    powerUpIcon: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
     weight: 50
   nextUpgrade: {fileID: 1901669996297178071}
-  icon: {fileID: 6111340093450583523, guid: ae3514c3d4872734d95c16961626559b, type: 3}
+  icon: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
   upgradeType: 10
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 5
 --- !u!1 &8105162575760502260
 GameObject:
@@ -11850,6 +11907,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 7329696752922098720}
   icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
   upgradeType: 8
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 0.3
 --- !u!1 &8429739856138232991
 GameObject:
@@ -11906,6 +11966,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 3380080085700406463}
   icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
   upgradeType: 1
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 4
 --- !u!1 &8440448901644491833
 GameObject:
@@ -12142,7 +12205,7 @@ GameObject:
   - component: {fileID: 6140848450053751762}
   - component: {fileID: 4334082768228367615}
   m_Layer: 6
-  m_Name: Burstfire Sidearm
+  m_Name: Burstfire Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12179,7 +12242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c98c24205b75b42bc1375d05964c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 0.5
+  interval: 0.7
   startOnAwake: 1
   repeat: 1
   useUnscaledTime: 0
@@ -12217,7 +12280,7 @@ MonoBehaviour:
   shootForce: 15
   damage: 15
   bulletLifetime: 5
-  critChance: 0
+  critChance: 0.3
   critMultiplier: 2
   applyStatusEffectOnHit: 0
   statusEffectOnHit: 1
@@ -12228,7 +12291,7 @@ MonoBehaviour:
   statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
   uiParent: {fileID: 3771470944807517528}
   extraTextField: ' '
-  weaponSprite: {fileID: 6111340093450583523, guid: ae3514c3d4872734d95c16961626559b, type: 3}
+  weaponSprite: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
   statsTextInstance: {fileID: 0}
   nextUpgrade: {fileID: 245260241631328366}
 --- !u!82 &6140848450053751762
@@ -12568,16 +12631,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Burstfire Sidearm - Extra Projectiles +1
-    powerUpDescription: Fire 1 more projectile(s) per shot.
+    powerUpName: Burstfire Sidearm - Chain Projectiles
+    powerUpDescription: Projectiles now chain.
     powerUpObject: {fileID: 8596700537061007026}
     IsAccessory: 0
     IsWeapon: 0
-    powerUpIcon: {fileID: 6111340093450583523, guid: ae3514c3d4872734d95c16961626559b, type: 3}
+    powerUpIcon: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
     weight: 50
   nextUpgrade: {fileID: 0}
-  icon: {fileID: 6111340093450583523, guid: ae3514c3d4872734d95c16961626559b, type: 3}
-  upgradeType: 12
+  icon: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
+  upgradeType: 27
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1635838341153099583}
+        m_TargetAssemblyTypeName: SimpleShooter, Grim
+        m_MethodName: ChangeBullet
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1832326421807717072, guid: 32156eb39050c19488cbff47d1a52fe7, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   value: 1
 --- !u!1 &8747906309377296148
 GameObject:
@@ -12898,6 +12976,9 @@ MonoBehaviour:
   nextUpgrade: {fileID: 0}
   icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
   upgradeType: 1
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
   value: 5
 --- !u!1 &8973821341139847649
 GameObject:
@@ -13148,7 +13229,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1.8964, y: -3.7392998}
-  m_SizeDelta: {x: 38.01, y: 26.01}
+  m_SizeDelta: {x: 42.13, y: 31.64}
   m_Pivot: {x: 0.4590991, y: 0.29592586}
 --- !u!222 &6249205235506271307
 CanvasRenderer:
@@ -13204,6 +13285,7 @@ MonoBehaviour:
   tooltipText: {fileID: 5269669559767013907}
   padding: {x: 20, y: 30}
   clampMargin: {x: 8, y: 8}
+  tooltipOffset: {x: 100, y: -50}
   autoHideWhenNoTarget: 1
   hideDelay: 0.35
 --- !u!114 &8168550893881944780
@@ -13365,6 +13447,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6077949585304594226}
+    - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7046290425082581312}
   m_SourcePrefab: {fileID: 100100000, guid: a015e792868585641aae8afc89c54767, type: 3}
 --- !u!1 &2986601009404336690 stripped
 GameObject:
@@ -13409,6 +13494,23 @@ MonoBehaviour:
   consumeAmount: 1
   continuousRefresh: 1
   debugLogs: 0
+--- !u!114 &7046290425082581312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2986601009404336690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0509da9ea8e4264cac6f07d79b68c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipMessage: 
+  appendExtraFromHealth: 0
+  appendFromInventoryActivator: 1
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  uiAnchorOverride: {fileID: 0}
 --- !u!114 &7588460332246137127 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7499715717791039070, guid: a015e792868585641aae8afc89c54767, type: 3}
@@ -13571,6 +13673,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3153558043755674536}
+    - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4677066426784484590}
   m_SourcePrefab: {fileID: 100100000, guid: a015e792868585641aae8afc89c54767, type: 3}
 --- !u!1 &4494581241513431476 stripped
 GameObject:
@@ -13615,6 +13720,23 @@ MonoBehaviour:
   consumeAmount: 1
   continuousRefresh: 1
   debugLogs: 0
+--- !u!114 &4677066426784484590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4494581241513431476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0509da9ea8e4264cac6f07d79b68c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipMessage: 
+  appendExtraFromHealth: 0
+  appendFromInventoryActivator: 1
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  uiAnchorOverride: {fileID: 0}
 --- !u!224 &8737996194798201594 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8013331885701244421, guid: a015e792868585641aae8afc89c54767, type: 3}
@@ -13777,6 +13899,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2837543751389493501}
+    - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7603023448824495657}
   m_SourcePrefab: {fileID: 100100000, guid: a015e792868585641aae8afc89c54767, type: 3}
 --- !u!1 &1114302618992814569 stripped
 GameObject:
@@ -13821,6 +13946,23 @@ MonoBehaviour:
   consumeAmount: 1
   continuousRefresh: 1
   debugLogs: 0
+--- !u!114 &7603023448824495657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114302618992814569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0509da9ea8e4264cac6f07d79b68c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipMessage: 
+  appendExtraFromHealth: 0
+  appendFromInventoryActivator: 1
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  uiAnchorOverride: {fileID: 0}
 --- !u!224 &5218159835437666983 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8013331885701244421, guid: a015e792868585641aae8afc89c54767, type: 3}
@@ -13983,6 +14125,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2368951062080499837}
+    - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2968670058090387076}
   m_SourcePrefab: {fileID: 100100000, guid: a015e792868585641aae8afc89c54767, type: 3}
 --- !u!1 &311259466833533387 stripped
 GameObject:
@@ -14027,6 +14172,23 @@ MonoBehaviour:
   consumeAmount: 1
   continuousRefresh: 1
   debugLogs: 0
+--- !u!114 &2968670058090387076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311259466833533387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0509da9ea8e4264cac6f07d79b68c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipMessage: 
+  appendExtraFromHealth: 0
+  appendFromInventoryActivator: 1
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  uiAnchorOverride: {fileID: 0}
 --- !u!224 &4849739336087020165 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8013331885701244421, guid: a015e792868585641aae8afc89c54767, type: 3}
@@ -14189,6 +14351,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4113821409760833223}
+    - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5619755163592230580}
   m_SourcePrefab: {fileID: 100100000, guid: a015e792868585641aae8afc89c54767, type: 3}
 --- !u!1 &1537733916144839568 stripped
 GameObject:
@@ -14233,6 +14398,23 @@ MonoBehaviour:
   consumeAmount: 1
   continuousRefresh: 1
   debugLogs: 0
+--- !u!114 &5619755163592230580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537733916144839568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0509da9ea8e4264cac6f07d79b68c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipMessage: 
+  appendExtraFromHealth: 0
+  appendFromInventoryActivator: 1
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  uiAnchorOverride: {fileID: 0}
 --- !u!224 &5929917122124812510 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8013331885701244421, guid: a015e792868585641aae8afc89c54767, type: 3}
@@ -14729,6 +14911,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6115827556510881206}
+    - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8003767649827529976}
   m_SourcePrefab: {fileID: 100100000, guid: a015e792868585641aae8afc89c54767, type: 3}
 --- !u!114 &579187952749193270 stripped
 MonoBehaviour:
@@ -14789,6 +14974,23 @@ MonoBehaviour:
   consumeAmount: 1
   continuousRefresh: 1
   debugLogs: 0
+--- !u!114 &8003767649827529976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5202952673803832099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0509da9ea8e4264cac6f07d79b68c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipMessage: 
+  appendExtraFromHealth: 0
+  appendFromInventoryActivator: 1
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  uiAnchorOverride: {fileID: 0}
 --- !u!1001 &7446910951381707847
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15083,6 +15285,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2140431800019696794}
+    - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6238582084385983347}
   m_SourcePrefab: {fileID: 100100000, guid: a015e792868585641aae8afc89c54767, type: 3}
 --- !u!114 &1253853910585737862 stripped
 MonoBehaviour:
@@ -15143,6 +15348,23 @@ MonoBehaviour:
   consumeAmount: 1
   continuousRefresh: 1
   debugLogs: 0
+--- !u!114 &6238582084385983347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5862486877742866835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0509da9ea8e4264cac6f07d79b68c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipMessage: 
+  appendExtraFromHealth: 0
+  appendFromInventoryActivator: 1
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  uiAnchorOverride: {fileID: 0}
 --- !u!1001 &9008894765095666203
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15295,6 +15517,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1622659323163113679}
+    - targetCorrespondingSourceObject: {fileID: 2893982816703028555, guid: a015e792868585641aae8afc89c54767, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8144475187426849114}
   m_SourcePrefab: {fileID: 100100000, guid: a015e792868585641aae8afc89c54767, type: 3}
 --- !u!224 &1311414911866233886 stripped
 RectTransform:
@@ -15355,3 +15580,20 @@ MonoBehaviour:
   consumeAmount: 1
   continuousRefresh: 1
   debugLogs: 0
+--- !u!114 &8144475187426849114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6138256789324193616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0509da9ea8e4264cac6f07d79b68c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipMessage: 
+  appendExtraFromHealth: 0
+  appendFromInventoryActivator: 1
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  uiAnchorOverride: {fileID: 0}

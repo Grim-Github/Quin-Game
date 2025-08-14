@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.Events; // <-- ADD THIS
 //
 // Handles a single weapon upgrade entry and (optionally) wires the *next* upgrade
 // to the next sibling WeaponUpgrades component under the same parent.
@@ -61,6 +61,11 @@ public class WeaponUpgrades : MonoBehaviour
     [Header("Upgrade Settings")]
     public UpgradeType upgradeType = UpgradeType.None;
 
+    [Header("Custom Hooks")]
+    [Tooltip("Invoked in Awake if UpgradeType.Custom is selected.")]
+    public UnityEvent onCustomAwake; // <-- ADD THIS
+
+
     [Tooltip("Acts as integer for flat amounts (rounded), or as a percent when the upgrade type is % based (e.g., 0.25 = 25%).")]
     public float value = 0f;
 
@@ -82,8 +87,17 @@ public class WeaponUpgrades : MonoBehaviour
             upgradeType = UpgradeType.None;
 
         SetUpgradeInfo();
+
+        // --- ADD THIS: fire the custom event on Awake if Custom is selected ---
+        if (upgradeType == UpgradeType.Custom)
+        {
+            onCustomAwake?.Invoke();
+        }
+        // ---------------------------------------------------------------------
+
         ApplyUpgrade();
     }
+
 
     private void OnEnable()
     {
@@ -532,6 +546,17 @@ public class WeaponUpgrades : MonoBehaviour
             {
                 if (wu.IsTypeAllowedForParent(t))
                     allowed.Add(t);
+            }
+            // After: value/other fields + so.ApplyModifiedProperties() if you prefer
+            // Find the serialized property for the UnityEvent
+            var customEventProp = so.FindProperty("onCustomAwake");
+
+            // Only show the event hook when the selected type is Custom
+            if (wu.upgradeType == WeaponUpgrades.UpgradeType.Custom)
+            {
+                UnityEditor.EditorGUILayout.Space();
+                UnityEditor.EditorGUILayout.LabelField("Custom Events", UnityEditor.EditorStyles.boldLabel);
+                UnityEditor.EditorGUILayout.PropertyField(customEventProp);
             }
 
             if (allowed.Count == 0)
