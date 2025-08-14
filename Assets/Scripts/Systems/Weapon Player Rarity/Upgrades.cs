@@ -21,6 +21,7 @@ public sealed class WeaponContext
     public ICritModule crit;
     public IAttackSpeedModule attack;
     public IKnifeModule knife;
+    public IDurationModule duration;
     public IShooterModule shooter;
     public IUITextSink ui;                     // sink to write rarity block
     public TickAdapter tickAdapter;            // to reset tick cleanly
@@ -88,6 +89,21 @@ public sealed class AttackSpeedUpgrade : IUpgrade
         return () => c.attack.Interval += actuallyReduced;
     }
 }
+
+public sealed class StatusEffectDurationUpgrade : IUpgrade
+{
+    public bool IsApplicable(WeaponContext c) => c.duration != null;
+    public Action Apply(WeaponContext c, StringBuilder notes)
+    {
+        var r = c.tiers.Scale(c.ranges.statusDurationAdd, c.tiers.statusDuration);
+        float add = Mathf.Max(0f, UnityEngine.Random.Range(r.x, r.y));
+        float before = c.duration.Duration;
+        c.duration.Duration = before + add;
+        notes.AppendLine($"+{add:F1}s Status Duration (Tier {c.Roman(c.tiers.statusDuration)})");
+        return () => c.duration.Duration = before;
+    }
+}
+
 
 public sealed class CritUpgrade : IUpgrade
 {

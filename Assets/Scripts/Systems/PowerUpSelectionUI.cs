@@ -16,6 +16,9 @@ public class PowerUpSelectionUI : MonoBehaviour
     [Header("Extra Buttons")]
     [SerializeField] private Button[] skipButton;
 
+    [Header("Reroll Button")]
+    [SerializeField] private Button rerollButton; // new button
+
     [Header("References")]
     [SerializeField] private PowerUpChooser powerUpChooser;
     [SerializeField] private Volume slowMoVolume;
@@ -58,6 +61,13 @@ public class PowerUpSelectionUI : MonoBehaviour
             }
         }
 
+        // Hook up reroll button
+        if (rerollButton != null)
+        {
+            rerollButton.onClick.RemoveAllListeners();
+            rerollButton.onClick.AddListener(() => ShowSelection()); // simply calls ShowSelection again
+            rerollButton.gameObject.SetActive(false); // hidden until selection is shown
+        }
     }
 
     private void PlaySFX(AudioClip clip)
@@ -165,6 +175,9 @@ public class PowerUpSelectionUI : MonoBehaviour
             }
         }
 
+        // Show reroll button
+        if (rerollButton != null)
+            rerollButton.gameObject.SetActive(true);
     }
 
     private void SelectPowerUp(int buttonSlot)
@@ -207,6 +220,8 @@ public class PowerUpSelectionUI : MonoBehaviour
             }
         }
 
+        if (rerollButton != null)
+            rerollButton.gameObject.SetActive(false);
     }
 
     private int[] PickRandomUnique(List<int> source, int count)

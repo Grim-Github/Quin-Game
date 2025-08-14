@@ -10,6 +10,8 @@ public class WeaponRarityController : MonoBehaviour
     [SerializeField] private bool rollOnAwake = true;
     [SerializeField] private int rngSeed = 0; // 0 = random
 
+    [SerializeField] private UpgradeWeightProvider upgradeWeights;  // optional; if null, fallback to old behavior
+
     [Header("Rarity")]
     [SerializeField] private Rarity current = Rarity.Common;
     [SerializeField] private RarityWeights weights = new RarityWeights { common = 60, uncommon = 25, rare = 12, legendary = 3 };
@@ -87,25 +89,51 @@ public class WeaponRarityController : MonoBehaviour
         UndoAllApplied();
 
         var ctx = BuildContext();
-        var pool = BuildUpgrades(ctx);
-        if (pool.Count == 0)
+
+        // NEW: build typed candidates instead of bare IUpgrade list
+        var candidates = BuildCandidates(ctx);
+        if (candidates.Count == 0)
         {
             applied.Clear();
             WriteUIBlock(new[] { $"<b>Rarity:</b> {WeaponContext.FormatRarity(current)}", "<i>No applicable upgrades.</i>" });
             return;
         }
 
-        int rolls = current switch { Rarity.Common => 1, Rarity.Uncommon => 2, Rarity.Rare => 4, Rarity.Legendary => 5, _ => 1 };
+        // Instead of fixed max rolls per rarity, roll between 1 and that rarity's max
+        int maxRolls = current switch
+        {
+            Rarity.Common => 1,
+            Rarity.Uncommon => 2,
+            Rarity.Rare => 4,
+            Rarity.Legendary => 5,
+            _ => 1
+        };
 
-        Shuffle(pool, rng);
+        // Randomly choose how many upgrades to apply (at least 1)
+        int rolls = rng.Next(1, maxRolls + 1);
+
 
         applied.Clear();
-        for (int i = 0; i < Math.Min(rolls, pool.Count); i++)
-            ApplyAndRecord(ctx, pool[i]);
+
+        if (upgradeWeights != null)
+        {
+            // Weighted selection
+            var picked = upgradeWeights.PickWeighted(candidates, rolls, rng);
+            for (int i = 0; i < picked.Count; i++)
+                ApplyAndRecord(ctx, picked[i]);
+        }
+        else
+        {
+            // Fallback: old behavior (shuffle + take N)
+            Shuffle(candidates, rng);
+            for (int i = 0; i < Math.Min(rolls, candidates.Count); i++)
+                ApplyAndRecord(ctx, candidates[i].upgrade);
+        }
 
         RebuildUIFromApplied();
         tick?.ResetAndStartIfPlaying();
     }
+
 
     /// <summary>Rerolls a single stat at <paramref name="index"/> keeping the same upgrade type.</summary>
     public bool RerollStatAt(int index)
@@ -135,6 +163,82 @@ public class WeaponRarityController : MonoBehaviour
         return RerollStatAt(idx);
     }
 
+    /// <summary>
+    /// Removes one random applied upgrade (undoing its effect).
+    /// Allows removal down to 1 remaining upgrade, regardless of rarity.
+    /// </summary>
+    public bool RemoveRandomUpgrade()
+    {
+        // Allow going down to exactly 1 upgrade
+        if (applied.Count <= 0) return false;
+
+        int idx = NextInt(rng, 0, applied.Count);
+        applied[idx].undo?.Invoke();
+        applied.RemoveAt(idx);
+
+        RebuildUIFromApplied();
+        tick?.ResetAndStartIfPlaying();
+        return true;
+    }
+
+
+    // === Add exactly one UNIQUE upgrade; never duplicate; respect rarity cap ===
+    public bool AddRandomUpgrade(bool preferUnique = true)
+    {
+        int maxAllowed = RollsFor(current);
+        if (applied.Count >= maxAllowed) return false; // already full
+
+        var ctx = BuildContext();
+        var cands = BuildCandidates(ctx);
+        if (cands == null || cands.Count == 0) return false;
+
+        // Types already taken
+        var existing = new HashSet<System.Type>();
+        for (int i = 0; i < applied.Count; i++)
+            if (applied[i].upgrade != null)
+                existing.Add(applied[i].upgrade.GetType());
+
+        // Only consider types not already present
+        var uniqueBag = new List<UpgradeWeightProvider.Candidate>(cands.Count);
+        for (int i = 0; i < cands.Count; i++)
+        {
+            var up = cands[i].upgrade;
+            if (up == null) continue;
+            if (!up.IsApplicable(ctx)) continue;
+            if (existing.Contains(up.GetType())) continue; // enforce uniqueness
+            uniqueBag.Add(cands[i]);
+        }
+
+        if (uniqueBag.Count == 0) return false; // nothing unique left to add
+
+        // Pick one
+        IUpgrade picked = null;
+        if (upgradeWeights != null)
+        {
+            var list = upgradeWeights.PickWeighted(uniqueBag, 1, rng);
+            if (list == null || list.Count == 0 || list[0] == null) return false;
+            picked = list[0];
+        }
+        else
+        {
+            Shuffle(uniqueBag, rng);
+            picked = uniqueBag[0].upgrade;
+        }
+
+        // Apply & record
+        var sb = new StringBuilder();
+        var undo = picked.Apply(ctx, sb);
+        applied.Add(new AppliedUpgrade(picked, undo, sb.ToString().Trim()));
+
+        RebuildUIFromApplied();
+        tick?.ResetAndStartIfPlaying();
+        return true;
+    }
+
+
+
+
+
     [ContextMenu("Rarity/Reroll 1 Random Stat")]
     private void ContextRerollOneRandomStat()
     {
@@ -144,7 +248,7 @@ public class WeaponRarityController : MonoBehaviour
 
     // ========== NEW #1: Reroll one stat INTO ANOTHER (switch upgrade type) ==========
 
-    /// <summary>Switch the upgrade type at index to a different applicable type, rerolling its values.</summary>
+    // === Reroll one slot into another UNIQUE upgrade type (no collisions) ===
     public bool RerollStatIntoAnotherAt(int index)
     {
         if (!IsValidIndex(index)) return false;
@@ -152,32 +256,62 @@ public class WeaponRarityController : MonoBehaviour
         tiers.RollAll(rng);
         var ctx = BuildContext();
 
-        var pool = BuildUpgrades(ctx);
-        if (pool.Count == 0) return false;
+        var cands = BuildCandidates(ctx);
+        if (cands == null || cands.Count == 0) return false;
 
-        var currentType = applied[index].upgrade.GetType();
+        var currentType = applied[index].upgrade?.GetType();
+        if (currentType == null) return false;
 
-        // Collect alternatives (different type, applicable)
-        var alternatives = new List<IUpgrade>();
-        for (int i = 0; i < pool.Count; i++)
-            if (pool[i] != null && pool[i].GetType() != currentType && pool[i].IsApplicable(ctx))
-                alternatives.Add(pool[i]);
+        // Types present in other slots (must avoid)
+        var occupied = new HashSet<System.Type>();
+        for (int i = 0; i < applied.Count; i++)
+        {
+            if (i == index) continue;
+            var up = applied[i].upgrade;
+            if (up != null) occupied.Add(up.GetType());
+        }
 
-        if (alternatives.Count == 0) return false;
+        // Build alternatives: different type, not occupied, applicable
+        var altBag = new List<UpgradeWeightProvider.Candidate>();
+        for (int i = 0; i < cands.Count; i++)
+        {
+            var up = cands[i].upgrade;
+            if (up == null) continue;
+            var t = up.GetType();
+            if (t == currentType) continue;
+            if (occupied.Contains(t)) continue;          // enforce uniqueness
+            if (!up.IsApplicable(ctx)) continue;
+            altBag.Add(cands[i]);
+        }
 
+        if (altBag.Count == 0) return false;
+
+        // Choose replacement
+        IUpgrade replacement = null;
+        if (upgradeWeights != null)
+        {
+            var list = upgradeWeights.PickWeighted(altBag, 1, rng);
+            if (list == null || list.Count == 0 || list[0] == null) return false;
+            replacement = list[0];
+        }
+        else
+        {
+            Shuffle(altBag, rng);
+            replacement = altBag[0].upgrade;
+        }
+
+        // Swap
         applied[index].undo?.Invoke();
 
-        Shuffle(alternatives, rng);
-        var newUp = alternatives[0];
-
         var sb = new StringBuilder();
-        var undo = newUp.Apply(ctx, sb);
-        applied[index] = new AppliedUpgrade(newUp, undo, sb.ToString().Trim());
+        var undo = replacement.Apply(ctx, sb);
+        applied[index] = new AppliedUpgrade(replacement, undo, sb.ToString().Trim());
 
         RebuildUIFromApplied();
         tick?.ResetAndStartIfPlaying();
         return true;
     }
+
 
     /// <summary>Pick a random applied slot and switch it to another upgrade type.</summary>
     public bool RerollRandomStatIntoAnother()
@@ -212,6 +346,32 @@ public class WeaponRarityController : MonoBehaviour
 
         return true;
     }
+
+
+
+    /// <summary>
+    /// Upgrades rarity by one step (max Legendary) without adding any new upgrades.
+    /// Keeps all current applied upgrades exactly as they are.
+    /// </summary>
+    public bool UpgradeRarityKeepStats()
+    {
+        var prev = current;
+        var next = NextRarity(prev);
+        if (next == prev) return false; // already Legendary
+
+        current = next;
+
+        // Optionally roll tiers so future rolls (not current stats) use fresh tiers.
+        // This does NOT change already-applied values.
+        tiers.RollAll(rng);
+
+        // Refresh UI & restart tick so the new rarity shows.
+        RebuildUIFromApplied();
+        tick?.ResetAndStartIfPlaying();
+        return true;
+    }
+
+
 
     [ContextMenu("Rarity/Upgrade 1 Random Tier (then reroll 1 stat)")]
     private void ContextUpgradeOneTier()
@@ -277,40 +437,52 @@ public class WeaponRarityController : MonoBehaviour
             knife = knife,
             shooter = shooter,
             ui = uiSink,
-            tickAdapter = tick
+            tickAdapter = tick,
+            duration = (IDurationModule)(object)(knife ?? (object)shooter ?? null) // NEW
         };
     }
 
-    private List<IUpgrade> BuildUpgrades(WeaponContext c)
-    {
-        var list = new List<IUpgrade>(12);
 
-        void AddIf(bool cond, IUpgrade up) { if (cond) list.Add(up); }
+    private List<UpgradeWeightProvider.Candidate> BuildCandidates(WeaponContext c)
+    {
+        var list = new List<UpgradeWeightProvider.Candidate>(12);
+        void Add(bool cond, IUpgrade up, UpgradeType t) { if (cond && up != null) list.Add(new UpgradeWeightProvider.Candidate(up, t)); }
 
         if (c.damage != null)
         {
-            AddIf(true, new DamageFlatUpgrade());
-            AddIf(true, new DamagePercentAsFlatUpgrade());
+            Add(true, new DamageFlatUpgrade(), UpgradeType.DamageFlat);
+            Add(true, new DamagePercentAsFlatUpgrade(), UpgradeType.DamagePercentAsFlat);
         }
-        AddIf(c.attack != null, new AttackSpeedUpgrade());
-        AddIf(c.crit != null, new CritUpgrade());
+
+        Add(c.attack != null, new AttackSpeedUpgrade(), UpgradeType.AttackSpeed);
+        Add(c.crit != null, new CritUpgrade(), UpgradeType.Crit);
 
         if (c.knife != null)
         {
-            AddIf(true, new KnifeLifestealUpgrade());
-            AddIf(true, new KnifeSplashUpgrade());
-            AddIf(true, new KnifeRadiusUpgrade());
-            AddIf(true, new KnifeMaxTargetsUpgrade());
+            Add(true, new KnifeLifestealUpgrade(), UpgradeType.KnifeLifesteal);
+            Add(true, new KnifeSplashUpgrade(), UpgradeType.KnifeSplash);
+            Add(true, new KnifeRadiusUpgrade(), UpgradeType.KnifeRadius);
+            Add(true, new KnifeMaxTargetsUpgrade(), UpgradeType.KnifeMaxTargets);
+
+            var knifeRef = GetComponent<Knife>();
+            if (knifeRef != null && knifeRef.applyStatusEffectOnHit)
+                Add(true, new StatusEffectDurationUpgrade(), UpgradeType.StatusEffectDuration);
         }
+
         if (c.shooter != null)
         {
-            AddIf(true, new ShooterProjectilesUpgrade());
-            AddIf(true, new ShooterRangeUpgrade());
-            AddIf(true, new ShooterAccuracyUpgrade());
+            Add(true, new ShooterProjectilesUpgrade(), UpgradeType.ShooterProjectiles);
+            Add(true, new ShooterRangeUpgrade(), UpgradeType.ShooterRange);
+            Add(true, new ShooterAccuracyUpgrade(), UpgradeType.ShooterAccuracy);
+
+            var shooterRef = GetComponent<SimpleShooter>();
+            if (shooterRef != null && shooterRef.applyStatusEffectOnHit)
+                Add(true, new StatusEffectDurationUpgrade(), UpgradeType.StatusEffectDuration);
         }
 
         return list;
     }
+
 
     // ===================== UI (single writer, no size tags) =====================
 
@@ -430,6 +602,24 @@ public class WeaponRarityController : MonoBehaviour
     }
 
     // ===================== RNG helpers =====================
+
+    private static Rarity NextRarity(Rarity r) => r switch
+    {
+        Rarity.Common => Rarity.Uncommon,
+        Rarity.Uncommon => Rarity.Rare,
+        Rarity.Rare => Rarity.Legendary,
+        _ => Rarity.Legendary
+    };
+
+    private static int RollsFor(Rarity r) => r switch
+    {
+        Rarity.Common => 1,
+        Rarity.Uncommon => 2,
+        Rarity.Rare => 4,
+        Rarity.Legendary => 5,
+        _ => 1
+    };
+
 
     private static int NextInt(System.Random r, int minInclusive, int maxExclusive)
         => r.Next(minInclusive, maxExclusive);

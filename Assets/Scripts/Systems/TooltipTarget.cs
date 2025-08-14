@@ -5,7 +5,10 @@ using UnityEngine.EventSystems;
 public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [TextArea] public string tooltipMessage;
+
+    [Header("Append From Other Components")]
     [SerializeField] private bool appendExtraFromHealth = true;
+    [SerializeField] private bool appendFromInventoryActivator = true;
 
     [Header("Text Appearance")]
     [Tooltip("Color of the tooltip text.")]
@@ -15,10 +18,12 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private RectTransform uiAnchorOverride;
 
     private SimpleHealth health;
+    private InventoryButtonActivator invActivator;
 
     private void Awake()
     {
         health = GetComponent<SimpleHealth>();
+        invActivator = GetComponent<InventoryButtonActivator>();
     }
 
     // ===== Shared =====
@@ -26,6 +31,7 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         string full = tooltipMessage;
 
+        // 1) SimpleHealth extras (unchanged from your file)
         if (appendExtraFromHealth && health != null)
         {
             string extra = health.extraTextField; // assumes public on your SimpleHealth
@@ -36,7 +42,24 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
         }
 
-        // Wrap text in rich text color tag
+        // 2) InventoryButtonActivator requirement block
+        if (appendFromInventoryActivator && invActivator != null)
+        {
+            // Use public getters (you'll need to add these to InventoryButtonActivator if not already there)
+            string reqName = invActivator.requiredItemName;
+            int reqAmt = Mathf.Max(1, invActivator.requiredAmount);
+
+            string reqBlock = $"<b>Requires</b>: {reqName} x{reqAmt}";
+
+            if (!string.IsNullOrWhiteSpace(reqBlock))
+            {
+                if (!string.IsNullOrWhiteSpace(full)) full += "\n\n";
+                full += reqBlock;
+            }
+        }
+
+
+        // 3) Wrap entire text in color
         string colorHex = ColorUtility.ToHtmlStringRGB(textColor);
         full = $"<color=#{colorHex}>{full}</color>";
 

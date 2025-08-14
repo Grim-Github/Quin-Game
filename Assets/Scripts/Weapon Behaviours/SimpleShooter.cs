@@ -14,6 +14,12 @@ public class SimpleShooter : MonoBehaviour
     [Range(0f, 1f)] public float critChance = 0f;
     [Min(1f)] public float critMultiplier = 2f;
 
+    [Header("On Hit Effects")]
+    public bool applyStatusEffectOnHit = false;
+    public StatusEffectSystem.StatusType statusEffectOnHit = StatusEffectSystem.StatusType.Bleeding;
+    [Tooltip("Duration in seconds for the applied status effect.")]
+    public float statusEffectDuration = 3f;
+
     [Header("Shot Pattern")]
     public int projectileCount = 1;
     [Tooltip("Total cone in degrees. Each projectile gets a random angle within [-spread/2, +spread/2].")]
@@ -87,35 +93,44 @@ public class SimpleShooter : MonoBehaviour
 
     private void UpdateStatsText()
     {
-        if (statsTextInstance != null)
+        if (statsTextInstance == null) return;
+
+        // Compute dynamic fields
+        string delay = wt != null ? $"{wt.interval:F1}s" : "N/A";
+
+        string penetrationInfo = "N/A";
+        if (bulletPrefab != null)
         {
-            string delay = wt != null ? $"{wt.interval:F1}s" : "N/A";
-
-            string penetrationInfo = "N/A";
-            if (bulletPrefab != null)
+            if (bulletPrefab.TryGetComponent<BulletDamageTrigger>(out var bullet))
             {
-                if (bulletPrefab.TryGetComponent<BulletDamageTrigger>(out var bullet))
-                {
-                    penetrationInfo = bullet.penetration.ToString();
-                }
-                else if (bulletPrefab.TryGetComponent<ExplosionDamage2D>(out var explosion))
-                {
-                    penetrationInfo = $"Radius: {explosion.radius:F1}";
-                }
+                penetrationInfo = bullet.penetration.ToString();
             }
-
-            statsTextInstance.text =
-                $"<b>{transform.name} Stats</b>\n" +
-                $"Damage: {damage}\n" +
-                $"Attack Delay: {delay}\n" +
-                $"Proj Speed: {shootForce:F1}\n" +
-                $"Lifetime: {bulletLifetime:F1}s\n" +
-                $"Projectile Count: {projectileCount}\n" +
-                $"Penetration: {penetrationInfo}\n" +
-                $"Crit: {(Mathf.Clamp01(critChance) * 100f):F0}% x{critMultiplier:F2}\n" +
-                extraTextField;
+            else if (bulletPrefab.TryGetComponent<ExplosionDamage2D>(out var explosion))
+            {
+                penetrationInfo = $"Radius: {explosion.radius:F1}";
+            }
         }
+
+        // Build text (Knife.cs style)
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine($"<b>{transform.name} Stats</b>");
+        sb.AppendLine($"Damage: {damage}");
+        sb.AppendLine($"Attack Delay: {delay}");
+        sb.AppendLine($"Proj Speed: {shootForce:F1}");
+        sb.AppendLine($"Lifetime: {bulletLifetime:F1}s");
+        sb.AppendLine($"Projectile Count: {Mathf.Max(1, projectileCount)}");
+        sb.AppendLine($"Penetration: {penetrationInfo}");
+        sb.AppendLine($"Crit: {(Mathf.Clamp01(critChance) * 100f):F0}% x{critMultiplier:F2}");
+
+        if (applyStatusEffectOnHit)
+            sb.AppendLine($"On Hit: {statusEffectOnHit} ({statusEffectDuration:F1}s)");
+
+        if (!string.IsNullOrWhiteSpace(extraTextField))
+            sb.AppendLine(extraTextField);
+
+        statsTextInstance.text = sb.ToString();
     }
+
 
     // --- Shooting API ---
 
@@ -174,7 +189,12 @@ public class SimpleShooter : MonoBehaviour
 
             // Apply damage to the correct component type
             if (bullet.TryGetComponent<BulletDamageTrigger>(out var bulletDamage))
+            {
                 bulletDamage.damageAmount = finalDamage;
+                bulletDamage.applyStatusEffectOnHit = applyStatusEffectOnHit;
+                bulletDamage.statusEffectOnHit = statusEffectOnHit;
+                bulletDamage.statusEffectDuration = statusEffectDuration;
+            }
 
             if (bullet.TryGetComponent<ExplosionDamage2D>(out var explosionDamage))
                 explosionDamage.baseDamage = finalDamage;

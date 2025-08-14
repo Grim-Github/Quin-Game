@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 8522411498283610141}
   - component: {fileID: 5771517332839581349}
   - component: {fileID: 6700987529909624937}
+  - component: {fileID: 6292461430747482891}
   m_Layer: 7
   m_Name: Enemy Base
   m_TagString: Untagged
@@ -258,6 +259,7 @@ MonoBehaviour:
   damagePopupPrefab: {fileID: 2924289727893196464, guid: a8aea507684d95a4c8b9545db21cf2cd, type: 3}
   popupOffset: {x: 0, y: 1, z: 0}
   currentHealth: 0
+  statsTextInstance: {fileID: 0}
 --- !u!61 &4859893581985587488
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -569,6 +571,22 @@ MonoBehaviour:
   minVelocity: 0.1
   stepInterval: 0.4
   pitchVariation: 0.1
+--- !u!114 &6292461430747482891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684754638328981509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac118bf3d4354924ba7e48db446a15eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useUnscaledTime: 0
+  enableBleeding: 1
+  bleedingDamagePerTick: 5
+  health: {fileID: 0}
 --- !u!1 &6227486896796405968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,6 +1035,9 @@ MonoBehaviour:
   maxTargetsPerTick: 0
   splashRadius: 0
   splashDamagePercent: 0.5
+  applyStatusEffectOnHit: 0
+  statusEffectOnHit: 0
+  statusEffectDuration: 3
   lifestealPercent: 0
   critChance: 0
   critMultiplier: 2

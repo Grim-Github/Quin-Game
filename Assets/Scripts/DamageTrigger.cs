@@ -17,6 +17,13 @@ public class BulletDamageTrigger : MonoBehaviour
     [Tooltip("If the bullet touches any of these layers, it is destroyed immediately (e.g., walls/obstacles).")]
     [SerializeField] private LayerMask destroyOnTouchLayers;
 
+    [Header("On Hit Effects")]
+    public bool applyStatusEffectOnHit = false;
+    public StatusEffectSystem.StatusType statusEffectOnHit = StatusEffectSystem.StatusType.Bleeding;
+    [Tooltip("Duration in seconds for the applied status effect.")]
+    public float statusEffectDuration = 3f;
+
+
     [Header("Impact VFX")]
     [Tooltip("Prefab to spawn at the impact point (both on block-hit and on damage).")]
     [SerializeField] private GameObject impactPrefab;
@@ -69,6 +76,17 @@ public class BulletDamageTrigger : MonoBehaviour
         // Apply damage
         health.TakeDamage(damageAmount);
         _alreadyHit.Add(health);
+
+        // ---- Apply status effect (if enabled and target supports it) ----
+        if (applyStatusEffectOnHit && statusEffectDuration > 0f)
+        {
+            var statusSys = other.GetComponentInParent<StatusEffectSystem>();
+            if (statusSys != null)
+            {
+                // This will refresh if the same status already exists (per your StatusEffectSystem)
+                statusSys.AddStatus(statusEffectOnHit, statusEffectDuration);
+            }
+        }
 
         if (spawnOnDamageHit) SpawnImpactAt(other, transform.position);
 

@@ -10,8 +10,11 @@ public class TooltipManager : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] private GameObject tooltipPanel;          // Parent panel (must be under a Canvas)
     [SerializeField] private TextMeshProUGUI tooltipText;      // Text element inside the panel
+
     [SerializeField] private Vector2 padding = new Vector2(20f, 10f); // Extra space around text
     [SerializeField] private Vector2 clampMargin = new Vector2(8f, 8f); // Keep inside canvas
+    [Header("Positioning")]
+    [SerializeField] private Vector2 tooltipOffset = new Vector2(10f, 10f);
 
     [Header("Behaviour")]
     [Tooltip("Hide automatically after losing the target or pointer exits.")]
@@ -175,14 +178,14 @@ public class TooltipManager : MonoBehaviour
 
         if (currentAnchor != null && currentAnchor.gameObject.activeInHierarchy)
         {
-            // Anchor to a UI element's position (center)
+            // Anchor to a UI element's position (center) + offset
             screenPoint = RectTransformUtility.WorldToScreenPoint(canvas.worldCamera, currentAnchor.position);
+            screenPoint += tooltipOffset;
         }
         else
         {
-            // Follow mouse
-            screenPoint = Input.mousePosition;
-            screenPoint += new Vector2(10f, 10f); // small offset so it doesn't sit under the cursor
+            // Follow mouse + offset
+            screenPoint = (Vector2)Input.mousePosition + tooltipOffset;
         }
 
         // Convert to canvas-local point
@@ -203,4 +206,5 @@ public class TooltipManager : MonoBehaviour
 
         panelRect.localPosition = localPoint;
     }
+
 }

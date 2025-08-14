@@ -9,9 +9,9 @@ public class InventoryButtonActivator : MonoBehaviour
     [SerializeField] private SimpleInventory inventory;
 
     [Header("Requirement")]
-    [SerializeField] private string requiredItemName = "Orb 1";
+    [SerializeField] public string requiredItemName = "Orb 1";
     [Min(1)]
-    [SerializeField] private int requiredAmount = 1;
+    [SerializeField] public int requiredAmount = 1;
 
     [Header("Target To Toggle")]
     [SerializeField] private TargetMode mode = TargetMode.ButtonInteractable;

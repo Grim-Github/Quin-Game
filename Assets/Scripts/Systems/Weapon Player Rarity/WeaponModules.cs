@@ -3,6 +3,7 @@ using UnityEngine;
 public interface IDamageModule { int Damage { get; set; } }
 public interface ICritModule { float CritChance { get; set; } float CritMultiplier { get; set; } }
 public interface IAttackSpeedModule { float Interval { get; set; } }
+public interface IDurationModule { float Duration { get; set; } }
 public interface IKnifeModule
 {
     float LifestealPercent { get; set; }
@@ -24,7 +25,7 @@ public interface IUITextSink
 }
 
 // ===== Adapters (no reflection) =====
-public sealed class KnifeAdapter : IDamageModule, ICritModule, IKnifeModule, IUITextSink
+public sealed class KnifeAdapter : IDamageModule, ICritModule, IKnifeModule, IDurationModule, IUITextSink
 {
     private readonly Knife k;
     public KnifeAdapter(Knife k) { this.k = k; }
@@ -35,11 +36,12 @@ public sealed class KnifeAdapter : IDamageModule, ICritModule, IKnifeModule, IUI
     public float Radius { get => k.radius; set => k.radius = value; }
     public float SplashRadius { get => k.splashRadius; set => k.splashRadius = value; }
     public int MaxTargetsPerTick { get => k.maxTargetsPerTick; set => k.maxTargetsPerTick = value; }
+    public float Duration { get => k.statusEffectDuration; set => k.statusEffectDuration = Mathf.Max(0f, value); }
     public string Text { get => k.extraTextField ?? ""; set => k.extraTextField = value; }
     public void SetText(string s) => k.extraTextField = s;
 }
 
-public sealed class ShooterAdapter : IDamageModule, ICritModule, IShooterModule, IUITextSink
+public sealed class ShooterAdapter : IDamageModule, ICritModule, IShooterModule, IDurationModule, IUITextSink
 {
     private readonly SimpleShooter s;
     public ShooterAdapter(SimpleShooter s) { this.s = s; }
@@ -48,6 +50,7 @@ public sealed class ShooterAdapter : IDamageModule, ICritModule, IShooterModule,
     public float CritMultiplier { get => s.critMultiplier; set => s.critMultiplier = value; }
     public float BulletLifetime { get => s.bulletLifetime; set => s.bulletLifetime = value; }
     public float ShootForce { get => s.shootForce; set => s.shootForce = value; }
+    public float Duration { get => s.statusEffectDuration; set => s.statusEffectDuration = Mathf.Max(0f, value); }
     public int ProjectileCount { get => s.projectileCount; set => s.projectileCount = value; }
     public float SpreadAngle { get => s.spreadAngle; set => s.spreadAngle = Mathf.Max(0f, value); }
     public string Text { get => s.extraTextField ?? ""; set => s.extraTextField = value; }

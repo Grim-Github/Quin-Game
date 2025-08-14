@@ -64,7 +64,18 @@ public class EnemyChaser : MonoBehaviour
         }
 
         Vector2 desiredDir = toTarget.normalized;
-        rb.linearVelocity = desiredDir * moveSpeed;
+        if (TryGetComponent<StatusEffectSystem>(out StatusEffectSystem ses))
+        {
+            if (!ses.HasStatus(StatusEffectSystem.StatusType.Stun))
+            {
+                rb.linearVelocity = desiredDir * moveSpeed;
+            }
+            else
+            {
+                rb.linearVelocity = Vector2.zero; // Stop moving if stunned
+            }
+        }
+
 
         ResetReachedIfFar(distance);
     }

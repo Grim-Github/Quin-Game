@@ -131,7 +131,7 @@ public class MonsterRarity : MonoBehaviour
 
         // Optional extra: cadence tweak across all weapons (60% chance)
         if (ticks != null && ticks.Length > 0 && UnityEngine.Random.value < 0.6f)
-            Upgrade_AllWeaponTickSpeed();
+            Upgrade_AllWeaponAttackSpeed();
 
         // Restart WeaponTick safely
         foreach (var t in ticks)
@@ -230,7 +230,7 @@ public class MonsterRarity : MonoBehaviour
     }
 
     // ===== Global cadence =====
-    private void Upgrade_AllWeaponTickSpeed()
+    private void Upgrade_AllWeaponAttackSpeed()
     {
         float frac = UnityEngine.Random.Range(atkSpeedFracAll.x, atkSpeedFracAll.y);
         if (ticks == null) return;
@@ -243,8 +243,11 @@ public class MonsterRarity : MonoBehaviour
             t.interval = after;
             if (t.isActiveAndEnabled) t.ResetAndStart();
         }
-        WN("Attack Interval (All)", $"-{frac * 100f:F0}%");
+
+        // Gamey name & positive stat wording
+        WN("Attack Speed (All)", $"+{frac * 100f:F0}%");
     }
+
 
     // ===== Knife (public fields) =====
     private void Up_Knife_Dmg_Flat()

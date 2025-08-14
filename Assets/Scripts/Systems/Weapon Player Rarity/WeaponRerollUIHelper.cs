@@ -12,7 +12,7 @@ public class WeaponRerollUIHelper : MonoBehaviour
     public Button nextButton;
 
     [Header("Action Buttons (Optional, in order)")]
-    [Tooltip("0=Reroll Rarity+Stats, 1=Reroll Stats, 2=Reroll Random Stat, 3=Reroll Into Another, 4=Upgrade Random Tier")]
+    [Tooltip("0=Reroll Rarity+Stats, 1=Reroll Stats, 2=Reroll Random Stat, 3=Reroll Into Another, 4=Upgrade Random Tier, 5=Upgrade Rarity (keep stats, add unique), 6=Remove Random Upgrade, 7=Add Random Upgrade")]
     public Button[] actionButtons;
 
     [Header("Labels & Icon (Optional)")]
@@ -135,7 +135,14 @@ public class WeaponRerollUIHelper : MonoBehaviour
             () => { RefreshControllers(); CurrentTarget()?.RerollStats(); UpdateSelectionUI(); },
             () => { RefreshControllers(); CurrentTarget()?.RerollRandomStat(); UpdateSelectionUI(); },
             () => { RefreshControllers(); CurrentTarget()?.RerollRandomStatIntoAnother(); UpdateSelectionUI(); },
-            () => { RefreshControllers(); CurrentTarget()?.UpgradeRandomTier(1, true); UpdateSelectionUI(); }
+            () => { RefreshControllers(); CurrentTarget()?.UpgradeRandomTier(1, true); UpdateSelectionUI(); },
+            () => { RefreshControllers(); CurrentTarget()?.UpgradeRarityKeepStats(); UpdateSelectionUI(); },
+
+            // NEW 6: Remove a random applied upgrade
+            () => { RefreshControllers(); CurrentTarget()?.RemoveRandomUpgrade(); UpdateSelectionUI(); },
+
+            // NEW 7: Add a random applicable upgrade
+            () => { RefreshControllers(); CurrentTarget()?.AddRandomUpgrade(); UpdateSelectionUI(); },
         };
 
         for (int i = 0; i < actionButtons.Length; i++)
@@ -145,7 +152,7 @@ public class WeaponRerollUIHelper : MonoBehaviour
 
             btn.onClick.RemoveAllListeners();
             if (i < actions.Length) btn.onClick.AddListener(actions[i]);
-            // Removed all code that sets TMP_Text or Text component labels
+            // No automatic text setting; you control button visuals in the Inspector
         }
     }
 

@@ -20,6 +20,11 @@ public class Knife : MonoBehaviour
     [SerializeField, Tooltip("Damage dealt to enemies inside splashRadius (percentage of main damage).")]
     [Range(0f, 1f)] public float splashDamagePercent = 0.5f;
 
+    [Header("On Hit Effects")]
+    public bool applyStatusEffectOnHit = false;
+    public StatusEffectSystem.StatusType statusEffectOnHit = StatusEffectSystem.StatusType.Bleeding;
+    public float statusEffectDuration = 3f; // Duration in seconds for the status effect
+
     [Header("Lifesteal")]
     [Range(0f, 1f)][SerializeField] public float lifestealPercent = 0.25f;
 
@@ -52,6 +57,9 @@ public class Knife : MonoBehaviour
     [SerializeField] private float visualPadding = 0f;
     [Tooltip("If true, auto-scales the rangeRenderer to match 'radius'.")]
     [SerializeField] private bool autoScaleRangeVisual = true;
+
+
+
 
     [HideInInspector] public TextMeshProUGUI statsTextInstance;
     private Image iconImage;
@@ -124,6 +132,8 @@ public class Knife : MonoBehaviour
             sb.AppendLine($"Lifesteal: {(lifestealPercent * 100f):F0}%");
             sb.AppendLine($"Crit: {(critChance * 100f):F0}% x{critMultiplier:F2}");
             sb.AppendLine($"Max Targets: {maxTargetsPerTick}");
+            if (applyStatusEffectOnHit)
+                sb.AppendLine($"On Hit: {statusEffectOnHit} ({statusEffectDuration:F1}s)");
 
             if (!string.IsNullOrWhiteSpace(extraTextField))
                 sb.AppendLine(extraTextField);
@@ -170,6 +180,13 @@ public class Knife : MonoBehaviour
                 Instantiate(slashEffect, col.transform.position, Quaternion.identity);
 
             SimpleHealth health = col.GetComponent<SimpleHealth>();
+            StatusEffectSystem splashStatus = col.GetComponent<StatusEffectSystem>();
+
+            if (splashStatus != null && health.IsAlive && !health.IsInvulnerable)
+            {
+                splashStatus.AddStatus(statusEffectOnHit, statusEffectDuration, 1f); // Add bleeding for 3 seconds with 1 second ticks
+            }
+
             if (health != null && health.IsAlive && !health.IsInvulnerable)
             {
                 // Main hit damage
@@ -177,6 +194,9 @@ public class Knife : MonoBehaviour
                 float mult = isCrit ? Mathf.Max(1f, critMultiplier) : 1f;
                 int dealt = Mathf.RoundToInt(damage * mult);
                 health.TakeDamage(dealt);
+
+
+
 
                 // Lifesteal from main hit
                 if (lifestealPercent > 0f && parentHealth != null && parentHealth.IsAlive)
@@ -194,10 +214,13 @@ public class Knife : MonoBehaviour
                         if (splashCol == null || splashCol == col || splashCol.gameObject == gameObject) continue;
 
                         SimpleHealth splashHealth = splashCol.GetComponent<SimpleHealth>();
+
+
                         if (splashHealth != null && splashHealth.IsAlive && !splashHealth.IsInvulnerable)
                         {
                             int splashDamage = Mathf.RoundToInt(dealt * splashDamagePercent);
                             splashHealth.TakeDamage(splashDamage);
+
                         }
                     }
                 }
