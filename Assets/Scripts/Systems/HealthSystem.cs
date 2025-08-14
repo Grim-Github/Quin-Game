@@ -182,6 +182,8 @@ public class SimpleHealth : MonoBehaviour
         if (mitigated <= 0) return;
 
         lastDamageTaken = mitigated;
+        GetComponent<DPSChecker>()?.RegisterDamage(mitigated);
+
         currentHealth = Mathf.Clamp(currentHealth - mitigated, 0, maxHealth);
         SyncSlider();
 

@@ -5,7 +5,6 @@ using UnityEngine;
 // to the next sibling WeaponUpgrades component under the same parent.
 // Also pushes that next upgrade's PowerUp into PowerUpChooser (expects a List<PowerUp>).
 //
-[ExecuteAlways]
 public class WeaponUpgrades : MonoBehaviour
 {
     public enum UpgradeType
