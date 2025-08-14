@@ -210,7 +210,10 @@ public class SimpleHealth : MonoBehaviour
         }
 
         if (bloodSFX != null)
-            Instantiate(bloodSFX, transform.position, Quaternion.identity);
+        {
+            Quaternion randomRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+            Instantiate(bloodSFX, transform.position, randomRotation);
+        }
 
         if (soundSource != null && damageClip != null)
             soundSource.PlayOneShot(damageClip);

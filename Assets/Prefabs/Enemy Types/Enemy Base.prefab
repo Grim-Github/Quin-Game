@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: -6411856879609721089}
   - component: {fileID: 8522411498283610141}
   - component: {fileID: 5771517332839581349}
+  - component: {fileID: 6700987529909624937}
   m_Layer: 7
   m_Name: Enemy Base
   m_TagString: Untagged
@@ -325,7 +326,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -518,6 +519,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooltipMessage: 
   appendExtraFromHealth: 1
+  textColor: {r: 1, g: 1, b: 1, a: 1}
+  uiAnchorOverride: {fileID: 0}
 --- !u!114 &5771517332839581349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,8 +544,31 @@ MonoBehaviour:
   zPosition: 0
   useSpawnPointZ: 1
   parent: {fileID: 0}
+  useCircleSpawn: 0
+  circleRadius: 1
+  circleCenter: {fileID: 0}
   lastSelectedIndex: -1
   lastSpawned: {fileID: 0}
+--- !u!114 &6700987529909624937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684754638328981509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983ef9fa8b32fe342b95317633cd2482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepClips:
+  - {fileID: 8300000, guid: 230b0600b1d5429418d53c475897de7f, type: 3}
+  - {fileID: 8300000, guid: 6e156e730abaec44986e73fa2b24f103, type: 3}
+  - {fileID: 8300000, guid: fdf99dbe1d6b45d408242e47ac21739b, type: 3}
+  - {fileID: 8300000, guid: a40344b185cc3f94b926e7255b93ad77, type: 3}
+  minVelocity: 0.1
+  stepInterval: 0.4
+  pitchVariation: 0.1
 --- !u!1 &6227486896796405968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,6 +1032,7 @@ MonoBehaviour:
   rangeRenderer: {fileID: 0}
   visualPadding: 0
   autoScaleRangeVisual: 1
+  statsTextInstance: {fileID: 0}
 --- !u!82 &5533731223449276409
 AudioSource:
   m_ObjectHideFlags: 0
