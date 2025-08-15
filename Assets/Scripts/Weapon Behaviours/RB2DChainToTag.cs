@@ -13,7 +13,7 @@ public class RB2DChainToTag : MonoBehaviour
     [Header("Targeting")]
     [SerializeField] private string targetTag = "Enemy";
     [Tooltip("Max number of retargets after the first hit.")]
-    [SerializeField] private int maxChains = 3;
+    [SerializeField] public int maxChains = 3;
     [Tooltip("Maximum search radius for next target (0 = unlimited).")]
     [SerializeField] private float searchRadius = 25f;
 

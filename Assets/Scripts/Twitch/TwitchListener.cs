@@ -58,7 +58,7 @@ public class TwitchListener : MonoBehaviour
     // Stopwatch time
     private float elapsedSeconds = 0f;
 
-    private HashSet<string> spawnedChatters = new HashSet<string>();
+    public List<Chatter> spawnedChatters = new List<Chatter>();
     [HideInInspector] public int currentSpawnCount = 0;
 
     private void Start()
@@ -71,7 +71,8 @@ public class TwitchListener : MonoBehaviour
             maxSpawnDistance = t;
         }
 
-        IRC.Instance.OnChatMessage += OnChatMessage;
+        if (IRC.Instance != null)
+            IRC.Instance.OnChatMessage += OnChatMessage;
     }
 
     private void Update()
@@ -84,7 +85,8 @@ public class TwitchListener : MonoBehaviour
             // Check if it's time to increase spawn cap
             if (spawnIncreaseInterval > 0f && elapsedSeconds >= nextSpawnIncreaseTime)
             {
-                if (Random.Range(0, 1) < chanceToUpgradeMinPower)
+                // Use Random.value (0..1f)
+                if (Random.value < chanceToUpgradeMinPower)
                 {
                     minPower++;
                 }
@@ -115,7 +117,7 @@ public class TwitchListener : MonoBehaviour
         if (prefab == null) return;
 
         string nameKey = chatter.tags.displayName.ToLowerInvariant();
-        if (spawnedChatters.Contains(nameKey)) return;
+        if (spawnedChatters.Contains(chatter)) return;
 
         Vector3 spawnPos;
         int safetyCounter = 0;
@@ -131,7 +133,7 @@ public class TwitchListener : MonoBehaviour
             spawnPos = player.position + offset;
             spawnPos.z += zOffset;
 
-            // NEW: require overlap with spawnOnLayers
+            // require overlap with spawnOnLayers
         } while (Physics2D.OverlapCircle(spawnPos, spawnCheckRadius, spawnOnLayers) == null
                  && safetyCounter < maxAttempts);
 
@@ -141,7 +143,7 @@ public class TwitchListener : MonoBehaviour
             return;
         }
 
-        spawnedChatters.Add(nameKey);
+        spawnedChatters.Add(chatter);
         currentSpawnCount++;
 
         GameObject instantiatedChatter = Instantiate(prefab, spawnPos, Quaternion.identity);
@@ -149,6 +151,7 @@ public class TwitchListener : MonoBehaviour
         var tracker = instantiatedChatter.AddComponent<ChatterTracker>();
         tracker.Init(
             listener: this,
+            chatter: chatter,
             nameKey: nameKey,
             player: player,
             minSpawnDistance: minSpawnDistance,
@@ -168,6 +171,10 @@ public class TwitchListener : MonoBehaviour
             stats.nameGUI.color = chatter.GetNameColor();
             stats.power = chatter.tags.badges.Length + minPower;
         }
+
+        var chatterMessage = instantiatedChatter.GetComponent<ChatterMessagePopups>();
+        if (chatterMessage != null)
+            chatterMessage.ShowMessage(chatter.message);
 
         Debug.Log($"<color=#fef83e><b>[MESSAGE]</b></color> Spawned ({prefab.name}) for {chatter.tags.displayName} at {spawnPos}");
     }
@@ -206,9 +213,9 @@ public class TwitchListener : MonoBehaviour
         return null;
     }
 
-    public void RemoveChatter(string nameKey)
+    public void RemoveChatter(Chatter chatter)
     {
-        if (spawnedChatters.Remove(nameKey))
+        if (spawnedChatters.Remove(chatter))
             currentSpawnCount = Mathf.Max(0, currentSpawnCount - 1);
     }
 
@@ -216,6 +223,7 @@ public class TwitchListener : MonoBehaviour
     {
         private TwitchListener listener;
         private string nameKey;
+        private Chatter chatter; // <-- store the chatter reference
 
         private Transform player;
         private float minSpawnDistance;
@@ -227,6 +235,7 @@ public class TwitchListener : MonoBehaviour
 
         public void Init(
             TwitchListener listener,
+            Chatter chatter,
             string nameKey,
             Transform player,
             float minSpawnDistance,
@@ -237,6 +246,7 @@ public class TwitchListener : MonoBehaviour
             float maxDistanceFromPlayer)
         {
             this.listener = listener;
+            this.chatter = chatter;     // <-- assign
             this.nameKey = nameKey;
 
             this.player = player;
@@ -286,7 +296,8 @@ public class TwitchListener : MonoBehaviour
 
         private void OnDestroy()
         {
-            listener?.RemoveChatter(nameKey);
+            // Remove the exact chatter instance we tracked
+            listener?.RemoveChatter(chatter);
         }
     }
 

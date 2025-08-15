@@ -167,13 +167,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 50
-  penetration: 2
+  penetration: 3
   damageLayers:
     serializedVersion: 2
     m_Bits: 128
   destroyOnTouchLayers:
     serializedVersion: 2
     m_Bits: 1
+  applyStatusEffectOnHit: 0
+  statusEffectOnHit: 0
+  statusEffectDuration: 3
   impactPrefab: {fileID: 0}
   spawnOnBlockedHit: 1
   spawnOnDamageHit: 1

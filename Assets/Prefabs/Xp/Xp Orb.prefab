@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 305872218719834409}
   - component: {fileID: 223877959965296366}
   - component: {fileID: 1738280694578222404}
+  - component: {fileID: 3088107068291830051}
   m_Layer: 2
   m_Name: Xp Orb
   m_TagString: Untagged
@@ -286,3 +287,15 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &3088107068291830051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469264671267830397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9ac1fc7f13b1e4eab63313a18ff78b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -166,7 +166,7 @@ public class SimpleShooter : MonoBehaviour
 
         if (bulletPrefab.TryGetComponent<RB2DChainToTag>(out var RB2D))
         {
-            sb.AppendLine($"Can Chain");
+            sb.AppendLine($"Can Chain {RB2D.maxChains} Times");
         }
 
 

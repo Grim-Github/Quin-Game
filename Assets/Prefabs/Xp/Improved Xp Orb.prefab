@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 305872218719834409}
   - component: {fileID: 223877959965296366}
   - component: {fileID: 7267073111414755011}
+  - component: {fileID: 2289027772744645065}
   m_Layer: 2
   m_Name: Improved Xp Orb
   m_TagString: Untagged
@@ -286,3 +287,15 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &2289027772744645065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469264671267830397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da9ac1fc7f13b1e4eab63313a18ff78b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
