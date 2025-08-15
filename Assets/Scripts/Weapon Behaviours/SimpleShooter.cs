@@ -131,6 +131,10 @@ public class SimpleShooter : MonoBehaviour
         string penetrationInfo = "N/A";
         if (bulletPrefab != null)
         {
+
+
+
+
             if (bulletPrefab.TryGetComponent<BulletDamageTrigger>(out var bullet))
             {
                 penetrationInfo = bullet.penetration.ToString();
@@ -152,8 +156,20 @@ public class SimpleShooter : MonoBehaviour
         sb.AppendLine($"Penetration: {penetrationInfo}");
         sb.AppendLine($"Crit: {(Mathf.Clamp01(critChance) * 100f):F0}% x{critMultiplier:F2}");
 
+
+
+
         if (applyStatusEffectOnHit)
             sb.AppendLine($"On Hit: {statusEffectOnHit} ({statusEffectDuration:F1}s)");
+
+
+
+        if (bulletPrefab.TryGetComponent<RB2DChainToTag>(out var RB2D))
+        {
+            sb.AppendLine($"Can Chain");
+        }
+
+
 
         if (!string.IsNullOrWhiteSpace(extraTextField))
             sb.AppendLine(extraTextField);

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -65,7 +65,7 @@ public class Accessory : MonoBehaviour
     private void OnDisable() { NotifyRootToRefresh(); }
     private void OnTransformChildrenChanged() { NotifyRootToRefresh(); }
 
-    // Public API � call this from upgrades after you activate/deactivate child accessories or edit descriptions
+    // Public API — call this from upgrades after you activate/deactivate child accessories or edit descriptions
     public void NotifyRootToRefresh()
     {
         var root = GetRootAccessory();
@@ -157,31 +157,39 @@ public class Accessory : MonoBehaviour
         @"^\s*([+\-]?\d+(?:\.\d+)?)\s*(%?)\s+([A-Za-z][A-Za-z\s/_\-\.]*)\s*$",
         RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
-    private string CombineStatLines(string raw)
+    // Call with keepMarkersInOutput=true when saving back to AccesoryDescription (preserve markers).
+    // Call with keepMarkersInOutput=false when building UI text (hide markers).
+    private string CombineStatLines(string raw, bool keepMarkersInOutput = true)
     {
         if (string.IsNullOrWhiteSpace(raw)) return string.Empty;
 
-        // Split on newlines and commas to be flexible with "a, b, c" or line-per-stat formats
+        // Split on newlines and commas
         var pieces = new List<string>();
-        var lines = raw.Split('\n');
-        foreach (var ln in lines)
-        {
-            var parts = ln.Split(',');
-            foreach (var p in parts)
+        foreach (var ln in raw.Split('\n'))
+            foreach (var p in ln.Split(','))
             {
                 var s = p.Trim();
                 if (s.Length > 0) pieces.Add(s);
             }
-        }
 
-        // Aggregation structures
-        var combinedOrder = new List<string>(); // preserves first-seen order of keys
-        var combinedValues = new Dictionary<string, float>(); // key -> sum
-        var percentFlags = new Dictionary<string, bool>(); // key -> isPercent
-        var rawUnparsed = new List<string>(); // keep lines we couldn't parse
+        var combinedOrder = new List<string>();
+        var combinedValues = new Dictionary<string, float>();
+        var percentFlags = new Dictionary<string, bool>();
+        var rawUnparsed = new List<string>();
 
         foreach (var piece in pieces)
         {
+            // Keep markers as-is, but don't parse them as stats
+            bool isStart = piece == "===AccessoryBonuses===";
+            bool isEnd = piece == "===/AccessoryBonuses===";
+
+            if (isStart || isEnd)
+            {
+                if (keepMarkersInOutput) rawUnparsed.Add(piece);
+                // If not keeping markers in output, we still skip parsing (so stats are recognized elsewhere)
+                continue;
+            }
+
             var m = statLineRegex.Match(piece);
             if (!m.Success)
             {
@@ -189,7 +197,6 @@ public class Accessory : MonoBehaviour
                 continue;
             }
 
-            // Parse numeric value
             if (!float.TryParse(m.Groups[1].Value, NumberStyles.Float, CultureInfo.InvariantCulture, out float val))
             {
                 rawUnparsed.Add(piece);
@@ -199,9 +206,8 @@ public class Accessory : MonoBehaviour
             bool isPercent = m.Groups[2].Value == "%";
             string nameRaw = m.Groups[3].Value.Trim();
 
-            // Normalize key (case-insensitive, compact spaces)
             string normName = NormalizeStatName(nameRaw);
-            string key = (isPercent ? "%" : "") + normName; // differentiate  "crit" vs "%crit"
+            string key = (isPercent ? "%" : "") + normName;
 
             if (!combinedValues.ContainsKey(key))
             {
@@ -212,30 +218,28 @@ public class Accessory : MonoBehaviour
             combinedValues[key] += val;
         }
 
-        // Build output: combined stats + any unparsed lines
         var outLines = new List<string>();
 
         foreach (var key in combinedOrder)
         {
             float sum = combinedValues[key];
             bool isPercent = percentFlags[key];
-            string displayName = DenormalizeStatName(key, isPercent);
-
-            // Skip zero results (e.g., +5 and -5 cancel)
             if (Mathf.Approximately(sum, 0f)) continue;
 
+            string displayName = DenormalizeStatName(key, isPercent);
             string num = FormatNumber(sum);
-            string sign = sum > 0 ? "+" : ""; // minus already included by formatting for negatives
+            string sign = sum > 0 ? "+" : "";
             string pct = isPercent ? "%" : "";
             outLines.Add($"{sign}{num}{pct} {displayName}");
         }
 
-        // Preserve any non-matching lines (at the end, in original encounter order)
-        outLines.AddRange(rawUnparsed);
+        // Append any non-stat lines (and, depending on flag, the markers)
+        foreach (var line in rawUnparsed)
+            outLines.Add(line);
 
-        // Join with newline
         return string.Join("\n", outLines);
     }
+
 
     private static string NormalizeStatName(string s)
     {
@@ -257,6 +261,8 @@ public class Accessory : MonoBehaviour
         }
         return sb.ToString();
     }
+
+
 
     private static string DenormalizeStatName(string key, bool isPercent)
     {

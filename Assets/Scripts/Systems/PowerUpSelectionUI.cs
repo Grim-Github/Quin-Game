@@ -90,19 +90,17 @@ public class PowerUpSelectionUI : MonoBehaviour
             return;
         }
 
-        // Build eligible candidates
+        // Keep lists in sync (chooser owns the logic)
+        powerUpChooser.SyncActiveToSelected(); // NEW
+
+        // Build eligible candidates strictly by caps/type rules
         List<int> candidates = new List<int>();
         for (int i = 0; i < powerUpChooser.powerUps.Count; i++)
         {
-            var pu = powerUpChooser.powerUps[i];
-
-            bool alreadyActive = pu.powerUpObject != null &&
-                                 pu.powerUpObject.scene.IsValid() &&
-                                 pu.powerUpObject.activeInHierarchy;
-
-            if (!alreadyActive && powerUpChooser.CanSelectByIndex(i))
+            if (powerUpChooser.CanSelectByIndex(i))
                 candidates.Add(i);
         }
+
 
         if (candidates.Count == 0)
         {

@@ -53,13 +53,16 @@ public class PowerUpChooser : MonoBehaviour
 
     private void Awake()
     {
+        SyncActiveToSelected();   // NEW
         RefreshStatsText();
     }
 
     private void OnEnable()
     {
+        SyncActiveToSelected();   // NEW
         RefreshStatsText();
     }
+
 
 #if UNITY_EDITOR
     private void OnValidate()
@@ -105,6 +108,30 @@ public class PowerUpChooser : MonoBehaviour
         // Update UI after selection
         RefreshStatsText();
         return true;
+    }
+    // Add inside PowerUpChooser class
+    public void SyncActiveToSelected()
+    {
+        if (powerUps == null) return;
+
+        // Move any already-active, in-scene objects to selectedPowerUps
+        for (int i = powerUps.Count - 1; i >= 0; i--)
+        {
+            var pu = powerUps[i];
+            if (pu == null || pu.powerUpObject == null) continue;
+
+            // Only treat as "already active" if it's an in-scene object AND active now
+            if (pu.powerUpObject.scene.IsValid() && pu.powerUpObject.activeInHierarchy)
+            {
+                // Avoid duplicates if something already inserted it
+                if (!selectedPowerUps.Contains(pu))
+                    selectedPowerUps.Add(pu);
+
+                powerUps.RemoveAt(i);
+            }
+        }
+
+        RefreshStatsText();
     }
 
     private int CountSelected(System.Predicate<PowerUp> predicate)
