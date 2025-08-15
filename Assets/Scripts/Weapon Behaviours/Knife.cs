@@ -184,7 +184,10 @@ public class Knife : MonoBehaviour
 
             if (splashStatus != null && health.IsAlive && !health.IsInvulnerable)
             {
-                splashStatus.AddStatus(statusEffectOnHit, statusEffectDuration, 1f); // Add bleeding for 3 seconds with 1 second ticks
+                if (applyStatusEffectOnHit)
+                {
+                    splashStatus.AddStatus(statusEffectOnHit, statusEffectDuration, 1f); // Add bleeding for 3 seconds with 1 second ticks
+                }
             }
 
             if (health != null && health.IsAlive && !health.IsInvulnerable)
@@ -262,6 +265,23 @@ public class Knife : MonoBehaviour
             UpdateRangeVisual();
     }
 #endif
+
+    public void EnableOnHitEffect(StatusEffectSystem.StatusType effectType)
+    {
+        applyStatusEffectOnHit = true;
+        statusEffectOnHit = effectType;
+    }
+
+    public void SetOnHitEffectDuration(float duration)
+    {
+        statusEffectDuration = duration;
+    }
+    public void EnableOnHitEffectByIndex(int effectIndex)
+    {
+        applyStatusEffectOnHit = true;
+        statusEffectOnHit = (StatusEffectSystem.StatusType)effectIndex;
+    }
+
 
     private void OnDrawGizmosSelected()
     {

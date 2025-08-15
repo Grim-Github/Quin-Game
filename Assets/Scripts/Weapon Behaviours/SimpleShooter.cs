@@ -100,6 +100,26 @@ public class SimpleShooter : MonoBehaviour
             statsTextInstance = null;
         }
     }
+    public void EnableOnHitEffect(StatusEffectSystem.StatusType effectType)
+    {
+        applyStatusEffectOnHit = true;
+        statusEffectOnHit = effectType;
+    }
+
+    public void SetOnHitEffectDuration(float duration)
+    {
+        statusEffectDuration = duration;
+    }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="effectIndex"></param>
+    public void EnableOnHitEffectByIndex(int effectIndex)
+    {
+        applyStatusEffectOnHit = true;
+        statusEffectOnHit = (StatusEffectSystem.StatusType)effectIndex;
+    }
+
 
     private void UpdateStatsText()
     {

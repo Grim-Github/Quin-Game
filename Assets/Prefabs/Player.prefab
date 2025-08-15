@@ -327,7 +327,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &276762356487948458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,7 +1033,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 2231107383271472083}
+  statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
+  uiParent: {fileID: 3771470944807517528}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &819256001971131541
 GameObject:
   m_ObjectHideFlags: 0
@@ -2053,7 +2085,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &1227099894277660166
 GameObject:
   m_ObjectHideFlags: 0
@@ -3180,7 +3228,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 1532793042552691948}
+  statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
+  uiParent: {fileID: 3771470944807517528}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &1465697286572918320
 GameObject:
   m_ObjectHideFlags: 0
@@ -5409,7 +5473,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
+  uiParent: {fileID: 3771470944807517528}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &3190016390325641590
 GameObject:
   m_ObjectHideFlags: 0
@@ -7814,7 +7894,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &4821376071138364741
 GameObject:
   m_ObjectHideFlags: 0
@@ -8751,7 +8847,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &5614068464345813072
 GameObject:
   m_ObjectHideFlags: 0
@@ -9233,7 +9345,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &6292668212798895234
 GameObject:
   m_ObjectHideFlags: 0
@@ -9421,7 +9549,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &6315981466353871724
 GameObject:
   m_ObjectHideFlags: 0
@@ -9486,7 +9630,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 4206175083726496136}
+  statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
+  uiParent: {fileID: 3771470944807517528}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &6391922091748824973
 GameObject:
   m_ObjectHideFlags: 0
@@ -10233,7 +10393,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &6917393764121337987
 GameObject:
   m_ObjectHideFlags: 0
@@ -10766,7 +10942,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &7847374846165817178
 GameObject:
   m_ObjectHideFlags: 0
@@ -11345,7 +11537,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &8201105541926267591
 GameObject:
   m_ObjectHideFlags: 0
@@ -11430,7 +11638,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &8223052747480331020
 GameObject:
   m_ObjectHideFlags: 0
@@ -12190,7 +12414,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &8497159287504080187
 GameObject:
   m_ObjectHideFlags: 0
@@ -12287,7 +12527,7 @@ MonoBehaviour:
   statusEffectDuration: 3
   projectileCount: 1
   spreadAngle: 30
-  shootClip: {fileID: 8300000, guid: 914eee10202a958438d1fb8d77da1f34, type: 3}
+  shootClip: {fileID: 8300000, guid: 28098e249b2b44641bec4d77c19f97ce, type: 3}
   statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
   uiParent: {fileID: 3771470944807517528}
   extraTextField: ' '
@@ -12920,7 +13160,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  extraTextField: 
+  statsTextInstance: {fileID: 0}
 --- !u!1 &8892643798934483796
 GameObject:
   m_ObjectHideFlags: 0
@@ -13423,11 +13679,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_text
-      value: 'Rerolls weapon <color=#D88FA1><b>rarity</b></color>, then completely
+      value: "Rerolls weapon <color=#D88FA1><b>rarity</b></color>, then completely
         re-rolls every <b>random</b> <color=#C6A664><b>modifier</b></color> and <color=#4A90E2><b>stat</b></color>
-        based on the new rarity. <i>Anything can happen!</i>
-
-'
+        based on the new rarity. \n"
       objectReference: {fileID: 0}
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_margin.x
@@ -13649,11 +13903,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_text
-      value: 'Selects one <b>random</b> <color=#C6A664><b>modifier</b></color> and
-        re-rolls its <color=#4A90E2><b>stat value</b></color> while keeping the same
-        effect type. <i>Small change, big impact.</i>
-
-'
+      value: "Selects one <b>random</b> <color=#C6A664><b>modifier</b></color> and
+        re-rolls its <color=#4A90E2><b>stat </b></color> \n"
       objectReference: {fileID: 0}
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_margin.x
@@ -13875,11 +14126,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_text
-      value: 'Increases the <color=#7FB77E><b>tier</b></color> level of one <b>random</b>
-        <color=#C6A664><b>modifier</b></color> toward its maximum, optionally re-rolling
-        one <b>random</b> <color=#4A90E2><b>stat</b></color>. <i>Closer to perfection.</i>
-
-'
+      value: "Reroll the <color=#7FB77E><b>tier</b></color> level of one <b>random</b>
+        <color=#C6A664><b>modifier</b></color> \n"
       objectReference: {fileID: 0}
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_margin.x
@@ -14101,11 +14349,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_text
-      value: 'Replaces one <b>random</b> <color=#C6A664><b>modifier</b></color> with
-        a different effect type, then rolls fresh <b>random</b> <color=#4A90E2><b>stats</b></color>
-        for it. <i>Out with the old, in with the new.</i>
-
-'
+      value: "Replaces one <b>random</b> <color=#C6A664><b>modifier</b></color> and
+        rolls fresh <b>random</b> <color=#4A90E2><b>stat</b></color> for it. \n"
       objectReference: {fileID: 0}
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_margin.x
@@ -14327,11 +14572,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_text
-      value: 'Keeps current <color=#D88FA1><b>rarity</b></color> but re-rolls every
-        <b>random</b> <color=#C6A664><b>modifier</b></color> and <color=#4A90E2><b>stat
-        value</b></color> for a fresh setup. <i>Same rarity, new potential.</i>
-
-'
+      value: "Re-rolls every <color=#C6A664><b>modifier</b></color> and <color=#4A90E2><b>stat</b></color>
+        for a fresh setup. \n"
       objectReference: {fileID: 0}
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_margin.x
@@ -14889,9 +15131,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_text
-      value: "Selects one <b>random</b> <color=#C6A664><b>modifier</b></color> and
-        <color=#D9534F><b>removes</b></color> it entirely from the weapon\u2019s
-        stats. <i>Sometimes less is\u2026 just less.</i>"
+      value: Selects one <b>random</b> <color=#C6A664><b>modifier</b></color> and
+        <color=#D9534F><b>removes</b></color> it.
       objectReference: {fileID: 0}
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_margin.x
@@ -15264,8 +15505,7 @@ PrefabInstance:
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_text
       value: Adds one <b>random</b> <color=#C6A664><b>modifier</b></color> from the
-        available pool and applies its <color=#4A90E2><b>stat value</b></color>.
-        <i>A surprise boost for your arsenal.</i>
+        available pool.
       objectReference: {fileID: 0}
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_margin.x
@@ -15488,8 +15728,7 @@ PrefabInstance:
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_text
       value: "Upgrades the weapon\u2019s <b>rarity</b> to the next tier while keeping
-        all current <color=#C6A664><b>modifiers</b></color> intact. <i>A leap in
-        quality.</i>"
+        all current <color=#C6A664><b>modifiers</b></color>. "
       objectReference: {fileID: 0}
     - target: {fileID: 8948387011462225072, guid: a015e792868585641aae8afc89c54767, type: 3}
       propertyPath: m_fontSize
