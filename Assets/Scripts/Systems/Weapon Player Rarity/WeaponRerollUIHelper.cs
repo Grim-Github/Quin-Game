@@ -151,8 +151,9 @@ public class WeaponRerollUIHelper : MonoBehaviour
             }
         }
 
-        if (selectedIcon != null)
-            selectedIcon.sprite = target ? GetWeaponSprite(target) : null;
+        if (selectedIcon != null && target != null)
+            selectedIcon.sprite = GetWeaponSprite(target);
+
 
         bool hasTarget = target != null;
         if (actionButtons != null)

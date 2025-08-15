@@ -79,7 +79,7 @@ public class ChatterMessagePopups : MonoBehaviour
         TextMeshPro tmp = msgInstance.GetComponent<TextMeshPro>();
         if (tmp)
         {
-            Color tmpColor = tmp.color; tmpColor.a = 0.4f;
+            Color tmpColor = Color.gray; tmpColor.a = 0.4f;
 
             tmp.color = tmpColor;
 

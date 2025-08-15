@@ -36,7 +36,7 @@ public class FollowNearest2D : MonoBehaviour
 
     private void Start()
     {
-        // Try to find player transform by tag
+        /// Try to find player transform by tag
         GameObject playerObj = GameObject.FindGameObjectWithTag(playerTag);
         if (playerObj != null)
             playerTransform = playerObj.transform;

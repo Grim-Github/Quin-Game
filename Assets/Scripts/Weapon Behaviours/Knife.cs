@@ -169,12 +169,15 @@ public class Knife : MonoBehaviour
             return;
         }
 
+        if (hits.Length > 0)
+        {
+            if (stabClip != null) shootSource?.PlayOneShot(stabClip);
+        }
+
         int targetsHit = 0;
         foreach (var col in hits)
         {
             if (col == null || col.gameObject == gameObject) continue;
-
-            if (stabClip != null) shootSource?.PlayOneShot(stabClip);
 
             if (slashEffect != null)
                 Instantiate(slashEffect, col.transform.position, Quaternion.identity);
