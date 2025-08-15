@@ -34,12 +34,7 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         // 1) SimpleHealth extras (unchanged from your file)
         if (appendExtraFromHealth && health != null)
         {
-            string extra = health.extraTextField; // assumes public on your SimpleHealth
-            if (!string.IsNullOrWhiteSpace(extra))
-            {
-                if (!string.IsNullOrWhiteSpace(full)) full += "\n\n";
-                full += extra;
-            }
+            full += "HP: " + (int)health.currentHealth + "/" + health.maxHealth;
         }
 
         // 2) InventoryButtonActivator requirement block

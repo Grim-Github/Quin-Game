@@ -22,6 +22,7 @@ public class Knife : MonoBehaviour
 
     [Header("On Hit Effects")]
     public bool applyStatusEffectOnHit = false;
+    public float statusApplyChance = 1f;    // optional: chance to apply on hit (0..1)
     public StatusEffectSystem.StatusType statusEffectOnHit = StatusEffectSystem.StatusType.Bleeding;
     public float statusEffectDuration = 3f; // Duration in seconds for the status effect
 
@@ -132,8 +133,13 @@ public class Knife : MonoBehaviour
             sb.AppendLine($"Lifesteal: {(lifestealPercent * 100f):F0}%");
             sb.AppendLine($"Crit: {(critChance * 100f):F0}% x{critMultiplier:F2}");
             sb.AppendLine($"Max Targets: {maxTargetsPerTick}");
+
             if (applyStatusEffectOnHit)
+            {
+                sb.AppendLine($"Status Effect Chance: {statusApplyChance * 100f:F0}%");
                 sb.AppendLine($"On Hit: {statusEffectOnHit} ({statusEffectDuration:F1}s)");
+            }
+
 
             if (!string.IsNullOrWhiteSpace(extraTextField))
                 sb.AppendLine(extraTextField);
@@ -189,7 +195,10 @@ public class Knife : MonoBehaviour
             {
                 if (applyStatusEffectOnHit)
                 {
-                    splashStatus.AddStatus(statusEffectOnHit, statusEffectDuration, 1f); // Add bleeding for 3 seconds with 1 second ticks
+                    if (Random.Range(0f, 1f) <= statusApplyChance)
+                    {
+                        splashStatus.AddStatus(statusEffectOnHit, statusEffectDuration, 1f); // Add bleeding for 3 seconds with 1 second ticks
+                    }
                 }
             }
 

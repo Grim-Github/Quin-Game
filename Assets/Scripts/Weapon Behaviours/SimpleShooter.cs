@@ -6,6 +6,7 @@ public class SimpleShooter : MonoBehaviour
 {
     [Header("Projectile Settings")]
     public GameObject bulletPrefab;
+    public Transform shootTransform; // Optional: where to spawn the bullet
     public float shootForce = 10f;
     public int damage = 15;
     public float bulletLifetime = 5f;
@@ -16,6 +17,7 @@ public class SimpleShooter : MonoBehaviour
 
     [Header("On Hit Effects")]
     public bool applyStatusEffectOnHit = false;
+    public float statusApplyChance = 1f;    // optional: chance to apply on hit (0..1)
     public StatusEffectSystem.StatusType statusEffectOnHit = StatusEffectSystem.StatusType.Bleeding;
     [Tooltip("Duration in seconds for the applied status effect.")]
     public float statusEffectDuration = 3f;
@@ -47,6 +49,11 @@ public class SimpleShooter : MonoBehaviour
     {
         shootSource = GetComponent<AudioSource>();
         powerUpChooser = GameObject.FindAnyObjectByType<PowerUpChooser>();
+
+        if (shootTransform == null)
+        {
+            shootTransform = transform; // Default to self if not set
+        }
 
         // Enqueue once, safely
         if (nextUpgrade != null && nextUpgrade.Upgrade != null && powerUpChooser != null && powerUpChooser.powerUps != null)
@@ -160,7 +167,11 @@ public class SimpleShooter : MonoBehaviour
 
 
         if (applyStatusEffectOnHit)
+        {
+            sb.AppendLine($"Status Effect Chance: {statusApplyChance * 100f:F0}%");
             sb.AppendLine($"On Hit: {statusEffectOnHit} ({statusEffectDuration:F1}s)");
+        }
+
 
 
 
@@ -222,7 +233,7 @@ public class SimpleShooter : MonoBehaviour
             );
 
             // Create projectile
-            GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPrefab, shootTransform.position, Quaternion.identity);
 
             // Point projectile
             float rotationAngle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
@@ -237,6 +248,7 @@ public class SimpleShooter : MonoBehaviour
             if (bullet.TryGetComponent<BulletDamageTrigger>(out var bulletDamage))
             {
                 bulletDamage.damageAmount = finalDamage;
+                bulletDamage.statusApplyChance = statusApplyChance;
                 bulletDamage.applyStatusEffectOnHit = applyStatusEffectOnHit;
                 bulletDamage.statusEffectOnHit = statusEffectOnHit;
                 bulletDamage.statusEffectDuration = statusEffectDuration;

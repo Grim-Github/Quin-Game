@@ -186,6 +186,7 @@ public class AccessoryBonuses : MonoBehaviour
         // "+5 Armor", "+1.2 Regen/s", "+25 Max Health", etc.
         _lastInjectedLines.Clear();
 
+
         foreach (var a in _applied)
         {
             switch (a.type)

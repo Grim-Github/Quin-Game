@@ -503,7 +503,7 @@ public class WeaponRarityController : MonoBehaviour
             shooter = shooter,
             ui = uiSink,
             tickAdapter = tick,
-            duration = (IDurationModule)(object)(knife ?? (object)shooter ?? null) // NEW
+            status = (IStatusTickModule)(object)(knife ?? (object)shooter ?? null) // NEW
         };
     }
 
@@ -531,7 +531,10 @@ public class WeaponRarityController : MonoBehaviour
 
             var knifeRef = GetComponent<Knife>();
             if (knifeRef != null && knifeRef.applyStatusEffectOnHit)
+            {
                 Add(true, new StatusEffectDurationUpgrade(), UpgradeType.StatusEffectDuration);
+                Add(true, new StatusApplyChanceUpgrade(), UpgradeType.StatusEffectChance);
+            }
         }
 
         if (c.shooter != null)
@@ -542,7 +545,11 @@ public class WeaponRarityController : MonoBehaviour
 
             var shooterRef = GetComponent<SimpleShooter>();
             if (shooterRef != null && shooterRef.applyStatusEffectOnHit)
+            {
                 Add(true, new StatusEffectDurationUpgrade(), UpgradeType.StatusEffectDuration);
+                Add(true, new StatusApplyChanceUpgrade(), UpgradeType.StatusEffectChance);
+            }
+
         }
 
         return list;
@@ -612,7 +619,15 @@ public class WeaponRarityController : MonoBehaviour
                 var r = tiers.Scale(ranges.statusDurationAdd, tiers.statusDuration);
                 sb.AppendLine("+Status Duration: " + RngF(r, 1) + "s");
                 continue;
+
             }
+            if (up is StatusApplyChanceUpgrade)
+            {
+                var r = tiers.Scale(ranges.statusChance, tiers.statusTickChance);
+                sb.AppendLine("+Status Chance: " + PctFromFrac(r, 0)); // e.g., 5%–25%
+                continue;
+            }
+
 
             // Knife-only
             if (up is KnifeLifestealUpgrade)

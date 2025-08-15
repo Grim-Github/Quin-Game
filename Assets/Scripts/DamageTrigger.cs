@@ -19,6 +19,7 @@ public class BulletDamageTrigger : MonoBehaviour
 
     [Header("On Hit Effects")]
     public bool applyStatusEffectOnHit = false;
+    public float statusApplyChance = 1f; // optional: chance to apply on hit (0..1)
     public StatusEffectSystem.StatusType statusEffectOnHit = StatusEffectSystem.StatusType.Bleeding;
     [Tooltip("Duration in seconds for the applied status effect.")]
     public float statusEffectDuration = 3f;
@@ -83,8 +84,12 @@ public class BulletDamageTrigger : MonoBehaviour
             var statusSys = other.GetComponentInParent<StatusEffectSystem>();
             if (statusSys != null)
             {
+                if (Random.Range(0f, 1f) <= statusApplyChance)
+                {
+                    statusSys.AddStatus(statusEffectOnHit, statusEffectDuration);
+                }
                 // This will refresh if the same status already exists (per your StatusEffectSystem)
-                statusSys.AddStatus(statusEffectOnHit, statusEffectDuration);
+
             }
         }
 

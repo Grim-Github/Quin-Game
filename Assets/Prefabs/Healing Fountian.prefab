@@ -438,6 +438,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6822408328617189311}
+        m_TargetAssemblyTypeName: SimpleInteractable2D, Grim
+        m_MethodName: PlaySoundAtPlayer
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: f7af8f3c6a0ba3e4bad25ce7c5b7c5ad, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &4008187606419370047
 BoxCollider2D:
   m_ObjectHideFlags: 0

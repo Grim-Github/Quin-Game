@@ -15,7 +15,7 @@ public class TwitchListener : MonoBehaviour
 
         [Header("Spawn Gate")]
         [Tooltip("Seconds since start before this prefab can be selected to spawn.")]
-        [Min(0f)] public float timeSpawn = 0f; // eligibility time
+        [MinMaxSlider(0, 600f)] public Vector2 timeSpawn = new Vector2(0, 600); // eligibility time
     }
 
     [Header("Spawn Setup")]
@@ -176,7 +176,6 @@ public class TwitchListener : MonoBehaviour
         if (chatterMessage != null)
         {
             chatterMessage.ShowMessage(chatter.message);
-            Debug.Log("yes");
         }
 
         Debug.Log($"<color=#fef83e><b>[MESSAGE]</b></color> Spawned ({prefab.name}) for {chatter.tags.displayName} at {spawnPos}");
@@ -184,36 +183,44 @@ public class TwitchListener : MonoBehaviour
 
     private GameObject PickWeightedPrefab()
     {
-        float now = elapsedSeconds; // use stopwatch time for gating
+        float now = elapsedSeconds; // stopwatch time
 
-        // Compute total weight only among eligible entries
+        // 1) Sum weights only for entries eligible in [min..max] window
         float total = 0f;
         foreach (var e in chatterPrefabs)
         {
-            if (e != null && e.prefab != null && e.weight > 0f && now >= e.timeSpawn)
+            if (e != null && e.prefab != null && e.weight > 0f && IsEligibleByTime(now, e.timeSpawn))
                 total += e.weight;
         }
-        if (total <= 0f) return null; // nothing eligible yet
+        if (total <= 0f) return null; // nothing eligible at this time
 
+        // 2) Weighted roll among only eligible entries
         float roll = Random.value * total;
         float acc = 0f;
 
         foreach (var e in chatterPrefabs)
         {
             if (e == null || e.prefab == null || e.weight <= 0f) continue;
-            if (now < e.timeSpawn) continue; // gate by time
+            if (!IsEligibleByTime(now, e.timeSpawn)) continue;
 
             acc += e.weight;
             if (roll <= acc)
                 return e.prefab;
         }
 
-        // Fallback (eligible first)
+        // 3) Fallback (shouldn't happen if total>0, but safe)
         foreach (var e in chatterPrefabs)
         {
-            if (e?.prefab != null && now >= e.timeSpawn) return e.prefab;
+            if (e?.prefab != null && IsEligibleByTime(now, e.timeSpawn))
+                return e.prefab;
         }
         return null;
+    }
+
+    private static bool IsEligibleByTime(float now, Vector2 window)
+    {
+        // window.x = earliest allowed time, window.y = latest allowed time
+        return now >= window.x && now <= window.y;
     }
 
     public void RemoveChatter(Chatter chatter)

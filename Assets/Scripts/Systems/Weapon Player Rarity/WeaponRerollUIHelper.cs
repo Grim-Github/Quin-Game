@@ -113,6 +113,7 @@ public class WeaponRerollUIHelper : MonoBehaviour
             index = 0;
 
         UpdateSelectionUI();
+
     }
 
     public void SelectPrev()
@@ -134,6 +135,7 @@ public class WeaponRerollUIHelper : MonoBehaviour
         var target = CurrentTarget();
         bool ctrl = lastCtrlHeld;
 
+        // --- Labels ---
         if (selectedNameLabel != null)
             selectedNameLabel.text = target ? target.name : "<none>";
 
@@ -145,23 +147,33 @@ public class WeaponRerollUIHelper : MonoBehaviour
             }
             else
             {
-                // When CTRL is held: show RARITY + RANGE SUMMARY (only applied upgrades, per your controller impl)
-                // When CTRL not held: show the weapon's normal extra text
+                // CTRL held => rarity + ranges overlay; otherwise show the weapon's own extra text
                 selectedExtraLabel.text = ctrl ? GetCtrlOverlayText(target) : GetExtraText(target);
             }
         }
 
-        if (selectedIcon != null && target != null)
-            selectedIcon.sprite = GetWeaponSprite(target);
+        // --- Icon ---
+        if (selectedIcon != null)
+        {
+            if (GetWeaponSprite(target) != null)
+            {
+                selectedIcon.sprite = GetWeaponSprite(target);
+            }
+        }
 
-
+        // --- Buttons ---
         bool hasTarget = target != null;
+
+        Debug.Log(controllers.Count);
+
+
         if (actionButtons != null)
         {
             foreach (var b in actionButtons)
-                if (b != null) b.interactable = hasTarget;
+                if (b != null) b.enabled = hasTarget;
         }
     }
+
 
     private void WireActions()
     {

@@ -40,7 +40,7 @@ public class SimpleHealth : MonoBehaviour
     [SerializeField] private Sprite iconSprite;
 
     [Header("SFX")]
-    [SerializeField] private GameObject[] bloodPool;
+    [SerializeField] private GameObject[] deathObjects;
     [SerializeField] private AudioClip[] damageClip;
     [SerializeField] private AudioClip[] deathClip;
     [SerializeField] private GameObject bloodSFX;
@@ -229,7 +229,7 @@ public class SimpleHealth : MonoBehaviour
 
         if (transform.CompareTag("Player"))
         {
-            float shakeStrength = Mathf.Clamp01((float)mitigated / maxHealth); // 0..1 based on % HP lost
+            float shakeStrength = Mathf.Clamp01((float)mitigated * 3 / maxHealth); // 0..1 based on % HP lost
             float duration = Mathf.Lerp(0.05f, 0.25f, shakeStrength);          // small to big duration
             float intensity = Mathf.Lerp(0.5f, 3f, shakeStrength);             // small to big intensity
 
@@ -286,6 +286,17 @@ public class SimpleHealth : MonoBehaviour
 
     private void Die()
     {
+        if (deathObjects.Length > 0)
+        {
+            foreach (var obj in deathObjects)
+            {
+                if (obj != null)
+                {
+                    Instantiate(obj, transform.position, Quaternion.identity);
+                }
+            }
+        }
+
         if (deathClip != null)
         {
             GameObject tempAudio = new GameObject("DeathSound");

@@ -1,11 +1,27 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-public class TriggerTeleport2D : MonoBehaviour
+public class UnityEventsRandom : MonoBehaviour
 {
+    public void Test(string textToTest)
+    {
+        Debug.Log(textToTest);
+    }
+}
+
+[RequireComponent(typeof(Collider2D))]
+public class TriggerTeleport2D : UnityEventsRandom
+{
+    [Header("Teleport Settings")]
     [SerializeField] private Transform destination;
     [SerializeField] private TriggerTeleport2D linkedTeleport;
     [SerializeField] private float linkCooldown = 0.2f;
+
+    [Header("Layer Filtering")]
+    [Tooltip("Only objects on these layers will be teleported.")]
+    [SerializeField] private LayerMask teleportLayers = (1 << 6) | (1 << 7); // default: layers 6 & 7
+
+    [Header("Sound")]
+    [SerializeField] private AudioClip teleportSFX;
 
     private bool cooldownActive = false;
 
@@ -19,7 +35,10 @@ public class TriggerTeleport2D : MonoBehaviour
     {
         if (cooldownActive || destination == null) return;
 
-        // Teleport the thing that entered
+        // Check layer eligibility
+        if ((teleportLayers.value & (1 << other.gameObject.layer)) == 0) return;
+
+        // Teleport
         var rb = other.attachedRigidbody;
         if (rb != null)
         {
@@ -32,10 +51,29 @@ public class TriggerTeleport2D : MonoBehaviour
             other.transform.position = destination.position;
         }
 
-        // Trigger cooldown on linked teleport to avoid instant back-teleport
+        // Play sound
+        PlaySound();
+
+        // Trigger cooldown on linked teleport
         if (linkedTeleport != null)
         {
             linkedTeleport.StartCooldown(linkCooldown);
+        }
+    }
+
+    private void PlaySound()
+    {
+        if (teleportSFX == null) return;
+
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            var playerAudio = player.GetComponent<AudioSource>();
+            if (playerAudio != null)
+            {
+                playerAudio.PlayOneShot(teleportSFX);
+            }
+
         }
     }
 

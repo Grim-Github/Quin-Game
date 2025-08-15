@@ -91,13 +91,13 @@ GameObject:
   - component: {fileID: 4859893581985587488}
   - component: {fileID: 4125131844956272248}
   - component: {fileID: 3942768026182763046}
-  - component: {fileID: 5020424717495316485}
   - component: {fileID: -6411856879609721089}
   - component: {fileID: 5771517332839581349}
   - component: {fileID: 6700987529909624937}
   - component: {fileID: 6292461430747482891}
   - component: {fileID: 7485042093931290822}
   - component: {fileID: 1227552129321894991}
+  - component: {fileID: 705530071313197328}
   m_Layer: 7
   m_Name: Enemy Base
   m_TagString: Enemy
@@ -250,7 +250,7 @@ MonoBehaviour:
   uiParent: {fileID: 0}
   extraTextField: 
   iconSprite: {fileID: 0}
-  bloodPool: []
+  deathObjects: []
   damageClip:
   - {fileID: 8300000, guid: 9b78a772c2d95074291fb5c3d97ee0d0, type: 3}
   - {fileID: 8300000, guid: 4da70bf93e7ae9a4fb87d0509942f9c8, type: 3}
@@ -430,59 +430,6 @@ MonoBehaviour:
   cadenceBoostPerPower: 0.01
   maxRangeMultiplier: 25
   maxRarityBiasFactor: 30
---- !u!114 &5020424717495316485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1684754638328981509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_Priority: 0
-  m_ComponentVersion: 5
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_AlphaCutoff: 0.1
-  m_ApplyToSortingLayers: 00000000
-  m_ShapePath:
-  - {x: -0.41666663, y: -0.5, z: 0}
-  - {x: -0.41666663, y: 0.5, z: 0}
-  - {x: 0.41666663, y: 0.5, z: 0}
-  - {x: 0.41666663, y: -0.5, z: 0}
-  m_ShapePathHash: 0
-  m_InstanceId: 0
-  m_ShadowShape2DComponent: {fileID: 562924106362761922}
-  m_ShadowShape2DProvider:
-    rid: 8693280127084134490
-  m_ShadowCastingSource: 2
-  m_ShadowMesh:
-    m_Mesh: {fileID: 0}
-    m_LocalBounds:
-      m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0.3766632, y: 0.4600067, z: 0}
-    m_EdgeProcessing: 1
-    m_TrimEdge: 0.04
-    m_FlipX: 0
-    m_FlipY: 0
-    m_InitialTrim: 0
-  m_CastingOption: 1
-  m_PreviousTrimEdge: 0.04
-  m_PreviousEdgeProcessing: 1
-  m_PreviousShadowCastingSource: 2
-  m_PreviousShadowShape2DSource: {fileID: 562924106362761922}
-  references:
-    version: 2
-    RefIds:
-    - rid: 8693280127084134490
-      type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
-      data: 
 --- !u!114 &-6411856879609721089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,8 +557,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTag: Player
-  activationRange: 12
+  activationRange: 10
   targetCanvas: {fileID: 3105641494143922297}
+--- !u!114 &705530071313197328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684754638328981509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0509da9ea8e4264cac6f07d79b68c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltipMessage: 
+  appendExtraFromHealth: 1
+  appendFromInventoryActivator: 0
+  textColor: {r: 0.9150943, g: 0.09927912, b: 0.09927912, a: 1}
+  uiAnchorOverride: {fileID: 0}
 --- !u!1 &6227486896796405968
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,7 +856,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1019,6 +983,7 @@ MonoBehaviour:
   splashRadius: 0
   splashDamagePercent: 0.5
   applyStatusEffectOnHit: 0
+  statusApplyChance: 1
   statusEffectOnHit: 0
   statusEffectDuration: 3
   lifestealPercent: 0

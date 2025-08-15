@@ -21,7 +21,7 @@ public sealed class WeaponContext
     public ICritModule crit;
     public IAttackSpeedModule attack;
     public IKnifeModule knife;
-    public IDurationModule duration;
+    public IStatusTickModule status;
     public IShooterModule shooter;
     public IUITextSink ui;                     // sink to write rarity block
     public TickAdapter tickAdapter;            // to reset tick cleanly
@@ -58,6 +58,33 @@ public sealed class DamageFlatUpgrade : IUpgrade
     }
 }
 
+
+public sealed class StatusApplyChanceUpgrade : IUpgrade
+{
+    public bool IsApplicable(WeaponContext c) => c.status != null;
+
+    public Action Apply(WeaponContext c, StringBuilder notes)
+    {
+        // Reuse your existing chance range+tier so no extra files need edits:
+        // - Range: ranges.critChanceAdd (Vector2 of fraction 0.05..0.20)
+        // - Tier:  tiers.critChance (Tier 1 = best)
+        var r = c.tiers.Scale(c.ranges.statusChance, c.tiers.statusTickChance);
+        float add = Mathf.Clamp01(UnityEngine.Random.Range(r.x, r.y));
+
+        float before = Mathf.Clamp01(c.status.StatusApplyChance);
+        float after = Mathf.Clamp01(before + add);
+        float actuallyAdded = after - before;
+
+        c.status.StatusApplyChance = after;
+
+        notes.AppendLine($"+{actuallyAdded * 100f:F0}% Status Chance (Tier {c.Roman(c.tiers.statusTickChance)})");
+
+        // undo restores the previous value (subtract exactly what we added)
+        return () => c.status.StatusApplyChance = Mathf.Clamp01(c.status.StatusApplyChance - actuallyAdded);
+    }
+}
+
+
 public sealed class DamagePercentAsFlatUpgrade : IUpgrade
 {
     public bool IsApplicable(WeaponContext c) => c.damage != null;
@@ -92,15 +119,15 @@ public sealed class AttackSpeedUpgrade : IUpgrade
 
 public sealed class StatusEffectDurationUpgrade : IUpgrade
 {
-    public bool IsApplicable(WeaponContext c) => c.duration != null;
+    public bool IsApplicable(WeaponContext c) => c.status != null;
     public Action Apply(WeaponContext c, StringBuilder notes)
     {
         var r = c.tiers.Scale(c.ranges.statusDurationAdd, c.tiers.statusDuration);
         float add = Mathf.Max(0f, UnityEngine.Random.Range(r.x, r.y));
-        float before = c.duration.Duration;
-        c.duration.Duration = before + add;
+        float before = c.status.Duration;
+        c.status.Duration = before + add;
         notes.AppendLine($"+{add:F1}s Status Duration (Tier {c.Roman(c.tiers.statusDuration)})");
-        return () => c.duration.Duration = before;
+        return () => c.status.Duration = before;
     }
 }
 

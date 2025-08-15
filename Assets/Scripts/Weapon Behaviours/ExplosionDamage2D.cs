@@ -44,7 +44,6 @@ public class ExplosionDamage2D : MonoBehaviour
     {
         Vector2 center = transform.position;
         var cols = Physics2D.OverlapCircleAll(center, radius, damageLayers);
-
         foreach (var col in cols)
         {
             if (col == null) continue;

@@ -10,6 +10,7 @@ public class TierSystem
     [Range(1, 10)] public int critChance = 5;
     [Range(1, 10)] public int critMultiplier = 5;
     [Range(1, 10)] public int statusDuration = 5;
+    [Range(1, 10)] public int statusTickChance = 5;
 
 
     [Header("Knife")]
@@ -37,6 +38,7 @@ public class TierSystem
         critChance = Roll(rng);
         critMultiplier = Roll(rng);
         statusDuration = Roll(rng);
+        statusTickChance = Roll(rng);
 
         knifeRadius = Roll(rng);
         knifeSplashRadius = Roll(rng);

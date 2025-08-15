@@ -26,6 +26,7 @@ public class Snappy2DController : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [Tooltip("If true, flips the sprite in the opposite direction.")]
     [SerializeField] private bool invertSpriteFlip = false;
+    [SerializeField] private AudioClip dashClip;
 
     private Rigidbody2D rb;
     private Vector2 input;
@@ -36,6 +37,7 @@ public class Snappy2DController : MonoBehaviour
     private float dashEndTime;
     private float nextDashTime;
     private Vector2 dashDirection;
+    private AudioSource playerSource;
 
     public float MoveSpeed => moveSpeed;
     public float DashSpeed => dashSpeed;
@@ -43,7 +45,9 @@ public class Snappy2DController : MonoBehaviour
     public float DashCooldown => dashCooldown;
 
     private void Awake()
+
     {
+        playerSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
         rb.gravityScale = 0f;
@@ -59,6 +63,10 @@ public class Snappy2DController : MonoBehaviour
         {
             if (input != Vector2.zero) // dash only if moving
             {
+                if (playerSource != null)
+                {
+                    playerSource.PlayOneShot(dashClip);
+                }
                 isDashing = true;
                 dashDirection = input.normalized;
                 dashEndTime = Time.time + dashDuration;

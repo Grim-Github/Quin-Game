@@ -44,6 +44,10 @@ public class SimpleInteractable2D : MonoBehaviour
         }
     }
 
+    public void PlaySoundAtPlayer(AudioClip sfx)
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>().PlayOneShot(sfx);
+    }
 
     void Update()
     {

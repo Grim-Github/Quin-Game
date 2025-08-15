@@ -3,7 +3,13 @@ using UnityEngine;
 public interface IDamageModule { int Damage { get; set; } }
 public interface ICritModule { float CritChance { get; set; } float CritMultiplier { get; set; } }
 public interface IAttackSpeedModule { float Interval { get; set; } }
-public interface IDurationModule { float Duration { get; set; } }
+
+public interface IStatusTickModule
+{
+    float StatusApplyChance { get; set; } // optional, used if you add a chance upgrade later
+    float Duration { get; set; }
+}
+
 public interface IKnifeModule
 {
     float LifestealPercent { get; set; }
@@ -25,7 +31,7 @@ public interface IUITextSink
 }
 
 // ===== Adapters (no reflection) =====
-public sealed class KnifeAdapter : IDamageModule, ICritModule, IKnifeModule, IDurationModule, IUITextSink
+public sealed class KnifeAdapter : IDamageModule, ICritModule, IKnifeModule, IStatusTickModule, IUITextSink
 {
     private readonly Knife k;
     public KnifeAdapter(Knife k) { this.k = k; }
@@ -37,17 +43,19 @@ public sealed class KnifeAdapter : IDamageModule, ICritModule, IKnifeModule, IDu
     public float SplashRadius { get => k.splashRadius; set => k.splashRadius = value; }
     public int MaxTargetsPerTick { get => k.maxTargetsPerTick; set => k.maxTargetsPerTick = value; }
     public float Duration { get => k.statusEffectDuration; set => k.statusEffectDuration = Mathf.Max(0f, value); }
+    public float StatusApplyChance { get => k.statusApplyChance; set => k.statusApplyChance = Mathf.Clamp01(value); }
     public string Text { get => k.extraTextField ?? ""; set => k.extraTextField = value; }
     public void SetText(string s) => k.extraTextField = s;
 }
 
-public sealed class ShooterAdapter : IDamageModule, ICritModule, IShooterModule, IDurationModule, IUITextSink
+public sealed class ShooterAdapter : IDamageModule, ICritModule, IShooterModule, IStatusTickModule, IUITextSink
 {
     private readonly SimpleShooter s;
     public ShooterAdapter(SimpleShooter s) { this.s = s; }
     public int Damage { get => s.damage; set => s.damage = value; }
     public float CritChance { get => s.critChance; set => s.critChance = Mathf.Clamp01(value); }
     public float CritMultiplier { get => s.critMultiplier; set => s.critMultiplier = value; }
+    public float StatusApplyChance { get => s.statusApplyChance; set => s.statusApplyChance = Mathf.Clamp01(value); }
     public float BulletLifetime { get => s.bulletLifetime; set => s.bulletLifetime = value; }
     public float ShootForce { get => s.shootForce; set => s.shootForce = value; }
     public float Duration { get => s.statusEffectDuration; set => s.statusEffectDuration = Mathf.Max(0f, value); }

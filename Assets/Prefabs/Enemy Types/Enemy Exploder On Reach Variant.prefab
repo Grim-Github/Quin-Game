@@ -1,0 +1,261 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8788722290585211189
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 562924106362761922, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -3189830935494748409, guid: 02859acead87ebf498926157c71aa600, type: 3}
+    - target: {fileID: 1684754638328981509, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_Name
+      value: Enemy Exploder On Reach Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1684754638328981509, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537684820452484303, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: maxHealth
+      value: 555
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537684820452484303, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: startingHealth
+      value: 555
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537684820452484303, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: bloodPool.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537684820452484303, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: 'bloodPool.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3500364665885549910, guid: 9c4d89636c51f5848822a0e42c65b7b8, type: 3}
+    - target: {fileID: 4537684820452484303, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: deathObjects.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537684820452484303, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: 'deathObjects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3500364665885549910, guid: 9c4d89636c51f5848822a0e42c65b7b8, type: 3}
+    - target: {fileID: 4859893581985587488, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.3913044
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859893581985587488, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.3913044
+      objectReference: {fileID: 0}
+    - target: {fileID: 5020424717495316485, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_ShadowMesh.m_LocalBounds.m_Extent.x
+      value: 0.6556549
+      objectReference: {fileID: 0}
+    - target: {fileID: 5020424717495316485, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_ShadowMesh.m_LocalBounds.m_Extent.y
+      value: 0.6556549
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381436693245369471, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.612
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: repeatEvent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: stoppingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: onReachDestination.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: onReachDestination.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: onReachDestination.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: onReachDestination.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2060706954687554221}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: onReachDestination.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5120249826371646970}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: onReachDestination.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: onReachDestination.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: onReachDestination.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InstantiateExplosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: onReachDestination.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Kill
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: onReachDestination.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: EnemyChaser, Grim
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: onReachDestination.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: SimpleHealth, Grim
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: onReachDestination.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 6304334721421402834, guid: 66b86de644497f14294ddc95584a5c7f, type: 3}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: onReachDestination.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: onReachDestination.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1684754638328981509, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2182773576065163061}
+  m_SourcePrefab: {fileID: 100100000, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+--- !u!114 &2060706954687554221 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+  m_PrefabInstance: {fileID: 8788722290585211189}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7968736021941188912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd7240510cf7298418966caa1ecda653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5120249826371646970 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4537684820452484303, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+  m_PrefabInstance: {fileID: 8788722290585211189}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7968736021941188912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbde2f8b9e5210143a9593e885331f2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &7968736021941188912 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1684754638328981509, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+  m_PrefabInstance: {fileID: 8788722290585211189}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2182773576065163061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7968736021941188912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 2
+  m_LightType: 2
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 0.91372555, g: 0.098039225, b: 0.098039225, a: 1}
+  m_Intensity: 1
+  m_LightVolumeIntensity: 1
+  m_LightVolumeEnabled: 0
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: -3189830935494748409, guid: 02859acead87ebf498926157c71aa600, type: 3}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowsEnabled: 1
+  m_ShadowIntensity: 0.75
+  m_ShadowSoftness: 0.3
+  m_ShadowSoftnessFalloffIntensity: 0.5
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.6956522, y: 0.6956522, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}

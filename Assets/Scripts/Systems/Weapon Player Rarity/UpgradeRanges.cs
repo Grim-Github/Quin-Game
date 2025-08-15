@@ -10,6 +10,7 @@ public class UpgradeRanges
     public Vector2 critChanceAdd = new Vector2(0.05f, 0.20f);
     public Vector2 critMultAdd = new Vector2(0.25f, 1.00f);
     public Vector2 statusDurationAdd = new Vector2(0.1f, 0.30f); // +5% to +20%
+    public Vector2 statusChance = new Vector2(0.01f, 0.30f); // reduce interval by 10%..30%
 
 
     [Header("Knife-only")]

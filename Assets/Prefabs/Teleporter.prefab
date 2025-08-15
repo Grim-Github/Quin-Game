@@ -97,6 +97,10 @@ MonoBehaviour:
   destination: {fileID: 0}
   linkedTeleport: {fileID: 0}
   linkCooldown: 0.2
+  teleportLayers:
+    serializedVersion: 2
+    m_Bits: 192
+  teleportSFX: {fileID: 8300000, guid: 276464621b982c145b2098334f9cf444, type: 3}
 --- !u!212 &6972660485991331741
 SpriteRenderer:
   m_ObjectHideFlags: 0

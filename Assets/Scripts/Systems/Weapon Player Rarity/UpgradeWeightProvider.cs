@@ -12,6 +12,7 @@ public enum UpgradeType
     AttackSpeed,
     Crit,
     StatusEffectDuration,
+    StatusEffectChance,
     KnifeLifesteal,
     KnifeRadius,
     KnifeSplash,
@@ -34,6 +35,7 @@ public class UpgradeWeightTable
     [Min(0f)] public float attackSpeed = 1f;
     [Min(0f)] public float crit = 1f;
     [Min(0f)] public float statusDuration = 1f;
+    [Min(0f)] public float statusChance = 1f;
 
     [Header("Knife")]
     [Min(0f)] public float knifeLifesteal = 1f;
@@ -53,6 +55,7 @@ public class UpgradeWeightTable
         UpgradeType.AttackSpeed => attackSpeed,
         UpgradeType.Crit => crit,
         UpgradeType.StatusEffectDuration => statusDuration,
+        UpgradeType.StatusEffectChance => statusChance,
         UpgradeType.KnifeLifesteal => knifeLifesteal,
         UpgradeType.KnifeRadius => knifeRadius,
         UpgradeType.KnifeSplash => knifeSplash,
