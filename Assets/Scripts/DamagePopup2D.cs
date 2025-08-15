@@ -22,7 +22,7 @@ public class DamagePopup2D : MonoBehaviour
 
     void Update()
     {
-        float dt = Time.deltaTime;
+        float dt = Time.unscaledDeltaTime;
         age += dt;
 
         // move up

@@ -118,6 +118,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3395601916232499452}
   - {fileID: 4818849166951042945}
   - {fileID: 2659867389249366696}
   m_Father: {fileID: 0}
@@ -250,8 +251,14 @@ MonoBehaviour:
   extraTextField: 
   iconSprite: {fileID: 0}
   bloodPool: []
-  damageClip: {fileID: 8300000, guid: b9c384eeb299c1b4fb0785c2b1d9cac3, type: 3}
-  deathClip: {fileID: 8300000, guid: 6855793d09d7aa444a323331fd00ff39, type: 3}
+  damageClip:
+  - {fileID: 8300000, guid: 9b78a772c2d95074291fb5c3d97ee0d0, type: 3}
+  - {fileID: 8300000, guid: 4da70bf93e7ae9a4fb87d0509942f9c8, type: 3}
+  - {fileID: 8300000, guid: b9c384eeb299c1b4fb0785c2b1d9cac3, type: 3}
+  deathClip:
+  - {fileID: 8300000, guid: 6855793d09d7aa444a323331fd00ff39, type: 3}
+  - {fileID: 8300000, guid: 790b96198b3860d459bc10ec5f650eb4, type: 3}
+  - {fileID: 8300000, guid: cb7c9c8eb2874d940b6b2cb67e0c7f28, type: 3}
   bloodSFX: {fileID: 5688528864766040321, guid: ab01d19b0799ef34fb9cb0524be1a66c, type: 3}
   loot: {fileID: 5771517332839581349}
   spriteRenderer: {fileID: 0}
@@ -331,7 +338,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 50
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -602,7 +609,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messagePrefab: {fileID: 2924289727893196464, guid: a8aea507684d95a4c8b9545db21cf2cd, type: 3}
+  messageSound: {fileID: 8300000, guid: eed08cbce49ddb9438d50650b92d570b, type: 3}
   spawnOffset: {x: 0, y: 1.5, z: 0}
+  minPitch: 0.9
+  maxPitch: 1.1
+  letterDelay: 0.03
 --- !u!1 &6227486896796405968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,3 +1314,65 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1001 &2620156982248861732
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5887235733221618242}
+    m_Modifications:
+    - target: {fileID: 811548532155576536, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 811548532155576536, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.507
+      objectReference: {fileID: 0}
+    - target: {fileID: 811548532155576536, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 811548532155576536, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 811548532155576536, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 811548532155576536, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 811548532155576536, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 811548532155576536, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 811548532155576536, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 811548532155576536, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070681909692254483, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
+      propertyPath: m_Name
+      value: Walk Particle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
+--- !u!4 &3395601916232499452 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 811548532155576536, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
+  m_PrefabInstance: {fileID: 2620156982248861732}
+  m_PrefabAsset: {fileID: 0}

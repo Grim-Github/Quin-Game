@@ -41,8 +41,8 @@ public class SimpleHealth : MonoBehaviour
 
     [Header("SFX")]
     [SerializeField] private GameObject[] bloodPool;
-    [SerializeField] private AudioClip damageClip;
-    [SerializeField] private AudioClip deathClip;
+    [SerializeField] private AudioClip[] damageClip;
+    [SerializeField] private AudioClip[] deathClip;
     [SerializeField] private GameObject bloodSFX;
 
     [Header("Loot")]
@@ -219,7 +219,7 @@ public class SimpleHealth : MonoBehaviour
         }
 
         if (soundSource != null && damageClip != null)
-            soundSource.PlayOneShot(damageClip);
+            soundSource.PlayOneShot(damageClip[Random.Range(0, damageClip.Length)]);
 
         if (spriteRenderer != null)
         {
@@ -229,8 +229,13 @@ public class SimpleHealth : MonoBehaviour
 
         if (transform.CompareTag("Player"))
         {
-            FindAnyObjectByType<OrthoScrollZoom>()?.CameraShake(0.1f, 2f);
+            float shakeStrength = Mathf.Clamp01((float)mitigated / maxHealth); // 0..1 based on % HP lost
+            float duration = Mathf.Lerp(0.05f, 0.25f, shakeStrength);          // small to big duration
+            float intensity = Mathf.Lerp(0.5f, 3f, shakeStrength);             // small to big intensity
+
+            FindAnyObjectByType<OrthoScrollZoom>()?.CameraShake(duration, intensity);
         }
+
 
         if (currentHealth <= 0)
             Die();
@@ -285,9 +290,10 @@ public class SimpleHealth : MonoBehaviour
         {
             GameObject tempAudio = new GameObject("DeathSound");
             var tempSource = tempAudio.AddComponent<AudioSource>();
-            tempSource.clip = deathClip;
+            var deathClipSelected = deathClip[Random.Range(0, deathClip.Length)];
+            tempSource.clip = deathClipSelected;
             tempSource.Play();
-            Destroy(tempAudio, deathClip.length);
+            Destroy(tempAudio, deathClipSelected.length);
         }
 
         if (loot != null)

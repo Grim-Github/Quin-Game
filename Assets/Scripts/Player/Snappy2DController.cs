@@ -1,4 +1,5 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Snappy2DController : MonoBehaviour
@@ -12,6 +13,9 @@ public class Snappy2DController : MonoBehaviour
     [SerializeField] private bool instant = true;
     [Tooltip("When not instant: how fast velocity moves toward target. Higher = snappier.")]
     [SerializeField] private float acceleration = 50f;
+
+    [Header("UI")]
+    [SerializeField] private Slider dashSlider;
 
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 12f;
@@ -109,6 +113,19 @@ public class Snappy2DController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (dashSlider != null)
+        {
+            float remaining = Mathf.Max(0f, nextDashTime - Time.time);
+            float fill = 1f - Mathf.Clamp01(remaining / dashCooldown); // 1 = ready
+
+            if (fill >= 1f)
+                dashSlider.value = 0f; // ready → empty
+            else
+                dashSlider.value = fill; // cooling down → fill growing
+        }
+
+
+
         if (isDashing)
         {
             rb.linearVelocity = dashDirection * dashSpeed;

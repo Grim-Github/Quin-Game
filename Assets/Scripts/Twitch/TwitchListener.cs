@@ -174,7 +174,10 @@ public class TwitchListener : MonoBehaviour
 
         var chatterMessage = instantiatedChatter.GetComponent<ChatterMessagePopups>();
         if (chatterMessage != null)
+        {
             chatterMessage.ShowMessage(chatter.message);
+            Debug.Log("yes");
+        }
 
         Debug.Log($"<color=#fef83e><b>[MESSAGE]</b></color> Spawned ({prefab.name}) for {chatter.tags.displayName} at {spawnPos}");
     }
