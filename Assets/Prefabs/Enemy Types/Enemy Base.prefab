@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 7485042093931290822}
   - component: {fileID: 1227552129321894991}
   - component: {fileID: 705530071313197328}
+  - component: {fileID: 6779586150045975674}
   m_Layer: 7
   m_Name: Enemy Base
   m_TagString: Enemy
@@ -240,7 +241,7 @@ MonoBehaviour:
   maxHealth: 40
   startingHealth: 40
   reservedHealth: 0
-  invulnerabilityDuration: 0.05
+  invulnerabilityDuration: 0
   regenRate: 0
   armor: 0
   armorScaling: 10
@@ -257,10 +258,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9b78a772c2d95074291fb5c3d97ee0d0, type: 3}
   - {fileID: 8300000, guid: 4da70bf93e7ae9a4fb87d0509942f9c8, type: 3}
   - {fileID: 8300000, guid: b9c384eeb299c1b4fb0785c2b1d9cac3, type: 3}
-  deathClip:
-  - {fileID: 8300000, guid: 6855793d09d7aa444a323331fd00ff39, type: 3}
-  - {fileID: 8300000, guid: 790b96198b3860d459bc10ec5f650eb4, type: 3}
-  - {fileID: 8300000, guid: cb7c9c8eb2874d940b6b2cb67e0c7f28, type: 3}
+  deathClip: []
   bloodSFX: {fileID: 5688528864766040321, guid: ab01d19b0799ef34fb9cb0524be1a66c, type: 3}
   loot: {fileID: 5771517332839581349}
   spriteRenderer: {fileID: 0}
@@ -479,10 +477,21 @@ MonoBehaviour:
   entries:
   - prefab: {fileID: 4469264671267830397, guid: f1158209e40541646a5fc348d2910d00, type: 3}
     weight: 15
+    amountOptions:
+    - amount: 1
+      weight: 30
+    - amount: 2
+      weight: 1
   - prefab: {fileID: 1878305132109642921, guid: 62f80dc1511c5de468a8dbdaf172c2cc, type: 3}
     weight: 2
+    amountOptions:
+    - amount: 1
+      weight: 1
   - prefab: {fileID: 8364669261576029562, guid: 4bf05456461aca74682d634e7d2d0931, type: 3}
     weight: 1
+    amountOptions:
+    - amount: 1
+      weight: 1
   rollOnAwake: 0
   seed: 0
   spawnPoint: {fileID: 5887235733221618242}
@@ -530,6 +539,8 @@ MonoBehaviour:
   enableBleeding: 1
   bleedingDamagePerTick: 5
   health: {fileID: 0}
+  defaultDuration: 5
+  defaultTickInterval: 1
 --- !u!114 &7485042093931290822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,6 +591,48 @@ MonoBehaviour:
   appendFromInventoryActivator: 0
   textColor: {r: 0.9150943, g: 0.09927912, b: 0.09927912, a: 1}
   uiAnchorOverride: {fileID: 0}
+--- !u!114 &6779586150045975674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684754638328981509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3942f68501f7147a399108f9fd8d58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictToThisDisplayName: 1
+  actions:
+  - messageActivation: LOLW
+    onTriggered:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6292461430747482891}
+          m_TargetAssemblyTypeName: StatusEffectSystem, Grim
+          m_MethodName: ApplyStatusEffect_Int
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 4125131844956272248}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: 7ec45f4d99cef8440afa52aa51b6b0c8, type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6227486896796405968
 GameObject:
   m_ObjectHideFlags: 0

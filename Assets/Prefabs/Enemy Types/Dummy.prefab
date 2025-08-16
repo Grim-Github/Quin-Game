@@ -25,6 +25,10 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4537684820452484303, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: extraTextField
+      value: test
+      objectReference: {fileID: 0}
+    - target: {fileID: 4537684820452484303, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: startingHealth
       value: 1000
       objectReference: {fileID: 0}
@@ -38,11 +42,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.1105165
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3677733
+      value: -4.5622263
       objectReference: {fileID: 0}
     - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -54,15 +58,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -82,10 +86,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7188273193220791366, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8129514716054302165, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8711306348562255683, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8711306348562255683, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
@@ -97,5 +105,38 @@ PrefabInstance:
     - {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1684754638328981509, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5687716321782393202}
   m_SourcePrefab: {fileID: 100100000, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+--- !u!114 &665516024587718543 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4184141167979861600, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+  m_PrefabInstance: {fileID: 3687724019607837167}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &2615498605530509802 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1684754638328981509, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+  m_PrefabInstance: {fileID: 3687724019607837167}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5687716321782393202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2615498605530509802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f7a6b2b570ede946a7188411d1c5082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dpsText: {fileID: 665516024587718543}
+  dpsWindow: 3

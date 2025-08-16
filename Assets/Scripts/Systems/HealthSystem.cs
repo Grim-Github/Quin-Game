@@ -243,7 +243,13 @@ public class SimpleHealth : MonoBehaviour
         if (currentHealth <= 0)
             Die();
         else
-            StartCoroutine(InvulnerabilityCoroutine());
+        {
+            if (invulnerabilityDuration > 0)
+            {
+                StartCoroutine(InvulnerabilityCoroutine());
+            }
+        }
+
     }
 
     private int ApplyArmor(int rawDamage)
@@ -300,7 +306,7 @@ public class SimpleHealth : MonoBehaviour
             }
         }
 
-        if (deathClip != null)
+        if (deathClip.Length > 0)
         {
             GameObject tempAudio = new GameObject("DeathSound");
             var tempSource = tempAudio.AddComponent<AudioSource>();

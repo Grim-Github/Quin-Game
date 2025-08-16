@@ -65,8 +65,6 @@ public class Knife : MonoBehaviour
     [SerializeField] private bool autoScaleRangeVisual = true;
 
 
-
-
     [HideInInspector] public TextMeshProUGUI statsTextInstance;
     private GameObject statsGameobjectInstance;
     private Image iconImage;
@@ -168,6 +166,8 @@ public class Knife : MonoBehaviour
     }
     public void OnKnifeTick()
     {
+
+
         if (selfSfxObject != null)
             Instantiate(selfSfxObject, transform.position, Quaternion.identity);
 

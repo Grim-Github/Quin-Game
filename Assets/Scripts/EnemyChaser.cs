@@ -75,7 +75,15 @@ public class EnemyChaser : MonoBehaviour
         {
             if (!ses.HasStatus(StatusEffectSystem.StatusType.Stun))
             {
-                rb.linearVelocity = desiredDir * moveSpeed;
+                if (!ses.HasStatus(StatusEffectSystem.StatusType.Speed))
+                {
+                    rb.linearVelocity = desiredDir * moveSpeed;
+                }
+                else
+                {
+                    rb.linearVelocity = desiredDir * (moveSpeed * 2);
+                }
+
             }
             else
             {

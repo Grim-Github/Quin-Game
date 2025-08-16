@@ -15,6 +15,8 @@ public class StatusEffectSystem : MonoBehaviour
     {
         Bleeding = 0,
         Stun = 1,
+        Speed = 2,
+        Rush = 3
         // Add more: Poison, Stunned, Shielded, etc.
     }
 
@@ -36,6 +38,11 @@ public class StatusEffectSystem : MonoBehaviour
 
     [Tooltip("Optional: target health. If not set, auto-finds on this GameObject.")]
     [SerializeField] private SimpleHealth health; // your health system
+
+    [Header("UnityEvent Defaults")]
+    [SerializeField, Min(0.01f)] private float defaultDuration = 5f;
+    [SerializeField, Min(0f)] private float defaultTickInterval = 1f;
+
 
     // ---- Internal model ----
     private class Effect
@@ -88,16 +95,23 @@ public class StatusEffectSystem : MonoBehaviour
     }
 
     /// <summary>
+    /// UnityEvent-friendly: apply by enum int (cast). 
+    /// In the Inspector you can pass an int for the enum (0=Bleeding, 1=Stun, 2=Speed...).
+    /// Uses defaultDuration and defaultTickInterval.
+    /// </summary>
+    public void ApplyStatusEffect_Int(int statusTypeInt)
+    {
+        var type = (StatusType)Mathf.Clamp(statusTypeInt, 0, Enum.GetNames(typeof(StatusType)).Length - 1);
+        AddStatus(type, defaultDuration, defaultTickInterval);
+    }
+
+
+    /// <summary>
     /// Adds or REFRESHES a status effect.
     /// If already active, resets remaining time to 'duration' (no stacking),
     /// and resets tick cadence. Does NOT fire OnStart again on refresh.
     /// </summary>
-    /// <summary>
-    /// Adds or refreshes a status effect.
-    /// If already active, ONLY resets remaining time to 'duration'
-    /// (keeps existing tickInterval, tickTimer, and tickCount).
-    /// Does NOT fire OnStart again on refresh.
-    /// </summary>
+
     public void AddStatus(StatusType type, float duration, float tickInterval = 1f)
     {
         duration = Mathf.Max(0f, duration);

@@ -154,7 +154,14 @@ public class Snappy2DController : MonoBehaviour
             {
                 if (!ses.HasStatus(StatusEffectSystem.StatusType.Stun))
                 {
-                    rb.linearVelocity = velocity;
+                    if (!ses.HasStatus(StatusEffectSystem.StatusType.Speed))
+                    {
+                        rb.linearVelocity = velocity;
+                    }
+                    else
+                    {
+                        rb.linearVelocity = velocity * 2;
+                    }
                 }
                 else
                 {

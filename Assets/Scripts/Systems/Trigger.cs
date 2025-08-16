@@ -33,6 +33,11 @@ public class Trigger2DEvent : MonoBehaviour
         GameObject.FindGameObjectWithTag("GameController").GetComponent<XpSystem>().AddExperience(Random.Range(value, value * 2));
     }
 
+    public void Hearth(int value)
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<SimpleHealth>().Heal(Random.Range(value / 2, value));
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!IsInLayerMask(other.gameObject, triggerLayers)) return;

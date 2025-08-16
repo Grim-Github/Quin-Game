@@ -1,4 +1,4 @@
-using Lexone.UnityTwitchChat;
+﻿using Lexone.UnityTwitchChat;
 using System.Collections;
 using TMPro;
 using UnityEngine;
