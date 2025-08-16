@@ -4953,21 +4953,6 @@ MonoBehaviour:
   - itemName: Orb 1
     amount: 123
     icon: {fileID: 8284900746422525209, guid: 609184cb4f9786a4c803cb49ab42bb4f, type: 3}
-    OnUse:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5791096993671492205}
-          m_TargetAssemblyTypeName: SimpleHealth, Grim
-          m_MethodName: TakeDamage
-          m_Mode: 3
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 5
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
   OnInventoryChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6474,8 +6459,6 @@ MonoBehaviour:
   itemUIPrefab: {fileID: 678029098258582335, guid: 28a9109b61fcad84396730b5880ffa16, type: 3}
   clearBeforePopulate: 1
   subscribeInCode: 1
-  consumeOnClick: 1
-  consumeAmount: 1
 --- !u!1 &3136231610781122561
 GameObject:
   m_ObjectHideFlags: 0
@@ -7923,7 +7906,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7536114075999525916
 Transform:
   m_ObjectHideFlags: 0

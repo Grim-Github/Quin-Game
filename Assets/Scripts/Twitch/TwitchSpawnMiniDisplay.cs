@@ -45,7 +45,7 @@ public class TwitchSpawnMiniDisplay : MonoBehaviour
         string v = ColorTag(valueHex);
         string n = ColorTag(noteHex);
 
-        int cur = Mathf.Max(0, listener.currentSpawnCount);
+        int cur = Mathf.Max(0, listener.spawnedChatters.Count);
         int cap = Mathf.Max(0, listener.maxSpawnCount);
         float interval = Mathf.Max(0f, listener.spawnIncreaseInterval);
         int inc = Mathf.Max(0, listener.spawnIncreaseAmount);
