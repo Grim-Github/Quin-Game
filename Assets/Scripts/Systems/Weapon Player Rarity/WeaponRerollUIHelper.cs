@@ -164,8 +164,6 @@ public class WeaponRerollUIHelper : MonoBehaviour
         // --- Buttons ---
         bool hasTarget = target != null;
 
-        Debug.Log(controllers.Count);
-
 
         if (actionButtons != null)
         {

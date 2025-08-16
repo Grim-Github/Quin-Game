@@ -344,7 +344,7 @@ public class SimpleHealth : MonoBehaviour
         // Increase reserved health but clamp so it never exceeds maxHealth
         reservedHealth = Mathf.Clamp(reservedHealth + amount, 0, maxHealth);
 
-        IncreaseMaxHealth(-reservedHealth);
+        IncreaseMaxHealth(-amount);
 
 
         // Update UI

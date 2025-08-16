@@ -49,6 +49,13 @@ MonoBehaviour:
     m_Bits: 64
   moveSpeed: 7
   searchRadius: 10
+  updateInterval: 1
+  playerTag: Player
+  searchAroundPlayer: 0
+  stopDistance: 0.5
+  decelerationRadius: 2
+  useRigidbodyMovement: 1
+  otherFollowers: []
 --- !u!1 &6218612490984896125
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,16 +138,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1832326421807717072, guid: 1f7be2eebcfd8854781b2baf0cf619ed, type: 3}
+  shootTransforms: []
   shootForce: 20
   damage: 8
-  spawnOffset: 0
   bulletLifetime: 5
+  critChance: 0
+  critMultiplier: 2
+  applyStatusEffectOnHit: 0
+  statusApplyChance: 1
+  statusEffectOnHit: 0
+  statusEffectDuration: 3
   projectileCount: 1
   spreadAngle: 0
   shootClip: {fileID: 8300000, guid: 28098e249b2b44641bec4d77c19f97ce, type: 3}
   statsTextPrefab: {fileID: 0}
   uiParent: {fileID: 0}
   extraTextField: ' '
+  weaponSprite: {fileID: 0}
+  statsTextInstance: {fileID: 0}
   nextUpgrade: {fileID: 0}
 --- !u!82 &8404851920732624897
 AudioSource:
@@ -277,11 +292,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.346
+      value: -1.416832
       objectReference: {fileID: 0}
     - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.305
+      value: 13.529882
       objectReference: {fileID: 0}
     - target: {fileID: 5887235733221618242, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -320,8 +335,12 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: fleeWhenTooClose
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: stoppingDistance
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8129514716054302165, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: m_IsActive

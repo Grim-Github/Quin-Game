@@ -25,13 +25,17 @@ public class CircularOrbit2D : MonoBehaviour
 
     private float baseAngleRad = 0f;
 
-    void Update()
+    private void Awake()
     {
         if (target == null)
         {
-            Debug.LogError("CircularOrbit2D: No target assigned.");
-            return;
+            target = transform;
         }
+    }
+
+    void Update()
+    {
+
 
         // Advance base angle
         baseAngleRad += speed * Mathf.Deg2Rad * Time.deltaTime;

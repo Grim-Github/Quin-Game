@@ -14,6 +14,10 @@ public class FollowNearest2D : MonoBehaviour
     [Tooltip("Tag to find the player transform")]
     public string playerTag = "Player";
 
+    [Header("Search Mode")]
+    [Tooltip("If true, search is centered around the player. If false, around this object.")]
+    public bool searchAroundPlayer = false;
+
     [Header("Arrival Smoothing")]
     [Tooltip("Stop moving when within this distance of the target.")]
     public float stopDistance = 0.5f;
@@ -29,106 +33,137 @@ public class FollowNearest2D : MonoBehaviour
     private Transform target;
     private Transform playerTransform;
     private float nextUpdateTime = 0f;
+    private float nextPlayerRetryTime = 0f;
     private Rigidbody2D rb2d;
 
-    // Expose current target read-only so teammates can check it
+    // Cached local origin
+    private Vector3 localOrigin;
+
     public Transform CurrentTarget => target;
 
     private void Start()
     {
-        /// Try to find player transform by tag
-        GameObject playerObj = GameObject.FindGameObjectWithTag(playerTag);
-        if (playerObj != null)
-            playerTransform = playerObj.transform;
-
+        TryFindPlayer();
         rb2d = GetComponent<Rigidbody2D>();
+        localOrigin = transform.localPosition; // cache starting point
     }
 
-    void Update()
+    private void Update()
     {
-        // Pick a new target every updateInterval seconds
+        // Re-try to find player every 1s if missing (handles late spawns / scene reloads)
+        if (playerTransform == null && Time.time >= nextPlayerRetryTime)
+        {
+            TryFindPlayer();
+            nextPlayerRetryTime = Time.time + 1f;
+        }
+
         if (Time.time >= nextUpdateTime)
         {
             FindNearestTarget();
             nextUpdateTime = Time.time + updateInterval;
         }
 
-        // Move towards the current target only if it's in range
+        // If target drifted out of the search sphere, clear it now
         if (target != null)
         {
-            Vector2 toTarget = (Vector2)(target.position - transform.position);
-            float distanceToTarget = toTarget.magnitude;
+            Vector2 searchCenter = (searchAroundPlayer && playerTransform != null)
+                ? (Vector2)playerTransform.position
+                : (Vector2)transform.position;
 
-            // Not in search radius? don't move
-            if (distanceToTarget > searchRadius) return;
-
-            // Inside deadzone? stop perfectly -> no jitter
-            if (distanceToTarget <= stopDistance) return;
-
-            // Smooth arrival: scale speed as we get close (between stopDistance and decelerationRadius)
-            float speed = moveSpeed;
-            if (distanceToTarget < decelerationRadius)
-            {
-                float t = Mathf.InverseLerp(stopDistance, decelerationRadius, distanceToTarget);
-                speed *= Mathf.Clamp01(t); // 0..1
-            }
-
-            // Compute step and clamp so we never overshoot past stopDistance
-            Vector2 dir = toTarget / Mathf.Max(distanceToTarget, 0.0001f);
-            float maxStep = (distanceToTarget - stopDistance);
-            Vector2 step = dir * speed * Time.deltaTime;
-            if (step.magnitude > maxStep) step = dir * maxStep;
-
-            if (useRigidbodyMovement && rb2d != null)
-                rb2d.MovePosition(rb2d.position + step);
-            else
-                transform.position += (Vector3)step;
+            float distanceFromCenterToTarget = Vector2.Distance(searchCenter, target.position);
+            if (distanceFromCenterToTarget > searchRadius)
+                target = null;
         }
     }
 
-    void FindNearestTarget()
+    private void FixedUpdate()
     {
-        Vector3 searchCenter = playerTransform != null ? playerTransform.position : transform.position;
-        Collider2D[] hits = Physics2D.OverlapCircleAll(searchCenter, searchRadius, targetLayer);
+        float dt = Time.fixedDeltaTime;
 
-        // Build the set of claimed targets from teammates
-        System.Collections.Generic.HashSet<Transform> claimed = new System.Collections.Generic.HashSet<Transform>();
+        if (target == null)
+        {
+            ReturnToOrigin(dt);
+            return;
+        }
+
+        MoveTowards(target.position, dt);
+    }
+
+    private void MoveTowards(Vector3 destination, float dt)
+    {
+        Vector2 toTarget = (Vector2)(destination - transform.position);
+        float distanceToTarget = toTarget.magnitude;
+
+        if (distanceToTarget <= stopDistance) return;
+
+        float speed = moveSpeed;
+        if (distanceToTarget < decelerationRadius)
+        {
+            float t = Mathf.InverseLerp(stopDistance, decelerationRadius, distanceToTarget);
+            speed *= Mathf.Clamp01(t);
+        }
+
+        Vector2 dir = (distanceToTarget > 0.0001f) ? toTarget / distanceToTarget : Vector2.zero;
+        float maxStep = Mathf.Max(0f, distanceToTarget - stopDistance);
+        Vector2 step = dir * speed * dt;
+        if (step.sqrMagnitude > (maxStep * maxStep)) step = dir * maxStep;
+
+        if (useRigidbodyMovement && rb2d != null)
+            rb2d.MovePosition(rb2d.position + step);
+        else
+            transform.position += (Vector3)step;
+    }
+
+    private void ReturnToOrigin(float dt)
+    {
+        Vector3 worldOrigin = transform.parent != null
+            ? transform.parent.TransformPoint(localOrigin)
+            : localOrigin;
+
+        MoveTowards(worldOrigin, dt);
+    }
+
+    private void FindNearestTarget()
+    {
+        Vector3 searchCenter = (searchAroundPlayer && playerTransform != null)
+            ? playerTransform.position
+            : transform.position;
+
+        var hits = Physics2D.OverlapCircleAll(searchCenter, searchRadius, targetLayer);
+
+        var claimed = new System.Collections.Generic.HashSet<Transform>();
         if (otherFollowers != null)
         {
             foreach (var f in otherFollowers)
-            {
-                if (f == null || f == this) continue;
-                if (f.CurrentTarget != null) claimed.Add(f.CurrentTarget);
-            }
+                if (f != null && f != this && f.CurrentTarget != null)
+                    claimed.Add(f.CurrentTarget);
         }
 
         float closestDistance = Mathf.Infinity;
         Transform closestTarget = null;
 
-        foreach (Collider2D hit in hits)
+        foreach (var hit in hits)
         {
             if (hit == null) continue;
-            if (hit.transform == transform) continue; // skip self
+            Transform ht = hit.transform;
+            if (ht == transform) continue;
+            if (claimed.Contains(ht)) continue;
 
-            // Skip targets already being followed by any teammate
-            if (claimed.Contains(hit.transform)) continue;
-
-            float distance = Vector2.Distance(searchCenter, hit.transform.position);
-            if (distance < closestDistance)
+            float d = Vector2.Distance(searchCenter, ht.position);
+            if (d < closestDistance)
             {
-                closestDistance = distance;
-                closestTarget = hit.transform;
+                closestDistance = d;
+                closestTarget = ht;
             }
         }
 
-        target = closestTarget; // if none available (all claimed), becomes null
+        target = closestTarget;
     }
 
-    // Draw the search radius in Scene view
-    void OnDrawGizmosSelected()
+    private void TryFindPlayer()
     {
-        Gizmos.color = Color.yellow;
-        Vector3 center = (playerTransform != null) ? playerTransform.position : transform.position;
-        Gizmos.DrawWireSphere(center, searchRadius);
+        if (string.IsNullOrEmpty(playerTag)) return;
+        var playerObj = GameObject.FindGameObjectWithTag(playerTag);
+        if (playerObj != null) playerTransform = playerObj.transform;
     }
 }
