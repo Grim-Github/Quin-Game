@@ -16,6 +16,25 @@ public class LootTable2D : MonoBehaviour
         [Min(0f)]
         [Tooltip("Relative weight. 0 = never selected. Higher = more likely.")]
         public float weight = 1f;
+
+        [Header("Amount (Weighted)")]
+        [Tooltip("Weighted options for how many of this prefab to drop when this entry wins.")]
+        public List<AmountOption> amountOptions = new()
+        {
+            new AmountOption(){ amount = 1, weight = 1f }
+        };
+    }
+
+    [System.Serializable]
+    public class AmountOption
+    {
+        [Min(1)]
+        [Tooltip("How many to drop when this option is chosen.")]
+        public int amount = 1;
+
+        [Min(0f)]
+        [Tooltip("Relative chance of choosing this amount.")]
+        public float weight = 1f;
     }
 
     [Header("Loot Table")]
@@ -59,6 +78,10 @@ public class LootTable2D : MonoBehaviour
             RollAndSpawn();
     }
 
+    /// <summary>
+    /// Rolls the loot table, then rolls the amount for the winning entry, and spawns that many prefabs.
+    /// Returns the last spawned GameObject (for quick reference), or null if nothing spawned.
+    /// </summary>
     public GameObject RollAndSpawn()
     {
         int idx = WeightedPickIndex(entries);
@@ -71,32 +94,46 @@ public class LootTable2D : MonoBehaviour
         }
 
         var entry = entries[idx];
+        int count = PickAmount(entry);
+
+        if (count <= 0)
+        {
+            Debug.LogWarning($"[LootTable2D] Picked non-positive amount ({count}) on {name}. Nothing spawned.");
+            return null;
+        }
 
         // Base spawn transform
         var sp = spawnPoint != null ? spawnPoint : transform;
-
-        // Determine circle center
         var centerT = circleCenter != null ? circleCenter : sp;
 
-        // Start from center position
-        Vector3 pos = centerT.position;
+        GameObject last = null;
 
-        // Apply 2D circle offset if enabled
-        if (useCircleSpawn && circleRadius > 0f)
+        for (int i = 0; i < count; i++)
         {
-            Vector2 offset2D = Random.insideUnitCircle * circleRadius; // X,Y only
-            pos.x += offset2D.x;
-            pos.y += offset2D.y;
+            Vector3 pos = centerT.position;
+
+            // Apply 2D circle offset per item (so multiple drops can scatter)
+            if (useCircleSpawn && circleRadius > 0f)
+            {
+                Vector2 offset2D = Random.insideUnitCircle * circleRadius; // X,Y only
+                pos.x += offset2D.x;
+                pos.y += offset2D.y;
+            }
+
+            // Handle Z positioning
+            if (!useSpawnPointZ)
+                pos.z = zPosition;
+
+            last = Instantiate(entry.prefab, pos, Quaternion.identity, parent);
         }
 
-        // Handle Z positioning
-        if (!useSpawnPointZ)
-            pos.z = zPosition;
-
-        lastSpawned = Instantiate(entry.prefab, pos, Quaternion.identity, parent);
+        lastSpawned = last;
         return lastSpawned;
     }
 
+    /// <summary>
+    /// Picks an index from a list of LootEntry, respecting entry weight and null/zero guards.
+    /// </summary>
     public int WeightedPickIndex(List<LootEntry> list)
     {
         float total = 0f;
@@ -122,6 +159,7 @@ public class LootTable2D : MonoBehaviour
                 return i;
         }
 
+        // Fallback: last valid
         for (int i = list.Count - 1; i >= 0; i--)
         {
             var e = list[i];
@@ -130,6 +168,49 @@ public class LootTable2D : MonoBehaviour
         }
 
         return -1;
+    }
+
+    /// <summary>
+    /// Picks an amount from a LootEntry's weighted amount options.
+    /// </summary>
+    private int PickAmount(LootEntry entry)
+    {
+        var opts = entry.amountOptions;
+        if (opts == null || opts.Count == 0)
+            return 1; // sensible default
+
+        float total = 0f;
+        for (int i = 0; i < opts.Count; i++)
+        {
+            var o = opts[i];
+            if (o.amount >= 1 && o.weight > 0f)
+                total += o.weight;
+        }
+
+        if (total <= 0f) return 1; // default when all invalid
+
+        float r = NextFloat() * total;
+        float cum = 0f;
+
+        for (int i = 0; i < opts.Count; i++)
+        {
+            var o = opts[i];
+            if (o.amount < 1 || o.weight <= 0f) continue;
+
+            cum += o.weight;
+            if (r < cum)
+                return Mathf.Max(1, o.amount);
+        }
+
+        // Fallback: last valid
+        for (int i = opts.Count - 1; i >= 0; i--)
+        {
+            var o = opts[i];
+            if (o.amount >= 1 && o.weight > 0f)
+                return o.amount;
+        }
+
+        return 1;
     }
 
     [ContextMenu("DEBUG ▸ Roll (No Spawn)")]
