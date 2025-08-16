@@ -46,7 +46,7 @@ public class EnemyChaser : MonoBehaviour
     public void InstantiateExplosion(GameObject explosion)
     {
         GameObject exploder = Instantiate(explosion, transform.position, Quaternion.identity);
-        exploder.GetComponent<ExplosionDamage2D>().baseDamage = GetComponent<SimpleHealth>().maxHealth;
+        exploder.GetComponent<ExplosionDamage2D>().baseDamage = GetComponent<SimpleHealth>().maxHealth / 3;
         exploder.GetComponent<ExplosionDamage2D>().DoExplosion();
     }
 

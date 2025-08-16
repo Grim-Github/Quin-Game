@@ -22,11 +22,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4537684820452484303, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: maxHealth
-      value: 130
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 4537684820452484303, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: startingHealth
-      value: 130
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 4537684820452484303, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: bloodPool.Array.size

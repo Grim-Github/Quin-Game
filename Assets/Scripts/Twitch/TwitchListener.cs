@@ -46,6 +46,9 @@ public class TwitchListener : MonoBehaviour
 
     [Tooltip("Layers the spawn position MUST overlap (e.g., Ground/Walkable).")]
     [SerializeField] private LayerMask spawnOnLayers;
+    [SerializeField]
+    private LayerMask linecastBlockLayers;
+
 
     [Header("Repositioning")]
     [Tooltip("If a chatter drifts farther than this from the player, it will be teleported back near the player.")]
@@ -158,13 +161,25 @@ public class TwitchListener : MonoBehaviour
             Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * r;
             spawnPos = player.position + offset;
 
-            if (Physics2D.OverlapCircle(spawnPos, spawnCheckRadius, spawnOnLayers) != null)
-                return spawnPos; // ✅ Found a valid position
+            // Must be on a valid ground/walkable surface
+            if (Physics2D.OverlapCircle(spawnPos, spawnCheckRadius, spawnOnLayers) == null)
+                continue;
+
+            // NEW: must have line-of-sight from player to spawn (no blockers between)
+            RaycastHit2D hit = Physics2D.Linecast(player.position, spawnPos, linecastBlockLayers);
+
+            // If we hit a solid blocker (non-trigger) on the blocking layers, reject this point
+            if (hit.collider != null && !hit.collider.isTrigger)
+                continue;
+
+            // All checks passed
+            return spawnPos;
         }
 
         Debug.LogWarning("[TwitchListener] Could not find valid spawn position.");
-        return null; // ❌ Failed
+        return null;
     }
+
 
 
 
