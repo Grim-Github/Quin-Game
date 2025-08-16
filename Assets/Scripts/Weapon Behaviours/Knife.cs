@@ -63,6 +63,7 @@ public class Knife : MonoBehaviour
 
 
     [HideInInspector] public TextMeshProUGUI statsTextInstance;
+    private GameObject statsGameobjectInstance;
     private Image iconImage;
     private AudioSource shootSource;
     private SimpleHealth parentHealth;
@@ -91,7 +92,7 @@ public class Knife : MonoBehaviour
             // Find the TMP text anywhere under it
             statsTextInstance = go.GetComponentInChildren<TextMeshProUGUI>(true);
             if (statsTextInstance != null) statsTextInstance.text = "";
-
+            statsGameobjectInstance = go;
             // Find Image in children and assign sprite
             // Find child GameObject named "Icon" and get its Image
             var iconObj = go.transform.Find("Icon");
@@ -156,7 +157,10 @@ public class Knife : MonoBehaviour
             statsTextInstance = null;
         }
     }
-
+    private void OnDisable()
+    {
+        Destroy(statsGameobjectInstance);
+    }
     public void OnKnifeTick()
     {
         if (selfSfxObject != null)

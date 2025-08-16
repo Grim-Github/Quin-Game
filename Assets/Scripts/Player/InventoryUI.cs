@@ -49,7 +49,7 @@ public class UIInventory : MonoBehaviour
             var entry = Instantiate(itemUIPrefab, contentParent);
 
             // Find UI components (first in children)
-            Image iconImage = entry.GetComponentInChildren<Image>(true);
+            Image iconImage = entry.transform.GetChild(1).GetComponent<Image>();
             TextMeshProUGUI amountText = entry.GetComponentInChildren<TextMeshProUGUI>(true);
 
             if (iconImage != null)

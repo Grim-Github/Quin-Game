@@ -42,6 +42,7 @@ public class SimpleShooter : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI statsTextInstance;
     private Image iconImage;
     private AudioSource shootSource;
+    private GameObject statsGameobjectInstance;
     public WeaponUpgrades nextUpgrade;
     PowerUpChooser powerUpChooser;
 
@@ -66,6 +67,7 @@ public class SimpleShooter : MonoBehaviour
         {
             // Instantiate the prefab root
             var go = Instantiate(statsTextPrefab, uiParent);
+            statsGameobjectInstance = go;
             // Find the TMP text anywhere under it
             statsTextInstance = go.GetComponentInChildren<TextMeshProUGUI>(true);
             if (statsTextInstance != null) statsTextInstance.text = "";
@@ -139,9 +141,6 @@ public class SimpleShooter : MonoBehaviour
         if (bulletPrefab != null)
         {
 
-
-
-
             if (bulletPrefab.TryGetComponent<BulletDamageTrigger>(out var bullet))
             {
                 penetrationInfo = bullet.penetration.ToString();
@@ -174,7 +173,6 @@ public class SimpleShooter : MonoBehaviour
 
 
 
-
         if (bulletPrefab.TryGetComponent<RB2DChainToTag>(out var RB2D))
         {
             sb.AppendLine($"Can Chain {RB2D.maxChains} Times");
@@ -186,6 +184,13 @@ public class SimpleShooter : MonoBehaviour
             sb.AppendLine(extraTextField);
 
         statsTextInstance.text = sb.ToString();
+    }
+
+
+
+    private void OnDisable()
+    {
+        Destroy(statsGameobjectInstance);
     }
 
 
