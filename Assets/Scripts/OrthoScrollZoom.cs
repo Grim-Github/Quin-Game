@@ -8,6 +8,10 @@ public class OrthoScrollZoom : MonoBehaviour
     [Header("Target (CM3)")]
     [SerializeField] private CinemachineCamera cmCamera;
 
+    [Header("Block Zoom When This UI Is Active")]
+    [Tooltip("If assigned, zoom is disabled while this object is active in the hierarchy (e.g., your UITabs root panel).")]
+    [SerializeField] private GameObject UITab;
+
     [Header("Zoom Settings")]
     [SerializeField] private float scrollSensitivity = 2.0f;
     [SerializeField] private float minSize = 2f;
@@ -56,6 +60,10 @@ public class OrthoScrollZoom : MonoBehaviour
 
     private void Update()
     {
+        // Block zoom if UITab is active (only if assigned)
+        if (UITab != null && UITab.activeInHierarchy)
+            return;
+
         // Old input system scroll
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (Mathf.Abs(scroll) > Mathf.Epsilon)

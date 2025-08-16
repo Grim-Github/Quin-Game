@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI; // For Image
 
@@ -6,7 +6,8 @@ public class SimpleShooter : MonoBehaviour
 {
     [Header("Projectile Settings")]
     public GameObject bulletPrefab;
-    public Transform shootTransform; // Optional: where to spawn the bullet
+    public Transform[] shootTransforms; // Where to spawn bullets; if empty, uses this.transform
+
     public float shootForce = 10f;
     public int damage = 15;
     public float bulletLifetime = 5f;
@@ -50,11 +51,6 @@ public class SimpleShooter : MonoBehaviour
     {
         shootSource = GetComponent<AudioSource>();
         powerUpChooser = GameObject.FindAnyObjectByType<PowerUpChooser>();
-
-        if (shootTransform == null)
-        {
-            shootTransform = transform; // Default to self if not set
-        }
 
         // Enqueue once, safely
         if (nextUpgrade != null && nextUpgrade.Upgrade != null && powerUpChooser != null && powerUpChooser.powerUps != null)
@@ -196,81 +192,85 @@ public class SimpleShooter : MonoBehaviour
 
     // --- Shooting API ---
 
+    // Call this to shoot at a Transform
     public void ShootTransform(Transform target)
     {
         if (target == null || bulletPrefab == null) return;
 
-        Vector2 dir = (target.position - transform.position);
-        if (dir.sqrMagnitude < 0.0001f) dir = Vector2.right; // fallback
-        dir.Normalize();
-
-        Shoot(dir);
+        // Per-origin shooting toward the target
+        ShootTowards(target.position);
     }
 
-    public void Shoot(Vector2 direction)
+    // Core shooter that handles multiple origins + spread
+    public void ShootTowards(Vector3 worldTargetPos)
     {
         if (bulletPrefab == null) return;
 
-        // Normalize and guard zero
-        if (direction.sqrMagnitude < 0.0001f) direction = Vector2.right;
-        direction.Normalize();
-
-        // Play shoot sound
+        // SFX
         if (shootClip != null && shootSource != null)
             shootSource.PlayOneShot(shootClip);
 
         float halfSpread = spreadAngle * 0.5f;
 
-        for (int i = 0; i < Mathf.Max(1, projectileCount); i++)
+        // Use provided origins or fallback to this.transform
+        Transform[] origins = (shootTransforms != null && shootTransforms.Length > 0)
+            ? shootTransforms
+            : new Transform[] { transform };
+
+        for (int oi = 0; oi < origins.Length; oi++)
         {
-            // Completely random spread per projectile, even if projectileCount == 1
-            float angle = (spreadAngle > 0f)
-                ? Random.Range(-halfSpread, halfSpread)
-                : 0f;
+            var origin = origins[oi];
+            if (origin == null) continue;
 
-            // Rotate direction by angle
-            float rad = angle * Mathf.Deg2Rad;
-            float cos = Mathf.Cos(rad);
-            float sin = Mathf.Sin(rad);
-            Vector2 shootDirection = new Vector2(
-                direction.x * cos - direction.y * sin,
-                direction.x * sin + direction.y * cos
-            );
+            // ✅ Direction from THIS origin to target
+            Vector2 baseDir = (Vector2)(worldTargetPos - origin.position);
+            if (baseDir.sqrMagnitude < 0.0001f) baseDir = (Vector2)origin.right; // per-origin fallback
+            baseDir.Normalize();
 
-            // Create projectile
-            GameObject bullet = Instantiate(bulletPrefab, shootTransform.position, Quaternion.identity);
-
-            // Point projectile
-            float rotationAngle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
-            bullet.transform.rotation = Quaternion.Euler(0, 0, rotationAngle);
-
-            // Calculate damage (with crit)
-            int finalDamage = damage;
-            if (Random.value < critChance)
-                finalDamage = Mathf.RoundToInt(damage * critMultiplier);
-
-            // Apply damage to the correct component type
-            if (bullet.TryGetComponent<BulletDamageTrigger>(out var bulletDamage))
+            int shots = Mathf.Max(1, projectileCount);
+            for (int i = 0; i < shots; i++)
             {
-                bulletDamage.damageAmount = finalDamage;
-                bulletDamage.statusApplyChance = statusApplyChance;
-                bulletDamage.applyStatusEffectOnHit = applyStatusEffectOnHit;
-                bulletDamage.statusEffectOnHit = statusEffectOnHit;
-                bulletDamage.statusEffectDuration = statusEffectDuration;
+                float angle = (spreadAngle > 0f) ? Random.Range(-halfSpread, halfSpread) : 0f;
+                float rad = angle * Mathf.Deg2Rad;
+                float cos = Mathf.Cos(rad);
+                float sin = Mathf.Sin(rad);
+
+                Vector2 shootDir = new Vector2(
+                    baseDir.x * cos - baseDir.y * sin,
+                    baseDir.x * sin + baseDir.y * cos
+                );
+
+                var bullet = Instantiate(bulletPrefab, origin.position, Quaternion.identity);
+
+                // Face travel direction
+                float rotDeg = Mathf.Atan2(shootDir.y, shootDir.x) * Mathf.Rad2Deg;
+                bullet.transform.rotation = Quaternion.Euler(0, 0, rotDeg);
+
+                // Crit calc
+                int finalDamage = (Random.value < critChance)
+                    ? Mathf.RoundToInt(damage * critMultiplier)
+                    : damage;
+
+                if (bullet.TryGetComponent<BulletDamageTrigger>(out var bulletDamage))
+                {
+                    bulletDamage.damageAmount = finalDamage;
+                    bulletDamage.statusApplyChance = statusApplyChance;
+                    bulletDamage.applyStatusEffectOnHit = applyStatusEffectOnHit;
+                    bulletDamage.statusEffectOnHit = statusEffectOnHit;
+                    bulletDamage.statusEffectDuration = statusEffectDuration;
+                }
+                if (bullet.TryGetComponent<ExplosionDamage2D>(out var explosionDamage))
+                    explosionDamage.baseDamage = finalDamage;
+
+                if (bullet.TryGetComponent<Rigidbody2D>(out var rb))
+                    rb.linearVelocity = shootDir * shootForce;
+
+                if (bulletLifetime > 0f)
+                    Destroy(bullet, bulletLifetime);
             }
-
-            if (bullet.TryGetComponent<ExplosionDamage2D>(out var explosionDamage))
-                explosionDamage.baseDamage = finalDamage;
-
-            // Move projectile (2D)
-            if (bullet.TryGetComponent<Rigidbody2D>(out var rb))
-                rb.linearVelocity = shootDirection * shootForce;
-
-            // Lifetime
-            if (bulletLifetime > 0f)
-                Destroy(bullet, bulletLifetime);
         }
     }
+
 
     // --- Debug Helpers ---
     private void OnDrawGizmos()

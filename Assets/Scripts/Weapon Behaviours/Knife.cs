@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI; // For Image
 
@@ -13,6 +13,11 @@ public class Knife : MonoBehaviour
     private LayerMask targetMask = ~0;
     [SerializeField, Tooltip("Maximum number of targets per tick (0 = unlimited).")]
     public int maxTargetsPerTick = 0;
+    [Header("Hit Origins")]
+    [Tooltip("Optional extra origins to check. If empty, uses this transform.")]
+    [SerializeField] private Transform[] hitOrigins;
+
+
 
     [Header("AOE Splash Damage")]
     [SerializeField, Tooltip("Radius around the main target for splash damage. 0 disables splash.")]
@@ -166,90 +171,111 @@ public class Knife : MonoBehaviour
         if (selfSfxObject != null)
             Instantiate(selfSfxObject, transform.position, Quaternion.identity);
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius, targetMask);
+        // choose origins (fallback to self)
+        Transform[] origins = (hitOrigins != null && hitOrigins.Length > 0) ? hitOrigins : new Transform[] { transform };
+
         if (shootClip != null) shootSource?.PlayOneShot(shootClip);
 
-        if (hits.Length == 0)
-        {
-            if (slashEffect != null)
-            {
-                Vector3 fxPos = transform.position + (Vector3)(Random.insideUnitCircle * 1f);
-                Instantiate(slashEffect, fxPos, Quaternion.identity);
-            }
-            return;
-        }
-
-        if (hits.Length > 0)
-        {
-            if (stabClip != null) shootSource?.PlayOneShot(stabClip);
-        }
-
+        bool anyHit = false;
         int targetsHit = 0;
-        foreach (var col in hits)
+
+        for (int oi = 0; oi < origins.Length; oi++)
         {
-            if (col == null || col.gameObject == gameObject) continue;
+            var origin = origins[oi];
+            if (origin == null) continue;
 
-            if (slashEffect != null)
-                Instantiate(slashEffect, col.transform.position, Quaternion.identity);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(origin.position, radius, targetMask);
 
-            SimpleHealth health = col.GetComponent<SimpleHealth>();
-            StatusEffectSystem splashStatus = col.GetComponent<StatusEffectSystem>();
-
-            if (splashStatus != null && health.IsAlive && !health.IsInvulnerable)
+            if (hits.Length > 0 && !anyHit)
             {
-                if (applyStatusEffectOnHit)
+                anyHit = true;
+                if (stabClip != null) shootSource?.PlayOneShot(stabClip);
+            }
+
+            for (int hi = 0; hi < hits.Length; hi++)
+            {
+                var col = hits[hi];
+                if (col == null || col.gameObject == gameObject) continue;
+
+                if (slashEffect != null)
+                    Instantiate(slashEffect, col.transform.position, Quaternion.identity);
+
+                SimpleHealth health = col.GetComponent<SimpleHealth>();
+                StatusEffectSystem splashStatus = col.GetComponent<StatusEffectSystem>();
+
+                // status on hit (safe-guard health != null)
+                if (splashStatus != null && health != null && health.IsAlive && !health.IsInvulnerable)
                 {
-                    if (Random.Range(0f, 1f) <= statusApplyChance)
+                    if (applyStatusEffectOnHit && Random.Range(0f, 1f) <= statusApplyChance)
                     {
-                        splashStatus.AddStatus(statusEffectOnHit, statusEffectDuration, 1f); // Add bleeding for 3 seconds with 1 second ticks
+                        splashStatus.AddStatus(statusEffectOnHit, statusEffectDuration, 1f);
                     }
                 }
-            }
 
-            if (health != null && health.IsAlive && !health.IsInvulnerable)
-            {
-                // Main hit damage
-                bool isCrit = Random.value < Mathf.Clamp01(critChance);
-                float mult = isCrit ? Mathf.Max(1f, critMultiplier) : 1f;
-                int dealt = Mathf.RoundToInt(damage * mult);
-                health.TakeDamage(dealt);
-
-
-
-
-                // Lifesteal from main hit
-                if (lifestealPercent > 0f && parentHealth != null && parentHealth.IsAlive)
+                if (health != null && health.IsAlive && !health.IsInvulnerable)
                 {
-                    int healAmount = Mathf.RoundToInt(dealt * lifestealPercent);
-                    parentHealth.Heal(healAmount);
-                }
+                    // main hit
+                    bool isCrit = Random.value < Mathf.Clamp01(critChance);
+                    float mult = isCrit ? Mathf.Max(1f, critMultiplier) : 1f;
+                    int dealt = Mathf.RoundToInt(damage * mult);
 
-                // Splash damage
-                if (splashRadius > 0f && splashDamagePercent > 0f)
-                {
-                    Collider2D[] splashHits = Physics2D.OverlapCircleAll(col.transform.position, splashRadius, targetMask);
-                    foreach (var splashCol in splashHits)
+
+                    // damage bleed based of hit
+                    if (splashStatus != null)
                     {
-                        if (splashCol == null || splashCol == col || splashCol.gameObject == gameObject) continue;
+                        float chance = Mathf.Clamp01((float)dealt / (float)health.maxHealth); // normalize 0..1
+                        float roll = Random.value; // 0..1
 
-                        SimpleHealth splashHealth = splashCol.GetComponent<SimpleHealth>();
-
-
-                        if (splashHealth != null && splashHealth.IsAlive && !splashHealth.IsInvulnerable)
+                        if (roll < chance)
                         {
-                            int splashDamage = Mathf.RoundToInt(dealt * splashDamagePercent);
-                            splashHealth.TakeDamage(splashDamage);
-
+                            splashStatus.SetBleedDamage(dealt * 0.25f);
+                            splashStatus.AddStatus(StatusEffectSystem.StatusType.Bleeding, statusEffectDuration, 1f);
                         }
                     }
-                }
 
-                targetsHit++;
-                if (maxTargetsPerTick > 0 && targetsHit >= maxTargetsPerTick)
-                    break;
+                    health.TakeDamage(dealt);
+
+                    // lifesteal
+                    if (lifestealPercent > 0f && parentHealth != null && parentHealth.IsAlive)
+                    {
+                        int healAmount = Mathf.RoundToInt(dealt * lifestealPercent);
+                        parentHealth.Heal(healAmount);
+                    }
+
+                    // splash
+                    if (splashRadius > 0f && splashDamagePercent > 0f)
+                    {
+                        Collider2D[] splashHits = Physics2D.OverlapCircleAll(col.transform.position, splashRadius, targetMask);
+                        for (int si = 0; si < splashHits.Length; si++)
+                        {
+                            var splashCol = splashHits[si];
+                            if (splashCol == null || splashCol == col || splashCol.gameObject == gameObject) continue;
+
+                            SimpleHealth splashHealth = splashCol.GetComponent<SimpleHealth>();
+                            if (splashHealth != null && splashHealth.IsAlive && !splashHealth.IsInvulnerable)
+                            {
+                                int splashDamage = Mathf.RoundToInt(dealt * splashDamagePercent);
+                                splashHealth.TakeDamage(splashDamage);
+                            }
+                        }
+                    }
+
+                    targetsHit++;
+                    if (maxTargetsPerTick > 0 && targetsHit >= maxTargetsPerTick)
+                        return; // stop after cap reached
+                }
             }
         }
+
+        // no targets anywhere → fling a slash VFX near first origin (or self)
+        if (!anyHit && slashEffect != null)
+        {
+            Transform baseOrigin = (hitOrigins != null && hitOrigins.Length > 0 && hitOrigins[0] != null) ? hitOrigins[0] : transform;
+            Vector3 fxPos = baseOrigin.position + (Vector3)(Random.insideUnitCircle * 1f);
+            Instantiate(slashEffect, fxPos, Quaternion.identity);
+        }
     }
+
 
     [ContextMenu("Sync Range Visual Now")]
     private void UpdateRangeVisual()

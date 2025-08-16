@@ -8,6 +8,7 @@ public class SimpleHealth : MonoBehaviour
     [SerializeField] public int maxHealth = 100;
     [Tooltip("If <=0, starts at maxHealth.")]
     [SerializeField] private int startingHealth = 100;
+    [SerializeField] private int reservedHealth = 0;
 
     [Header("Invulnerability")]
     [Tooltip("Seconds of invulnerability after taking damage.")]
@@ -29,6 +30,7 @@ public class SimpleHealth : MonoBehaviour
     [Header("UI")]
     [Tooltip("Optional slider to show current health.")]
     [SerializeField] public Slider healthSlider;
+    [SerializeField] public Slider reservedSlider;
     [SerializeField] public TextMeshProUGUI healthText;
 
     [Header("Stats Display")]
@@ -158,6 +160,7 @@ public class SimpleHealth : MonoBehaviour
         var sb = new System.Text.StringBuilder();
         sb.AppendLine($"<b>{transform.name} Stats</b>");
         sb.AppendLine($"Max Health: {maxHealth}");
+        sb.AppendLine($"Reserved Health: {reservedHealth}");
         sb.AppendLine($"Current Health: {CurrentHealth}");
         sb.AppendLine($"Regen Rate: {regenRate:F2}/s");
         sb.AppendLine($"Armor: {armor}");
@@ -318,19 +321,39 @@ public class SimpleHealth : MonoBehaviour
 
     public void SyncSlider()
     {
+        if (reservedSlider != null)
+        {
+            reservedSlider.maxValue = maxHealth;
+            reservedSlider.value = reservedHealth;
+        }
+
         if (healthSlider != null)
         {
+
             healthSlider.maxValue = maxHealth;
-            healthSlider.value = currentHealth;
+            healthSlider.value = currentHealth - reservedHealth;
         }
         if (healthText != null)
             healthText.text = $"{Mathf.RoundToInt(currentHealth)}/{maxHealth}";
     }
 
-    public void IncreaseMaxHealth(int amount)
+    public void ReserveLife(int amount)
     {
         if (amount <= 0) return;
 
+        // Increase reserved health but clamp so it never exceeds maxHealth
+        reservedHealth = Mathf.Clamp(reservedHealth + amount, 0, maxHealth);
+
+        IncreaseMaxHealth(-reservedHealth);
+
+
+        // Update UI
+        SyncSlider();
+    }
+
+
+    public void IncreaseMaxHealth(int amount)
+    {
         maxHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         SyncSlider();

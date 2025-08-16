@@ -1,56 +1,78 @@
 using UnityEngine;
 
 /// <summary>
-/// Makes the GameObject this script is attached to orbit around a target Transform in a 2D circular path.
+/// Orbits either THIS object or a list of objects (multiple) around a target in 2D.
+/// - target = center point
+/// - multiple = objects that float; if empty, this object floats
 /// </summary>
 public class CircularOrbit2D : MonoBehaviour
 {
     [Header("Orbit Settings")]
-    [Tooltip("The object that this GameObject will orbit around.")]
+    [Tooltip("Center to orbit around.")]
     public Transform target;
 
-    [Tooltip("The distance from the target object.")]
-    public float distance = 3.0f;
+    [Tooltip("If set, all of these objects will orbit around the target. If empty, this object orbits.")]
+    public Transform[] multiple;
 
-    [Tooltip("The speed of the orbit. Can be negative for opposite direction.")]
-    public float speed = 50.0f;
+    [Tooltip("Orbit radius (same for all).")]
+    public float distance = 3f;
 
-    // We use a private variable to store the current angle of the object in its orbit.
-    // We don't expose it to the inspector because we calculate it continuously.
-    private float angle = 0f;
+    [Tooltip("Degrees per second. Negative = opposite direction.")]
+    public float speed = 50f;
+
+    [Tooltip("Starting angle offset in degrees.")]
+    public float startAngleDegrees = 0f;
+
+    private float baseAngleRad = 0f;
 
     void Update()
     {
-        // First, check if a target has been assigned. If not, the script will log an error
-        // and stop executing in this frame to prevent further issues.
         if (target == null)
         {
-            Debug.LogError("CircularOrbit2D: Target not set. Please assign a target Transform in the Inspector.");
+            Debug.LogError("CircularOrbit2D: No target assigned.");
             return;
         }
 
-        // Increment the angle over time to create motion.
-        // We multiply speed by Time.deltaTime to make the movement smooth and frame-rate independent.
-        // We also convert the speed from degrees per second to radians per second.
-        angle += speed * Time.deltaTime * Mathf.Deg2Rad;
+        // Advance base angle
+        baseAngleRad += speed * Mathf.Deg2Rad * Time.deltaTime;
+        if (baseAngleRad > Mathf.PI * 2f) baseAngleRad -= Mathf.PI * 2f;
+        if (baseAngleRad < -Mathf.PI * 2f) baseAngleRad += Mathf.PI * 2f;
 
-        // Keep the angle within a 0 to 2*PI range (a full circle in radians).
-        // This is not strictly necessary but can help prevent floating point inaccuracies over time.
-        if (angle > (2.0f * Mathf.PI))
+        float startRad = startAngleDegrees * Mathf.Deg2Rad;
+
+        // Count valid entries in multiple
+        int count = 0;
+        if (multiple != null)
         {
-            angle -= (2.0f * Mathf.PI);
+            for (int i = 0; i < multiple.Length; i++)
+                if (multiple[i] != null) count++;
         }
 
-        // Calculate the new X and Y positions for the orbiting object.
-        // We use cosine for the X coordinate and sine for the Y coordinate to get a point on a circle.
-        // We then add the target's position to make the orbit centered around the target.
-        float x = target.position.x + Mathf.Cos(angle) * distance;
-        float y = target.position.y + Mathf.Sin(angle) * distance;
+        if (count <= 0)
+        {
+            // Orbit THIS object
+            float a = baseAngleRad + startRad;
+            float x = target.position.x + Mathf.Cos(a) * distance;
+            float y = target.position.y + Mathf.Sin(a) * distance;
+            transform.position = new Vector3(x, y, transform.position.z);
+            return;
+        }
 
-        // Create a new position vector. The Z position is kept the same as the current object's Z position.
-        Vector3 newPosition = new Vector3(x, y, transform.position.z);
+        // Orbit all objects in 'multiple', evenly spaced around the circle
+        float step = (Mathf.PI * 2f) / count;
+        int idx = 0;
 
-        // Apply the new position to this GameObject's transform.
-        transform.position = newPosition;
+        for (int i = 0; i < multiple.Length; i++)
+        {
+            var t = multiple[i];
+            if (t == null) continue;
+
+            float a = baseAngleRad + startRad + step * idx;
+            float x = target.position.x + Mathf.Cos(a) * distance;
+            float y = target.position.y + Mathf.Sin(a) * distance;
+
+            t.position = new Vector3(x, y, t.position.z);
+            idx++;
+        }
     }
 }

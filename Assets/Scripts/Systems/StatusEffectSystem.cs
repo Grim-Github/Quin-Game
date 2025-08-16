@@ -152,6 +152,20 @@ public class StatusEffectSystem : MonoBehaviour
         _active.Clear();
     }
 
+
+    /// <summary>
+    /// Sets bleeding damage per tick. 
+    /// If the given amount is higher than the current bleed damage, it replaces it.
+    /// </summary>
+    public void SetBleedDamage(float amount)
+    {
+        if (amount <= 0f) return;
+
+        if (amount > bleedingDamagePerTick)
+            bleedingDamagePerTick = amount;
+    }
+
+
     // ---- Built-in handlers ----
     private void HandleBuiltIn(StatusType type)
     {
