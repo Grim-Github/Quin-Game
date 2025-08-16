@@ -163,7 +163,7 @@ public class SimpleHealth : MonoBehaviour
         sb.AppendLine($"Reserved Health: {reservedHealth}");
         sb.AppendLine($"Current Health: {CurrentHealth}");
         sb.AppendLine($"Regen Rate: {regenRate:F2}/s");
-        sb.AppendLine($"Armor: {armor}");
+        sb.AppendLine($"Armor: {(int)armor}");
         sb.AppendLine($"Approx Mitigation: {(currentMitigation * 100f):F1}% (Max: {(maxMitigation * 100f):F0}%)");
         sb.AppendLine($"Last Hit Damage: {lastDamageTaken}");
 

@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  moveSpeed: 2
+  moveSpeed: 1
   stoppingDistance: 0.5
   repeatEvent: 1
   resetDistanceBuffer: 1
@@ -237,14 +237,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbde2f8b9e5210143a9593e885331f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
-  startingHealth: 50
+  maxHealth: 40
+  startingHealth: 40
+  reservedHealth: 0
   invulnerabilityDuration: 0.05
   regenRate: 0
   armor: 0
   armorScaling: 10
   maxMitigation: 0.8
   healthSlider: {fileID: 4625923915150811510}
+  reservedSlider: {fileID: 0}
   healthText: {fileID: 2445523053030195790}
   statsTextPrefab: {fileID: 0}
   uiParent: {fileID: 0}
@@ -336,7 +338,7 @@ AudioSource:
   Priority: 152
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 40
+  MaxDistance: 100
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
@@ -371,7 +373,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -476,8 +478,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
   - prefab: {fileID: 4469264671267830397, guid: f1158209e40541646a5fc348d2910d00, type: 3}
-    weight: 10
+    weight: 15
   - prefab: {fileID: 1878305132109642921, guid: 62f80dc1511c5de468a8dbdaf172c2cc, type: 3}
+    weight: 2
+  - prefab: {fileID: 8364669261576029562, guid: 4bf05456461aca74682d634e7d2d0931, type: 3}
     weight: 1
   rollOnAwake: 0
   seed: 0
@@ -980,6 +984,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   maxTargetsPerTick: 0
+  hitOrigins: []
   splashRadius: 0
   splashDamagePercent: 0.5
   applyStatusEffectOnHit: 0

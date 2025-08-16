@@ -81,7 +81,7 @@ public class TwitchListener : MonoBehaviour
             if (spawnedChatters[i] == null)
                 spawnedChatters.RemoveAt(i);
 
-
+        if (player == null) return; // ✅ Prevents MissingReferenceException
         // Only update stopwatch if the game isn't paused
         if (Time.timeScale > 0f)
         {
@@ -105,7 +105,7 @@ public class TwitchListener : MonoBehaviour
             for (int i = spawnedChatters.Count - 1; i >= 0; i--)
             {
                 GameObject chatterObj = spawnedChatters[i];
-                if (chatterObj == null || player != null) continue;
+                if (chatterObj == null) continue;
 
                 float dist = Vector3.Distance(player.position, chatterObj.transform.position);
                 if (dist > maxDistanceFromPlayer)

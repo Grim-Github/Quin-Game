@@ -104,6 +104,10 @@ PrefabInstance:
       propertyPath: slashEffect
       value: 
       objectReference: {fileID: 5926670090880783180, guid: 10e77f1b4fa730744b7efe0fa462dce0, type: 3}
+    - target: {fileID: 7309001713497125784, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
+      propertyPath: moveSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8711306348562255683, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
