@@ -17,6 +17,7 @@ public class BulletDamageTrigger : MonoBehaviour
     [SerializeField] private LayerMask damageLayers = ~0;
     [Tooltip("If the bullet touches any of these layers, it is destroyed immediately (e.g., walls/obstacles).")]
     [SerializeField] private LayerMask destroyOnTouchLayers;
+    [SerializeField] private bool allowMultipleHits = false;
 
     [Header("On Hit Effects")]
     public bool applyStatusEffectOnHit = false;
@@ -72,12 +73,21 @@ public class BulletDamageTrigger : MonoBehaviour
         var health = other.GetComponentInParent<SimpleHealth>();
         if (health == null || !health.IsAlive) return;
 
+        if (!allowMultipleHits)
+        {
+            if (_alreadyHit.Contains(health)) return;
+        }
         // Already hit this target? skip
-        if (_alreadyHit.Contains(health)) return;
+
 
         // Apply damage
         health.TakeDamage(damageAmount, damageType);
-        _alreadyHit.Add(health);
+
+        if (!allowMultipleHits)
+        {
+            _alreadyHit.Add(health);
+        }
+
 
         // ---- Apply status effect (if enabled and target supports it) ----
         if (applyStatusEffectOnHit && statusEffectDuration > 0f)
