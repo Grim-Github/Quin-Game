@@ -12,7 +12,7 @@ public class Accessory : MonoBehaviour
 {
     [Header("Power-Up")]
     public string AccesoryName;
-    [TextArea] public string AccesoryDescription;
+    public string AccesoryDescription;
     public Sprite icon;
 
     [Header("Event to trigger on Awake")]
@@ -28,7 +28,7 @@ public class Accessory : MonoBehaviour
     [SerializeField] public GameObject statsTextPrefab;
     [SerializeField] private Transform uiParent;
 
-    [TextArea, SerializeField] private string extraTextField; // combined description block (self + active children; auto-combined)
+    private string extraTextField; // combined description block (self + active children; auto-combined)
     [HideInInspector] public TextMeshProUGUI statsTextInstance;
     private Image iconImage;
 

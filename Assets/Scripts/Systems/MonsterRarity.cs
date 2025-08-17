@@ -199,7 +199,7 @@ public class MonsterRarity : MonoBehaviour
         health.maxHealth = Mathf.RoundToInt(health.maxHealth * mult);
         health.currentHealth = health.maxHealth; // full heal
 
-        EN("Max Health", $"×{mult:F2}");
+        EN("Max Health", $"+{(mult - 1f) * 100f:F0}%");
         health.UpdateStatsText();
     }
 
@@ -261,7 +261,7 @@ public class MonsterRarity : MonoBehaviour
     {
         float m = UnityEngine.Random.Range(KnifeDamageMult.x, KnifeDamageMult.y);
         foreach (var k in knives) if (k) k.damage = Mathf.RoundToInt(k.damage * m);
-        WN("Melee Damage", $"×{m:F2}");
+        WN("Melee Damage", $"+{(m - 1f) * 100f:F0}%");
     }
 
     private void Up_Knife_Lifesteal_Add()
@@ -281,7 +281,7 @@ public class MonsterRarity : MonoBehaviour
             k.critChance = Mathf.Clamp01(k.critChance + addChance);
             k.critMultiplier = Mathf.Max(1f, k.critMultiplier + addMult);
         }
-        WN("Melee Crit", $"+{addChance * 100f:F0}% / +{addMult:F2}x");
+        WN("Melee Crit", $"+{addChance * 100f:F0}% / +{addMult * 100f:F0}% dmg");
     }
 
     // ===== Shooter (public fields) =====
@@ -296,7 +296,7 @@ public class MonsterRarity : MonoBehaviour
     {
         float m = UnityEngine.Random.Range(shooterDamageMult.x, shooterDamageMult.y);
         foreach (var s in shooters) if (s) s.damage = Mathf.RoundToInt(s.damage * m);
-        WN("Ranged Damage", $"×{m:F2}");
+        WN("Ranged Damage", $"+{(m - 1f) * 100f:F0}%");
     }
 
     private void Up_Shooter_Projectiles_Add()
@@ -324,7 +324,7 @@ public class MonsterRarity : MonoBehaviour
         var sb = new StringBuilder();
 
         // Header
-        sb.AppendLine($"<b>{C(C_LABEL, "Rarity:")} {FormatRarity(rarity)}</b>");
+        sb.AppendLine($"<b>{C(C_LABEL, "")} {FormatRarity(rarity)}</b>");
 
         // Enemy section
         if (notesEnemy.Count > 0)

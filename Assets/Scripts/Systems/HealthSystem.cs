@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +26,12 @@ public class SimpleHealth : MonoBehaviour
     [Tooltip("Cap the maximum mitigation fraction (0..0.95). 0.8 = up to 80% reduction on tiny hits.")]
     [Range(0f, 0.95f)]
     [SerializeField] private float maxMitigation = 0.8f;
+
+    [Header("Evasion (Chance to completely dodge small hits)")]
+    [SerializeField] public float evasion = 0f; // base evasion stat
+    [SerializeField] private float evasionScaling = 10f; // bigger hits reduce chance
+    [SerializeField, Range(0f, 0.95f)] private float maxEvasion = 0.8f; // cap
+
 
     [Header("UI")]
     [Tooltip("Optional slider to show current health.")]
@@ -157,14 +163,28 @@ public class SimpleHealth : MonoBehaviour
             currentMitigation = Mathf.Min(currentMitigation, maxMitigation);
         }
 
+        // --- Evasion preview vs a reference hit (uses same referenceDamage as armor) ---
+        float currentEvasion = 0f;
+        if (evasion > 0f && evasionScaling > 0f)
+        {
+            currentEvasion = evasion / (evasion + evasionScaling * referenceDamage);
+            currentEvasion = Mathf.Min(currentEvasion, maxEvasion);
+        }
+
+
         var sb = new System.Text.StringBuilder();
         sb.AppendLine($"<b>{transform.name} Stats</b>");
         sb.AppendLine($"Max Health: {maxHealth}");
         sb.AppendLine($"Reserved Health: {reservedHealth}");
         sb.AppendLine($"Current Health: {CurrentHealth}");
         sb.AppendLine($"Regen Rate: {regenRate:F2}/s");
+
         sb.AppendLine($"Armor: {(int)armor}");
+        sb.AppendLine($"Evasion: {(int)evasion}");
+
         sb.AppendLine($"Approx Mitigation: {(currentMitigation * 100f):F1}% (Max: {(maxMitigation * 100f):F0}%)");
+        sb.AppendLine($"Approx Evasion: {(currentEvasion * 100f):F1}% (Max: {(maxEvasion * 100f):F0}%)");
+
         sb.AppendLine($"Last Hit Damage: {lastDamageTaken}");
 
         if (movementController != null)
@@ -184,6 +204,28 @@ public class SimpleHealth : MonoBehaviour
     public void TakeDamage(int amount)
     {
         if (amount <= 0 || isInvulnerable || currentHealth <= 0) return;
+
+        // Evasion check BEFORE armor
+        if (TryEvade(amount))
+        {
+            lastDamageTaken = 0;
+
+            // Show "Dodged" popup
+            if (damagePopupPrefab != null)
+            {
+                GameObject popup = Instantiate(damagePopupPrefab, transform.position + popupOffset, Quaternion.identity);
+                var tmpUI = popup.GetComponentInChildren<TextMeshProUGUI>();
+
+                if (tmpUI != null)
+                {
+                    tmpUI.color = Color.white;
+                    tmpUI.text = "Dodged";
+                }
+
+            }
+
+            return; // completely avoid damage
+        }
 
         int mitigated = ApplyArmor(amount);
         if (mitigated <= 0) return;
@@ -251,6 +293,17 @@ public class SimpleHealth : MonoBehaviour
         }
 
     }
+    private bool TryEvade(int rawDamage)
+    {
+        if (rawDamage <= 0 || evasion <= 0f || evasionScaling <= 0f) return false;
+
+        // Smaller hits → higher chance to dodge
+        float chance = evasion / (evasion + evasionScaling * rawDamage);
+        chance = Mathf.Min(chance, maxEvasion);
+
+        return Random.value < chance;
+    }
+
 
     private int ApplyArmor(int rawDamage)
     {

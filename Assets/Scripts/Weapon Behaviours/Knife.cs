@@ -120,7 +120,7 @@ public class Knife : MonoBehaviour
             UpdateRangeVisual();
     }
 
-    private void UpdateStatsText()
+    public void UpdateStatsText()
     {
         if (statsTextInstance != null)
         {

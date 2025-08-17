@@ -36,11 +36,20 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             string extra = health.extraTextField; // assumes public on your SimpleHealth
 
-            full += "<sprite name=\"heart_0\"> " + health.currentHealth + "/" + health.maxHealth;
+            full += "<sprite name=\"heart_0\"> " + (int)health.currentHealth + "/" + health.maxHealth;
+
+            ChatterStats cs = GetComponent<ChatterStats>();
+
+            if (cs != null)
+            {
+                full += "\n<color=#1212FC><sprite name=\"power\"> " + cs.power + "</color>";
+
+            }
+
 
             if (!string.IsNullOrWhiteSpace(extra))
             {
-                if (!string.IsNullOrWhiteSpace(full)) full += "\n\n";
+                if (!string.IsNullOrWhiteSpace(full)) full += "\n";
                 full += extra;
             }
         }

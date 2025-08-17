@@ -126,7 +126,7 @@ public class SimpleShooter : MonoBehaviour
     }
 
 
-    private void UpdateStatsText()
+    public void UpdateStatsText()
     {
         if (statsTextInstance == null) return;
 

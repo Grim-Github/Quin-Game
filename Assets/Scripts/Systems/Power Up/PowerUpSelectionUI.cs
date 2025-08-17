@@ -135,7 +135,22 @@ public class PowerUpSelectionUI : MonoBehaviour
 
             // Description
             if (descriptionTexts != null && i < descriptionTexts.Length && descriptionTexts[i] != null)
-                descriptionTexts[i].text = has ? powerUpChooser.powerUps[shownIndices[i]].powerUpDescription : string.Empty;
+            {
+                descriptionTexts[i].text = "";
+
+                if (powerUpChooser.powerUps[shownIndices[i]].IsWeapon)
+                {
+                    descriptionTexts[i].text += "<b>[WEAPON] </b>";
+                }
+
+                if (powerUpChooser.powerUps[shownIndices[i]].IsAccessory)
+                {
+                    descriptionTexts[i].text += "<b>[ACCESSORY] </b>";
+                }
+
+                descriptionTexts[i].text += powerUpChooser.powerUps[shownIndices[i]].powerUpDescription;
+            }
+
 
             // Icon
             if (iconImages != null && i < iconImages.Length && iconImages[i] != null)

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Unity.Cinemachine;
+﻿using Unity.Cinemachine;
 using UnityEngine;
 
 [AddComponentMenu("Camera/Cinemachine Ortho Scroll Zoom (Smooth + Perlin Shake)")]
@@ -30,10 +29,17 @@ public class OrthoScrollZoom : MonoBehaviour
     private float _targetSize;
     private float _currentSize;
 
-    // Perlin original values to restore
+    // Perlin original values to restore (from Awake)
     private float _origAmplitude;
     private float _origFrequency;
-    private Coroutine _shakeRoutine;
+
+    // --- Shake state (no coroutine) ---
+    private bool _isShaking = false;
+    private float _shakeTimer = 0f;
+    private float _shakeDuration = 0f;
+    private float _shakeIntensity = 0f;
+    private float _prevAmp = 0f;
+    private float _prevFreq = 0f;
 
     private void Awake()
     {
@@ -64,7 +70,7 @@ public class OrthoScrollZoom : MonoBehaviour
         if (UITab != null && UITab.activeInHierarchy)
             return;
 
-        // Old input system scroll
+        // --- Zoom ---
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (Mathf.Abs(scroll) > Mathf.Epsilon)
         {
@@ -80,6 +86,39 @@ public class OrthoScrollZoom : MonoBehaviour
 
         _currentSize = Mathf.Lerp(_currentSize, _targetSize, zoomSmoothSpeed * Time.unscaledDeltaTime);
         SetSize(_currentSize);
+
+        // --- Shake tick (no coroutine) ---
+        if (_isShaking && perlin != null)
+        {
+            float dt = useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+            _shakeTimer += dt;
+
+            float half = Mathf.Max(0.0001f, _shakeDuration * 0.5f);
+            float amp;
+
+            if (_shakeTimer < half)
+            {
+                // ease-in: 0 -> intensity
+                float u = _shakeTimer / half;
+                amp = Mathf.Lerp(0f, _shakeIntensity, u);
+            }
+            else if (_shakeTimer < _shakeDuration)
+            {
+                // ease-out: intensity -> 0
+                float u = (_shakeTimer - half) / half;
+                amp = Mathf.Lerp(_shakeIntensity, 0f, u);
+            }
+            else
+            {
+                // done
+                perlin.AmplitudeGain = _prevAmp;
+                perlin.FrequencyGain = _prevFreq;
+                _isShaking = false;
+                return;
+            }
+
+            perlin.AmplitudeGain = amp;
+        }
     }
 
     private float GetSize() => cmCamera.Lens.OrthographicSize;
@@ -104,31 +143,17 @@ public class OrthoScrollZoom : MonoBehaviour
             return;
         }
 
-        if (_shakeRoutine != null) StopCoroutine(_shakeRoutine);
-        _shakeRoutine = StartCoroutine(ShakeRoutine(duration, intensity));
-    }
+        // Save current values (so we restore whatever was there)
+        _prevAmp = perlin.AmplitudeGain;
+        _prevFreq = perlin.FrequencyGain;
 
-    private IEnumerator ShakeRoutine(float duration, float intensity)
-    {
-        // Set shake values
-        float prevAmp = perlin.AmplitudeGain;
-        float prevFreq = perlin.FrequencyGain;
-
-        perlin.AmplitudeGain = intensity;
+        // Configure shake
         perlin.FrequencyGain = shakeFrequency;
 
-        // Wait for duration (scaled or unscaled)
-        float t = 0f;
-        while (t < duration)
-        {
-            t = useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
-            yield return null;
-        }
-
-        // Restore previous values
-        perlin.AmplitudeGain = prevAmp;
-        perlin.FrequencyGain = prevFreq;
-
-        _shakeRoutine = null;
+        // Start/Restart shake
+        _shakeDuration = Mathf.Max(0f, duration);
+        _shakeIntensity = Mathf.Max(0f, intensity);
+        _shakeTimer = 0f;
+        _isShaking = _shakeDuration > 0f;
     }
 }

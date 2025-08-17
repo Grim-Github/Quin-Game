@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
-  m_Name: heart
+  m_Name: i-staff_power
   m_EditorClassIdentifier: 
   m_Version: 1.1.0
   m_FaceInfo:
@@ -35,43 +35,41 @@ MonoBehaviour:
     m_StrikethroughOffset: 0
     m_StrikethroughThickness: 0
     m_TabWidth: 0
-  m_Material: {fileID: 8080785089994961091}
-  spriteSheet: {fileID: 2800000, guid: 9d198d5251e3a1c498e6ad4e73508eab, type: 3}
+  m_Material: {fileID: 8918216494590623158}
+  spriteSheet: {fileID: 2800000, guid: b0893d1fb50cde14cbc18c06131f0591, type: 3}
   m_SpriteCharacterTable:
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 0
     m_Scale: 1
-    m_Name: heart_0
+    m_Name: power
   m_GlyphTable:
   - m_Index: 0
     m_Metrics:
-      m_Width: 11
-      m_Height: 9
-      m_HorizontalBearingX: 0.3
-      m_HorizontalBearingY: 7.73
-      m_HorizontalAdvance: 11
+      m_Width: 17
+      m_Height: 16
+      m_HorizontalBearingX: 0.22
+      m_HorizontalBearingY: 15.29
+      m_HorizontalAdvance: 17
     m_GlyphRect:
-      m_X: 21
-      m_Y: 23
-      m_Width: 11
-      m_Height: 9
+      m_X: 15
+      m_Y: 0
+      m_Width: 17
+      m_Height: 16
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: -205270267638800340, guid: 9d198d5251e3a1c498e6ad4e73508eab, type: 3}
+    sprite: {fileID: -6941906604170301085, guid: b0893d1fb50cde14cbc18c06131f0591, type: 3}
   spriteInfoList: []
-  fallbackSpriteAssets:
-  - {fileID: 11400000, guid: b805fe7704b895545b8049386d74c38e, type: 2}
-  - {fileID: 11400000, guid: 55df72389fc0c524380fa5f234fd23dc, type: 2}
---- !u!21 &8080785089994961091
+  fallbackSpriteAssets: []
+--- !u!21 &8918216494590623158
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: heart Material
+  m_Name: i-staff_power Material
   m_Shader: {fileID: 4800000, guid: cf81c85f95fe47e1a27f6ae460cf182c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -88,7 +86,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9d198d5251e3a1c498e6ad4e73508eab, type: 3}
+        m_Texture: {fileID: 2800000, guid: b0893d1fb50cde14cbc18c06131f0591, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []

@@ -272,11 +272,20 @@ public class WeaponRerollUIHelper : MonoBehaviour
         if (!controller) return "";
 
         var shooter = controller.GetComponent<SimpleShooter>();
-        if (shooter != null) return shooter.extraTextField;
+        if (shooter != null)
+        {
+            shooter.UpdateStatsText();
+            return shooter.statsTextInstance.text;
+        }
+
 
         var knife = controller.GetComponent<Knife>();
-        if (knife != null) return knife.extraTextField;
 
+        if (knife != null)
+        {
+            knife.UpdateStatsText();
+            return knife.statsTextInstance.text;
+        }
         return "";
     }
 

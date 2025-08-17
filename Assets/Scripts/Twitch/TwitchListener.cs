@@ -228,6 +228,7 @@ public class TwitchListener : MonoBehaviour
                     stats.power += int.Parse(b.version);
                 }
             }
+            stats.power += minPower;
 
         }
 
