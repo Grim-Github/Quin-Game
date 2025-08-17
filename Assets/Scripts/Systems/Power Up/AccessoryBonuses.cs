@@ -11,15 +11,19 @@ public class AccessoryBonuses : MonoBehaviour
     {
         MaxHealthFlat,   // +N to SimpleHealth.maxHealth (also heals by same amount)
         RegenPerSecond,  // +f to SimpleHealth.regenRate
-        ArmorFlat,        // +f to SimpleHealth.armor
-        EvasionFlat
+        ArmorFlat,       // +f to SimpleHealth.armor
+        EvasionFlat,
+        FireResistance,      // +x to SimpleHealth.fireResist  (x is fraction 0..0.95)
+        ColdResistance,      // +x to SimpleHealth.coldResist
+        LightingResistance,  // (kept spelling) +x to SimpleHealth.lightningResist
+        PoisonResistance,     // +x to SimpleHealth.poisonResist
     }
 
     [Serializable]
     public class BonusOption
     {
         public BonusType type = BonusType.MaxHealthFlat;
-        [Tooltip("Min..Max roll range. Integers are rounded for MaxHealth.")]
+        [Tooltip("Min..Max roll range. For resistances: if <=1 treat as fraction (e.g. 0.10=10%). If >1 treat as percent (e.g. 10..25 => 10%..25%).")]
         public Vector2 range = new Vector2(5, 25);
         [Tooltip("Enable/disable this bonus from the pool.")]
         public bool enabled = true;
@@ -35,6 +39,9 @@ public class AccessoryBonuses : MonoBehaviour
         new BonusOption{ type = BonusType.RegenPerSecond, range = new Vector2(0.2f,1.5f), enabled = true },
         new BonusOption{ type = BonusType.ArmorFlat, range = new Vector2(2f,12f), enabled = true },
         new BonusOption{ type = BonusType.EvasionFlat, range = new Vector2(2f,12f), enabled = true },
+        // Example resistance entries (commented by default):
+        // new BonusOption{ type = BonusType.FireResistance, range = new Vector2(10f,20f), enabled = true },  // 10%..20%
+        // new BonusOption{ type = BonusType.ColdResistance, range = new Vector2(0.05f,0.12f), enabled = true }, // 5%..12% (fraction style)
     };
 
     [Min(1)] public int bonusesToRoll = 2;
@@ -143,6 +150,44 @@ public class AccessoryBonuses : MonoBehaviour
                         _applied.Add(new Applied { type = chosen.type, value = rolled, intValue = 0 });
                         break;
                     }
+
+                // --- Resistances (fractions 0..0.95) ---
+                case BonusType.FireResistance:
+                    {
+                        float add = NormalizeResistInput(rolled);
+                        float before = target.fireResist;
+                        target.fireResist = Mathf.Clamp(before + add, 0f, 0.95f);
+                        float applied = target.fireResist - before;        // in case we hit clamp
+                        _applied.Add(new Applied { type = chosen.type, value = applied, intValue = 0 });
+                        break;
+                    }
+                case BonusType.ColdResistance:
+                    {
+                        float add = NormalizeResistInput(rolled);
+                        float before = target.coldResist;
+                        target.coldResist = Mathf.Clamp(before + add, 0f, 0.95f);
+                        float applied = target.coldResist - before;
+                        _applied.Add(new Applied { type = chosen.type, value = applied, intValue = 0 });
+                        break;
+                    }
+                case BonusType.LightingResistance: // (spelling preserved intentionally)
+                    {
+                        float add = NormalizeResistInput(rolled);
+                        float before = target.lightningResist;
+                        target.lightningResist = Mathf.Clamp(before + add, 0f, 0.95f);
+                        float applied = target.lightningResist - before;
+                        _applied.Add(new Applied { type = chosen.type, value = applied, intValue = 0 });
+                        break;
+                    }
+                case BonusType.PoisonResistance:
+                    {
+                        float add = NormalizeResistInput(rolled);
+                        float before = target.poisonResist;
+                        target.poisonResist = Mathf.Clamp(before + add, 0f, 0.95f);
+                        float applied = target.poisonResist - before;
+                        _applied.Add(new Applied { type = chosen.type, value = applied, intValue = 0 });
+                        break;
+                    }
             }
         }
 
@@ -171,8 +216,25 @@ public class AccessoryBonuses : MonoBehaviour
                 case BonusType.ArmorFlat:
                     target.armor = Mathf.Max(0f, target.armor - a.value);
                     break;
+
                 case BonusType.EvasionFlat:
                     target.evasion = Mathf.Max(0f, target.evasion - a.value);
+                    break;
+
+                case BonusType.FireResistance:
+                    target.fireResist = Mathf.Clamp(target.fireResist - a.value, 0f, 0.95f);
+                    break;
+
+                case BonusType.ColdResistance:
+                    target.coldResist = Mathf.Clamp(target.coldResist - a.value, 0f, 0.95f);
+                    break;
+
+                case BonusType.LightingResistance: // (spelling preserved)
+                    target.lightningResist = Mathf.Clamp(target.lightningResist - a.value, 0f, 0.95f);
+                    break;
+
+                case BonusType.PoisonResistance:
+                    target.poisonResist = Mathf.Clamp(target.poisonResist - a.value, 0f, 0.95f);
                     break;
             }
         }
@@ -193,10 +255,7 @@ public class AccessoryBonuses : MonoBehaviour
     {
         if (_accessory == null) return;
 
-        // Build neat stat lines formatted to match your combiner:
-        // "+5 Armor", "+1.2 Regen/s", "+25 Max Health", etc.
         _lastInjectedLines.Clear();
-
 
         foreach (var a in _applied)
         {
@@ -213,6 +272,19 @@ public class AccessoryBonuses : MonoBehaviour
                     break;
                 case BonusType.EvasionFlat:
                     _lastInjectedLines.Add($"+{FormatFloat(a.value)} Evasion");
+                    break;
+
+                case BonusType.FireResistance:
+                    _lastInjectedLines.Add($"+{Mathf.RoundToInt(a.value * 100f)}% Fire Resist");
+                    break;
+                case BonusType.ColdResistance:
+                    _lastInjectedLines.Add($"+{Mathf.RoundToInt(a.value * 100f)}% Cold Resist");
+                    break;
+                case BonusType.LightingResistance: // (spelling preserved)
+                    _lastInjectedLines.Add($"+{Mathf.RoundToInt(a.value * 100f)}% Lightning Resist");
+                    break;
+                case BonusType.PoisonResistance:
+                    _lastInjectedLines.Add($"+{Mathf.RoundToInt(a.value * 100f)}% Poison Resist");
                     break;
             }
         }
@@ -246,6 +318,13 @@ public class AccessoryBonuses : MonoBehaviour
     {
         // int-like -> no decimals; else one decimal
         return Mathf.Abs(v - Mathf.Round(v)) < 0.0001f ? Mathf.RoundToInt(v).ToString() : v.ToString("0.0");
+    }
+
+    private static float NormalizeResistInput(float rolled)
+    {
+        // If designer provided 0..1, use directly; if >1 assume percent and divide by 100.
+        float val = rolled <= 1f ? rolled : rolled * 0.01f;
+        return Mathf.Clamp(val, 0f, 0.95f);
     }
 
     private static string AppendUniqueLines(string text, List<string> linesToAdd)
