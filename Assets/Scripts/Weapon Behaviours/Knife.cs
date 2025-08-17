@@ -9,6 +9,7 @@ public class Knife : MonoBehaviour
     public float radius = 1f;
     [SerializeField, Tooltip("Base damage dealt to main target.")]
     public int damage = 10;
+    [SerializeField] public SimpleHealth.DamageType damageType;
     [SerializeField, Tooltip("Which layers are considered valid targets.")]
     private LayerMask targetMask = ~0;
     [SerializeField, Tooltip("Maximum number of targets per tick (0 = unlimited).")]
@@ -233,7 +234,7 @@ public class Knife : MonoBehaviour
                         }
                     }
 
-                    health.TakeDamage(dealt);
+                    health.TakeDamage(dealt, damageType);
 
                     // lifesteal
                     if (lifestealPercent > 0f && parentHealth != null && parentHealth.IsAlive)
@@ -255,7 +256,7 @@ public class Knife : MonoBehaviour
                             if (splashHealth != null && splashHealth.IsAlive && !splashHealth.IsInvulnerable)
                             {
                                 int splashDamage = Mathf.RoundToInt(dealt * splashDamagePercent);
-                                splashHealth.TakeDamage(splashDamage);
+                                splashHealth.TakeDamage(splashDamage, SimpleHealth.DamageType.Physical);
                             }
                         }
                     }

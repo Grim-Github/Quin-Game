@@ -10,6 +10,7 @@ public class SimpleShooter : MonoBehaviour
 
     public float shootForce = 10f;
     public int damage = 15;
+    [SerializeField] public SimpleHealth.DamageType damageType;
     public float bulletLifetime = 5f;
 
     [Header("Criticals")]
@@ -254,6 +255,7 @@ public class SimpleShooter : MonoBehaviour
                 if (bullet.TryGetComponent<BulletDamageTrigger>(out var bulletDamage))
                 {
                     bulletDamage.damageAmount = finalDamage;
+                    bulletDamage.damageType = damageType;
                     bulletDamage.statusApplyChance = statusApplyChance;
                     bulletDamage.applyStatusEffectOnHit = applyStatusEffectOnHit;
                     bulletDamage.statusEffectOnHit = statusEffectOnHit;

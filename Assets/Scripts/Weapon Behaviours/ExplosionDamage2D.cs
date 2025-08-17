@@ -56,7 +56,7 @@ public class ExplosionDamage2D : MonoBehaviour
             int dmg = CalculateDamage(center, col);
             if (dmg > 0)
             {
-                health.TakeDamage(dmg);
+                health.TakeDamage(dmg, SimpleHealth.DamageType.Physical);
                 _hitOnce.Add(health);
             }
         }

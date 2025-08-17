@@ -7,6 +7,7 @@ using UnityEngine;
 public class BulletDamageTrigger : MonoBehaviour
 {
     [Header("Damage")]
+    [SerializeField] public SimpleHealth.DamageType damageType;
     [SerializeField] public int damageAmount = 10;
     [Tooltip("How many successful damage hits this bullet can apply before it is destroyed.")]
     [SerializeField] public int penetration = 1;
@@ -75,7 +76,7 @@ public class BulletDamageTrigger : MonoBehaviour
         if (_alreadyHit.Contains(health)) return;
 
         // Apply damage
-        health.TakeDamage(damageAmount);
+        health.TakeDamage(damageAmount, damageType);
         _alreadyHit.Add(health);
 
         // ---- Apply status effect (if enabled and target supports it) ----

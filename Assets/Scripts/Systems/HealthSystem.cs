@@ -5,6 +5,16 @@ using UnityEngine.UI;
 
 public class SimpleHealth : MonoBehaviour
 {
+    // NEW: Damage types
+    public enum DamageType
+    {
+        Physical = 0,
+        Fire = 1,
+        Cold = 2,
+        Lightning = 3,
+        Poison = 4
+    }
+
     [Header("Health")]
     [SerializeField] public int maxHealth = 100;
     [Tooltip("If <=0, starts at maxHealth.")]
@@ -33,6 +43,13 @@ public class SimpleHealth : MonoBehaviour
     [SerializeField] private float evasionScaling = 10f; // bigger hits reduce chance
     [SerializeField, Range(0f, 0.95f)] private float maxEvasion = 0.8f; // cap
 
+    [Header("Resistances (% damage reduced AFTER armor)")]
+    [Tooltip("0..0.95 fraction of damage reduced for each type.")]
+
+    [Range(0f, 0.95f)] public float fireResist = 0f;
+    [Range(0f, 0.95f)] public float coldResist = 0f;
+    [Range(0f, 0.95f)] public float lightningResist = 0f;
+    [Range(0f, 0.95f)] public float poisonResist = 0f;
 
     [Header("UI")]
     [Tooltip("Optional slider to show current health.")]
@@ -78,13 +95,13 @@ public class SimpleHealth : MonoBehaviour
     private bool _hasOriginalColor;
     private Coroutine _flashRoutine;
     private int lastDamageTaken = 0;
+    private DamageType lastDamageType = DamageType.Physical; // NEW: remember last type
     private Snappy2DController movementController;
 
     // Stats UI (now matches Knife.cs pattern)
     [HideInInspector] public TextMeshProUGUI statsTextInstance;
     private Image iconImage;
     private AudioLowPassFilter filter;
-
 
     public bool IsAlive => currentHealth > 0f;
     public bool IsInvulnerable => isInvulnerable;
@@ -136,24 +153,18 @@ public class SimpleHealth : MonoBehaviour
     {
         if (playerVolume != null)
         {
-            // Post-processing weight (visual effect)
             float hpFraction = currentHealth / Mathf.Max(1f, maxHealth);
             playerVolume.weight = 1f - hpFraction;
         }
 
         if (filter != null)
         {
-            // Map HP% to cutoff frequency
             float hpFraction = currentHealth / Mathf.Max(1f, maxHealth);
-
-            // Example mapping: 20 Hz at 0% HP → 22000 Hz at full HP
             float minCutoff = 200f;
             float maxCutoff = 22000f;
             filter.cutoffFrequency = Mathf.Lerp(minCutoff, maxCutoff, hpFraction);
         }
     }
-
-
 
     private void OnEnable()
     {
@@ -201,7 +212,6 @@ public class SimpleHealth : MonoBehaviour
             currentEvasion = Mathf.Min(currentEvasion, maxEvasion);
         }
 
-
         var sb = new System.Text.StringBuilder();
         sb.AppendLine($"<b>{transform.name} Stats</b>");
         sb.AppendLine($"Max Health: {maxHealth}");
@@ -215,7 +225,11 @@ public class SimpleHealth : MonoBehaviour
         sb.AppendLine($"Approx Mitigation: {(currentMitigation * 100f):F1}% (Max: {(maxMitigation * 100f):F0}%)");
         sb.AppendLine($"Approx Evasion: {(currentEvasion * 100f):F1}% (Max: {(maxEvasion * 100f):F0}%)");
 
-        sb.AppendLine($"Last Hit Damage: {lastDamageTaken}");
+        // NEW: show resistances
+        sb.AppendLine($"Resist (Fire/Cold/Lightning/Poison): " +
+                      $"{fireResist * 100f:F0}% / {coldResist * 100f:F0}% / {lightningResist * 100f:F0}% / {poisonResist * 100f:F0}%");
+
+        sb.AppendLine($"Last Hit Damage: {lastDamageTaken} ({lastDamageType})");
 
         if (movementController != null)
         {
@@ -231,45 +245,61 @@ public class SimpleHealth : MonoBehaviour
         statsTextInstance.text = sb.ToString();
     }
 
+    // BACK-COMPAT: original signature forwards to Physical damage type
     public void TakeDamage(int amount, bool mitigatable = true)
+    {
+        TakeDamage(amount, DamageType.Physical, mitigatable);
+    }
+
+    // NEW: main overload with type
+    public void TakeDamage(int amount, DamageType type = DamageType.Physical, bool mitigatable = true)
     {
         if (amount <= 0 || isInvulnerable || currentHealth <= 0) return;
 
-        // Evasion check BEFORE armor
-        if (mitigatable && TryEvade(amount))
-        {
-            lastDamageTaken = 0;
-
-            // Show "Dodged" popup
-            if (damagePopupPrefab != null)
-            {
-                GameObject popup = Instantiate(damagePopupPrefab, transform.position + popupOffset, Quaternion.identity);
-                var tmpUI = popup.GetComponentInChildren<TextMeshProUGUI>();
-
-                if (tmpUI != null)
-                {
-                    tmpUI.color = Color.white;
-                    tmpUI.text = "Dodged";
-                }
-
-            }
-
-            return; // completely avoid damage
-        }
-
-        int mitigated = amount;
+        int dmg = amount;
 
         if (mitigatable)
         {
-            mitigated = ApplyArmor(amount);
+            // Evasion check BEFORE armor/resistance
+            if (TryEvade(amount))
+            {
+                lastDamageTaken = 0;
+                lastDamageType = type;
+
+                // Show "Dodged" popup
+                if (damagePopupPrefab != null)
+                {
+                    GameObject popup = Instantiate(damagePopupPrefab, transform.position + popupOffset, Quaternion.identity);
+                    var tmpUI = popup.GetComponentInChildren<TextMeshProUGUI>();
+                    if (tmpUI != null)
+                    {
+                        tmpUI.color = Color.white;
+                        tmpUI.text = "Dodged";
+                    }
+                }
+                return;
+            }
+
+
+            if (type == DamageType.Physical)
+            {
+                // Armor (small-hit mitigation) first
+                dmg = ApplyArmor(dmg);
+            }
+
+
+            // Then elemental/type resistance
+            dmg = ApplyResistance(dmg, type);
+
         }
 
-        if (mitigated <= 0) return;
+        if (dmg <= 0) return;
 
-        lastDamageTaken = mitigated;
-        GetComponent<DPSChecker>()?.RegisterDamage(mitigated);
+        lastDamageTaken = dmg;
+        lastDamageType = type;
+        GetComponent<DPSChecker>()?.RegisterDamage(dmg);
 
-        currentHealth = Mathf.Clamp(currentHealth - mitigated, 0, maxHealth);
+        currentHealth = Mathf.Clamp(currentHealth - dmg, 0, maxHealth);
         SyncSlider();
 
         // Damage popup
@@ -278,18 +308,18 @@ public class SimpleHealth : MonoBehaviour
             GameObject popup = Instantiate(damagePopupPrefab, transform.position + popupOffset, Quaternion.identity);
             if (popup.TryGetComponent<TextMeshPro>(out var tmpWorld))
             {
-                tmpWorld.text = mitigated.ToString();
+                tmpWorld.text = dmg.ToString();
             }
             else if (popup.TryGetComponent<TextMeshProUGUI>(out var tmpUI))
             {
-                tmpUI.text = mitigated.ToString();
+                tmpUI.text = dmg.ToString();
             }
             else
             {
                 var childWorld = popup.GetComponentInChildren<TextMeshPro>();
-                if (childWorld != null) childWorld.text = mitigated.ToString();
+                if (childWorld != null) childWorld.text = dmg.ToString();
                 var childUI = popup.GetComponentInChildren<TextMeshProUGUI>();
-                if (childUI != null) childUI.text = mitigated.ToString();
+                if (childUI != null) childUI.text = dmg.ToString();
             }
         }
 
@@ -299,7 +329,7 @@ public class SimpleHealth : MonoBehaviour
             Instantiate(bloodSFX, transform.position, randomRotation);
         }
 
-        if (soundSource != null && damageClip != null)
+        if (soundSource != null && damageClip != null && damageClip.Length > 0)
             soundSource.PlayOneShot(damageClip[Random.Range(0, damageClip.Length)]);
 
         if (spriteRenderer != null)
@@ -310,36 +340,23 @@ public class SimpleHealth : MonoBehaviour
 
         if (transform.CompareTag("Player"))
         {
-            float shakeStrength = Mathf.Clamp01((float)mitigated * 3 / maxHealth); // 0..1 based on % HP lost
+            float shakeStrength = Mathf.Clamp01((float)dmg * 3 / maxHealth); // 0..1 based on % HP lost
             float duration = Mathf.Lerp(0.05f, 0.25f, shakeStrength);          // small to big duration
             float intensity = Mathf.Lerp(0.5f, 3f, shakeStrength);             // small to big intensity
-
             FindAnyObjectByType<OrthoScrollZoom>()?.CameraShake(duration, intensity);
         }
 
-
-        if (currentHealth <= 0)
-            Die();
-        else
-        {
-            if (invulnerabilityDuration > 0)
-            {
-                StartCoroutine(InvulnerabilityCoroutine());
-            }
-        }
-
+        if (currentHealth <= 0) Die();
+        else if (invulnerabilityDuration > 0) StartCoroutine(InvulnerabilityCoroutine());
     }
+
     private bool TryEvade(int rawDamage)
     {
         if (rawDamage <= 0 || evasion <= 0f || evasionScaling <= 0f) return false;
-
-        // Smaller hits → higher chance to dodge
         float chance = evasion / (evasion + evasionScaling * rawDamage);
         chance = Mathf.Min(chance, maxEvasion);
-
         return Random.value < chance;
     }
-
 
     private int ApplyArmor(int rawDamage)
     {
@@ -347,6 +364,25 @@ public class SimpleHealth : MonoBehaviour
         float m = armor / (armor + armorScaling * rawDamage);
         if (maxMitigation > 0f) m = Mathf.Min(m, maxMitigation);
         float reduced = rawDamage * (1f - m);
+        return Mathf.Max(0, Mathf.RoundToInt(reduced));
+    }
+
+    // NEW: per-type resistance after armor
+    private int ApplyResistance(int rawDamage, DamageType type)
+    {
+        if (rawDamage <= 0) return 0;
+
+        float resist = 0f;
+        switch (type)
+        {
+            case DamageType.Fire: resist = fireResist; break;
+            case DamageType.Cold: resist = coldResist; break;
+            case DamageType.Lightning: resist = lightningResist; break;
+            case DamageType.Poison: resist = poisonResist; break;
+        }
+
+        resist = Mathf.Clamp(resist, 0f, 0.95f);
+        float reduced = rawDamage * (1f - resist);
         return Mathf.Max(0, Mathf.RoundToInt(reduced));
     }
 
@@ -395,7 +431,7 @@ public class SimpleHealth : MonoBehaviour
             }
         }
 
-        if (deathClip.Length > 0)
+        if (deathClip != null && deathClip.Length > 0)
         {
             GameObject tempAudio = new GameObject("DeathSound");
             var tempSource = tempAudio.AddComponent<AudioSource>();
@@ -424,10 +460,10 @@ public class SimpleHealth : MonoBehaviour
 
         if (healthSlider != null)
         {
-
             healthSlider.maxValue = maxHealth;
             healthSlider.value = currentHealth - reservedHealth;
         }
+
         if (healthText != null)
             healthText.text = $"{Mathf.RoundToInt(currentHealth)}/{maxHealth}";
     }
@@ -435,17 +471,10 @@ public class SimpleHealth : MonoBehaviour
     public void ReserveLife(int amount)
     {
         if (amount <= 0) return;
-
-        // Increase reserved health but clamp so it never exceeds maxHealth
         reservedHealth = Mathf.Clamp(reservedHealth + amount, 0, maxHealth);
-
         IncreaseMaxHealth(-amount);
-
-
-        // Update UI
         SyncSlider();
     }
-
 
     public void IncreaseMaxHealth(int amount)
     {
@@ -464,6 +493,19 @@ public class SimpleHealth : MonoBehaviour
     {
         if (amount == 0f) return;
         evasion = Mathf.Max(0f, evasion + amount);
+    }
+
+    // OPTIONAL HELPERS: adjust resistances at runtime
+    public void GiveResistance(DamageType type, float amount)
+    {
+        if (Mathf.Approximately(amount, 0f)) return;
+        switch (type)
+        {
+            case DamageType.Fire: fireResist = Mathf.Clamp(fireResist + amount, 0f, 0.95f); break;
+            case DamageType.Cold: coldResist = Mathf.Clamp(coldResist + amount, 0f, 0.95f); break;
+            case DamageType.Lightning: lightningResist = Mathf.Clamp(lightningResist + amount, 0f, 0.95f); break;
+            case DamageType.Poison: poisonResist = Mathf.Clamp(poisonResist + amount, 0f, 0.95f); break;
+        }
     }
 
     private System.Collections.IEnumerator InvulnerabilityCoroutine()
