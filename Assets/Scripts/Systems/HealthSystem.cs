@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using NaughtyAttributes;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -15,77 +16,83 @@ public class SimpleHealth : MonoBehaviour
         Poison = 4
     }
 
-    [Header("Health")]
-    [SerializeField] public int maxHealth = 100;
+    [BoxGroup("Health")][SerializeField] public int maxHealth = 100;
+    [BoxGroup("Health")]
     [Tooltip("If <=0, starts at maxHealth.")]
     [SerializeField] private int startingHealth = 100;
-    [SerializeField] private int reservedHealth = 0;
+    [BoxGroup("Health")][SerializeField] private int reservedHealth = 0;
 
-    [Header("Invulnerability")]
+    [BoxGroup("Invulnerability")]
     [Tooltip("Seconds of invulnerability after taking damage.")]
     [SerializeField] private float invulnerabilityDuration = 1f;
 
-    [Header("Regeneration")]
+    [BoxGroup("Regeneration")]
     [Tooltip("Health regenerated per second. Can be fractional.")]
     [SerializeField] public float regenRate = 0f;
 
-    [Header("Armor (Small-hit mitigation)")]
+    [BoxGroup("Armor (Small-hit mitigation)")]
     [Tooltip("Flat armor rating. More armor = more mitigation on small hits.")]
     [SerializeField] public float armor = 0f;
+    [BoxGroup("Armor (Small-hit mitigation)")]
     [Tooltip("How quickly mitigation falls off as the hit gets bigger. Higher = big hits bypass sooner.")]
     [SerializeField] private float armorScaling = 10f;
+    [BoxGroup("Armor (Small-hit mitigation)")]
     [Tooltip("Cap the maximum mitigation fraction (0..0.95). 0.8 = up to 80% reduction on tiny hits.")]
-    [Range(0f, 0.95f)]
-    [SerializeField] private float maxMitigation = 0.8f;
+    [Range(0f, 0.95f)][SerializeField] private float maxMitigation = 0.8f;
 
-    [Header("Evasion (Chance to completely dodge small hits)")]
-    [SerializeField] public float evasion = 0f; // base evasion stat
-    [SerializeField] private float evasionScaling = 10f; // bigger hits reduce chance
-    [SerializeField, Range(0f, 0.95f)] private float maxEvasion = 0.8f; // cap
+    [BoxGroup("Evasion (Chance to completely dodge small hits)")]
+    [SerializeField] public float evasion = 0f;
+    [BoxGroup("Evasion (Chance to completely dodge small hits)")]
+    [SerializeField] private float evasionScaling = 10f;
+    [BoxGroup("Evasion (Chance to completely dodge small hits)")]
+    [SerializeField, Range(0f, 0.95f)] private float maxEvasion = 0.8f;
 
-    [Header("Resistances (% damage reduced AFTER armor)")]
+    [BoxGroup("Resistances (% damage reduced AFTER armor)")]
     [Tooltip("0..0.95 fraction of damage reduced for each type.")]
-
     [Range(0f, 0.95f)] public float fireResist = 0f;
+    [BoxGroup("Resistances (% damage reduced AFTER armor)")]
     [Range(0f, 0.95f)] public float coldResist = 0f;
+    [BoxGroup("Resistances (% damage reduced AFTER armor)")]
     [Range(0f, 0.95f)] public float lightningResist = 0f;
+    [BoxGroup("Resistances (% damage reduced AFTER armor)")]
     [Range(0f, 0.95f)] public float poisonResist = 0f;
 
-    [Header("UI")]
+    [BoxGroup("UI")]
     [Tooltip("Optional slider to show current health.")]
     [SerializeField] public Slider healthSlider;
-    [SerializeField] public Slider reservedSlider;
-    [SerializeField] public TextMeshProUGUI healthText;
+    [BoxGroup("UI")][SerializeField] public Slider reservedSlider;
+    [BoxGroup("UI")][SerializeField] public TextMeshProUGUI healthText;
 
-    [Header("Stats Display")]
+    [BoxGroup("Stats Display")]
     [Tooltip("Prefab root GameObject that contains a TextMeshProUGUI somewhere in its children.")]
-    [SerializeField] private GameObject statsTextPrefab; // CHANGED: now a prefab root like Knife.cs
-    [SerializeField] private Transform uiParent;
-    [TextArea][SerializeField] public string extraTextField;
+    [SerializeField] private GameObject statsTextPrefab;
+    [BoxGroup("Stats Display")][SerializeField] private Transform uiParent;
+    [BoxGroup("Stats Display")][TextArea][SerializeField] public string extraTextField;
+    [BoxGroup("Stats Display")]
     [Tooltip("Sprite to show above the stats text.")]
     [SerializeField] private Sprite iconSprite;
 
-    [Header("SFX")]
-    [SerializeField] private Volume playerVolume;
-    [SerializeField] private GameObject[] deathObjects;
-    [SerializeField] private AudioClip[] damageClip;
-    [SerializeField] private AudioClip[] deathClip;
-    [SerializeField] private GameObject bloodSFX;
+    [BoxGroup("SFX")][SerializeField] private Volume playerVolume;
+    [BoxGroup("SFX")][SerializeField] private GameObject[] deathObjects;
+    [BoxGroup("SFX")][SerializeField] private AudioClip[] damageClip;
+    [BoxGroup("SFX")][SerializeField] private AudioClip[] deathClip;
+    [BoxGroup("SFX")][SerializeField] private GameObject bloodSFX;
 
-    [Header("Loot")]
+    [BoxGroup("Loot")]
     [Tooltip("Weighted loot table. On death we roll once and spawn the result (if any).")]
     [SerializeField] private LootTable2D loot;
 
-    [Header("Hit Flash")]
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Color hitColor = new Color(1f, 0.5f, 0.5f, 1f);
-    [SerializeField] private float hitFlashDuration = 0.1f;
+    [BoxGroup("Hit Flash")][SerializeField] private SpriteRenderer spriteRenderer;
+    [BoxGroup("Hit Flash")][SerializeField] private Color hitColor = new Color(1f, 0.5f, 0.5f, 1f);
+    [BoxGroup("Hit Flash")][SerializeField] private float hitFlashDuration = 0.1f;
 
-    [Header("Damage Popup")]
+    [BoxGroup("Damage Popup")]
     [Tooltip("Prefab with a TextMeshPro or TextMeshProUGUI to display damage taken.")]
     [SerializeField] private GameObject damagePopupPrefab;
+    [BoxGroup("Damage Popup")]
     [Tooltip("Offset from entity position when spawning damage popup.")]
     [SerializeField] private Vector3 popupOffset = new Vector3(0f, 1f, 0f);
+
 
     private AudioSource soundSource;
     [HideInInspector] public float currentHealth;
@@ -99,7 +106,12 @@ public class SimpleHealth : MonoBehaviour
     private Snappy2DController movementController;
 
     // Stats UI (now matches Knife.cs pattern)
-    [HideInInspector] public TextMeshProUGUI statsTextInstance;
+    // Split into separate parts instead of one giant text block
+    [HideInInspector] public TextMeshProUGUI healthStatsText;
+    [HideInInspector] public TextMeshProUGUI defenseStatsText;
+    [HideInInspector] public TextMeshProUGUI resistStatsText;
+    [HideInInspector] public TextMeshProUGUI movementStatsText;
+
     private Image iconImage;
     private AudioLowPassFilter filter;
 
@@ -131,17 +143,37 @@ public class SimpleHealth : MonoBehaviour
         // Instantiate prefab root (like Knife.cs) and wire up text + icon
         if (statsTextPrefab != null && uiParent != null)
         {
-            var go = Instantiate(statsTextPrefab, uiParent);
-            statsTextInstance = go.GetComponentInChildren<TextMeshProUGUI>(true);
-            if (statsTextInstance != null) statsTextInstance.text = string.Empty;
+            // Health section
+            var go1 = Instantiate(statsTextPrefab, uiParent);
+            healthStatsText = go1.GetComponentInChildren<TextMeshProUGUI>(true);
 
-            var iconObj = go.transform.Find("Icon");
+            // Defense section
+            var go2 = Instantiate(statsTextPrefab, uiParent);
+            defenseStatsText = go2.GetComponentInChildren<TextMeshProUGUI>(true);
+
+            // Resistances section
+            var go3 = Instantiate(statsTextPrefab, uiParent);
+            resistStatsText = go3.GetComponentInChildren<TextMeshProUGUI>(true);
+
+            // Movement section
+            var go4 = Instantiate(statsTextPrefab, uiParent);
+            movementStatsText = go4.GetComponentInChildren<TextMeshProUGUI>(true);
+
+            // Clear initial
+            if (healthStatsText != null) healthStatsText.text = string.Empty;
+            if (defenseStatsText != null) defenseStatsText.text = string.Empty;
+            if (resistStatsText != null) resistStatsText.text = string.Empty;
+            if (movementStatsText != null) movementStatsText.text = string.Empty;
+
+            // Icon stays optional
+            var iconObj = go1.transform.Find("Icon");
             if (iconObj != null)
                 iconImage = iconObj.GetComponent<Image>();
-
             if (iconImage != null && iconSprite != null)
                 iconImage.sprite = iconSprite;
         }
+
+
     }
 
     private void Start()
@@ -193,57 +225,62 @@ public class SimpleHealth : MonoBehaviour
 
     public void UpdateStatsText()
     {
-        if (statsTextInstance == null) return;
-
         float referenceDamage = Mathf.Max(1, lastDamageTaken);
-        float currentMitigation = 0f;
 
-        if (armor > 0f && armorScaling > 0f)
+        // HEALTH
+        if (healthStatsText != null)
         {
-            currentMitigation = armor / (armor + armorScaling * referenceDamage);
-            currentMitigation = Mathf.Min(currentMitigation, maxMitigation);
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine($"<b>Health</b>");
+            sb.AppendLine($"Max Health: {maxHealth}");
+            sb.AppendLine($"Reserved: {reservedHealth}");
+            sb.AppendLine($"Current: {CurrentHealth}");
+            sb.AppendLine($"Regen: {regenRate:F2}/s");
+            healthStatsText.text = sb.ToString();
         }
 
-        // --- Evasion preview vs a reference hit (uses same referenceDamage as armor) ---
-        float currentEvasion = 0f;
-        if (evasion > 0f && evasionScaling > 0f)
+        // DEFENSE
+        if (defenseStatsText != null)
         {
-            currentEvasion = evasion / (evasion + evasionScaling * referenceDamage);
-            currentEvasion = Mathf.Min(currentEvasion, maxEvasion);
+            float mitigation = (armor > 0f && armorScaling > 0f)
+                ? Mathf.Min(armor / (armor + armorScaling * referenceDamage), maxMitigation)
+                : 0f;
+            float evasionChance = (evasion > 0f && evasionScaling > 0f)
+                ? Mathf.Min(evasion / (evasion + evasionScaling * referenceDamage), maxEvasion)
+                : 0f;
+
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine($"<b>Mitigation</b>");
+            sb.AppendLine($"Armor: {(int)armor}");
+            sb.AppendLine($"Evasion: {(int)evasion}");
+            sb.AppendLine($"Mitigation: {mitigation * 100f:F1}%");
+            sb.AppendLine($"Evasion%: {evasionChance * 100f:F1}%");
+            sb.AppendLine($"Last Hit: {lastDamageTaken} ({lastDamageType})");
+            defenseStatsText.text = sb.ToString();
         }
 
-        var sb = new System.Text.StringBuilder();
-        sb.AppendLine($"<b>{transform.name} Stats</b>");
-        sb.AppendLine($"Max Health: {maxHealth}");
-        sb.AppendLine($"Reserved Health: {reservedHealth}");
-        sb.AppendLine($"Current Health: {CurrentHealth}");
-        sb.AppendLine($"Regen Rate: {regenRate:F2}/s");
-
-        sb.AppendLine($"Armor: {(int)armor}");
-        sb.AppendLine($"Evasion: {(int)evasion}");
-
-        sb.AppendLine($"Approx Mitigation: {(currentMitigation * 100f):F1}% (Max: {(maxMitigation * 100f):F0}%)");
-        sb.AppendLine($"Approx Evasion: {(currentEvasion * 100f):F1}% (Max: {(maxEvasion * 100f):F0}%)");
-
-        // NEW: show resistances
-        sb.AppendLine($"Resist (Fire/Cold/Lightning/Poison): " +
-                      $"{fireResist * 100f:F0}% / {coldResist * 100f:F0}% / {lightningResist * 100f:F0}% / {poisonResist * 100f:F0}%");
-
-        sb.AppendLine($"Last Hit Damage: {lastDamageTaken} ({lastDamageType})");
-
-        if (movementController != null)
+        // RESISTANCES
+        if (resistStatsText != null)
         {
+            resistStatsText.text =
+                $"<B>Resists</b>\nFire {fireResist * 100f:F0}%\nCold {coldResist * 100f:F0}%\n" +
+                $"Lightning {lightningResist * 100f:F0}%\nPoison {poisonResist * 100f:F0}%";
+        }
+
+        // MOVEMENT
+        if (movementStatsText != null && movementController != null)
+        {
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine($"<b>Movement</b>");
             sb.AppendLine($"Move Speed: {movementController.MoveSpeed:F2}");
             sb.AppendLine($"Dash Speed: {movementController.DashSpeed:F2}");
             sb.AppendLine($"Dash Duration: {movementController.DashDuration:F2}s");
             sb.AppendLine($"Dash Cooldown: {movementController.DashCooldown:F2}s");
+            movementStatsText.text = sb.ToString();
         }
-
-        if (!string.IsNullOrWhiteSpace(extraTextField))
-            sb.AppendLine(extraTextField);
-
-        statsTextInstance.text = sb.ToString();
     }
+
+
 
     // BACK-COMPAT: original signature forwards to Physical damage type
     public void TakeDamage(int amount, bool mitigatable = true)
