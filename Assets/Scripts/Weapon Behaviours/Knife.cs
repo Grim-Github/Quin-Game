@@ -28,7 +28,7 @@ public class Knife : MonoBehaviour
 
     [Header("On Hit Effects")]
     public bool applyStatusEffectOnHit = false;
-    public float statusApplyChance = 1f;    // optional: chance to apply on hit (0..1)
+    [Range(0f, 1f)] public float statusApplyChance = 1f;    // optional: chance to apply on hit (0..1)
     public StatusEffectSystem.StatusType statusEffectOnHit = StatusEffectSystem.StatusType.Bleeding;
     public float statusEffectDuration = 3f; // Duration in seconds for the status effect
 

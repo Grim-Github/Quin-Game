@@ -450,6 +450,7 @@ RectTransform:
   m_Children:
   - {fileID: 5273291680512889307}
   - {fileID: 1894998249607283941}
+  - {fileID: 2700161614771664637}
   m_Father: {fileID: 4939500946709195127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -1456,6 +1457,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1420364789606767436}
   - component: {fileID: 7754145506774124050}
+  - component: {fileID: 167509031548696411}
   m_Layer: 6
   m_Name: Life Ring
   m_TagString: Untagged
@@ -1530,6 +1532,48 @@ MonoBehaviour:
   statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
   uiParent: {fileID: 3771470944807517528}
   statsTextInstance: {fileID: 0}
+--- !u!114 &167509031548696411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763878338640954299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f079c31d3aaa7804d800c865cdeafbad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 5791096993671492205}
+  bonusPool:
+  - type: 0
+    range: {x: 10, y: 30}
+    enabled: 1
+  - type: 1
+    range: {x: 0.2, y: 1.5}
+    enabled: 1
+  - type: 2
+    range: {x: 2, y: 12}
+    enabled: 1
+  - type: 3
+    range: {x: 2, y: 12}
+    enabled: 1
+  - type: 4
+    range: {x: 5, y: 12}
+    enabled: 1
+  - type: 5
+    range: {x: 5, y: 12}
+    enabled: 1
+  - type: 6
+    range: {x: 5, y: 12}
+    enabled: 1
+  - type: 7
+    range: {x: 5, y: 12}
+    enabled: 1
+  bonusesToRoll: 2
+  seed: 0
+  applyOnAwake: 1
+  revertOnDisable: 1
 --- !u!1 &819256001971131541
 GameObject:
   m_ObjectHideFlags: 0
@@ -3105,7 +3149,7 @@ MonoBehaviour:
   maxHealth: 100
   startingHealth: 100
   reservedHealth: 0
-  invulnerabilityDuration: 0.3
+  invulnerabilityDuration: 0
   regenRate: 0.1
   armor: 0
   armorScaling: 10
@@ -4021,6 +4065,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9147439597678959549}
   - component: {fileID: 6355551625964360536}
+  - component: {fileID: 3045383573133791685}
   m_Layer: 6
   m_Name: Boots
   m_TagString: Untagged
@@ -4093,6 +4138,48 @@ MonoBehaviour:
   statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
   uiParent: {fileID: 3771470944807517528}
   statsTextInstance: {fileID: 0}
+--- !u!114 &3045383573133791685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454800635535539524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f079c31d3aaa7804d800c865cdeafbad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 5791096993671492205}
+  bonusPool:
+  - type: 0
+    range: {x: 10, y: 30}
+    enabled: 1
+  - type: 1
+    range: {x: 0.2, y: 1.5}
+    enabled: 1
+  - type: 2
+    range: {x: 2, y: 12}
+    enabled: 1
+  - type: 3
+    range: {x: 2, y: 12}
+    enabled: 1
+  - type: 4
+    range: {x: 5, y: 12}
+    enabled: 1
+  - type: 5
+    range: {x: 5, y: 12}
+    enabled: 1
+  - type: 6
+    range: {x: 5, y: 12}
+    enabled: 1
+  - type: 7
+    range: {x: 5, y: 12}
+    enabled: 1
+  bonusesToRoll: 2
+  seed: 0
+  applyOnAwake: 1
+  revertOnDisable: 1
 --- !u!1 &1465697286572918320
 GameObject:
   m_ObjectHideFlags: 0
@@ -6645,6 +6732,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1432232446246633481}
   - component: {fileID: 6680414583333143163}
+  - component: {fileID: 8197921174528607523}
   m_Layer: 6
   m_Name: Projectile Charm
   m_TagString: Untagged
@@ -6713,6 +6801,48 @@ MonoBehaviour:
   statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
   uiParent: {fileID: 3771470944807517528}
   statsTextInstance: {fileID: 0}
+--- !u!114 &8197921174528607523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3162848350499587913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f079c31d3aaa7804d800c865cdeafbad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 5791096993671492205}
+  bonusPool:
+  - type: 0
+    range: {x: 10, y: 30}
+    enabled: 1
+  - type: 1
+    range: {x: 0.2, y: 1.5}
+    enabled: 1
+  - type: 2
+    range: {x: 2, y: 12}
+    enabled: 1
+  - type: 3
+    range: {x: 2, y: 12}
+    enabled: 1
+  - type: 4
+    range: {x: 5, y: 12}
+    enabled: 1
+  - type: 5
+    range: {x: 5, y: 12}
+    enabled: 1
+  - type: 6
+    range: {x: 5, y: 12}
+    enabled: 1
+  - type: 7
+    range: {x: 5, y: 12}
+    enabled: 1
+  bonusesToRoll: 2
+  seed: 0
+  applyOnAwake: 1
+  revertOnDisable: 1
 --- !u!1 &3190016390325641590
 GameObject:
   m_ObjectHideFlags: 0
@@ -12612,6 +12742,89 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   value: 5
+--- !u!1 &6236938002615705278
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2700161614771664637}
+  - component: {fileID: 1892736670834776801}
+  - component: {fileID: 3772199095564728511}
+  m_Layer: 5
+  m_Name: Status Effects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2700161614771664637
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6236938002615705278}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1612001075127765590}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.00048828, y: 65.8}
+  m_SizeDelta: {x: 363, y: 32.9576}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1892736670834776801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6236938002615705278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 3
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 45, y: 45}
+  m_Spacing: {x: 15, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
+--- !u!114 &3772199095564728511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6236938002615705278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82a381bf767099b4ca26ea0d6694d2a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1755575790829812756}
+  iconsParent: {fileID: 2700161614771664637}
+  iconPrefab: {fileID: 8149073676715525968, guid: 23d355ddfdde7184db4b821b6e5e1a9a, type: 3}
+  icons:
+  - type: 0
+    sprite: {fileID: -2948085528684641165, guid: 6d5689dde65daae4bb70c70d62f11111, type: 3}
+  - type: 1
+    sprite: {fileID: 5985717383883113354, guid: 913d2f739499c9147a0f228a905ab185, type: 3}
+  - type: 2
+    sprite: {fileID: 3075010726887620817, guid: 0efb3faec8ded214f8715a7dcf1d88e3, type: 3}
 --- !u!1 &6278243993951913938
 GameObject:
   m_ObjectHideFlags: 0
@@ -13036,7 +13249,7 @@ MonoBehaviour:
     enabled: 1
   bonusesToRoll: 2
   seed: 0
-  applyOnAwake: 0
+  applyOnAwake: 1
   revertOnDisable: 1
 --- !u!1 &6330886543815198051
 GameObject:
