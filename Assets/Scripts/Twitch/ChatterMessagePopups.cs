@@ -76,16 +76,22 @@ public class ChatterMessagePopups : MonoBehaviour
         Vector3 spawnPos = transform.position + spawnOffset;
         GameObject msgInstance = Instantiate(messagePrefab, spawnPos, Quaternion.identity);
 
-        TextMeshPro tmp = msgInstance.GetComponent<TextMeshPro>();
+        TextMeshProUGUI tmp = msgInstance.GetComponentInChildren<TextMeshProUGUI>();
         if (tmp)
         {
-            Color tmpColor = Color.gray; tmpColor.a = 0.4f;
+            Color tmpColor = Color.gray;
+            tmpColor.a = 0.9f;
 
             tmp.color = tmpColor;
 
-            var popup = tmp.GetComponent<DamagePopup2D>();
+            var popup = tmp.GetComponentInParent<DamagePopup2D>();
             if (popup != null)
+            {
                 popup.lifetime = message.Length * 0.2f;
+                popup.floatSpeed = 0.1f;
+            }
+
+            popup.transform.SetParent(transform);
 
             StartCoroutine(TypewriterEffect(tmp, message));
         }
@@ -95,7 +101,7 @@ public class ChatterMessagePopups : MonoBehaviour
         }
     }
 
-    private IEnumerator TypewriterEffect(TextMeshPro tmp, string message)
+    private IEnumerator TypewriterEffect(TextMeshProUGUI tmp, string message)
     {
         tmp.text = string.Empty;
 

@@ -30,6 +30,10 @@ public class FollowNearest2D : MonoBehaviour
     [Tooltip("Other followers to avoid duplicating targets with.")]
     public FollowNearest2D[] otherFollowers;
 
+    [Header("Return Behavior")]
+    [Tooltip("If true, the object will return to its starting point when no target is found.")]
+    public bool returnToOriginWhenIdle = false;
+
     private Transform target;
     private Transform playerTransform;
     private float nextUpdateTime = 0f;
@@ -82,7 +86,8 @@ public class FollowNearest2D : MonoBehaviour
 
         if (target == null)
         {
-            ReturnToOrigin(dt);
+            if (returnToOriginWhenIdle)
+                ReturnToOrigin(dt);
             return;
         }
 

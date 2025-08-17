@@ -281,7 +281,7 @@ public class MonsterRarity : MonoBehaviour
             k.critChance = Mathf.Clamp01(k.critChance + addChance);
             k.critMultiplier = Mathf.Max(1f, k.critMultiplier + addMult);
         }
-        WN("Melee Crit (Chance & Mult)", $"+{addChance * 100f:F0}% / +{addMult:F2}x");
+        WN("Melee Crit", $"+{addChance * 100f:F0}% / +{addMult:F2}x");
     }
 
     // ===== Shooter (public fields) =====
@@ -329,14 +329,12 @@ public class MonsterRarity : MonoBehaviour
         // Enemy section
         if (notesEnemy.Count > 0)
         {
-            sb.AppendLine(C(C_HEADER, "<b>Enemy Mods</b>"));
             foreach (var line in notesEnemy) sb.AppendLine(line);
             // Weapon section
             if (notesWeapons.Count > 0)
             {
                 foreach (var line in notesWeapons) sb.AppendLine(line);
             }
-
         }
 
 
@@ -359,7 +357,7 @@ public class MonsterRarity : MonoBehaviour
     // ===== Formatting helpers =====
     private static string C(string hex, string text) => $"<color={hex}>{text}</color>";
     private static string Bullet(string label, string value)
-        => $"• {C(C_LABEL, label)}: {C(C_VALUE, value)}";
+        => $"{C(C_LABEL, label)}: {C(C_VALUE, value)}";
 
     private void EN(string label, string value) => notesEnemy.Add(Bullet(label, value));
     private void WN(string label, string value) => notesWeapons.Add(Bullet(label, value));
@@ -373,11 +371,11 @@ public class MonsterRarity : MonoBehaviour
 
     private static string FormatRarity(Rarity r) => r switch
     {
-        Rarity.Common => C(C_COM, "Common"),
-        Rarity.Uncommon => C(C_UNC, "Uncommon"),
-        Rarity.Rare => C(C_RARE, "Rare"),
-        Rarity.Legendary => C(C_LEG, "Legendary"),
-        _ => "Common"
+        Rarity.Common => C(C_COM, "Weak"),
+        Rarity.Uncommon => C(C_UNC, "Normal"),
+        Rarity.Rare => C(C_RARE, "Strong"),
+        Rarity.Legendary => C(C_LEG, "Elite"),
+        _ => "Weak"
     };
 
     private static void Shuffle<T>(IList<T> list)

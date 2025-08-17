@@ -174,21 +174,18 @@ public class TooltipManager : MonoBehaviour
     {
         if (canvasRect == null) return;
 
+        // 1) Get the screen point for mouse or anchor (NO offset yet)
         Vector2 screenPoint;
-
         if (currentAnchor != null && currentAnchor.gameObject.activeInHierarchy)
         {
-            // Anchor to a UI element's position (center) + offset
             screenPoint = RectTransformUtility.WorldToScreenPoint(canvas.worldCamera, currentAnchor.position);
-            screenPoint += tooltipOffset;
         }
         else
         {
-            // Follow mouse + offset
-            screenPoint = (Vector2)Input.mousePosition + tooltipOffset;
+            screenPoint = Input.mousePosition;
         }
 
-        // Convert to canvas-local point
+        // 2) Convert to local point in the canvas
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvasRect,
             screenPoint,
@@ -196,7 +193,13 @@ public class TooltipManager : MonoBehaviour
             out var localPoint
         );
 
-        // Clamp inside canvas bounds
+        // 3) Apply offset in *UI units* so it scales with the canvas
+        //    (Canvas.scaleFactor converts pixels <-> UI units)
+        float sf = canvas.scaleFactor <= 0f ? 1f : canvas.scaleFactor;
+        Vector2 offsetInLocalUnits = tooltipOffset / sf;
+        localPoint += offsetInLocalUnits;
+
+        // 4) Clamp to canvas bounds
         Vector2 half = panelRect.sizeDelta * 0.5f;
         Vector2 min = (canvasRect.rect.min + half) + clampMargin;
         Vector2 max = (canvasRect.rect.max - half) - clampMargin;
@@ -206,5 +209,6 @@ public class TooltipManager : MonoBehaviour
 
         panelRect.localPosition = localPoint;
     }
+
 
 }

@@ -61,8 +61,8 @@ public class TwitchListener : MonoBehaviour
     // Stopwatch time
     private float elapsedSeconds = 0f;
     // Track spawned chatters
-    [SerializeField] public readonly List<GameObject> spawnedChatters = new();
-
+    [SerializeField] public List<GameObject> spawnedChatters = new();
+    [SerializeField] public List<Chatter> chatters = new();
     private void Start()
     {
         if (player == null) player = transform;
@@ -187,7 +187,7 @@ public class TwitchListener : MonoBehaviour
     {
         if (player == null) return;
         if (spawnedChatters.Count >= maxSpawnCount) return;
-
+        chatters.Add(chatter);
         var prefab = PickWeightedPrefab();
         if (prefab == null) return;
 
@@ -221,7 +221,14 @@ public class TwitchListener : MonoBehaviour
         {
             stats.nameGUI.text = chatter.tags.displayName;
             stats.nameGUI.color = chatter.GetNameColor();
-            stats.power = chatter.tags.badges.Length + minPower;
+            foreach (ChatterBadge b in chatter.tags.badges)
+            {
+                if (b.id == "subscriber")
+                {
+                    stats.power += int.Parse(b.version);
+                }
+            }
+
         }
 
         var chatterMessage = instantiatedChatter.GetComponent<ChatterMessagePopups>();

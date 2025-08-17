@@ -224,7 +224,7 @@ public class LootTable2D : MonoBehaviour
     public void DebugRollAndSpawn()
     {
         var go = RollAndSpawn();
-        Debug.Log($"[LootTable2D] Spawned: {(go ? go.name : "null")} on {name}");
+        // Debug.Log($"[LootTable2D] Spawned: {(go ? go.name : "null")} on {name}");
     }
 
     private float NextFloat()

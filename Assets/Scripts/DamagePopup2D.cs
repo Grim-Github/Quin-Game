@@ -9,13 +9,13 @@ public class DamagePopup2D : MonoBehaviour
     public float floatSpeed = 1.5f;     // units/sec upward
     public float fadeStart = 0.3f;      // seconds before end to start fading
 
-    private TextMeshPro tmp;
+    private TextMeshProUGUI tmp;
     private float age;
     private Color baseColor;
 
     void Awake()
     {
-        tmp = GetComponent<TextMeshPro>() ?? GetComponentInChildren<TextMeshPro>(true);
+        tmp = GetComponent<TextMeshProUGUI>() ?? GetComponentInChildren<TextMeshProUGUI>();
         if (tmp == null) { Debug.LogWarning("DamagePopup2D: no TextMeshProUGUI found."); enabled = false; return; }
         baseColor = tmp.color;
     }

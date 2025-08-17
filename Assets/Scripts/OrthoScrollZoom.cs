@@ -121,7 +121,7 @@ public class OrthoScrollZoom : MonoBehaviour
         float t = 0f;
         while (t < duration)
         {
-            t += useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+            t = useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
             yield return null;
         }
 

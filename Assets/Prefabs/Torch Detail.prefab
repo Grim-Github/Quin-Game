@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4983492403128618168}
   - component: {fileID: 378122182990338580}
   - component: {fileID: 8429965775105096370}
+  - component: {fileID: 3385118409921225754}
   m_Layer: 0
   m_Name: Torch Detail
   m_TagString: Untagged
@@ -261,3 +262,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3385118409921225754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3636215825690073154}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d1c00080e510a4786ba05d28f7fab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerAmount: 5
+  flickerSpeed: 2

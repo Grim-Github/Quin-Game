@@ -42,6 +42,7 @@ public class ExplosionDamage2D : MonoBehaviour
     /// <summary>Triggers the explosion manually if explodeOnAwake is false.</summary>
     public void DoExplosion()
     {
+        FindAnyObjectByType<OrthoScrollZoom>().CameraShake(0.5f, baseDamage / 50);
         Vector2 center = transform.position;
         var cols = Physics2D.OverlapCircleAll(center, radius, damageLayers);
         foreach (var col in cols)
