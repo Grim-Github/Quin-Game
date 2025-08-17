@@ -11,7 +11,8 @@ public class AccessoryBonuses : MonoBehaviour
     {
         MaxHealthFlat,   // +N to SimpleHealth.maxHealth (also heals by same amount)
         RegenPerSecond,  // +f to SimpleHealth.regenRate
-        ArmorFlat        // +f to SimpleHealth.armor
+        ArmorFlat,        // +f to SimpleHealth.armor
+        EvasionFlat
     }
 
     [Serializable]
@@ -33,6 +34,7 @@ public class AccessoryBonuses : MonoBehaviour
         new BonusOption{ type = BonusType.MaxHealthFlat, range = new Vector2(10,30), enabled = true },
         new BonusOption{ type = BonusType.RegenPerSecond, range = new Vector2(0.2f,1.5f), enabled = true },
         new BonusOption{ type = BonusType.ArmorFlat, range = new Vector2(2f,12f), enabled = true },
+        new BonusOption{ type = BonusType.EvasionFlat, range = new Vector2(2f,12f), enabled = true },
     };
 
     [Min(1)] public int bonusesToRoll = 2;
@@ -135,6 +137,12 @@ public class AccessoryBonuses : MonoBehaviour
                         _applied.Add(new Applied { type = chosen.type, value = rolled, intValue = 0 });
                         break;
                     }
+                case BonusType.EvasionFlat:
+                    {
+                        target.evasion = Mathf.Max(0f, target.evasion + rolled);
+                        _applied.Add(new Applied { type = chosen.type, value = rolled, intValue = 0 });
+                        break;
+                    }
             }
         }
 
@@ -162,6 +170,9 @@ public class AccessoryBonuses : MonoBehaviour
 
                 case BonusType.ArmorFlat:
                     target.armor = Mathf.Max(0f, target.armor - a.value);
+                    break;
+                case BonusType.EvasionFlat:
+                    target.evasion = Mathf.Max(0f, target.evasion - a.value);
                     break;
             }
         }
@@ -199,6 +210,9 @@ public class AccessoryBonuses : MonoBehaviour
                     break;
                 case BonusType.ArmorFlat:
                     _lastInjectedLines.Add($"+{FormatFloat(a.value)} Armor");
+                    break;
+                case BonusType.EvasionFlat:
+                    _lastInjectedLines.Add($"+{FormatFloat(a.value)} Evasion");
                     break;
             }
         }

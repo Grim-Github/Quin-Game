@@ -190,7 +190,7 @@ public class StatusEffectSystem : MonoBehaviour
                 int dmg = Mathf.Max(1, Mathf.RoundToInt(bleedingDamagePerTick));
                 // Uses your health system's public API:
                 // SimpleHealth.TakeDamage(int amount)
-                health.TakeDamage(dmg); // will handle armor, invuln, popup, etc. :contentReference[oaicite:1]{index=1}
+                health.TakeDamage(dmg, false); // will handle armor, invuln, popup, etc. :contentReference[oaicite:1]{index=1}
             }
             // If no health found, we silently skip (no debug spam).
         }

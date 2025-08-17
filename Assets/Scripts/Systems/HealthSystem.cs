@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class SimpleHealth : MonoBehaviour
@@ -48,6 +49,7 @@ public class SimpleHealth : MonoBehaviour
     [SerializeField] private Sprite iconSprite;
 
     [Header("SFX")]
+    [SerializeField] private Volume playerVolume;
     [SerializeField] private GameObject[] deathObjects;
     [SerializeField] private AudioClip[] damageClip;
     [SerializeField] private AudioClip[] deathClip;
@@ -81,6 +83,8 @@ public class SimpleHealth : MonoBehaviour
     // Stats UI (now matches Knife.cs pattern)
     [HideInInspector] public TextMeshProUGUI statsTextInstance;
     private Image iconImage;
+    private AudioLowPassFilter filter;
+
 
     public bool IsAlive => currentHealth > 0f;
     public bool IsInvulnerable => isInvulnerable;
@@ -92,6 +96,8 @@ public class SimpleHealth : MonoBehaviour
         if (startingHealth <= 0) startingHealth = maxHealth;
         currentHealth = Mathf.Clamp(startingHealth, 0, maxHealth);
         SyncSlider();
+
+        filter = GetComponent<AudioLowPassFilter>();
 
         movementController = GetComponent<Snappy2DController>();
         soundSource = GetComponent<AudioSource>();
@@ -126,6 +132,29 @@ public class SimpleHealth : MonoBehaviour
         ResetHealth();
     }
 
+    private void UpdateVolume()
+    {
+        if (playerVolume != null)
+        {
+            // Post-processing weight (visual effect)
+            float hpFraction = currentHealth / Mathf.Max(1f, maxHealth);
+            playerVolume.weight = 1f - hpFraction;
+        }
+
+        if (filter != null)
+        {
+            // Map HP% to cutoff frequency
+            float hpFraction = currentHealth / Mathf.Max(1f, maxHealth);
+
+            // Example mapping: 20 Hz at 0% HP → 22000 Hz at full HP
+            float minCutoff = 200f;
+            float maxCutoff = 22000f;
+            filter.cutoffFrequency = Mathf.Lerp(minCutoff, maxCutoff, hpFraction);
+        }
+    }
+
+
+
     private void OnEnable()
     {
         if (_hasOriginalColor && spriteRenderer != null)
@@ -147,6 +176,7 @@ public class SimpleHealth : MonoBehaviour
             SyncSlider();
         }
 
+        UpdateVolume();
         UpdateStatsText();
     }
 
@@ -201,12 +231,12 @@ public class SimpleHealth : MonoBehaviour
         statsTextInstance.text = sb.ToString();
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, bool mitigatable = true)
     {
         if (amount <= 0 || isInvulnerable || currentHealth <= 0) return;
 
         // Evasion check BEFORE armor
-        if (TryEvade(amount))
+        if (mitigatable && TryEvade(amount))
         {
             lastDamageTaken = 0;
 
@@ -227,7 +257,13 @@ public class SimpleHealth : MonoBehaviour
             return; // completely avoid damage
         }
 
-        int mitigated = ApplyArmor(amount);
+        int mitigated = amount;
+
+        if (mitigatable)
+        {
+            mitigated = ApplyArmor(amount);
+        }
+
         if (mitigated <= 0) return;
 
         lastDamageTaken = mitigated;
@@ -422,6 +458,12 @@ public class SimpleHealth : MonoBehaviour
     {
         if (amount == 0f) return;
         armor = Mathf.Max(0f, armor + amount);
+    }
+
+    public void GiveEvasion(float amount)
+    {
+        if (amount == 0f) return;
+        evasion = Mathf.Max(0f, evasion + amount);
     }
 
     private System.Collections.IEnumerator InvulnerabilityCoroutine()

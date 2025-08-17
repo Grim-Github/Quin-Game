@@ -2954,6 +2954,7 @@ GameObject:
   - component: {fileID: 6608178519213617443}
   - component: {fileID: 2703210912007669065}
   - component: {fileID: 1605220350274199287}
+  - component: {fileID: 3392709203779967207}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3107,7 +3108,7 @@ MonoBehaviour:
   armor: 0
   armorScaling: 10
   maxMitigation: 0.8
-  evasion: 25
+  evasion: 0
   evasionScaling: 10
   maxEvasion: 0.8
   healthSlider: {fileID: 6907000266174429018}
@@ -3117,6 +3118,7 @@ MonoBehaviour:
   uiParent: {fileID: 288510957997346985}
   extraTextField: 
   iconSprite: {fileID: -205270267638800340, guid: 9d198d5251e3a1c498e6ad4e73508eab, type: 3}
+  playerVolume: {fileID: 2872917081157335626}
   deathObjects: []
   damageClip:
   - {fileID: 8300000, guid: 4da70bf93e7ae9a4fb87d0509942f9c8, type: 3}
@@ -3446,6 +3448,31 @@ MonoBehaviour:
     max: 0
   autoApplyOnStart: 1
   logBuild: 0
+--- !u!169 &3392709203779967207
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227099894277660166}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.22727273
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1247444226582579560
 GameObject:
   m_ObjectHideFlags: 0
@@ -5382,7 +5409,7 @@ GameObject:
   - component: {fileID: 5141939082895427631}
   - component: {fileID: 2872917081157335626}
   m_Layer: 0
-  m_Name: Pause Volume
+  m_Name: Player Health Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5418,7 +5445,7 @@ MonoBehaviour:
   m_IsGlobal: 1
   priority: 2
   blendDistance: 0
-  weight: 0
+  weight: 1
   sharedProfile: {fileID: 11400000, guid: bbf04a0c0a4d5bf409d0f2ee1fc33b92, type: 2}
 --- !u!1 &2754739268539261328
 GameObject:
