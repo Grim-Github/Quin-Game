@@ -64,6 +64,7 @@ MonoBehaviour:
   fallbackSpriteAssets:
   - {fileID: 11400000, guid: b805fe7704b895545b8049386d74c38e, type: 2}
   - {fileID: 11400000, guid: 55df72389fc0c524380fa5f234fd23dc, type: 2}
+  - {fileID: 11400000, guid: ce8146f0d547e854493f3f135f225b28, type: 2}
 --- !u!21 &8080785089994961091
 Material:
   serializedVersion: 8

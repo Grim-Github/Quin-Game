@@ -185,7 +185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1292039828634639122
 RectTransform:
   m_ObjectHideFlags: 0
@@ -473,6 +473,7 @@ GameObject:
   - component: {fileID: 8493325509765533882}
   - component: {fileID: 2368951062080499837}
   - component: {fileID: 2968670058090387076}
+  - component: {fileID: 5456532944993249781}
   m_Layer: 5
   m_Name: Reroll
   m_TagString: Untagged
@@ -496,10 +497,10 @@ RectTransform:
   - {fileID: 360904604133583349}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -176.98228}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3723150730366642734
 CanvasRenderer:
@@ -561,12 +562,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -650,6 +651,20 @@ MonoBehaviour:
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
   uiAnchorOverride: {fileID: 0}
+--- !u!114 &5456532944993249781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311259466833533387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &367963332591515878
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,6 +1430,12 @@ MonoBehaviour:
     critMultAdd: {x: 0.25, y: 1}
     statusDurationAdd: {x: 0.1, y: 0.3}
     statusChance: {x: 0.3, y: 0.5}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
     knifeLifestealAdd: {x: 0.05, y: 0.2}
@@ -1431,6 +1452,12 @@ MonoBehaviour:
     critMultiplier: 5
     statusDuration: 5
     statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
     knifeLifesteal: 5
@@ -1447,6 +1474,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  healthSystem: {fileID: 0}
 --- !u!1 &763878338640954299
 GameObject:
   m_ObjectHideFlags: 0
@@ -1457,7 +1485,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1420364789606767436}
   - component: {fileID: 7754145506774124050}
-  - component: {fileID: 167509031548696411}
+  - component: {fileID: 919886633822181183}
   m_Layer: 6
   m_Name: Life Ring
   m_TagString: Untagged
@@ -1532,7 +1560,7 @@ MonoBehaviour:
   statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
   uiParent: {fileID: 3771470944807517528}
   statsTextInstance: {fileID: 0}
---- !u!114 &167509031548696411
+--- !u!114 &919886633822181183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1541,39 +1569,71 @@ MonoBehaviour:
   m_GameObject: {fileID: 763878338640954299}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f079c31d3aaa7804d800c865cdeafbad, type: 3}
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 5791096993671492205}
-  bonusPool:
-  - type: 0
-    range: {x: 10, y: 30}
-    enabled: 1
-  - type: 1
-    range: {x: 0.2, y: 1.5}
-    enabled: 1
-  - type: 2
-    range: {x: 2, y: 12}
-    enabled: 1
-  - type: 3
-    range: {x: 2, y: 12}
-    enabled: 1
-  - type: 4
-    range: {x: 5, y: 12}
-    enabled: 1
-  - type: 5
-    range: {x: 5, y: 12}
-    enabled: 1
-  - type: 6
-    range: {x: 5, y: 12}
-    enabled: 1
-  - type: 7
-    range: {x: 5, y: 12}
-    enabled: 1
-  bonusesToRoll: 2
-  seed: 0
-  applyOnAwake: 1
-  revertOnDisable: 1
+  rollOnAwake: 1
+  rngSeed: 0
+  upgradeWeights: {fileID: 0}
+  current: 0
+  weights:
+    common: 60
+    uncommon: 25
+    rare: 12
+    legendary: 3
+  ranges:
+    damageMult: {x: 1.1, y: 1.3}
+    damageFlatAdd: {x: 3, y: 12}
+    atkSpeedFrac: {x: 0.1, y: 0.25}
+    critChanceAdd: {x: 0.05, y: 0.2}
+    critMultAdd: {x: 0.25, y: 1}
+    statusDurationAdd: {x: 0.1, y: 0.3}
+    statusChance: {x: 0.01, y: 0.3}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
+    knifeRadiusMult: {x: 1.1, y: 1.3}
+    knifeSplashRadiusMult: {x: 1.1, y: 1.3}
+    knifeLifestealAdd: {x: 0.05, y: 0.2}
+    knifeMaxTargetsAdd: {x: 1, y: 3}
+    shooterLifetimeAdd: {x: 0.5, y: 2}
+    shooterForceAdd: {x: 1, y: 4}
+    shooterProjectilesAdd: {x: 1, y: 2}
+    shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
+  tiers:
+    damagePercent: 5
+    damageFlat: 5
+    attackSpeed: 5
+    critChance: 5
+    critMultiplier: 5
+    statusDuration: 5
+    statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
+    knifeRadius: 5
+    knifeSplashRadius: 5
+    knifeLifesteal: 5
+    knifeMaxTargets: 5
+    shooterLifetime: 5
+    shooterForce: 5
+    shooterProjectiles: 5
+    shooterAccuracy: 5
+    multiplierCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
+    defaultMinMax: {x: 0.5, y: 2}
+  healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &819256001971131541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1987,7 +2047,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<sprite name="power"> tttttt
+  m_text: '<sprite name="chest"> tttttt
 
 '
   m_isRightToLeft: 0
@@ -2293,6 +2353,12 @@ MonoBehaviour:
     critMultAdd: {x: 0.25, y: 1}
     statusDurationAdd: {x: 0.1, y: 0.3}
     statusChance: {x: 0.3, y: 0.5}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
     knifeLifestealAdd: {x: 0.05, y: 0.2}
@@ -2309,6 +2375,12 @@ MonoBehaviour:
     critMultiplier: 5
     statusDuration: 5
     statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
     knifeLifesteal: 5
@@ -2325,6 +2397,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  healthSystem: {fileID: 0}
 --- !u!1 &935738676766603409
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,6 +2411,7 @@ GameObject:
   - component: {fileID: 2373171176801795095}
   - component: {fileID: 498318057186037389}
   - component: {fileID: 2782723417985154868}
+  - component: {fileID: 6507785059604553201}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -2363,10 +2437,10 @@ RectTransform:
   - {fileID: 1564346842508848}
   m_Father: {fileID: 493180743653363522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 329.04004, y: -370.4542}
-  m_SizeDelta: {x: 587.8, y: 186.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7723292610746042545
 CanvasRenderer:
@@ -2428,12 +2502,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -2477,6 +2551,20 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: c3d3d847c56d95849a0720f90cc3465c, type: 3}
   playerTag: Player
+--- !u!114 &6507785059604553201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935738676766603409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &960783670830548699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2701,6 +2789,7 @@ GameObject:
   - component: {fileID: 7640682039143239990}
   - component: {fileID: 2837543751389493501}
   - component: {fileID: 7603023448824495657}
+  - component: {fileID: 6871481294515819535}
   m_Layer: 5
   m_Name: Reroll
   m_TagString: Untagged
@@ -2723,10 +2812,10 @@ RectTransform:
   - {fileID: 1749874623983533180}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -226.78229}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4074725629246888460
 CanvasRenderer:
@@ -2788,12 +2877,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -2877,6 +2966,20 @@ MonoBehaviour:
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
   uiAnchorOverride: {fileID: 0}
+--- !u!114 &6871481294515819535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114302618992814569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &1216054553433728835
 GameObject:
   m_ObjectHideFlags: 0
@@ -3623,6 +3726,7 @@ GameObject:
   - component: {fileID: 4445483280857714174}
   - component: {fileID: 2700507533484032187}
   - component: {fileID: 553629924177958861}
+  - component: {fileID: 1231124461057260225}
   m_Layer: 5
   m_Name: Tab Inventory Button
   m_TagString: Untagged
@@ -3710,12 +3814,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -3788,6 +3892,20 @@ MonoBehaviour:
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
   uiAnchorOverride: {fileID: 0}
+--- !u!114 &1231124461057260225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248278467058947826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &1305896732080586545
 GameObject:
   m_ObjectHideFlags: 0
@@ -3935,7 +4053,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: f52201be749d5a944bb58fe73e86a396, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -4065,7 +4183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9147439597678959549}
   - component: {fileID: 6355551625964360536}
-  - component: {fileID: 3045383573133791685}
+  - component: {fileID: 8435410987459581995}
   m_Layer: 6
   m_Name: Boots
   m_TagString: Untagged
@@ -4138,7 +4256,7 @@ MonoBehaviour:
   statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
   uiParent: {fileID: 3771470944807517528}
   statsTextInstance: {fileID: 0}
---- !u!114 &3045383573133791685
+--- !u!114 &8435410987459581995
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4147,39 +4265,71 @@ MonoBehaviour:
   m_GameObject: {fileID: 1454800635535539524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f079c31d3aaa7804d800c865cdeafbad, type: 3}
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 5791096993671492205}
-  bonusPool:
-  - type: 0
-    range: {x: 10, y: 30}
-    enabled: 1
-  - type: 1
-    range: {x: 0.2, y: 1.5}
-    enabled: 1
-  - type: 2
-    range: {x: 2, y: 12}
-    enabled: 1
-  - type: 3
-    range: {x: 2, y: 12}
-    enabled: 1
-  - type: 4
-    range: {x: 5, y: 12}
-    enabled: 1
-  - type: 5
-    range: {x: 5, y: 12}
-    enabled: 1
-  - type: 6
-    range: {x: 5, y: 12}
-    enabled: 1
-  - type: 7
-    range: {x: 5, y: 12}
-    enabled: 1
-  bonusesToRoll: 2
-  seed: 0
-  applyOnAwake: 1
-  revertOnDisable: 1
+  rollOnAwake: 1
+  rngSeed: 0
+  upgradeWeights: {fileID: 0}
+  current: 0
+  weights:
+    common: 60
+    uncommon: 25
+    rare: 12
+    legendary: 3
+  ranges:
+    damageMult: {x: 1.1, y: 1.3}
+    damageFlatAdd: {x: 3, y: 12}
+    atkSpeedFrac: {x: 0.1, y: 0.25}
+    critChanceAdd: {x: 0.05, y: 0.2}
+    critMultAdd: {x: 0.25, y: 1}
+    statusDurationAdd: {x: 0.1, y: 0.3}
+    statusChance: {x: 0.01, y: 0.3}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
+    knifeRadiusMult: {x: 1.1, y: 1.3}
+    knifeSplashRadiusMult: {x: 1.1, y: 1.3}
+    knifeLifestealAdd: {x: 0.05, y: 0.2}
+    knifeMaxTargetsAdd: {x: 1, y: 3}
+    shooterLifetimeAdd: {x: 0.5, y: 2}
+    shooterForceAdd: {x: 1, y: 4}
+    shooterProjectilesAdd: {x: 1, y: 2}
+    shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
+  tiers:
+    damagePercent: 5
+    damageFlat: 5
+    attackSpeed: 5
+    critChance: 5
+    critMultiplier: 5
+    statusDuration: 5
+    statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
+    knifeRadius: 5
+    knifeSplashRadius: 5
+    knifeLifesteal: 5
+    knifeMaxTargets: 5
+    shooterLifetime: 5
+    shooterForce: 5
+    shooterProjectiles: 5
+    shooterAccuracy: 5
+    multiplierCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
+    defaultMinMax: {x: 0.5, y: 2}
+  healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &1465697286572918320
 GameObject:
   m_ObjectHideFlags: 0
@@ -4345,6 +4495,7 @@ GameObject:
   - component: {fileID: 5310310373291600406}
   - component: {fileID: 4113821409760833223}
   - component: {fileID: 5619755163592230580}
+  - component: {fileID: 6839644261897766792}
   m_Layer: 5
   m_Name: Reroll
   m_TagString: Untagged
@@ -4368,10 +4519,10 @@ RectTransform:
   - {fileID: 6159125347764133184}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -77.38229}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2498857686562003061
 CanvasRenderer:
@@ -4433,12 +4584,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -4522,6 +4673,20 @@ MonoBehaviour:
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
   uiAnchorOverride: {fileID: 0}
+--- !u!114 &6839644261897766792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537733916144839568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &1617304167826018044
 GameObject:
   m_ObjectHideFlags: 0
@@ -4594,6 +4759,7 @@ GameObject:
   - component: {fileID: 5902267265382813036}
   - component: {fileID: 6266773982444833984}
   - component: {fileID: 5058730065962291956}
+  - component: {fileID: 3582252943806838063}
   m_Layer: 5
   m_Name: Previous
   m_TagString: Untagged
@@ -4681,12 +4847,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -4730,6 +4896,20 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: c3d3d847c56d95849a0720f90cc3465c, type: 3}
   playerTag: Player
+--- !u!114 &3582252943806838063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640757255282028501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &1712862820456983879
 GameObject:
   m_ObjectHideFlags: 0
@@ -5001,7 +5181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - itemName: 'Orb 1 '
+  - itemName: Orb 1
     amount: 120
     icon: {fileID: 0}
   OnInventoryChanged:
@@ -5272,6 +5452,7 @@ GameObject:
   - component: {fileID: 7619612048798880757}
   - component: {fileID: 5013774516192322037}
   - component: {fileID: 2760542235863493518}
+  - component: {fileID: 5627917617542466304}
   m_Layer: 5
   m_Name: Button (3)
   m_TagString: Untagged
@@ -5297,10 +5478,10 @@ RectTransform:
   - {fileID: 3976635862840989751}
   m_Father: {fileID: 493180743653363522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 329.04004, y: -628.3042}
-  m_SizeDelta: {x: 587.8, y: 186.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6558651054070855748
 CanvasRenderer:
@@ -5362,12 +5543,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -5411,6 +5592,20 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: c3d3d847c56d95849a0720f90cc3465c, type: 3}
   playerTag: Player
+--- !u!114 &5627917617542466304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2567872715430225568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &2594278893742469122
 GameObject:
   m_ObjectHideFlags: 0
@@ -5888,6 +6083,7 @@ GameObject:
   - component: {fileID: 6114878799195689843}
   - component: {fileID: 6077949585304594226}
   - component: {fileID: 7046290425082581312}
+  - component: {fileID: 2915305336109336926}
   m_Layer: 5
   m_Name: Reroll
   m_TagString: Untagged
@@ -5911,10 +6107,10 @@ RectTransform:
   - {fileID: 491513941130106179}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -27.582296}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2200026841810741719
 CanvasRenderer:
@@ -5976,12 +6172,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -6065,6 +6261,20 @@ MonoBehaviour:
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
   uiAnchorOverride: {fileID: 0}
+--- !u!114 &2915305336109336926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2986601009404336690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &3015571481402315596
 GameObject:
   m_ObjectHideFlags: 0
@@ -6335,6 +6545,12 @@ MonoBehaviour:
     critMultAdd: {x: 0.25, y: 1}
     statusDurationAdd: {x: 0.1, y: 0.3}
     statusChance: {x: 0.3, y: 0.5}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.3, y: 1.5}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
     knifeLifestealAdd: {x: 0.05, y: 0.1}
@@ -6351,6 +6567,12 @@ MonoBehaviour:
     critMultiplier: 5
     statusDuration: 5
     statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
     knifeLifesteal: 5
@@ -6367,6 +6589,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  healthSystem: {fileID: 0}
 --- !u!114 &7596382903804138479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6386,6 +6609,15 @@ MonoBehaviour:
     crit: 1
     statusDuration: 1
     statusChance: 1
+    hpFlat: 1
+    hpPercent: 1
+    hpRegen: 1
+    armor: 1
+    evasion: 1
+    fireResist: 0.5
+    coldResist: 0.5
+    lightningResist: 0.5
+    poisonResist: 0.5
     knifeLifesteal: 1
     knifeRadius: 1
     knifeSplash: 0
@@ -6732,7 +6964,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1432232446246633481}
   - component: {fileID: 6680414583333143163}
-  - component: {fileID: 8197921174528607523}
+  - component: {fileID: 4132545019636135579}
   m_Layer: 6
   m_Name: Projectile Charm
   m_TagString: Untagged
@@ -6801,7 +7033,7 @@ MonoBehaviour:
   statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
   uiParent: {fileID: 3771470944807517528}
   statsTextInstance: {fileID: 0}
---- !u!114 &8197921174528607523
+--- !u!114 &4132545019636135579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6810,39 +7042,71 @@ MonoBehaviour:
   m_GameObject: {fileID: 3162848350499587913}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f079c31d3aaa7804d800c865cdeafbad, type: 3}
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 5791096993671492205}
-  bonusPool:
-  - type: 0
-    range: {x: 10, y: 30}
-    enabled: 1
-  - type: 1
-    range: {x: 0.2, y: 1.5}
-    enabled: 1
-  - type: 2
-    range: {x: 2, y: 12}
-    enabled: 1
-  - type: 3
-    range: {x: 2, y: 12}
-    enabled: 1
-  - type: 4
-    range: {x: 5, y: 12}
-    enabled: 1
-  - type: 5
-    range: {x: 5, y: 12}
-    enabled: 1
-  - type: 6
-    range: {x: 5, y: 12}
-    enabled: 1
-  - type: 7
-    range: {x: 5, y: 12}
-    enabled: 1
-  bonusesToRoll: 2
-  seed: 0
-  applyOnAwake: 1
-  revertOnDisable: 1
+  rollOnAwake: 1
+  rngSeed: 0
+  upgradeWeights: {fileID: 0}
+  current: 0
+  weights:
+    common: 60
+    uncommon: 25
+    rare: 12
+    legendary: 3
+  ranges:
+    damageMult: {x: 1.1, y: 1.3}
+    damageFlatAdd: {x: 3, y: 12}
+    atkSpeedFrac: {x: 0.1, y: 0.25}
+    critChanceAdd: {x: 0.05, y: 0.2}
+    critMultAdd: {x: 0.25, y: 1}
+    statusDurationAdd: {x: 0.1, y: 0.3}
+    statusChance: {x: 0.01, y: 0.3}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
+    knifeRadiusMult: {x: 1.1, y: 1.3}
+    knifeSplashRadiusMult: {x: 1.1, y: 1.3}
+    knifeLifestealAdd: {x: 0.05, y: 0.2}
+    knifeMaxTargetsAdd: {x: 1, y: 3}
+    shooterLifetimeAdd: {x: 0.5, y: 2}
+    shooterForceAdd: {x: 1, y: 4}
+    shooterProjectilesAdd: {x: 1, y: 2}
+    shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
+  tiers:
+    damagePercent: 5
+    damageFlat: 5
+    attackSpeed: 5
+    critChance: 5
+    critMultiplier: 5
+    statusDuration: 5
+    statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
+    knifeRadius: 5
+    knifeSplashRadius: 5
+    knifeLifesteal: 5
+    knifeMaxTargets: 5
+    shooterLifetime: 5
+    shooterForce: 5
+    shooterProjectiles: 5
+    shooterAccuracy: 5
+    multiplierCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
+    defaultMinMax: {x: 0.5, y: 2}
+  healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &3190016390325641590
 GameObject:
   m_ObjectHideFlags: 0
@@ -7241,6 +7505,12 @@ MonoBehaviour:
     critMultAdd: {x: 0.25, y: 1}
     statusDurationAdd: {x: 0.1, y: 0.3}
     statusChance: {x: 0.3, y: 0.5}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
     knifeLifestealAdd: {x: 0.05, y: 0.2}
@@ -7257,6 +7527,12 @@ MonoBehaviour:
     critMultiplier: 5
     statusDuration: 5
     statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
     knifeLifesteal: 5
@@ -7273,6 +7549,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  healthSystem: {fileID: 0}
 --- !u!1 &3401677938551974219
 GameObject:
   m_ObjectHideFlags: 0
@@ -8312,6 +8589,12 @@ MonoBehaviour:
     critMultAdd: {x: 0.25, y: 1}
     statusDurationAdd: {x: 0.1, y: 0.3}
     statusChance: {x: 0.3, y: 0.5}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
     knifeLifestealAdd: {x: 0.05, y: 0.2}
@@ -8328,6 +8611,12 @@ MonoBehaviour:
     critMultiplier: 5
     statusDuration: 5
     statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
     knifeLifesteal: 5
@@ -8344,6 +8633,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  healthSystem: {fileID: 0}
 --- !u!1 &4019939872639026237
 GameObject:
   m_ObjectHideFlags: 0
@@ -9157,6 +9447,7 @@ GameObject:
   - component: {fileID: 8141085841061298029}
   - component: {fileID: 2360879047358701719}
   - component: {fileID: 470848094725041167}
+  - component: {fileID: 1982891114589844319}
   m_Layer: 5
   m_Name: Tab Orb Button
   m_TagString: Untagged
@@ -9244,12 +9535,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -9322,6 +9613,20 @@ MonoBehaviour:
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
   uiAnchorOverride: {fileID: 0}
+--- !u!114 &1982891114589844319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4433324680681110919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &4448058578589689684
 GameObject:
   m_ObjectHideFlags: 0
@@ -9467,6 +9772,7 @@ GameObject:
   - component: {fileID: 16650669833111309}
   - component: {fileID: 3153558043755674536}
   - component: {fileID: 4677066426784484590}
+  - component: {fileID: 6734616409180408056}
   m_Layer: 5
   m_Name: Reroll
   m_TagString: Untagged
@@ -9490,10 +9796,10 @@ RectTransform:
   - {fileID: 2965144522027759990}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -127.1823}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &695081399239090769
 CanvasRenderer:
@@ -9555,12 +9861,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -9644,6 +9950,20 @@ MonoBehaviour:
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
   uiAnchorOverride: {fileID: 0}
+--- !u!114 &6734616409180408056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4494581241513431476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &4545335021469969581
 GameObject:
   m_ObjectHideFlags: 0
@@ -10016,6 +10336,12 @@ MonoBehaviour:
     critMultAdd: {x: 0.25, y: 1}
     statusDurationAdd: {x: 0.1, y: 0.3}
     statusChance: {x: 0.3, y: 0.5}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.3, y: 1.5}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
     knifeLifestealAdd: {x: 0.05, y: 0.1}
@@ -10032,6 +10358,12 @@ MonoBehaviour:
     critMultiplier: 5
     statusDuration: 5
     statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
     knifeLifesteal: 5
@@ -10048,6 +10380,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  healthSystem: {fileID: 0}
 --- !u!114 &8555762351250044580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10067,6 +10400,15 @@ MonoBehaviour:
     crit: 1
     statusDuration: 1
     statusChance: 1
+    hpFlat: 1
+    hpPercent: 1
+    hpRegen: 1
+    armor: 1
+    evasion: 1
+    fireResist: 0.5
+    coldResist: 0.5
+    lightningResist: 0.5
+    poisonResist: 0.5
     knifeLifesteal: 1
     knifeRadius: 1
     knifeSplash: 0
@@ -10227,7 +10569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6843857821109585707
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10845,6 +11187,7 @@ GameObject:
   - component: {fileID: 8539647170188055113}
   - component: {fileID: 3688257252900025357}
   - component: {fileID: 8915823171433196371}
+  - component: {fileID: 5019250816863149127}
   m_Layer: 5
   m_Name: Cancel Button
   m_TagString: Untagged
@@ -10932,12 +11275,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -10981,6 +11324,20 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: c3d3d847c56d95849a0720f90cc3465c, type: 3}
   playerTag: Player
+--- !u!114 &5019250816863149127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4914448787214158926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &4933762346331223216
 GameObject:
   m_ObjectHideFlags: 0
@@ -11217,6 +11574,7 @@ GameObject:
   - component: {fileID: 4572363279092251431}
   - component: {fileID: 6115827556510881206}
   - component: {fileID: 8003767649827529976}
+  - component: {fileID: 7563845046193219266}
   m_Layer: 5
   m_Name: Reroll (2)
   m_TagString: Untagged
@@ -11239,10 +11597,10 @@ RectTransform:
   - {fileID: 6848453330417983158}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -326.3823}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9209299288882247878
 CanvasRenderer:
@@ -11304,12 +11662,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -11393,6 +11751,20 @@ MonoBehaviour:
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
   uiAnchorOverride: {fileID: 0}
+--- !u!114 &7563845046193219266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5202952673803832099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &5294307976084307883
 GameObject:
   m_ObjectHideFlags: 0
@@ -11886,6 +12258,7 @@ GameObject:
   - component: {fileID: 8127290507637566893}
   - component: {fileID: 2140431800019696794}
   - component: {fileID: 6238582084385983347}
+  - component: {fileID: 5957003038487374404}
   m_Layer: 5
   m_Name: Reroll (3)
   m_TagString: Untagged
@@ -11908,10 +12281,10 @@ RectTransform:
   - {fileID: 5072668526965699590}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -376.18228}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7395233620441092726
 CanvasRenderer:
@@ -11973,12 +12346,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -12062,6 +12435,20 @@ MonoBehaviour:
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
   uiAnchorOverride: {fileID: 0}
+--- !u!114 &5957003038487374404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5862486877742866835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &5939634740483177003
 GameObject:
   m_ObjectHideFlags: 0
@@ -12420,6 +12807,7 @@ GameObject:
   - component: {fileID: 675359704218285255}
   - component: {fileID: 1622659323163113679}
   - component: {fileID: 8144475187426849114}
+  - component: {fileID: 2890204707457237865}
   m_Layer: 5
   m_Name: Reroll (1)
   m_TagString: Untagged
@@ -12442,10 +12830,10 @@ RectTransform:
   - {fileID: 4760720284868463301}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -276.5823}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7121845835245431989
 CanvasRenderer:
@@ -12507,12 +12895,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -12596,6 +12984,20 @@ MonoBehaviour:
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
   uiAnchorOverride: {fileID: 0}
+--- !u!114 &2890204707457237865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6138256789324193616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &6182335612106051969
 GameObject:
   m_ObjectHideFlags: 0
@@ -13138,7 +13540,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5702712710036007540}
   - component: {fileID: 4104966517400091509}
-  - component: {fileID: 5215569807684914175}
+  - component: {fileID: 2423581163331950451}
   m_Layer: 6
   m_Name: Armor
   m_TagString: Untagged
@@ -13209,7 +13611,7 @@ MonoBehaviour:
   statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
   uiParent: {fileID: 3771470944807517528}
   statsTextInstance: {fileID: 0}
---- !u!114 &5215569807684914175
+--- !u!114 &2423581163331950451
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13218,39 +13620,71 @@ MonoBehaviour:
   m_GameObject: {fileID: 6315981466353871724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f079c31d3aaa7804d800c865cdeafbad, type: 3}
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 5791096993671492205}
-  bonusPool:
-  - type: 0
-    range: {x: 10, y: 30}
-    enabled: 1
-  - type: 1
-    range: {x: 0.2, y: 1.5}
-    enabled: 1
-  - type: 2
-    range: {x: 2, y: 12}
-    enabled: 1
-  - type: 3
-    range: {x: 2, y: 12}
-    enabled: 1
-  - type: 4
-    range: {x: 5, y: 12}
-    enabled: 1
-  - type: 5
-    range: {x: 5, y: 12}
-    enabled: 1
-  - type: 6
-    range: {x: 5, y: 12}
-    enabled: 1
-  - type: 7
-    range: {x: 5, y: 12}
-    enabled: 1
-  bonusesToRoll: 2
-  seed: 0
-  applyOnAwake: 1
-  revertOnDisable: 1
+  rollOnAwake: 1
+  rngSeed: 0
+  upgradeWeights: {fileID: 0}
+  current: 0
+  weights:
+    common: 60
+    uncommon: 25
+    rare: 12
+    legendary: 3
+  ranges:
+    damageMult: {x: 1.1, y: 1.3}
+    damageFlatAdd: {x: 3, y: 12}
+    atkSpeedFrac: {x: 0.1, y: 0.25}
+    critChanceAdd: {x: 0.05, y: 0.2}
+    critMultAdd: {x: 0.25, y: 1}
+    statusDurationAdd: {x: 0.1, y: 0.3}
+    statusChance: {x: 0.01, y: 0.3}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
+    knifeRadiusMult: {x: 1.1, y: 1.3}
+    knifeSplashRadiusMult: {x: 1.1, y: 1.3}
+    knifeLifestealAdd: {x: 0.05, y: 0.2}
+    knifeMaxTargetsAdd: {x: 1, y: 3}
+    shooterLifetimeAdd: {x: 0.5, y: 2}
+    shooterForceAdd: {x: 1, y: 4}
+    shooterProjectilesAdd: {x: 1, y: 2}
+    shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
+  tiers:
+    damagePercent: 5
+    damageFlat: 5
+    attackSpeed: 5
+    critChance: 5
+    critMultiplier: 5
+    statusDuration: 5
+    statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
+    knifeRadius: 5
+    knifeSplashRadius: 5
+    knifeLifesteal: 5
+    knifeMaxTargets: 5
+    shooterLifetime: 5
+    shooterForce: 5
+    shooterProjectiles: 5
+    shooterAccuracy: 5
+    multiplierCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
+    defaultMinMax: {x: 0.5, y: 2}
+  healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &6330886543815198051
 GameObject:
   m_ObjectHideFlags: 0
@@ -13473,7 +13907,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: f52201be749d5a944bb58fe73e86a396, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -13976,6 +14410,7 @@ GameObject:
   - component: {fileID: 7417009711147868194}
   - component: {fileID: 350957583585213623}
   - component: {fileID: 8848463020372936457}
+  - component: {fileID: 576191365374469}
   m_Layer: 5
   m_Name: Tab Weapons Button
   m_TagString: Untagged
@@ -14063,12 +14498,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -14141,6 +14576,20 @@ MonoBehaviour:
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
   uiAnchorOverride: {fileID: 0}
+--- !u!114 &576191365374469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6899674828911923886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &6901148550188591256
 GameObject:
   m_ObjectHideFlags: 0
@@ -14391,6 +14840,7 @@ GameObject:
   - component: {fileID: 4525426369024840503}
   - component: {fileID: 4733901181027847654}
   - component: {fileID: 6187379798686826587}
+  - component: {fileID: 5176672499888805167}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -14416,10 +14866,10 @@ RectTransform:
   - {fileID: 77739165152623567}
   m_Father: {fileID: 493180743653363522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 329.04004, y: -112.604195}
-  m_SizeDelta: {x: 587.8, y: 186.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4410814435797816065
 CanvasRenderer:
@@ -14481,12 +14931,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -14530,6 +14980,20 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: c3d3d847c56d95849a0720f90cc3465c, type: 3}
   playerTag: Player
+--- !u!114 &5176672499888805167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6917393764121337987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &6954913475967393510
 GameObject:
   m_ObjectHideFlags: 0
@@ -15218,6 +15682,7 @@ GameObject:
   - component: {fileID: 3265096351045893911}
   - component: {fileID: 3053139970987687611}
   - component: {fileID: 5717873925622511232}
+  - component: {fileID: 729650610017387709}
   m_Layer: 5
   m_Name: Next
   m_TagString: Untagged
@@ -15305,12 +15770,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -15354,6 +15819,20 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: c3d3d847c56d95849a0720f90cc3465c, type: 3}
   playerTag: Player
+--- !u!114 &729650610017387709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7666189916886687150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &7718795412781081265
 GameObject:
   m_ObjectHideFlags: 0
@@ -15738,6 +16217,7 @@ GameObject:
   - component: {fileID: 1018660118574415889}
   - component: {fileID: 4975011415727248887}
   - component: {fileID: 8575698542529364891}
+  - component: {fileID: 1963638949667839332}
   m_Layer: 5
   m_Name: Tab Player Button
   m_TagString: Untagged
@@ -15825,12 +16305,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -15905,6 +16385,20 @@ MonoBehaviour:
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
   uiAnchorOverride: {fileID: 0}
+--- !u!114 &1963638949667839332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7853639094291776377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &7952360591557015454
 GameObject:
   m_ObjectHideFlags: 0
@@ -16207,7 +16701,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: f52201be749d5a944bb58fe73e86a396, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -16622,6 +17116,7 @@ GameObject:
   - component: {fileID: 4421991264960915099}
   - component: {fileID: 8002093160284705009}
   - component: {fileID: 6612569080255918486}
+  - component: {fileID: 2925680292984977985}
   m_Layer: 5
   m_Name: Reroll Button
   m_TagString: Untagged
@@ -16709,12 +17204,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+    m_HighlightedColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+    m_PressedColor: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.05
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -16781,6 +17276,20 @@ MonoBehaviour:
   consumeAmount: 1
   continuousRefresh: 1
   debugLogs: 0
+--- !u!114 &2925680292984977985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8307947251354831275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d15a1deb628e44b9d3bd835a279ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedScale: 0.9
+  duration: 0.1
 --- !u!1 &8349147056304136137
 GameObject:
   m_ObjectHideFlags: 0
@@ -17592,6 +18101,12 @@ MonoBehaviour:
     critMultAdd: {x: 0.25, y: 1}
     statusDurationAdd: {x: 0.1, y: 0.3}
     statusChance: {x: 0.3, y: 0.5}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
     knifeLifestealAdd: {x: 0.05, y: 0.2}
@@ -17608,6 +18123,12 @@ MonoBehaviour:
     critMultiplier: 5
     statusDuration: 5
     statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
     knifeLifesteal: 5
@@ -17624,6 +18145,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  healthSystem: {fileID: 0}
 --- !u!1 &8503593496250004042
 GameObject:
   m_ObjectHideFlags: 0
@@ -19065,7 +19587,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 29.04248, y: -10.766951}
-  m_SizeDelta: {x: 82.51, y: 47.88}
+  m_SizeDelta: {x: 83.13, y: 47.88}
   m_Pivot: {x: 0.4590991, y: 0.29592586}
 --- !u!222 &6249205235506271307
 CanvasRenderer:

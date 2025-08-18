@@ -133,22 +133,27 @@ public class PowerUpSelectionUI : MonoBehaviour
             if (nameTexts != null && i < nameTexts.Length && nameTexts[i] != null)
                 nameTexts[i].text = has ? powerUpChooser.powerUps[shownIndices[i]].powerUpName : string.Empty;
 
-            // Description
+            // Description (with bold [weight] prefix)
             if (descriptionTexts != null && i < descriptionTexts.Length && descriptionTexts[i] != null)
             {
-                descriptionTexts[i].text = "";
-
-                if (powerUpChooser.powerUps[shownIndices[i]].IsWeapon)
+                if (has)
                 {
-                    descriptionTexts[i].text += "<b>[WEAPON] </b>";
-                }
+                    var pu = powerUpChooser.powerUps[shownIndices[i]];
+                    string weightStr = pu.weight.ToString("0.##");
+                    descriptionTexts[i].text = $"<b>[<sprite name=\"chest\">{weightStr}] </b>";
 
-                if (powerUpChooser.powerUps[shownIndices[i]].IsAccessory)
+                    if (pu.IsWeapon)
+                        descriptionTexts[i].text += "<b>[WEAPON] </b>";
+
+                    if (pu.IsAccessory)
+                        descriptionTexts[i].text += "<b>[ACCESSORY] </b>";
+
+                    descriptionTexts[i].text += pu.powerUpDescription;
+                }
+                else
                 {
-                    descriptionTexts[i].text += "<b>[ACCESSORY] </b>";
+                    descriptionTexts[i].text = string.Empty;
                 }
-
-                descriptionTexts[i].text += powerUpChooser.powerUps[shownIndices[i]].powerUpDescription;
             }
 
 
