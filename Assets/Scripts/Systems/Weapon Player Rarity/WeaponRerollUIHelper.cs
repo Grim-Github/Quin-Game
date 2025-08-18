@@ -286,6 +286,14 @@ public class WeaponRerollUIHelper : MonoBehaviour
             knife.UpdateStatsText();
             return knife.statsTextInstance.text;
         }
+        // Accessory support
+        var accessory = controller.GetComponent<Accessory>();
+        if (accessory != null)
+        {
+            // Ensure description/UI are current
+            accessory.NotifyRootToRefresh();
+            return accessory.statsTextInstance != null ? accessory.statsTextInstance.text : "";
+        }
         return "";
     }
 
@@ -298,6 +306,9 @@ public class WeaponRerollUIHelper : MonoBehaviour
 
         var knife = controller.GetComponent<Knife>();
         if (knife != null) return knife.weaponSprite;
+
+        var accessory = controller.GetComponent<Accessory>();
+        if (accessory != null) return accessory.icon;
 
         return null;
     }

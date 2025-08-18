@@ -12,6 +12,14 @@ public class TierSystem
     [Range(1, 10)] public int statusDuration = 5;
     [Range(1, 10)] public int statusTickChance = 5;
 
+    [Header("Health / Defense (1=best, 10=worst)")]
+    [Range(1, 10)] public int hpFlat = 5;
+    [Range(1, 10)] public int hpPercent = 5;
+    [Range(1, 10)] public int regen = 5;
+    [Range(1, 10)] public int armor = 5;
+    [Range(1, 10)] public int evasion = 5;
+    [Range(1, 10)] public int resist = 5;
+
 
     [Header("Knife")]
     [Range(1, 10)] public int knifeRadius = 5;
@@ -39,6 +47,13 @@ public class TierSystem
         critMultiplier = Roll(rng);
         statusDuration = Roll(rng);
         statusTickChance = Roll(rng);
+
+        hpFlat = Roll(rng);
+        hpPercent = Roll(rng);
+        regen = Roll(rng);
+        armor = Roll(rng);
+        evasion = Roll(rng);
+        resist = Roll(rng);
 
         knifeRadius = Roll(rng);
         knifeSplashRadius = Roll(rng);

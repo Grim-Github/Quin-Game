@@ -13,6 +13,16 @@ public enum UpgradeType
     Crit,
     StatusEffectDuration,
     StatusEffectChance,
+    // Health/Defense
+    HpFlat,
+    HpPercent,
+    HpRegen,
+    Armor,
+    Evasion,
+    FireResist,
+    ColdResist,
+    LightningResist,
+    PoisonResist,
     KnifeLifesteal,
     KnifeRadius,
     KnifeSplash,
@@ -37,6 +47,17 @@ public class UpgradeWeightTable
     [Min(0f)] public float statusDuration = 1f;
     [Min(0f)] public float statusChance = 1f;
 
+    [Header("Health / Defense")]
+    [Min(0f)] public float hpFlat = 1f;
+    [Min(0f)] public float hpPercent = 1f;
+    [Min(0f)] public float hpRegen = 1f;
+    [Min(0f)] public float armor = 1f;
+    [Min(0f)] public float evasion = 1f;
+    [Min(0f)] public float fireResist = 0.5f;
+    [Min(0f)] public float coldResist = 0.5f;
+    [Min(0f)] public float lightningResist = 0.5f;
+    [Min(0f)] public float poisonResist = 0.5f;
+
     [Header("Knife")]
     [Min(0f)] public float knifeLifesteal = 1f;
     [Min(0f)] public float knifeRadius = 1f;
@@ -56,6 +77,15 @@ public class UpgradeWeightTable
         UpgradeType.Crit => crit,
         UpgradeType.StatusEffectDuration => statusDuration,
         UpgradeType.StatusEffectChance => statusChance,
+        UpgradeType.HpFlat => hpFlat,
+        UpgradeType.HpPercent => hpPercent,
+        UpgradeType.HpRegen => hpRegen,
+        UpgradeType.Armor => armor,
+        UpgradeType.Evasion => evasion,
+        UpgradeType.FireResist => fireResist,
+        UpgradeType.ColdResist => coldResist,
+        UpgradeType.LightningResist => lightningResist,
+        UpgradeType.PoisonResist => poisonResist,
         UpgradeType.KnifeLifesteal => knifeLifesteal,
         UpgradeType.KnifeRadius => knifeRadius,
         UpgradeType.KnifeSplash => knifeSplash,

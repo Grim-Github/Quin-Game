@@ -23,6 +23,7 @@ public sealed class WeaponContext
     public IKnifeModule knife;
     public IStatusTickModule status;
     public IShooterModule shooter;
+    public IHealthModule health;
     public IUITextSink ui;                     // sink to write rarity block
     public TickAdapter tickAdapter;            // to reset tick cleanly
 
@@ -44,6 +45,125 @@ public sealed class WeaponContext
 }
 
 // ===== Concrete upgrades =====
+public sealed class HpFlatUpgrade : IUpgrade
+{
+    public bool IsApplicable(WeaponContext c) => c.health != null;
+    public Action Apply(WeaponContext c, StringBuilder notes)
+    {
+        var r = c.tiers.Scale(c.ranges.hpFlatAdd, c.tiers.hpFlat, 0);
+        int add = UnityEngine.Random.Range(r.x, r.y + 1);
+        c.health.IncreaseMaxHealth(add);
+        notes.AppendLine($"+{add} Max Health (Tier {c.Roman(c.tiers.hpFlat)})");
+        return () => c.health.IncreaseMaxHealth(-add);
+    }
+}
+
+public sealed class HpPercentUpgrade : IUpgrade
+{
+    public bool IsApplicable(WeaponContext c) => c.health != null;
+    public Action Apply(WeaponContext c, StringBuilder notes)
+    {
+        var r = c.tiers.ScaleMultiplierLike(c.ranges.hpMult, c.tiers.hpPercent);
+        float mult = UnityEngine.Random.Range(r.x, r.y);
+        int baseHp = c.health.MaxHealth;
+        int delta = Mathf.RoundToInt(baseHp * (mult - 1f));
+        if (delta <= 0) delta = 1;
+        c.health.IncreaseMaxHealth(delta);
+        notes.AppendLine($"+{(mult - 1f) * 100f:F0}% Max Health (Tier {c.Roman(c.tiers.hpPercent)})");
+        return () => c.health.IncreaseMaxHealth(-delta);
+    }
+}
+
+public sealed class RegenUpgrade : IUpgrade
+{
+    public bool IsApplicable(WeaponContext c) => c.health != null;
+    public Action Apply(WeaponContext c, StringBuilder notes)
+    {
+        var r = c.tiers.Scale(c.ranges.regenAdd, c.tiers.regen);
+        float add = Mathf.Max(0f, UnityEngine.Random.Range(r.x, r.y));
+        float before = c.health.RegenRate;
+        float after = Mathf.Max(0f, before + add);
+        float actually = after - before;
+        c.health.RegenRate = after;
+        notes.AppendLine($"+{actually:F2}/s Regen (Tier {c.Roman(c.tiers.regen)})");
+        return () => c.health.RegenRate = Mathf.Max(0f, c.health.RegenRate - actually);
+    }
+}
+
+public sealed class ArmorUpgrade : IUpgrade
+{
+    public bool IsApplicable(WeaponContext c) => c.health != null;
+    public Action Apply(WeaponContext c, StringBuilder notes)
+    {
+        var r = c.tiers.Scale(c.ranges.armorAdd, c.tiers.armor);
+        float add = Mathf.Max(0f, UnityEngine.Random.Range(r.x, r.y));
+        c.health.Armor = Mathf.Max(0f, c.health.Armor + add);
+        notes.AppendLine($"+{add:F1} Armor (Tier {c.Roman(c.tiers.armor)})");
+        return () => c.health.Armor = Mathf.Max(0f, c.health.Armor - add);
+    }
+}
+
+public sealed class EvasionUpgrade : IUpgrade
+{
+    public bool IsApplicable(WeaponContext c) => c.health != null;
+    public Action Apply(WeaponContext c, StringBuilder notes)
+    {
+        var r = c.tiers.Scale(c.ranges.evasionAdd, c.tiers.evasion);
+        float add = Mathf.Max(0f, UnityEngine.Random.Range(r.x, r.y));
+        c.health.Evasion = Mathf.Max(0f, c.health.Evasion + add);
+        notes.AppendLine($"+{add:F1} Evasion (Tier {c.Roman(c.tiers.evasion)})");
+        return () => c.health.Evasion = Mathf.Max(0f, c.health.Evasion - add);
+    }
+}
+
+public abstract class ResistUpgradeBase : IUpgrade
+{
+    public abstract string Label { get; }
+    protected abstract float Get(WeaponContext c);
+    protected abstract void Set(WeaponContext c, float v);
+    protected abstract int Tier(WeaponContext c);
+    public bool IsApplicable(WeaponContext c) => c.health != null;
+    public Action Apply(WeaponContext c, StringBuilder notes)
+    {
+        var r = c.tiers.Scale(c.ranges.resistAdd, c.tiers.resist);
+        float add = Mathf.Max(0f, UnityEngine.Random.Range(r.x, r.y));
+        float before = Mathf.Clamp(Get(c), 0f, 0.95f);
+        float after = Mathf.Clamp(before + add, 0f, 0.95f);
+        float actually = after - before;
+        Set(c, after);
+        notes.AppendLine($"+{actually * 100f:F0}% {Label} Resist (Tier {c.Roman(Tier(c))})");
+        return () => Set(c, Mathf.Clamp(Get(c) - actually, 0f, 0.95f));
+    }
+}
+
+public sealed class FireResistUpgrade : ResistUpgradeBase
+{
+    public override string Label => "Fire";
+    protected override float Get(WeaponContext c) => c.health.FireResist;
+    protected override void Set(WeaponContext c, float v) => c.health.FireResist = v;
+    protected override int Tier(WeaponContext c) => c.tiers.resist;
+}
+public sealed class ColdResistUpgrade : ResistUpgradeBase
+{
+    public override string Label => "Cold";
+    protected override float Get(WeaponContext c) => c.health.ColdResist;
+    protected override void Set(WeaponContext c, float v) => c.health.ColdResist = v;
+    protected override int Tier(WeaponContext c) => c.tiers.resist;
+}
+public sealed class LightningResistUpgrade : ResistUpgradeBase
+{
+    public override string Label => "Lightning";
+    protected override float Get(WeaponContext c) => c.health.LightningResist;
+    protected override void Set(WeaponContext c, float v) => c.health.LightningResist = v;
+    protected override int Tier(WeaponContext c) => c.tiers.resist;
+}
+public sealed class PoisonResistUpgrade : ResistUpgradeBase
+{
+    public override string Label => "Poison";
+    protected override float Get(WeaponContext c) => c.health.PoisonResist;
+    protected override void Set(WeaponContext c, float v) => c.health.PoisonResist = v;
+    protected override int Tier(WeaponContext c) => c.tiers.resist;
+}
 public sealed class DamageFlatUpgrade : IUpgrade
 {
     public bool IsApplicable(WeaponContext c) => c.damage != null;

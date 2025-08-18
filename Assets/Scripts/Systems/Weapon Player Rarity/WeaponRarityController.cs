@@ -22,10 +22,14 @@ public class WeaponRarityController : MonoBehaviour
     [Header("Tiers")]
     [SerializeField] private TierSystem tiers = new TierSystem();
 
+    [Header("References")]
+    [SerializeField] private SimpleHealth healthSystem; // optional explicit reference (falls back to parent)
+
     // Cached adapters
     private KnifeAdapter knife;
     private ShooterAdapter shooter;
     private TickAdapter tick;
+    private HealthAdapter health;
     private IUITextSink uiSink; // whichever (knife or shooter) we found
 
     // Single RNG source (deterministic with seed)
@@ -62,11 +66,16 @@ public class WeaponRarityController : MonoBehaviour
         // Build adapters (no reflection)
         var k = GetComponent<Knife>();
         var s = GetComponent<SimpleShooter>();
+        var acc = GetComponent<Accessory>();
         var t = GetComponent<WeaponTick>();
+        if (healthSystem == null)
+            healthSystem = GetComponentInParent<SimpleHealth>();
 
         if (k) { knife = new KnifeAdapter(k); uiSink = knife; }
         if (s) { shooter = new ShooterAdapter(s); if (uiSink == null) uiSink = shooter; }
+        if (acc) { var accSink = new AccessoryAdapter(acc); if (uiSink == null) uiSink = accSink; }
         if (t) { tick = new TickAdapter(t); }
+        if (healthSystem) { health = new HealthAdapter(healthSystem); }
 
         rng = rngSeed == 0 ? new System.Random() : new System.Random(rngSeed);
 
@@ -359,7 +368,8 @@ public class WeaponRarityController : MonoBehaviour
         steps = Mathf.Max(1, steps);
 
         // 13 tier slots indexed 0..12
-        int slot = NextInt(rng, 0, 13);
+        // 19 tier slots indexed 0..18
+        int slot = NextInt(rng, 0, 19);
         bool changed = ImproveTierSlot(slot, steps);
 
         if (!changed) return false;
@@ -373,7 +383,8 @@ public class WeaponRarityController : MonoBehaviour
     public bool RandomizeRandomTier(bool rerollOneAppliedStat = true)
     {
         // 13 tier slots indexed 0..12
-        int slot = NextInt(rng, 0, 13);
+        // 19 tier slots indexed 0..18
+        int slot = NextInt(rng, 0, 19);
         bool changed = RandomizeTierSlot(slot);
 
         if (!changed) return false;
@@ -435,6 +446,12 @@ public class WeaponRarityController : MonoBehaviour
             case 10: return ClampTier(ref tiers.shooterForce, steps);
             case 11: return ClampTier(ref tiers.shooterProjectiles, steps);
             case 12: return ClampTier(ref tiers.shooterAccuracy, steps);
+            case 13: return ClampTier(ref tiers.hpFlat, steps);
+            case 14: return ClampTier(ref tiers.hpPercent, steps);
+            case 15: return ClampTier(ref tiers.regen, steps);
+            case 16: return ClampTier(ref tiers.armor, steps);
+            case 17: return ClampTier(ref tiers.evasion, steps);
+            case 18: return ClampTier(ref tiers.resist, steps);
             default: return false;
         }
     }
@@ -457,6 +474,12 @@ public class WeaponRarityController : MonoBehaviour
             case 10: return SetTier(ref tiers.shooterForce, newTier);
             case 11: return SetTier(ref tiers.shooterProjectiles, newTier);
             case 12: return SetTier(ref tiers.shooterAccuracy, newTier);
+            case 13: return SetTier(ref tiers.hpFlat, newTier);
+            case 14: return SetTier(ref tiers.hpPercent, newTier);
+            case 15: return SetTier(ref tiers.regen, newTier);
+            case 16: return SetTier(ref tiers.armor, newTier);
+            case 17: return SetTier(ref tiers.evasion, newTier);
+            case 18: return SetTier(ref tiers.resist, newTier);
             default: return false;
         }
     }
@@ -501,6 +524,7 @@ public class WeaponRarityController : MonoBehaviour
             attack = (IAttackSpeedModule)tick,
             knife = knife,
             shooter = shooter,
+            health = health,
             ui = uiSink,
             tickAdapter = tick,
             status = (IStatusTickModule)(object)(knife ?? (object)shooter ?? null) // NEW
@@ -521,6 +545,20 @@ public class WeaponRarityController : MonoBehaviour
 
         Add(c.attack != null, new AttackSpeedUpgrade(), UpgradeType.AttackSpeed);
         Add(c.crit != null, new CritUpgrade(), UpgradeType.Crit);
+
+        // Health / Defense candidates (if SimpleHealth available)
+        if (c.health != null)
+        {
+            Add(true, new HpFlatUpgrade(), UpgradeType.HpFlat);
+            Add(true, new HpPercentUpgrade(), UpgradeType.HpPercent);
+            Add(true, new RegenUpgrade(), UpgradeType.HpRegen);
+            Add(true, new ArmorUpgrade(), UpgradeType.Armor);
+            Add(true, new EvasionUpgrade(), UpgradeType.Evasion);
+            Add(true, new FireResistUpgrade(), UpgradeType.FireResist);
+            Add(true, new ColdResistUpgrade(), UpgradeType.ColdResist);
+            Add(true, new LightningResistUpgrade(), UpgradeType.LightningResist);
+            Add(true, new PoisonResistUpgrade(), UpgradeType.PoisonResist);
+        }
 
         if (c.knife != null)
         {
@@ -625,6 +663,44 @@ public class WeaponRarityController : MonoBehaviour
             {
                 var r = tiers.Scale(ranges.statusChance, tiers.statusTickChance);
                 sb.AppendLine("+Status Chance: " + PctFromFrac(r, 0)); // e.g., 5%–25%
+                continue;
+            }
+
+            // Health / Defense
+            if (up is HpFlatUpgrade)
+            {
+                var r = tiers.Scale(ranges.hpFlatAdd, tiers.hpFlat);
+                sb.AppendLine("+Max Health: " + RngInt(r));
+                continue;
+            }
+            if (up is HpPercentUpgrade)
+            {
+                var r = tiers.ScaleMultiplierLike(ranges.hpMult, tiers.hpPercent);
+                sb.AppendLine("+Max Health%: " + PctFromMult(r, 0));
+                continue;
+            }
+            if (up is RegenUpgrade)
+            {
+                var r = tiers.Scale(ranges.regenAdd, tiers.regen);
+                sb.AppendLine("+Regen: " + RngF(r, 2) + "/s");
+                continue;
+            }
+            if (up is ArmorUpgrade)
+            {
+                var r = tiers.Scale(ranges.armorAdd, tiers.armor);
+                sb.AppendLine("+Armor: " + RngF(r, 1));
+                continue;
+            }
+            if (up is EvasionUpgrade)
+            {
+                var r = tiers.Scale(ranges.evasionAdd, tiers.evasion);
+                sb.AppendLine("+Evasion: " + RngF(r, 1));
+                continue;
+            }
+            if (up is FireResistUpgrade || up is ColdResistUpgrade || up is LightningResistUpgrade || up is PoisonResistUpgrade)
+            {
+                var r = tiers.Scale(ranges.resistAdd, tiers.resist);
+                sb.AppendLine("+Resist: " + PctFromFrac(r, 0));
                 continue;
             }
 

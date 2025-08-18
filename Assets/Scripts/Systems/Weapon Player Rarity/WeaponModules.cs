@@ -30,6 +30,21 @@ public interface IUITextSink
     void SetText(string s);
 }
 
+public interface IHealthModule
+{
+    int MaxHealth { get; set; }
+    float RegenRate { get; set; }
+    float Armor { get; set; }
+    float Evasion { get; set; }
+
+    float FireResist { get; set; }
+    float ColdResist { get; set; }
+    float LightningResist { get; set; }
+    float PoisonResist { get; set; }
+
+    void IncreaseMaxHealth(int delta);
+}
+
 // ===== Adapters (no reflection) =====
 public sealed class KnifeAdapter : IDamageModule, ICritModule, IKnifeModule, IStatusTickModule, IUITextSink
 {
@@ -73,5 +88,38 @@ public sealed class TickAdapter : IAttackSpeedModule
     public void ResetAndStartIfPlaying()
     {
         if (Application.isPlaying) t.ResetAndStart();
+    }
+}
+
+public sealed class HealthAdapter : IHealthModule
+{
+    private readonly SimpleHealth h;
+    public HealthAdapter(SimpleHealth h) { this.h = h; }
+
+    public int MaxHealth { get => h.maxHealth; set => h.maxHealth = Mathf.Max(1, value); }
+    public float RegenRate { get => h.regenRate; set => h.regenRate = Mathf.Max(0f, value); }
+    public float Armor { get => h.armor; set => h.armor = Mathf.Max(0f, value); }
+    public float Evasion { get => h.evasion; set => h.evasion = Mathf.Max(0f, value); }
+
+    public float FireResist { get => h.fireResist; set => h.fireResist = Mathf.Clamp(value, 0f, 0.95f); }
+    public float ColdResist { get => h.coldResist; set => h.coldResist = Mathf.Clamp(value, 0f, 0.95f); }
+    public float LightningResist { get => h.lightningResist; set => h.lightningResist = Mathf.Clamp(value, 0f, 0.95f); }
+    public float PoisonResist { get => h.poisonResist; set => h.poisonResist = Mathf.Clamp(value, 0f, 0.95f); }
+
+    public void IncreaseMaxHealth(int delta) => h.IncreaseMaxHealth(delta);
+}
+
+public sealed class AccessoryAdapter : IUITextSink
+{
+    private readonly Accessory a;
+    public AccessoryAdapter(Accessory a) { this.a = a; }
+    public string Text
+    {
+        get => a != null ? (a.AccesoryDescription ?? string.Empty) : string.Empty;
+        set { if (a != null) a.SetDescription(value ?? string.Empty); }
+    }
+    public void SetText(string s)
+    {
+        if (a != null) a.SetDescription(s ?? string.Empty);
     }
 }

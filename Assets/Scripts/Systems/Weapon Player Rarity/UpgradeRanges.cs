@@ -12,6 +12,14 @@ public class UpgradeRanges
     public Vector2 statusDurationAdd = new Vector2(0.1f, 0.30f); // +5% to +20%
     public Vector2 statusChance = new Vector2(0.01f, 0.30f); // reduce interval by 10%..30%
 
+    [Header("Health / Defense")]
+    public Vector2Int hpFlatAdd = new Vector2Int(15, 60);
+    public Vector2 hpMult = new Vector2(1.05f, 1.25f);
+    public Vector2 regenAdd = new Vector2(0.10f, 1.50f);
+    public Vector2 armorAdd = new Vector2(1.0f, 6.0f);
+    public Vector2 evasionAdd = new Vector2(2.0f, 12.0f);
+    public Vector2 resistAdd = new Vector2(0.05f, 0.20f);
+
 
     [Header("Knife-only")]
     public Vector2 knifeRadiusMult = new Vector2(1.10f, 1.30f);
