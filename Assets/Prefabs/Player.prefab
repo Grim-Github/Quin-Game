@@ -5193,10 +5193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800c606759b78c54e80d7563b7318dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - itemName: Orb 1
-    amount: 120
-    icon: {fileID: 0}
+  items: []
   OnInventoryChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8449,9 +8446,9 @@ MonoBehaviour:
   bulletLifetime: 5
   critChance: 0.05
   critMultiplier: 2
-  applyStatusEffectOnHit: 0
-  statusApplyChance: 1
-  statusEffectOnHit: 0
+  applyStatusEffectOnHit: 1
+  statusApplyChance: 0.1
+  statusEffectOnHit: 1
   statusEffectDuration: 1
   projectileCount: 1
   spreadAngle: 40

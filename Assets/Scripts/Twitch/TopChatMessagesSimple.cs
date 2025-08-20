@@ -8,6 +8,7 @@ public class TopChatMessagesSimple : MonoBehaviour
 {
     public static TopChatMessagesSimple Instance { get; private set; }
     [SerializeField] private TextMeshProUGUI output; // assign in Inspector
+    [SerializeField] private float refreshIntervalSeconds = 10f; // UI refresh cadence
 
     // word -> count (after simple normalization)
     private readonly Dictionary<string, int> counts = new Dictionary<string, int>();
@@ -22,6 +23,13 @@ public class TopChatMessagesSimple : MonoBehaviour
     private void OnDisable()
     {
         if (IRC.Instance != null) IRC.Instance.OnChatMessage -= OnChatMessage;
+        StopAllCoroutines();
+    }
+
+    private void Start()
+    {
+        // Periodically refresh the displayed top words
+        StartCoroutine(RefreshLoop());
     }
 
     // Return the current top N words (descending by count)
@@ -53,7 +61,7 @@ public class TopChatMessagesSimple : MonoBehaviour
             else counts[w] = n + 1;
         }
 
-        UpdateUI();
+        // UI updates are timer-driven; no immediate refresh here
     }
 
     private void UpdateUI()
@@ -97,5 +105,15 @@ public class TopChatMessagesSimple : MonoBehaviour
         }
 
         return sb.ToString().Trim();
+    }
+
+    private System.Collections.IEnumerator RefreshLoop()
+    {
+        var wait = new WaitForSeconds(refreshIntervalSeconds > 0 ? refreshIntervalSeconds : 10f);
+        while (enabled)
+        {
+            UpdateUI();
+            yield return wait;
+        }
     }
 }

@@ -278,6 +278,6 @@ MonoBehaviour:
   itemName: Orb 1
   minAmount: 1
   maxAmount: 1
-  icon: {fileID: 0}
+  icon: {fileID: 5956006617489119344, guid: 36badf2c10d33bf49bc0c46ad45c4d00, type: 3}
   playerInventory: {fileID: 0}
   playerTag: Player

@@ -65,60 +65,35 @@ public class EnemyChaser : MonoBehaviour
         Vector2 toTarget = targetPos - currentPos;
         float distance = toTarget.magnitude;
 
-        // Determine desired direction based on flee toggle
+        // Decide desired direction (flee/approach with deadband)
         Vector2 desiredDir;
         if (enableFlee)
         {
-            // With flee enabled, use a stop band to avoid oscillation
-            // - distance < stoppingDistance - fleeBuffer: FLEE (away)
-            // - |distance - stoppingDistance| <= fleeBuffer: STOP (zero)
-            // - distance > stoppingDistance + fleeBuffer: CHASE (toward)
             float buffer = Mathf.Max(0f, fleeBuffer);
-            if (distance < stoppingDistance - buffer)
-            {
-                desiredDir = (-toTarget).normalized;
-            }
-            else if (distance > stoppingDistance + buffer)
-            {
-                desiredDir = toTarget.normalized;
-            }
-            else
-            {
-                desiredDir = Vector2.zero;
-            }
+            if (distance < stoppingDistance - buffer) desiredDir = (-toTarget).normalized;  // flee
+            else if (distance > stoppingDistance + buffer) desiredDir = toTarget.normalized;     // chase
+            else desiredDir = Vector2.zero;            // hold
         }
         else
         {
-            // Default (flee disabled): chase when outside; stop when inside
             desiredDir = distance > stoppingDistance ? toTarget.normalized : Vector2.zero;
         }
 
-        // Fire reach event when crossing into stopping distance
+        // Fire reach event on first entry
         if (distance <= stoppingDistance && !hasReached)
         {
             hasReached = true;
             onReachDestination?.Invoke();
         }
-        if (TryGetComponent<StatusEffectSystem>(out StatusEffectSystem ses))
-        {
-            if (!ses.HasStatus(StatusEffectSystem.StatusType.Stun) || !ses.HasStatus(StatusEffectSystem.StatusType.Frozen))
-            {
-                if (!ses.HasStatus(StatusEffectSystem.StatusType.Speed))
-                {
-                    rb.linearVelocity = desiredDir * moveSpeed;
-                }
-                else
-                {
-                    rb.linearVelocity = desiredDir * (moveSpeed * 2);
-                }
 
-            }
-            else
-            {
-                rb.linearVelocity = Vector2.zero; // Stop moving if stunned
-            }
-        }
+        // Movement multiplier from status effects
+        StatusEffectSystem ses = null;
+        TryGetComponent(out ses);
+        float mult = GetMoveMultiplier(ses); // 0 if Stun/Frozen, 2 if Speed, else 1
 
+        // Apply velocity
+        float speed = moveSpeed * mult;
+        rb.linearVelocity = desiredDir * speed;
 
         ResetReachedIfFar(distance);
     }
@@ -128,4 +103,15 @@ public class EnemyChaser : MonoBehaviour
         if (hasReached && repeatEvent && distance > stoppingDistance + resetDistanceBuffer)
             hasReached = false;
     }
+
+    private float GetMoveMultiplier(StatusEffectSystem ses)
+    {
+        if (ses.HasStatus(StatusEffectSystem.StatusType.Stun) || ses.HasStatus(StatusEffectSystem.StatusType.Frozen))
+            return 0f;
+
+        float m = 1f;
+        if (ses.HasStatus(StatusEffectSystem.StatusType.Speed)) m *= 2f;   // tweak in inspector later
+        return m;
+    }
+
 }

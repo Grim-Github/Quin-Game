@@ -17,12 +17,7 @@ public class LootTable2D : MonoBehaviour
         [Tooltip("Relative weight. 0 = never selected. Higher = more likely.")]
         public float weight = 1f;
 
-        [Header("Amount (Weighted)")]
-        [Tooltip("Weighted options for how many of this prefab to drop when this entry wins.")]
-        public List<AmountOption> amountOptions = new()
-        {
-            new AmountOption(){ amount = 1, weight = 1f }
-        };
+        // Amount options are now global on LootTable2D
     }
 
     [System.Serializable]
@@ -39,6 +34,13 @@ public class LootTable2D : MonoBehaviour
 
     [Header("Loot Table")]
     [SerializeField] private List<LootEntry> entries = new List<LootEntry>();
+
+    [Header("Amount (Weighted)")]
+    [Tooltip("Global weighted options for how many to drop when an entry wins.")]
+    public List<AmountOption> amountOptions = new()
+    {
+        new AmountOption(){ amount = 1, weight = 1f }
+    };
 
     [Header("Roll Settings")]
     [SerializeField] private bool rollOnAwake = true;
@@ -94,7 +96,7 @@ public class LootTable2D : MonoBehaviour
         }
 
         var entry = entries[idx];
-        int count = PickAmount(entry);
+        int count = PickAmount();
 
         if (count <= 0)
         {
@@ -171,11 +173,11 @@ public class LootTable2D : MonoBehaviour
     }
 
     /// <summary>
-    /// Picks an amount from a LootEntry's weighted amount options.
+    /// Picks an amount from the global weighted amount options.
     /// </summary>
-    private int PickAmount(LootEntry entry)
+    private int PickAmount()
     {
-        var opts = entry.amountOptions;
+        var opts = amountOptions;
         if (opts == null || opts.Count == 0)
             return 1; // sensible default
 

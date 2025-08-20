@@ -321,8 +321,8 @@ public class SimpleHealth : MonoBehaviour
                     Debug.Log($"[Ailment] Poison hit {dmg} dmg → Poison chance {chance:P1}, roll={roll:F2}");
                     if (roll < chance)
                     {
-                        ses.AddStatus(StatusEffectSystem.StatusType.Poison, 5f, 1f);
-                        ses.poisonDamagePerTick = dotDamage;
+                        ses.AddStatus(StatusEffectSystem.StatusType.Poison, 15f, 0.1f);
+                        ses.poisonDamagePerTick = 1;
                     }
                     break;
                 }
@@ -566,14 +566,17 @@ public class SimpleHealth : MonoBehaviour
     {
         if (reservedSlider != null)
         {
-            reservedSlider.maxValue = maxHealth;
-            reservedSlider.value = reservedHealth;
+            reservedSlider.minValue = 0;
+            reservedSlider.maxValue = Mathf.Max(0, maxHealth);
+            reservedSlider.value = Mathf.Clamp(reservedHealth, 0, reservedSlider.maxValue);
         }
 
         if (healthSlider != null)
         {
-            healthSlider.maxValue = maxHealth;
-            healthSlider.value = currentHealth - reservedHealth;
+            healthSlider.minValue = 0;
+            healthSlider.maxValue = Mathf.Max(0, maxHealth);
+            // Show actual current health on the slider; reserved is shown separately
+            healthSlider.value = Mathf.Clamp(currentHealth, 0, healthSlider.maxValue);
         }
 
         if (healthText != null)
