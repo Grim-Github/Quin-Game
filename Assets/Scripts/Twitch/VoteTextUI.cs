@@ -10,7 +10,7 @@ public class VoteTextUI : MonoBehaviour
 
     private void Awake()
     {
-        if (!manager) manager = FindObjectOfType<VoteManager>();
+        if (!manager) manager = FindAnyObjectByType<VoteManager>();
     }
 
     private void OnEnable()

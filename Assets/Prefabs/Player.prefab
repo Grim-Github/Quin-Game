@@ -129,7 +129,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 467.46, y: -19.673828}
+  m_AnchoredPosition: {x: 467.46, y: -19.673767}
   m_SizeDelta: {x: 83.8057, y: -39.349}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &58172944614052687
@@ -742,6 +742,352 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2.39
+--- !u!1 &374135658928197448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7278172175999806099}
+  - component: {fileID: 5816118974365816501}
+  - component: {fileID: 3570729368270483169}
+  - component: {fileID: 5189756175646396021}
+  - component: {fileID: 1667156782506404961}
+  m_Layer: 6
+  m_Name: Axe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7278172175999806099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374135658928197448}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5406754041752683843}
+  - {fileID: 8513244833514361426}
+  - {fileID: 1974706184933083547}
+  - {fileID: 9027709624487194995}
+  m_Father: {fileID: 5833988517266502027}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5816118974365816501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374135658928197448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c98c24205b75b42bc1375d05964c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interval: 1.7
+  startOnAwake: 1
+  repeat: 1
+  useUnscaledTime: 0
+  burstEnabled: 0
+  burstCount: 3
+  burstSpacing: 0.1
+  onTick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3570729368270483169}
+        m_TargetAssemblyTypeName: Knife, Assembly-CSharp
+        m_MethodName: OnKnifeTick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3570729368270483169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374135658928197448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417756cd4c94eef498d4c38e016c552b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 2.5
+  damage: 40
+  damageType: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 128
+  maxTargetsPerTick: 1
+  hitOrigins: []
+  splashRadius: 1
+  splashDamagePercent: 1
+  applyStatusEffectOnHit: 1
+  statusApplyChance: 0.1
+  statusEffectOnHit: 0
+  statusEffectDuration: 8
+  lifestealPercent: 0
+  critChance: 0.02
+  critMultiplier: 2
+  nextUpgrade: {fileID: 4692232530680801010}
+  shootClip: {fileID: 8300000, guid: 922ee1299c93f99418024a365450b12c, type: 3}
+  stabClip: {fileID: 8300000, guid: 95c906fdaf654834fb592c668a587250, type: 3}
+  slashEffect: {fileID: 2990082284754955125, guid: 3c7fa9ceb543b3b4e874935cce42a793, type: 3}
+  selfSfxObject: {fileID: 0}
+  statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
+  uiParent: {fileID: 3771470944807517528}
+  extraTextField: 
+  weaponSprite: {fileID: 6674386295937086461, guid: 314224ddc60daef45ad898b3faea6ff9, type: 3}
+  rangeRenderer: {fileID: 0}
+  visualPadding: 0
+  autoScaleRangeVisual: 1
+  statsTextInstance: {fileID: 0}
+--- !u!82 &5189756175646396021
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374135658928197448}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1667156782506404961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374135658928197448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollOnAwake: 1
+  rngSeed: 0
+  upgradeWeights: {fileID: 0}
+  current: 0
+  weights:
+    common: 60
+    uncommon: 25
+    rare: 12
+    legendary: 3
+  ranges:
+    damageMult: {x: 1.1, y: 1.3}
+    damageFlatAdd: {x: 3, y: 12}
+    atkSpeedFrac: {x: 0.1, y: 0.25}
+    critChanceAdd: {x: 0.05, y: 0.2}
+    critMultAdd: {x: 0.25, y: 1}
+    statusDurationAdd: {x: 0.1, y: 0.3}
+    statusChance: {x: 0.3, y: 0.5}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
+    knifeRadiusMult: {x: 1.1, y: 1.3}
+    knifeSplashRadiusMult: {x: 1.1, y: 1.3}
+    knifeLifestealAdd: {x: 0.05, y: 0.2}
+    knifeMaxTargetsAdd: {x: 1, y: 2}
+    shooterLifetimeAdd: {x: 0.5, y: 2}
+    shooterForceAdd: {x: 1, y: 4}
+    shooterProjectilesAdd: {x: 1, y: 2}
+    shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
+  tiers:
+    damagePercent: 5
+    damageFlat: 5
+    attackSpeed: 5
+    critChance: 5
+    critMultiplier: 5
+    statusDuration: 5
+    statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
+    knifeRadius: 5
+    knifeSplashRadius: 5
+    knifeLifesteal: 5
+    knifeMaxTargets: 5
+    shooterLifetime: 5
+    shooterForce: 5
+    shooterProjectiles: 5
+    shooterAccuracy: 5
+    multiplierCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
+    defaultMinMax: {x: 0.4, y: 1.75}
+  onHitStatusBlacklist: 0300000002000000
+  healthSystem: {fileID: 0}
+--- !u!1 &414099259750872978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7974001187210173229}
+  - component: {fileID: 1594226970401455821}
+  m_Layer: 6
+  m_Name: Upgrade 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7974001187210173229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414099259750872978}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7262086574399655167}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1594226970401455821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414099259750872978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Sword - Melee Damage +5
+    powerUpDescription: Increase Melee damage by 5.
+    powerUpObject: {fileID: 414099259750872978}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 0}
+  icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+  upgradeType: 1
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 5
 --- !u!1 &519535130097200017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,7 +1586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c98c24205b75b42bc1375d05964c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 0.8
+  interval: 0.7
   startOnAwake: 1
   repeat: 1
   useUnscaledTime: 0
@@ -1274,23 +1620,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417756cd4c94eef498d4c38e016c552b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 3
-  damage: 20
+  radius: 2
+  damage: 15
   damageType: 0
   targetMask:
     serializedVersion: 2
     m_Bits: 128
   maxTargetsPerTick: 1
   hitOrigins: []
-  splashRadius: 0.5
+  splashRadius: 0
   splashDamagePercent: 0.5
   applyStatusEffectOnHit: 0
   statusApplyChance: 0.1
   statusEffectOnHit: 0
   statusEffectDuration: 3
   lifestealPercent: 0
-  critChance: 0
-  critMultiplier: 2
+  critChance: 0.5
+  critMultiplier: 1.5
   nextUpgrade: {fileID: 4848430714005660769}
   shootClip: {fileID: 8300000, guid: b1abb9547cde4ba43bbf932cdc804719, type: 3}
   stabClip: {fileID: 8300000, guid: 95c906fdaf654834fb592c668a587250, type: 3}
@@ -1473,7 +1819,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     useCurve: 0
-    defaultMinMax: {x: 1, y: 2}
+    defaultMinMax: {x: 0.4, y: 1.75}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &763878338640954299
@@ -2398,7 +2744,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     useCurve: 0
-    defaultMinMax: {x: 1, y: 2}
+    defaultMinMax: {x: 0.4, y: 1.75}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &935738676766603409
@@ -2763,8 +3109,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Knife Range +10%
-    powerUpDescription: Increase Knife attack radius by 10%.
+    powerUpName: Phantom Demonis - Melee Range +10%
+    powerUpDescription: Increase Melee attack radius by 10%.
     powerUpObject: {fileID: 1032309275379302934}
     IsAccessory: 0
     IsWeapon: 0
@@ -2777,6 +3123,65 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   value: 0.1
+--- !u!1 &1064784799497703940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3646861948275999015}
+  - component: {fileID: 152948157228144700}
+  m_Layer: 6
+  m_Name: Upgrade 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3646861948275999015
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064784799497703940}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7262086574399655167}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &152948157228144700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064784799497703940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Sword - Melee Crit Chance +30%
+    powerUpDescription: Increase Melee critical hit chance by 30%.
+    powerUpObject: {fileID: 1064784799497703940}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 3291443988822653172}
+  icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+  upgradeType: 8
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 0.3
 --- !u!1 &1114302618992814569
 GameObject:
   m_ObjectHideFlags: 0
@@ -3238,7 +3643,7 @@ MonoBehaviour:
   dashSlider: {fileID: 9073139496275943802}
   dashSpeed: 16
   dashDuration: 0.1
-  dashCooldown: 1.2
+  dashCooldown: 2
   spriteRenderer: {fileID: 30405735645601086}
   invertSpriteFlip: 1
   dashClip: {fileID: 8300000, guid: 6a1f73d25be1414419a1fbd749f68672, type: 3}
@@ -5241,8 +5646,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Knife Range +10%
-    powerUpDescription: Increase Knife attack radius by 10%.
+    powerUpName: Phantom Demonis - Melee Range +10%
+    powerUpDescription: Increase Melee attack radius by 10%.
     powerUpObject: {fileID: 1939926413673383864}
     IsAccessory: 0
     IsWeapon: 0
@@ -5300,8 +5705,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Demon Aura - Knife Damage +1
-    powerUpDescription: Increase Knife damage by 1.
+    powerUpName: Demon Aura - Melee Damage +1
+    powerUpDescription: Increase Melee damage by 1.
     powerUpObject: {fileID: 2302453346357717577}
     IsAccessory: 0
     IsWeapon: 0
@@ -6598,7 +7003,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     useCurve: 0
-    defaultMinMax: {x: 1, y: 2}
+    defaultMinMax: {x: 0.4, y: 1.75}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!114 &7596382903804138479
@@ -7225,7 +7630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Knife - Multi-Target +1
-    powerUpDescription: Knife can hit 1 additional target(s) per tick.
+    powerUpDescription: Melee can hit 1 additional target(s) per tick.
     powerUpObject: {fileID: 3203538148253821362}
     IsAccessory: 0
     IsWeapon: 0
@@ -7287,6 +7692,65 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: b547906ff3f9451468c1b818c9edac1e, type: 2}
+--- !u!1 &3318086922698768104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1974706184933083547}
+  - component: {fileID: 6900721938385046628}
+  m_Layer: 6
+  m_Name: Upgrade 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1974706184933083547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3318086922698768104}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7278172175999806099}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6900721938385046628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3318086922698768104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Axe - Multi-Target +1
+    powerUpDescription: Melee can hit 1 additional target(s) per tick.
+    powerUpObject: {fileID: 3318086922698768104}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 7892373115348196174}
+  icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+  upgradeType: 5
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 1
 --- !u!1 &3383175445945189892
 GameObject:
   m_ObjectHideFlags: 0
@@ -7561,7 +8025,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     useCurve: 0
-    defaultMinMax: {x: 1, y: 2}
+    defaultMinMax: {x: 0.4, y: 1.75}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &3401677938551974219
@@ -7973,6 +8437,65 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &3488441713488379910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9027709624487194995}
+  - component: {fileID: 7892373115348196174}
+  m_Layer: 6
+  m_Name: Upgrade 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &9027709624487194995
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3488441713488379910}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7278172175999806099}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7892373115348196174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3488441713488379910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Axe - Melee Damage +5
+    powerUpDescription: Increase Melee damage by 5.
+    powerUpObject: {fileID: 3488441713488379910}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 0}
+  icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+  upgradeType: 1
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 5
 --- !u!1 &3636674733915474295
 GameObject:
   m_ObjectHideFlags: 0
@@ -8097,6 +8620,65 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 4.42
+--- !u!1 &3810719867447538245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8994207777706744908}
+  - component: {fileID: 3291443988822653172}
+  m_Layer: 6
+  m_Name: Upgrade 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8994207777706744908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3810719867447538245}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7262086574399655167}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3291443988822653172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3810719867447538245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Sword - Multi-Target +1
+    powerUpDescription: Melee can hit 1 additional target(s) per tick.
+    powerUpObject: {fileID: 3810719867447538245}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 1594226970401455821}
+  icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+  upgradeType: 5
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 1
 --- !u!1 &3929116076122226886
 GameObject:
   m_ObjectHideFlags: 0
@@ -8445,7 +9027,7 @@ MonoBehaviour:
   bulletLifetime: 5
   critChance: 0.05
   critMultiplier: 2
-  applyStatusEffectOnHit: 1
+  applyStatusEffectOnHit: 0
   statusApplyChance: 0.1
   statusEffectOnHit: 1
   statusEffectDuration: 1
@@ -8646,7 +9228,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     useCurve: 0
-    defaultMinMax: {x: 1, y: 2}
+    defaultMinMax: {x: 0.4, y: 1.75}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &4019939872639026237
@@ -8905,8 +9487,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Knife Range +10%
-    powerUpDescription: Increase Knife attack radius by 10%.
+    powerUpName: Phantom Demonis - Melee Range +10%
+    powerUpDescription: Increase Melee attack radius by 10%.
     powerUpObject: {fileID: 4041443675930029742}
     IsAccessory: 0
     IsWeapon: 0
@@ -9107,7 +9689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -538.2551, y: -12.418945}
+  m_AnchoredPosition: {x: -538.25507, y: -12.418945}
   m_SizeDelta: {x: -1076.5105, y: -24.839}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4154395797457514244
@@ -9140,6 +9722,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5526111780517100950}
+  - {fileID: 7278172175999806099}
+  - {fileID: 7262086574399655167}
   - {fileID: 4105205200030717801}
   - {fileID: 2343388649771207969}
   - {fileID: 7536114075999525916}
@@ -9824,8 +10408,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Knife Range +10%
-    powerUpDescription: Increase Knife attack radius by 10%.
+    powerUpName: Phantom Demonis - Melee Range +10%
+    powerUpDescription: Increase Melee attack radius by 10%.
     powerUpObject: {fileID: 4493435403853585137}
     IsAccessory: 0
     IsWeapon: 0
@@ -10461,7 +11045,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     useCurve: 0
-    defaultMinMax: {x: 1, y: 2}
+    defaultMinMax: {x: 0.4, y: 1.75}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!114 &8555762351250044580
@@ -11496,6 +12080,65 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4968957011494331475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8513244833514361426}
+  - component: {fileID: 5032476681555639029}
+  m_Layer: 6
+  m_Name: Upgrade 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8513244833514361426
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4968957011494331475}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7278172175999806099}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5032476681555639029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4968957011494331475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Axe - Melee Crit Chance +30%
+    powerUpDescription: Increase Melee critical hit chance by 30%.
+    powerUpObject: {fileID: 4968957011494331475}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 6900721938385046628}
+  icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+  upgradeType: 8
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 0.3
 --- !u!1 &5049089134884609721
 GameObject:
   m_ObjectHideFlags: 0
@@ -11849,6 +12492,65 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressedScale: 0.9
   duration: 0.1
+--- !u!1 &5270625494332502256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9032932181784672374}
+  - component: {fileID: 1590784257798976024}
+  m_Layer: 6
+  m_Name: 'Upgrade 1 '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &9032932181784672374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5270625494332502256}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7262086574399655167}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1590784257798976024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5270625494332502256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Sword - Melee Damage +4
+    powerUpDescription: Increase Melee damage by 4.
+    powerUpObject: {fileID: 5270625494332502256}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 152948157228144700}
+  icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+  upgradeType: 1
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 4
 --- !u!1 &5294307976084307883
 GameObject:
   m_ObjectHideFlags: 0
@@ -12163,8 +12865,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Demon Aura - Knife Range +0.50
-    powerUpDescription: Increase Knife attack radius by 0.50 units.
+    powerUpName: Demon Aura - Melee Range +0.50
+    powerUpDescription: Increase Melee attack radius by 0.50 units.
     powerUpObject: {fileID: 5614068464345813072}
     IsAccessory: 0
     IsWeapon: 0
@@ -14129,6 +14831,65 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 3.1
+--- !u!1 &6624940588092883440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5406754041752683843}
+  - component: {fileID: 4692232530680801010}
+  m_Layer: 6
+  m_Name: 'Upgrade 1 '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5406754041752683843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6624940588092883440}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7278172175999806099}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4692232530680801010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6624940588092883440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Axe - Melee Damage +4
+    powerUpDescription: Increase Melee damage by 4.
+    powerUpObject: {fileID: 6624940588092883440}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 5032476681555639029}
+  icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+  upgradeType: 1
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 4
 --- !u!1 &6627710127977642258
 GameObject:
   m_ObjectHideFlags: 0
@@ -14204,6 +14965,293 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 7.1
+--- !u!1 &6678805226392397752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7262086574399655167}
+  - component: {fileID: 4664173640457228158}
+  - component: {fileID: 8518473475936388659}
+  - component: {fileID: 5343019531519531953}
+  - component: {fileID: 6907940236970892765}
+  m_Layer: 6
+  m_Name: Sword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7262086574399655167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678805226392397752}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 9032932181784672374}
+  - {fileID: 3646861948275999015}
+  - {fileID: 8994207777706744908}
+  - {fileID: 7974001187210173229}
+  m_Father: {fileID: 5833988517266502027}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4664173640457228158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678805226392397752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c98c24205b75b42bc1375d05964c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interval: 1
+  startOnAwake: 1
+  repeat: 1
+  useUnscaledTime: 0
+  burstEnabled: 0
+  burstCount: 3
+  burstSpacing: 0.1
+  onTick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8518473475936388659}
+        m_TargetAssemblyTypeName: Knife, Assembly-CSharp
+        m_MethodName: OnKnifeTick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8518473475936388659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678805226392397752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417756cd4c94eef498d4c38e016c552b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 5.25
+  damage: 20
+  damageType: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 128
+  maxTargetsPerTick: 1
+  hitOrigins: []
+  splashRadius: 0.5
+  splashDamagePercent: 0.5
+  applyStatusEffectOnHit: 0
+  statusApplyChance: 0.1
+  statusEffectOnHit: 0
+  statusEffectDuration: 3
+  lifestealPercent: 0
+  critChance: 0.2
+  critMultiplier: 2
+  nextUpgrade: {fileID: 1590784257798976024}
+  shootClip: {fileID: 8300000, guid: b1abb9547cde4ba43bbf932cdc804719, type: 3}
+  stabClip: {fileID: 8300000, guid: 95c906fdaf654834fb592c668a587250, type: 3}
+  slashEffect: {fileID: 2990082284754955125, guid: 3c7fa9ceb543b3b4e874935cce42a793, type: 3}
+  selfSfxObject: {fileID: 0}
+  statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
+  uiParent: {fileID: 3771470944807517528}
+  extraTextField: 
+  weaponSprite: {fileID: 5734951662672692488, guid: 8540d4521fd661f499c22750fb5a8984, type: 3}
+  rangeRenderer: {fileID: 0}
+  visualPadding: 0
+  autoScaleRangeVisual: 1
+  statsTextInstance: {fileID: 0}
+--- !u!82 &5343019531519531953
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678805226392397752}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &6907940236970892765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678805226392397752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollOnAwake: 1
+  rngSeed: 0
+  upgradeWeights: {fileID: 0}
+  current: 0
+  weights:
+    common: 60
+    uncommon: 25
+    rare: 12
+    legendary: 3
+  ranges:
+    damageMult: {x: 1.1, y: 1.3}
+    damageFlatAdd: {x: 3, y: 12}
+    atkSpeedFrac: {x: 0.1, y: 0.25}
+    critChanceAdd: {x: 0.05, y: 0.2}
+    critMultAdd: {x: 0.25, y: 1}
+    statusDurationAdd: {x: 0.1, y: 0.3}
+    statusChance: {x: 0.3, y: 0.5}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
+    knifeRadiusMult: {x: 1.1, y: 1.3}
+    knifeSplashRadiusMult: {x: 1.1, y: 1.3}
+    knifeLifestealAdd: {x: 0.05, y: 0.2}
+    knifeMaxTargetsAdd: {x: 1, y: 2}
+    shooterLifetimeAdd: {x: 0.5, y: 2}
+    shooterForceAdd: {x: 1, y: 4}
+    shooterProjectilesAdd: {x: 1, y: 2}
+    shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
+  tiers:
+    damagePercent: 5
+    damageFlat: 5
+    attackSpeed: 5
+    critChance: 5
+    critMultiplier: 5
+    statusDuration: 5
+    statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
+    knifeRadius: 5
+    knifeSplashRadius: 5
+    knifeLifesteal: 5
+    knifeMaxTargets: 5
+    shooterLifetime: 5
+    shooterForce: 5
+    shooterProjectiles: 5
+    shooterAccuracy: 5
+    multiplierCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
+    defaultMinMax: {x: 0.4, y: 1.75}
+  onHitStatusBlacklist: 0300000002000000
+  healthSystem: {fileID: 0}
 --- !u!1 &6825222994911543504
 GameObject:
   m_ObjectHideFlags: 0
@@ -16465,8 +17513,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Demon Aura - Knife Damage +1
-    powerUpDescription: Increase Knife damage by 1.
+    powerUpName: Demon Aura - Melee Damage +1
+    powerUpDescription: Increase Melee damage by 1.
     powerUpObject: {fileID: 7847374846165817178}
     IsAccessory: 0
     IsWeapon: 0
@@ -16721,8 +17769,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Knife Range +10%
-    powerUpDescription: Increase Knife attack radius by 10%.
+    powerUpName: Phantom Demonis - Melee Range +10%
+    powerUpDescription: Increase Melee attack radius by 10%.
     powerUpObject: {fileID: 7952360591557015454}
     IsAccessory: 0
     IsWeapon: 0
@@ -17875,8 +18923,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Knife - Knife Crit Chance +30%
-    powerUpDescription: Increase Knife critical hit chance by 30%.
+    powerUpName: Knife - Melee Crit Chance +30%
+    powerUpDescription: Increase Melee critical hit chance by 30%.
     powerUpObject: {fileID: 8429005387526368443}
     IsAccessory: 0
     IsWeapon: 0
@@ -17934,8 +18982,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Knife - Knife Damage +4
-    powerUpDescription: Increase Knife damage by 4.
+    powerUpName: Knife - Melee Damage +4
+    powerUpDescription: Increase Melee damage by 4.
     powerUpObject: {fileID: 8429739856138232991}
     IsAccessory: 0
     IsWeapon: 0
@@ -18460,7 +19508,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     useCurve: 0
-    defaultMinMax: {x: 1, y: 2}
+    defaultMinMax: {x: 0.4, y: 1.75}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &8503593496250004042
@@ -19206,8 +20254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Knife - Knife Damage +5
-    powerUpDescription: Increase Knife damage by 5.
+    powerUpName: Knife - Melee Damage +5
+    powerUpDescription: Increase Melee damage by 5.
     powerUpObject: {fileID: 8892643798934483796}
     IsAccessory: 0
     IsWeapon: 0

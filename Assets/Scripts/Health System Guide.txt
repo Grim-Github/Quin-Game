@@ -1,0 +1,139 @@
+﻿codex
+Overview
+
+- Purpose: Health, mitigation, resistances, regen, invulnerability, FX/SFX/UI, loot, and basic status-effect hooks for
+any entity.
+- Scope: A single MonoBehaviour that owns health state, plays feedback, shows UI, and coordinates with other systems
+(movement, status effects, loot).
+- Key idea: Damage flows through evasion → armor → resistance → shock modifier → health, with optional ailments applied
+based on damage type and magnitude.
+
+Core Data
+
+- Health: maxHealth, startingHealth (clamped to max), currentHealth (float to support regen), reservedHealth.
+- Defense: armor, armorScaling, maxMitigation; evasion, evasionScaling, maxEvasion.
+- Resistances: fireResist, coldResist, lightningResist, poisonResist for DamageType enum.
+- Timing: invulnerabilityDuration, regenRate.
+- UI: healthSlider, reservedSlider, healthText, stats HUD via statsTextPrefab + uiParent.
+- FX/SFX: Sprite hit flash, blood prefab, damage popups, damage/death clips, per-health audio Volume weight and low-pass
+filter.
+- Death: Drops from LootTable2D, spawns deathObjects, plays death sound, destroys enemy or deactivates player.
+
+Lifecycle
+
+- Awake: Initializes currentHealth, caches/captures components and original sprite color, instantiates 4 stats-UI
+entries (Health/Defense/Resists/Movement), assigns optional icon.
+- Start: Calls ResetHealth (full heal).
+- Update: Applies regen per second, updates volume/filter, rebuilds the four stats texts each frame.
+
+Damage Flow
+
+- Entry points:
+    - TakeDamage(int amount, bool mitigatable = true) (legacy → Physical).
+    - TakeDamage(int amount, DamageType type, bool mitigatable = true, bool applyAilments = true) (main).
+- Early outs: Ignore if dead, invulnerable, or non-positive amount.
+- If mitigatable:
+    - Evasion: chance = evasion / (evasion + evasionScaling * rawDamage) capped by maxEvasion. On success: spawn
+“Dodged” popup and return.
+    - Armor (Physical only): mitigation m = armor / (armor + armorScaling * rawDamage) capped by maxMitigation.
+ReducedDamage = raw * (1 - m).
+    - Resistance (by type): ReducedDamage = raw * (1 - resist) with resist clamped to <= 0.95.
+- Status system synergy:
+    - If Shock status present: doubles post-mitigation damage (dmg *= 2).
+    - Ailments (if enabled): chance scales with fraction of max HP dealt (dmg/maxHealth). Fire→Ignite, Poison→Poison,
+Physical→Bleed, Lightning→Shock. Sets DoT magnitudes directly on StatusEffectSystem.
+- Effects on hit: Updates lastDamageTaken/type, registers with DPSChecker, subtracts from currentHealth, updates UI,
+spawns popup text with damage, spawns blood VFX, plays damage SFX, flashes sprite, shakes camera (player only) with
+intensity scaled by HP% lost, triggers invulnerability window.
+- Death: Spawns deathObjects, plays a one-shot death clip via a temporary AudioSource GO, rolls loot, destroys
+non-player, deactivates player.
+
+UI/Stats Output
+
+- SyncSlider: Updates healthSlider, reservedSlider, healthText.
+- UpdateStatsText: Builds four multi-line TMP texts:
+    - Health: max, reserved, current, regen.
+    - Defense: armor, evasion, computed mitigation/evasion chance using the last hit amount as the “reference damage”.
+    - Resists: shows % per element.
+    - Movement: pulls from Snappy2DController (speed/dash stats).
+
+Utility/API
+
+- Healing and state: Heal, Kill, ResetHealth, IncreaseMaxHealth, ReserveLife.
+- Stat grants: GiveArmor, GiveEvasion, GiveResistance(type, amount).
+- Properties: IsAlive, IsInvulnerable, CurrentHealth, MaxHealth.
+
+Notable Design Choices
+
+- Armor/evasion scale down with larger hits via .../(... + scaling * damage) curves; evasion is rolled before
+mitigation, armor only for Physical.
+- Resistances are applied after armor and apply to the remaining damage.
+- Damage popups and UI text updated on every hit; stats text rebuilt every frame.
+- Uses FindAnyObjectByType<OrthoScrollZoom>() at hit time to camera shake.
+
+Targeted Improvements
+
+- Separation of concerns:
+    - Split into components: HealthCore (state, regen, invuln), DefenseModel (armor/evasion/resistance formulas),
+EffectsPresenter (FX/SFX/popups/shake), UI Presenter (bars + stats), LootOnDeath. Reduces coupling and makes testing
+easier.
+- Event-driven architecture:
+    - Expose C# events/UnityEvents: OnDamaged, OnHealed, OnDeath, OnInvulnerabilityStart/End, OnHealthChanged,
+OnMitigationComputed. Consumers (FX/UI/camera/loot) subscribe instead of being hard-coded here.
+- Performance and allocation:
+    - Avoid rebuilding TMP strings every Update; update only when relevant values change (health, last hit, stats
+changed). Track dirty flags.
+    - Pool popups, blood VFX, and audio sources to reduce Instantiate/Destroy churn and GC.
+    - Cache component refs used in hot paths (DPSChecker, StatusEffectSystem, OrthoScrollZoom) in Awake instead of
+per-hit GetComponent/FindAnyObjectByType.
+- Balance and clarity:
+    - Extract mitigation/evasion/resistance formulas into a static utility and cover with unit tests. Document
+order-of-operations.
+    - Consider whether armor should affect all types (with per-type armor pen) or remain physical-only by design—make
+it explicit.
+    - Rethink “reference damage” for defense UI: Use configurable reference (e.g., 10% max HP) instead of last hit to
+avoid jittery display.
+- Robustness:
+    - Add an isDead flag to guard against multiple Die() triggers and redundant FX.
+    - Replace WaitForSecondsRealtime in hit flash with WaitForSeconds unless you specifically want flashes during pause;
+be consistent with time scaling.
+    - Guard/centralize Debug.Log spam behind a verbosity toggle.
+- UX polish:
+    - Color-code damage popups by DamageType, add crit indicator, and show “Dodged” with a distinct style.
+    - Smooth health bar changes with lerp and gradient by HP%.
+    - Camera shake: decouple via event, clamp intensity, and throttle to avoid stacking.
+- Data modeling:
+    - Replace individual resistance floats with an array or dictionary indexed by DamageType to simplify code and future
+expansion.
+    - Consider ScriptableObject configs for default defense/resist profiles and ailment rules.
+- Status effects integration:
+    - Avoid setting DoT magnitudes directly on StatusEffectSystem singletons—prefer passing “ailment application data”
+so system manages stacking, durations, and per-source scaling. Add ailment resistances and max stacks.
+- Death/audio handling:
+    - Use an audio manager or pooled source with mixer groups instead of creating a temporary GameObject each time.
+- Reserved health semantics:
+ensure UI communicates the difference (e.g., greyed bar segment).
+- Testing:
+    - Unit-test mitigation curves, evasion odds vs. damage, and resistance combo outcome to catch regressions when
+tuning.
+
+Feature Ideas To Consider
+
+- Shields/Barrier: A separate resource that absorbs damage before health; can regenerate and have its own resist rules.
+- Crits and penetration: Crit chance/multiplier, armor/resist penetration, damage type conversion.
+- Damage categories: Percent max-HP damage, non-mitigatable damage, degeneration that bypasses evasion.
+- Temporary buffs/debuffs: Fortify, weaken, curse—clean order-of-operations (additive vs multiplicative) and consistent
+stacking rules.
+- Lifesteal and on-hit effects: Healing from damage dealt, leech caps and delays.
+- Overheal and overheal decay: Temporary HP beyond max that decays.
+- Respawn flow: Checkpoints, revive with invulnerability and FX, reset statuses on death.
+- Combat log/telemetry: Record sources, amounts, mitigations, and ailments for debugging and balancing.
+- Accessibility: Reduced flashes, camera shake intensity settings, colorblind-friendly damage type colors.
+- Networking/authoritative control: Server-side health authority, prediction & reconciliation hooks (if multiplayer
+is planned).
+
+If you want, I can:
+
+- Refactor this into HealthCore + presenters with events.
+- Add a simple event API and convert the current FX/UI to subscribers.
+- Introduce pooling for popups/blood and throttle stats updates.
