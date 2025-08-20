@@ -113,6 +113,16 @@ public class ChatterStats : MonoBehaviour
         TryScaleV2I(mr, "shooterDamageFlat", rangeMul, ScaleV2I);
         TryScaleV2(mr, "shooterDamageMult", rangeMul, ScaleV2);
         TryScaleV2I(mr, "shooterProjectilesAdd", rangeMul, ScaleV2I);
+
+        LootTable2D lt2d = GetComponent<LootTable2D>();
+        if (lt2d != null)
+        {
+            foreach (LootTable2D.AmountOption item in lt2d.amountOptions)
+            {
+                item.amount += Mathf.RoundToInt(power / 10);
+            }
+        }
+
     }
 
     // =========================

@@ -517,7 +517,7 @@ MonoBehaviour:
   zPosition: 0
   useSpawnPointZ: 1
   parent: {fileID: 0}
-  useCircleSpawn: 0
+  useCircleSpawn: 1
   circleRadius: 1
   circleCenter: {fileID: 0}
   lastSelectedIndex: -1

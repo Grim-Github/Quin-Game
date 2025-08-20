@@ -321,7 +321,7 @@ public class SimpleHealth : MonoBehaviour
                     Debug.Log($"[Ailment] Poison hit {dmg} dmg → Poison chance {chance:P1}, roll={roll:F2}");
                     if (roll < chance)
                     {
-                        ses.AddStatus(StatusEffectSystem.StatusType.Poison, 15f, 0.1f);
+                        ses.AddStatus(StatusEffectSystem.StatusType.Poison, 15f, 0.5f);
                         ses.poisonDamagePerTick = 1;
                     }
                     break;
@@ -453,7 +453,7 @@ public class SimpleHealth : MonoBehaviour
         if (transform.CompareTag("Player"))
         {
             float shakeStrength = Mathf.Clamp01((float)dmg * 3 / maxHealth); // 0..1 based on % HP lost
-            float duration = Mathf.Lerp(0.05f, 0.25f, shakeStrength);          // small to big duration
+            float duration = Mathf.Lerp(0.05f, 0.1f, shakeStrength);          // small to big duration
             float intensity = Mathf.Lerp(0.5f, 3f, shakeStrength);             // small to big intensity
             FindAnyObjectByType<OrthoScrollZoom>()?.CameraShake(duration, intensity);
         }

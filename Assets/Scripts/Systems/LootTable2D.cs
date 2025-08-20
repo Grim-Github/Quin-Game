@@ -81,23 +81,11 @@ public class LootTable2D : MonoBehaviour
     }
 
     /// <summary>
-    /// Rolls the loot table, then rolls the amount for the winning entry, and spawns that many prefabs.
-    /// Returns the last spawned GameObject (for quick reference), or null if nothing spawned.
+    /// Rolls amount, then picks and spawns that many entries (duplicates allowed). Returns last spawned, or null.
     /// </summary>
     public GameObject RollAndSpawn()
     {
-        int idx = WeightedPickIndex(entries);
-        lastSelectedIndex = idx;
-
-        if (idx < 0)
-        {
-            Debug.LogWarning($"[LootTable2D] No valid entries to roll on {name}. Nothing spawned.");
-            return null;
-        }
-
-        var entry = entries[idx];
         int count = PickAmount();
-
         if (count <= 0)
         {
             Debug.LogWarning($"[LootTable2D] Picked non-positive amount ({count}) on {name}. Nothing spawned.");
@@ -112,21 +100,22 @@ public class LootTable2D : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
+            int idx = WeightedPickIndex(entries);
+            if (idx < 0)
+            {
+                Debug.LogWarning($"[LootTable2D] No valid entries to roll on {name}. Nothing spawned.");
+                break;
+            }
+            var entry = entries[idx];
             Vector3 pos = centerT.position;
-
-            // Apply 2D circle offset per item (so multiple drops can scatter)
             if (useCircleSpawn && circleRadius > 0f)
             {
-                Vector2 offset2D = Random.insideUnitCircle * circleRadius; // X,Y only
-                pos.x += offset2D.x;
-                pos.y += offset2D.y;
+                Vector2 offset2D = Random.insideUnitCircle * circleRadius;
+                pos.x += offset2D.x; pos.y += offset2D.y;
             }
-
-            // Handle Z positioning
-            if (!useSpawnPointZ)
-                pos.z = zPosition;
-
+            if (!useSpawnPointZ) pos.z = zPosition;
             last = Instantiate(entry.prefab, pos, Quaternion.identity, parent);
+            lastSelectedIndex = idx;
         }
 
         lastSpawned = last;

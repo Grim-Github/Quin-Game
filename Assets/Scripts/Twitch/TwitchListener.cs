@@ -223,9 +223,10 @@ public class TwitchListener : MonoBehaviour
             stats.nameGUI.color = chatter.GetNameColor();
             foreach (ChatterBadge b in chatter.tags.badges)
             {
-
-                stats.power += chatter.tags.badges.Length * 10;
-
+                if (b.id == "subscriber" && int.Parse(b.version) < 100)
+                {
+                    stats.power += int.Parse(b.version);
+                }
             }
             stats.power += minPower;
 

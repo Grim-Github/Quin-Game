@@ -129,6 +129,11 @@ public class MonsterRarity : MonoBehaviour
         for (int i = 0; i < Mathf.Min(rolls, candidates.Count); i++)
             candidates[i].Invoke();
 
+        // Always apply a randomized damage type to weapons if present
+        bool hasWeapons = (knives != null && knives.Length > 0) || (shooters != null && shooters.Length > 0);
+        if (hasWeapons)
+            Up_Weapons_DamageType_Reroll();
+
         // Optional extra: cadence tweak across all weapons (60% chance)
         if (ticks != null && ticks.Length > 0 && UnityEngine.Random.value < 0.6f)
             Upgrade_AllWeaponAttackSpeed();
@@ -177,9 +182,8 @@ public class MonsterRarity : MonoBehaviour
             list.Add(Up_Shooter_Projectiles_Add);
         }
 
-        // New: Damage type reroll for weapons (applies to all knives and shooters present)
-        if (hasKnives || hasShooters)
-            list.Add(Up_Weapons_DamageType_Reroll);
+        // Damage type reroll is now always applied in RerollStats(),
+        // so we do not include it in the random candidate pool.
 
         return list;
     }
@@ -315,9 +319,10 @@ public class MonsterRarity : MonoBehaviour
     // ===== New: Weapon Damage Type Reroll =====
     private void Up_Weapons_DamageType_Reroll()
     {
-        // Pick a non-Physical damage type at random
+        // Pick a damage type at random (including Physical)
         var types = new[]
         {
+            SimpleHealth.DamageType.Physical,
             SimpleHealth.DamageType.Fire,
             SimpleHealth.DamageType.Cold,
             SimpleHealth.DamageType.Lightning,
@@ -361,11 +366,12 @@ public class MonsterRarity : MonoBehaviour
         if (notesEnemy.Count > 0)
         {
             foreach (var line in notesEnemy) sb.AppendLine(line);
-            // Weapon section
-            if (notesWeapons.Count > 0)
-            {
-                foreach (var line in notesWeapons) sb.AppendLine(line);
-            }
+        }
+
+        // Weapon section (append independently so it shows even if no enemy notes)
+        if (notesWeapons.Count > 0)
+        {
+            foreach (var line in notesWeapons) sb.AppendLine(line);
         }
 
         // Wrap with base text color and slightly smaller size for compactness
@@ -414,4 +420,3 @@ public class MonsterRarity : MonoBehaviour
         }
     }
 }
-

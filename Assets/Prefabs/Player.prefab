@@ -624,7 +624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1391921168707288461}
-  requiredItemName: Orb 1
+  requiredItemName: Orb 4
   requiredAmount: 1
   mode: 0
   targetButton: {fileID: 4930589926353091294}
@@ -2218,7 +2218,7 @@ MonoBehaviour:
   critChance: 0.25
   critMultiplier: 3
   applyStatusEffectOnHit: 0
-  statusApplyChance: 1
+  statusApplyChance: 0.1
   statusEffectOnHit: 0
   statusEffectDuration: 3
   projectileCount: 1
@@ -2943,7 +2943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1391921168707288461}
-  requiredItemName: Orb 1
+  requiredItemName: Orb 5
   requiredAmount: 1
   mode: 0
   targetButton: {fileID: 5713913337476582140}
@@ -4658,7 +4658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1391921168707288461}
-  requiredItemName: Orb 1
+  requiredItemName: Orb 2
   requiredAmount: 1
   mode: 0
   targetButton: {fileID: 6154742171528333445}
@@ -6488,7 +6488,7 @@ MonoBehaviour:
   splashRadius: 0
   splashDamagePercent: 0
   applyStatusEffectOnHit: 0
-  statusApplyChance: 1
+  statusApplyChance: 0.1
   statusEffectOnHit: 0
   statusEffectDuration: 3
   lifestealPercent: 0.1
@@ -7381,7 +7381,7 @@ MonoBehaviour:
   critChance: 0
   critMultiplier: 2
   applyStatusEffectOnHit: 0
-  statusApplyChance: 1
+  statusApplyChance: 0.1
   statusEffectOnHit: 0
   statusEffectDuration: 3
   projectileCount: 5
@@ -10076,7 +10076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1391921168707288461}
-  requiredItemName: Orb 1
+  requiredItemName: Orb 3
   requiredAmount: 1
   mode: 0
   targetButton: {fileID: 9107083767112594081}
@@ -10290,7 +10290,7 @@ MonoBehaviour:
   splashRadius: 0
   splashDamagePercent: 0
   applyStatusEffectOnHit: 0
-  statusApplyChance: 1
+  statusApplyChance: 0.1
   statusEffectOnHit: 0
   statusEffectDuration: 3
   lifestealPercent: 0
@@ -11237,8 +11237,8 @@ MonoBehaviour:
   statsUI: {fileID: 4084994685357349882}
   otherUI: {fileID: 6050524428096378807}
   toggleKey: 9
-  slowTimeScale: 1
-  slowMoVolume: {fileID: 0}
+  slowTimeScale: 0.5
+  slowMoVolume: {fileID: 4768749160937343259}
 --- !u!1 &4906352248192492447
 GameObject:
   m_ObjectHideFlags: 0
@@ -11881,7 +11881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1391921168707288461}
-  requiredItemName: Orb 1
+  requiredItemName: Orb 7
   requiredAmount: 1
   mode: 0
   targetButton: {fileID: 579187952749193270}
@@ -12566,7 +12566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1391921168707288461}
-  requiredItemName: Orb 1
+  requiredItemName: Orb 8
   requiredAmount: 1
   mode: 0
   targetButton: {fileID: 1253853910585737862}
@@ -13116,7 +13116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 1391921168707288461}
-  requiredItemName: Orb 1
+  requiredItemName: Orb 6
   requiredAmount: 1
   mode: 0
   targetButton: {fileID: 1518365888233765957}
@@ -18239,7 +18239,7 @@ MonoBehaviour:
   critChance: 0.3
   critMultiplier: 2
   applyStatusEffectOnHit: 0
-  statusApplyChance: 1
+  statusApplyChance: 0.1
   statusEffectOnHit: 1
   statusEffectDuration: 3
   projectileCount: 1

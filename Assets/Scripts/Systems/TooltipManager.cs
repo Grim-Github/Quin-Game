@@ -32,6 +32,7 @@ public class TooltipManager : MonoBehaviour
     private RectTransform currentAnchor;
 
     private Coroutine hideCoroutine;
+    private static CoroutineRunner runner; // ensures coroutines can run even if this object is inactive
 
     private void Awake()
     {
@@ -144,14 +145,24 @@ public class TooltipManager : MonoBehaviour
     {
         if (!tooltipPanel.activeSelf) return; // already hidden
         if (hideCoroutine != null) return;    // already scheduled
-        hideCoroutine = StartCoroutine(HideAfterDelay());
+        if (isActiveAndEnabled)
+        {
+            hideCoroutine = StartCoroutine(HideAfterDelay());
+        }
+        else
+        {
+            hideCoroutine = GetRunner().StartCoroutine(HideAfterDelay());
+        }
     }
 
     private void CancelScheduledHide()
     {
         if (hideCoroutine != null)
         {
-            StopCoroutine(hideCoroutine);
+            if (isActiveAndEnabled)
+                StopCoroutine(hideCoroutine);
+            else if (runner != null)
+                runner.StopCoroutine(hideCoroutine);
             hideCoroutine = null;
         }
     }
@@ -210,5 +221,15 @@ public class TooltipManager : MonoBehaviour
         panelRect.localPosition = localPoint;
     }
 
+    // A tiny hidden helper to host coroutines when this object is inactive
+    private static CoroutineRunner GetRunner()
+    {
+        if (runner != null) return runner;
+        var go = new GameObject("TooltipCoroutineRunner");
+        DontDestroyOnLoad(go);
+        runner = go.AddComponent<CoroutineRunner>();
+        return runner;
+    }
 
+    private class CoroutineRunner : MonoBehaviour { }
 }

@@ -43,8 +43,6 @@ public class FollowNearest2D : MonoBehaviour
     // Cached local origin
     private Vector3 localOrigin;
 
-    // Reusable buffers to reduce per-frame allocations
-    private Collider2D[] hitsBuffer = new Collider2D[64];
     private readonly System.Collections.Generic.HashSet<Transform> claimed = new System.Collections.Generic.HashSet<Transform>();
 
     public Transform CurrentTarget => target;
@@ -148,20 +146,8 @@ public class FollowNearest2D : MonoBehaviour
             ? (Vector2)playerTransform.position
             : (rb2d != null ? rb2d.position : (Vector2)transform.position);
 
-        // Grow buffer if full to preserve correctness; still far fewer allocations.
-        int count = Physics2D.OverlapCircleNonAlloc(searchCenter, searchRadius, hitsBuffer, targetLayer);
-        if (count == hitsBuffer.Length)
-        {
-            // Expand and retry until results fit
-            int newSize = hitsBuffer.Length * 2;
-            const int MaxSize = 4096;
-            while (count == hitsBuffer.Length && hitsBuffer.Length < MaxSize)
-            {
-                hitsBuffer = new Collider2D[newSize];
-                count = Physics2D.OverlapCircleNonAlloc(searchCenter, searchRadius, hitsBuffer, targetLayer);
-                newSize = Mathf.Min(newSize * 2, MaxSize);
-            }
-        }
+        // Use Physics2D.OverlapCircleAll instead of NonAlloc to gather candidates
+        var hits = Physics2D.OverlapCircleAll(searchCenter, searchRadius, targetLayer);
 
         claimed.Clear();
         if (otherFollowers != null)
@@ -174,9 +160,9 @@ public class FollowNearest2D : MonoBehaviour
         float closestSqrDist = float.PositiveInfinity;
         Transform closestTarget = null;
 
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < hits.Length; i++)
         {
-            var hit = hitsBuffer[i];
+            var hit = hits[i];
             if (hit == null) continue;
             Transform ht = hit.transform;
             if (ht == transform) continue;
