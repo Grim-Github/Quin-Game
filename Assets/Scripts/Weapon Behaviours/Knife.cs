@@ -220,20 +220,6 @@ public class Knife : MonoBehaviour
                     float mult = isCrit ? Mathf.Max(1f, critMultiplier) : 1f;
                     int dealt = Mathf.RoundToInt(damage * mult);
 
-
-                    // damage bleed based of hit
-                    if (splashStatus != null)
-                    {
-                        float chance = Mathf.Clamp01((float)dealt / (float)health.maxHealth); // normalize 0..1
-                        float roll = Random.value; // 0..1
-
-                        if (roll < chance)
-                        {
-                            splashStatus.SetBleedDamage(dealt * 0.25f);
-                            splashStatus.AddStatus(StatusEffectSystem.StatusType.Bleeding, statusEffectDuration, 1f);
-                        }
-                    }
-
                     health.TakeDamage(dealt, damageType);
 
                     // lifesteal

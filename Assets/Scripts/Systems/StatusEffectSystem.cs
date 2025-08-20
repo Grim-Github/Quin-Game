@@ -244,7 +244,7 @@ public class StatusEffectSystem : MonoBehaviour
                 int dmg = Mathf.Max(1, Mathf.RoundToInt(igniteDamagePerTick));
                 // Uses your health system's public API:
                 // SimpleHealth.TakeDamage(int amount)
-                health.TakeDamage(dmg, false);
+                health.TakeDamage(dmg, SimpleHealth.DamageType.Fire, false);
             }
             // If no health found, we silently skip (no debug spam).
         }
@@ -256,7 +256,7 @@ public class StatusEffectSystem : MonoBehaviour
                 int dmg = Mathf.Max(1, Mathf.RoundToInt(poisonDamagePerTick));
                 // Uses your health system's public API:
                 // SimpleHealth.TakeDamage(int amount)
-                health.TakeDamage(dmg, false);
+                health.TakeDamage(dmg, SimpleHealth.DamageType.Poison, false);
             }
             // If no health found, we silently skip (no debug spam).
         }

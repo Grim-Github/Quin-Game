@@ -138,7 +138,7 @@ public class MonsterRarity : MonoBehaviour
             if (t && t.isActiveAndEnabled)
                 t.ResetAndStart();
 
-        // === Write EVERYTHING to parent entity’s UI ===
+        // === Write EVERYTHING to parent entityâ€™s UI ===
         WriteIntoParentUI();
     }
 
@@ -160,7 +160,8 @@ public class MonsterRarity : MonoBehaviour
             list.Add(Up_MoveSpeed_Add);
         }
 
-        if (knives != null && knives.Length > 0)
+        bool hasKnives = knives != null && knives.Length > 0;
+        if (hasKnives)
         {
             list.Add(Up_Knife_Dmg_Flat);
             list.Add(Up_Knife_Dmg_Mult);
@@ -168,12 +169,17 @@ public class MonsterRarity : MonoBehaviour
             list.Add(Up_Knife_Crit_Both);
         }
 
-        if (shooters != null && shooters.Length > 0)
+        bool hasShooters = shooters != null && shooters.Length > 0;
+        if (hasShooters)
         {
             list.Add(Up_Shooter_Dmg_Flat);
             list.Add(Up_Shooter_Dmg_Mult);
             list.Add(Up_Shooter_Projectiles_Add);
         }
+
+        // New: Damage type reroll for weapons (applies to all knives and shooters present)
+        if (hasKnives || hasShooters)
+            list.Add(Up_Weapons_DamageType_Reroll);
 
         return list;
     }
@@ -306,6 +312,31 @@ public class MonsterRarity : MonoBehaviour
         WN("Ranged Projectiles", $"+{add}");
     }
 
+    // ===== New: Weapon Damage Type Reroll =====
+    private void Up_Weapons_DamageType_Reroll()
+    {
+        // Pick a non-Physical damage type at random
+        var types = new[]
+        {
+            SimpleHealth.DamageType.Fire,
+            SimpleHealth.DamageType.Cold,
+            SimpleHealth.DamageType.Lightning,
+            SimpleHealth.DamageType.Poison
+        };
+        int idx = UnityEngine.Random.Range(0, types.Length);
+        var chosen = types[idx];
+
+        if (knives != null)
+            foreach (var k in knives)
+                if (k) k.damageType = chosen;
+
+        if (shooters != null)
+            foreach (var s in shooters)
+                if (s) s.damageType = chosen;
+
+        WN("Damage Type", chosen.ToString());
+    }
+
     // ===== Rarity & UI =====
     private Rarity RollWeightedRarity()
     {
@@ -324,7 +355,7 @@ public class MonsterRarity : MonoBehaviour
         var sb = new StringBuilder();
 
         // Header
-        sb.AppendLine($"<b>{C(C_LABEL, "")} {FormatRarity(rarity)}</b>");
+        sb.AppendLine($"<b>{C(C_LABEL, "Rarity:")} {FormatRarity(rarity)}</b>");
 
         // Enemy section
         if (notesEnemy.Count > 0)
@@ -336,8 +367,6 @@ public class MonsterRarity : MonoBehaviour
                 foreach (var line in notesWeapons) sb.AppendLine(line);
             }
         }
-
-
 
         // Wrap with base text color and slightly smaller size for compactness
         string block = $"{C(C_TEXT, $"<size=85%>{sb}</size>")}";
@@ -351,8 +380,6 @@ public class MonsterRarity : MonoBehaviour
         // Update UI (method assumed public)
         try { health.UpdateStatsText(); } catch { /* ignore if not present */ }
     }
-
-
 
     // ===== Formatting helpers =====
     private static string C(string hex, string text) => $"<color={hex}>{text}</color>";
@@ -387,3 +414,4 @@ public class MonsterRarity : MonoBehaviour
         }
     }
 }
+
