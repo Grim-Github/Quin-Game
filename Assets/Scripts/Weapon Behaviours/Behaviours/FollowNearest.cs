@@ -43,6 +43,10 @@ public class FollowNearest2D : MonoBehaviour
     // Cached local origin
     private Vector3 localOrigin;
 
+    // Reusable buffers to reduce per-frame allocations
+    private Collider2D[] hitsBuffer = new Collider2D[64];
+    private readonly System.Collections.Generic.HashSet<Transform> claimed = new System.Collections.Generic.HashSet<Transform>();
+
     public Transform CurrentTarget => target;
 
     private void Start()
@@ -50,6 +54,10 @@ public class FollowNearest2D : MonoBehaviour
         TryFindPlayer();
         rb2d = GetComponent<Rigidbody2D>();
         localOrigin = transform.localPosition; // cache starting point
+
+        // Stagger first update to avoid thundering herd across instances
+        if (updateInterval > 0f && nextUpdateTime == 0f)
+            nextUpdateTime = Time.time + Random.value * updateInterval;
     }
 
     private void Update()
@@ -72,10 +80,11 @@ public class FollowNearest2D : MonoBehaviour
         {
             Vector2 searchCenter = (searchAroundPlayer && playerTransform != null)
                 ? (Vector2)playerTransform.position
-                : (Vector2)transform.position;
+                : (rb2d != null ? rb2d.position : (Vector2)transform.position);
 
-            float distanceFromCenterToTarget = Vector2.Distance(searchCenter, target.position);
-            if (distanceFromCenterToTarget > searchRadius)
+            float r2 = searchRadius * searchRadius;
+            Vector2 toTarget = (Vector2)target.position - searchCenter;
+            if (toTarget.sqrMagnitude > r2)
                 target = null;
         }
     }
@@ -96,12 +105,17 @@ public class FollowNearest2D : MonoBehaviour
 
     private void MoveTowards(Vector3 destination, float dt)
     {
-        Vector2 toTarget = (Vector2)(destination - transform.position);
-        float distanceToTarget = toTarget.magnitude;
+        Vector2 currentPos = (useRigidbodyMovement && rb2d != null)
+            ? rb2d.position
+            : (Vector2)transform.position;
+        Vector2 toTarget = (Vector2)destination - currentPos;
+        float sqrDistanceToTarget = toTarget.sqrMagnitude;
+        float stopDistance2 = stopDistance * stopDistance;
 
-        if (distanceToTarget <= stopDistance) return;
+        if (sqrDistanceToTarget <= stopDistance2) return;
 
         float speed = moveSpeed;
+        float distanceToTarget = Mathf.Sqrt(sqrDistanceToTarget);
         if (distanceToTarget < decelerationRadius)
         {
             float t = Mathf.InverseLerp(stopDistance, decelerationRadius, distanceToTarget);
@@ -130,13 +144,26 @@ public class FollowNearest2D : MonoBehaviour
 
     private void FindNearestTarget()
     {
-        Vector3 searchCenter = (searchAroundPlayer && playerTransform != null)
-            ? playerTransform.position
-            : transform.position;
+        Vector2 searchCenter = (searchAroundPlayer && playerTransform != null)
+            ? (Vector2)playerTransform.position
+            : (rb2d != null ? rb2d.position : (Vector2)transform.position);
 
-        var hits = Physics2D.OverlapCircleAll(searchCenter, searchRadius, targetLayer);
+        // Grow buffer if full to preserve correctness; still far fewer allocations.
+        int count = Physics2D.OverlapCircleNonAlloc(searchCenter, searchRadius, hitsBuffer, targetLayer);
+        if (count == hitsBuffer.Length)
+        {
+            // Expand and retry until results fit
+            int newSize = hitsBuffer.Length * 2;
+            const int MaxSize = 4096;
+            while (count == hitsBuffer.Length && hitsBuffer.Length < MaxSize)
+            {
+                hitsBuffer = new Collider2D[newSize];
+                count = Physics2D.OverlapCircleNonAlloc(searchCenter, searchRadius, hitsBuffer, targetLayer);
+                newSize = Mathf.Min(newSize * 2, MaxSize);
+            }
+        }
 
-        var claimed = new System.Collections.Generic.HashSet<Transform>();
+        claimed.Clear();
         if (otherFollowers != null)
         {
             foreach (var f in otherFollowers)
@@ -144,20 +171,22 @@ public class FollowNearest2D : MonoBehaviour
                     claimed.Add(f.CurrentTarget);
         }
 
-        float closestDistance = Mathf.Infinity;
+        float closestSqrDist = float.PositiveInfinity;
         Transform closestTarget = null;
 
-        foreach (var hit in hits)
+        for (int i = 0; i < count; i++)
         {
+            var hit = hitsBuffer[i];
             if (hit == null) continue;
             Transform ht = hit.transform;
             if (ht == transform) continue;
             if (claimed.Contains(ht)) continue;
 
-            float d = Vector2.Distance(searchCenter, ht.position);
-            if (d < closestDistance)
+            Vector2 to = (Vector2)ht.position - searchCenter;
+            float d2 = to.sqrMagnitude;
+            if (d2 < closestSqrDist)
             {
-                closestDistance = d;
+                closestSqrDist = d2;
                 closestTarget = ht;
             }
         }

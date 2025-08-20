@@ -6,32 +6,52 @@ using UnityEngine;
 
 public class TopChatMessagesSimple : MonoBehaviour
 {
+    public static TopChatMessagesSimple Instance { get; private set; }
     [SerializeField] private TextMeshProUGUI output; // assign in Inspector
 
-    // message -> count (after simple normalization)
+    // word -> count (after simple normalization)
     private readonly Dictionary<string, int> counts = new Dictionary<string, int>();
 
-    private void Start()
+    private void Awake()
     {
+        Instance = this;
         // Add a listener for the IRC.OnChatMessage event
         IRC.Instance.OnChatMessage += OnChatMessage;
     }
-
 
     private void OnDisable()
     {
         if (IRC.Instance != null) IRC.Instance.OnChatMessage -= OnChatMessage;
     }
 
+    // Return the current top N words (descending by count)
+    public List<string> GetTopWords(int n = 3)
+    {
+        if (n <= 0) n = 3;
+        // Snapshot and order; ignore null/empty keys just in case
+        return counts
+            .Where(kv => !string.IsNullOrWhiteSpace(kv.Key))
+            .OrderByDescending(kv => kv.Value)
+            .Take(n)
+            .Select(kv => kv.Key)
+            .ToList();
+    }
+
     private void OnChatMessage(Chatter c)
     {
+        string raw = c?.message ?? string.Empty;
+        string norm = Normalize(raw);
+        if (norm.Length == 0) return;
 
-        string raw = c?.message ?? "";
-        string key = Normalize(raw);
-        if (key.Length == 0) return;
-
-        if (!counts.TryGetValue(key, out int n)) counts[key] = 1;
-        else counts[key] = n + 1;
+        // Split into words and count each
+        var words = norm.Split(' ');
+        foreach (var w in words)
+        {
+            if (string.IsNullOrWhiteSpace(w)) continue;
+            if (w.Length <= 3) continue; // ignore very short words
+            if (!counts.TryGetValue(w, out int n)) counts[w] = 1;
+            else counts[w] = n + 1;
+        }
 
         UpdateUI();
     }
@@ -43,7 +63,7 @@ public class TopChatMessagesSimple : MonoBehaviour
 
         if (counts.Count == 0)
         {
-            output.text = "Top chat messages:\n—";
+            output.text = "Top chat words:\n-";
             return;
         }
 

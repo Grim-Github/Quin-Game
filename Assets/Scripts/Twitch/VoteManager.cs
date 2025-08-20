@@ -48,7 +48,7 @@ public class VoteManager : MonoBehaviour
     [NonSerialized] private int[] tallies = new int[kOptions];
     private readonly Queue<string> recentIds = new();
 
-    public event Action<float> OnCooldownStart; // duration
+    public event Action<float> OnCooldownStart;// duration
     public event Action<float> OnCooldownTick;  // remaining
     public event Action OnCooldownEnd;
 
@@ -69,7 +69,8 @@ public class VoteManager : MonoBehaviour
         NormalizePoolIds();
     }
 
-    private static readonly Regex VoteCmd = new(@"!vote\s*([1-3])", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+    // Voting keywords are dynamic (top 3 words from chat)
+    private readonly string[] voteKeywords = new string[kOptions];
 
     private void OnChatMessage(Chatter chatter)
     {
@@ -77,11 +78,8 @@ public class VoteManager : MonoBehaviour
         var msg = chatter.message;
         if (string.IsNullOrEmpty(msg)) return;
 
-        var m = VoteCmd.Match(msg);
-        if (!m.Success) return;
-
-        int parsed = m.Groups[1].Value[0] - '1'; // 1..3 -> 0..2
-        AcceptVote(parsed);
+        if (!TryParseVote(msg, out int idx)) return;
+        AcceptVote(idx);
     }
 
     public void StartRoundNow() => StartVoting();
@@ -117,6 +115,50 @@ public class VoteManager : MonoBehaviour
 
     private float Now => useScaledTime ? Time.time : Time.unscaledTime;
 
+    private void RefreshVoteKeywords()
+    {
+        string[] fallback = { "LOLW", "ICANT", "ABOBA" };
+        var src = TopChatMessagesSimple.Instance;
+        List<string> top = src != null ? src.GetTopWords(kOptions) : null;
+        for (int i = 0; i < kOptions; i++)
+        {
+            string v = (top != null && i < top.Count && !string.IsNullOrWhiteSpace(top[i])) ? top[i] : fallback[i];
+            voteKeywords[i] = v;
+        }
+    }
+
+    private bool TryParseVote(string message, out int index)
+    {
+        index = -1;
+        if (string.IsNullOrEmpty(message)) return false;
+
+        var parts = message.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+        for (int p = 0; p < parts.Length; p++)
+        {
+            // strip non-alnum from ends so "aboba!" still matches
+            string token = StripNonAlnum(parts[p]);
+            if (string.IsNullOrEmpty(token)) continue;
+            for (int i = 0; i < kOptions; i++)
+            {
+                if (!string.IsNullOrEmpty(voteKeywords[i]) && string.Equals(token, voteKeywords[i], StringComparison.OrdinalIgnoreCase))
+                {
+                    index = i;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static string StripNonAlnum(string s)
+    {
+        int start = 0, end = s.Length - 1;
+        while (start <= end && !char.IsLetterOrDigit(s[start])) start++;
+        while (end >= start && !char.IsLetterOrDigit(s[end])) end--;
+        if (end < start) return string.Empty;
+        return s.Substring(start, end - start + 1);
+    }
+
     private void EnterCooldown()
     {
         phase = Phase.Cooldown;
@@ -126,6 +168,7 @@ public class VoteManager : MonoBehaviour
 
     private void StartVoting()
     {
+        RefreshVoteKeywords();
         PickOptionsWeightedWithoutReplacement();
 
         for (int i = 0; i < kOptions; i++) tallies[i] = 0;
@@ -257,10 +300,10 @@ public class VoteManager : MonoBehaviour
             int total = tallies[0] + tallies[1] + tallies[2];
             return
                 $"VOTE! ({tt})\n" +
-                $"[1] {currentOptions[0]?.description}\n" +
-                $"[2] {currentOptions[1]?.description}\n" +
-                $"[3] {currentOptions[2]?.description}\n\n" +
-                $"Votes: 1) {tallies[0]}  2) {tallies[1]}  3) {tallies[2]}  |  Total: {total}";
+                $"[{voteKeywords[0]}] {currentOptions[0]?.description}\n" +
+                $"[{voteKeywords[1]}] {currentOptions[1]?.description}\n" +
+                $"[{voteKeywords[2]}] {currentOptions[2]?.description}\n\n" +
+                $"Votes: {voteKeywords[0]} {tallies[0]}  {voteKeywords[1]} {tallies[1]}  {voteKeywords[2]} {tallies[2]}  |  Total: {total}";
         }
         if (phase == Phase.Cooldown) return $"Next vote in: {FormatMMSS(TimeRemaining)}";
         return "Resolving...";
@@ -284,4 +327,3 @@ public class VoteManager : MonoBehaviour
         for (int i = 0; i < pool.Count; i++) pool[i]?.EnsureId();
     }
 }
-
