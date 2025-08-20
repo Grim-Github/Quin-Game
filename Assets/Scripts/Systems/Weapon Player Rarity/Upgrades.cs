@@ -26,6 +26,7 @@ public sealed class WeaponContext
     public IHealthModule health;
     public IUITextSink ui;                     // sink to write rarity block
     public TickAdapter tickAdapter;            // to reset tick cleanly
+    public StatusEffectSystem.StatusType[] statusBlacklist; // which statuses cannot be rolled
 
     public string Roman(int n)
     {
@@ -248,6 +249,43 @@ public sealed class StatusEffectDurationUpgrade : IUpgrade
         c.status.Duration = before + add;
         notes.AppendLine($"+{add:F1}s Status Duration (Tier {c.Roman(c.tiers.statusDuration)})");
         return () => c.status.Duration = before;
+    }
+}
+
+// Enables on-hit status and rolls a random allowed status effect (respects blacklist)
+public sealed class EnableOnHitRandomStatusUpgrade : IUpgrade
+{
+    public bool IsApplicable(WeaponContext c) => c.status != null && !c.status.OnHitEnabled;
+
+    public Action Apply(WeaponContext c, StringBuilder notes)
+    {
+        bool prevEnabled = c.status.OnHitEnabled;
+        var prevEffect = c.status.Effect;
+
+        // Build allowed list by filtering enum with blacklist
+        var all = (StatusEffectSystem.StatusType[])System.Enum.GetValues(typeof(StatusEffectSystem.StatusType));
+        var blacklist = c.statusBlacklist ?? System.Array.Empty<StatusEffectSystem.StatusType>();
+
+        System.Predicate<StatusEffectSystem.StatusType> isBlacklisted = t =>
+        {
+            for (int i = 0; i < blacklist.Length; i++) if (blacklist[i].Equals(t)) return true;
+            return false;
+        };
+
+        var allowed = new System.Collections.Generic.List<StatusEffectSystem.StatusType>(all.Length);
+        for (int i = 0; i < all.Length; i++)
+            if (!isBlacklisted(all[i])) allowed.Add(all[i]);
+
+        // Fallback if all blacklisted: default to Bleeding
+        var picked = allowed.Count > 0
+            ? allowed[c.rng.Next(0, allowed.Count)]
+            : StatusEffectSystem.StatusType.Bleeding;
+
+        c.status.OnHitEnabled = true;
+        c.status.Effect = picked;
+
+        notes.AppendLine($"Enable On-Hit: {picked}");
+        return () => { c.status.OnHitEnabled = prevEnabled; c.status.Effect = prevEffect; };
     }
 }
 

@@ -11,6 +11,7 @@ public enum UpgradeType
     DamagePercentAsFlat,
     AttackSpeed,
     Crit,
+    EnableOnHitRandom,
     StatusEffectDuration,
     StatusEffectChance,
     // Health/Defense
@@ -44,6 +45,7 @@ public class UpgradeWeightTable
     [Min(0f)] public float damagePercentAsFlat = 1f;
     [Min(0f)] public float attackSpeed = 1f;
     [Min(0f)] public float crit = 1f;
+    [Min(0f)] public float enableOnHitRandom = 1f;
     [Min(0f)] public float statusDuration = 1f;
     [Min(0f)] public float statusChance = 1f;
 
@@ -75,6 +77,7 @@ public class UpgradeWeightTable
         UpgradeType.DamagePercentAsFlat => damagePercentAsFlat,
         UpgradeType.AttackSpeed => attackSpeed,
         UpgradeType.Crit => crit,
+        UpgradeType.EnableOnHitRandom => enableOnHitRandom,
         UpgradeType.StatusEffectDuration => statusDuration,
         UpgradeType.StatusEffectChance => statusChance,
         UpgradeType.HpFlat => hpFlat,

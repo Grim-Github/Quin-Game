@@ -22,6 +22,10 @@ public class WeaponRarityController : MonoBehaviour
     [Header("Tiers")]
     [SerializeField] private TierSystem tiers = new TierSystem();
 
+    [Header("Status Rolls")]
+    [Tooltip("Blacklist of status effects that will never be rolled by the 'Enable On-Hit' upgrade.")]
+    [SerializeField] private StatusEffectSystem.StatusType[] onHitStatusBlacklist = System.Array.Empty<StatusEffectSystem.StatusType>();
+
     [Header("References")]
     [SerializeField] private SimpleHealth healthSystem; // optional explicit reference (falls back to parent)
 
@@ -68,8 +72,6 @@ public class WeaponRarityController : MonoBehaviour
         var s = GetComponent<SimpleShooter>();
         var acc = GetComponent<Accessory>();
         var t = GetComponent<WeaponTick>();
-        if (healthSystem == null)
-            healthSystem = GetComponentInParent<SimpleHealth>();
 
         if (k) { knife = new KnifeAdapter(k); uiSink = knife; }
         if (s) { shooter = new ShooterAdapter(s); if (uiSink == null) uiSink = shooter; }
@@ -527,7 +529,8 @@ public class WeaponRarityController : MonoBehaviour
             health = health,
             ui = uiSink,
             tickAdapter = tick,
-            status = (IStatusTickModule)(object)(knife ?? (object)shooter ?? null) // NEW
+            status = (IStatusTickModule)(object)(knife ?? (object)shooter ?? null),
+            statusBlacklist = onHitStatusBlacklist
         };
     }
 
@@ -573,6 +576,10 @@ public class WeaponRarityController : MonoBehaviour
                 Add(true, new StatusEffectDurationUpgrade(), UpgradeType.StatusEffectDuration);
                 Add(true, new StatusApplyChanceUpgrade(), UpgradeType.StatusEffectChance);
             }
+            else if (c.status != null && !c.status.OnHitEnabled)
+            {
+                Add(true, new EnableOnHitRandomStatusUpgrade(), UpgradeType.EnableOnHitRandom);
+            }
         }
 
         if (c.shooter != null)
@@ -586,6 +593,10 @@ public class WeaponRarityController : MonoBehaviour
             {
                 Add(true, new StatusEffectDurationUpgrade(), UpgradeType.StatusEffectDuration);
                 Add(true, new StatusApplyChanceUpgrade(), UpgradeType.StatusEffectChance);
+            }
+            else if (c.status != null && !c.status.OnHitEnabled)
+            {
+                Add(true, new EnableOnHitRandomStatusUpgrade(), UpgradeType.EnableOnHitRandom);
             }
 
         }
@@ -650,6 +661,11 @@ public class WeaponRarityController : MonoBehaviour
                     var r = tiers.Scale(ranges.critMultAdd, tiers.critMultiplier);
                     sb.AppendLine("+Crit Mult: " + RngF(r, 2) + "x");
                 }
+                continue;
+            }
+            if (up is EnableOnHitRandomStatusUpgrade)
+            {
+                sb.AppendLine("Enable On-Hit: Random Status");
                 continue;
             }
             if (up is StatusEffectDurationUpgrade)

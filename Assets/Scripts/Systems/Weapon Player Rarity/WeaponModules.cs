@@ -8,6 +8,8 @@ public interface IStatusTickModule
 {
     float StatusApplyChance { get; set; } // optional, used if you add a chance upgrade later
     float Duration { get; set; }
+    bool OnHitEnabled { get; set; }
+    StatusEffectSystem.StatusType Effect { get; set; }
 }
 
 public interface IKnifeModule
@@ -59,6 +61,8 @@ public sealed class KnifeAdapter : IDamageModule, ICritModule, IKnifeModule, ISt
     public int MaxTargetsPerTick { get => k.maxTargetsPerTick; set => k.maxTargetsPerTick = value; }
     public float Duration { get => k.statusEffectDuration; set => k.statusEffectDuration = Mathf.Max(0f, value); }
     public float StatusApplyChance { get => k.statusApplyChance; set => k.statusApplyChance = Mathf.Clamp01(value); }
+    public bool OnHitEnabled { get => k.applyStatusEffectOnHit; set => k.applyStatusEffectOnHit = value; }
+    public StatusEffectSystem.StatusType Effect { get => k.statusEffectOnHit; set => k.statusEffectOnHit = value; }
     public string Text { get => k.extraTextField ?? ""; set => k.extraTextField = value; }
     public void SetText(string s) => k.extraTextField = s;
 }
@@ -76,6 +80,8 @@ public sealed class ShooterAdapter : IDamageModule, ICritModule, IShooterModule,
     public float Duration { get => s.statusEffectDuration; set => s.statusEffectDuration = Mathf.Max(0f, value); }
     public int ProjectileCount { get => s.projectileCount; set => s.projectileCount = value; }
     public float SpreadAngle { get => s.spreadAngle; set => s.spreadAngle = Mathf.Max(0f, value); }
+    public bool OnHitEnabled { get => s.applyStatusEffectOnHit; set => s.applyStatusEffectOnHit = value; }
+    public StatusEffectSystem.StatusType Effect { get => s.statusEffectOnHit; set => s.statusEffectOnHit = value; }
     public string Text { get => s.extraTextField ?? ""; set => s.extraTextField = value; }
     public void SetText(string t) => s.extraTextField = t;
 }
