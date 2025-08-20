@@ -1226,7 +1226,6 @@ Transform:
   - {fileID: 977729874839342573}
   - {fileID: 893505022041302612}
   - {fileID: 6488690948797804823}
-  - {fileID: 2286984618383716447}
   m_Father: {fileID: 5833988517266502027}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6721967264053730172
@@ -1440,7 +1439,7 @@ MonoBehaviour:
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
     knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
+    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
     shooterProjectilesAdd: {x: 1, y: 2}
@@ -1474,7 +1473,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     useCurve: 0
-    defaultMinMax: {x: 0.5, y: 2}
+    defaultMinMax: {x: 1, y: 2}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &763878338640954299
@@ -2365,7 +2364,7 @@ MonoBehaviour:
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
     knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
+    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
     shooterProjectilesAdd: {x: 1, y: 2}
@@ -2399,7 +2398,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     useCurve: 0
-    defaultMinMax: {x: 0.5, y: 2}
+    defaultMinMax: {x: 1, y: 2}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &935738676766603409
@@ -5972,11 +5971,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4939500946709195127}
+  m_Father: {fileID: 1366275554965733953}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 130.59003, y: -207.0357}
+  m_AnchoredPosition: {x: 130.59007, y: -100.44041}
   m_SizeDelta: {x: 261.18, y: 200.8741}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8744612499278301441
@@ -6565,7 +6564,7 @@ MonoBehaviour:
     knifeRadiusMult: {x: 1.3, y: 1.5}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
     knifeLifestealAdd: {x: 0.05, y: 0.1}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
+    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
     shooterProjectilesAdd: {x: 1, y: 2}
@@ -6599,7 +6598,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     useCurve: 0
-    defaultMinMax: {x: 0.5, y: 2}
+    defaultMinMax: {x: 1, y: 2}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!114 &7596382903804138479
@@ -7528,7 +7527,7 @@ MonoBehaviour:
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
     knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
+    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
     shooterProjectilesAdd: {x: 1, y: 2}
@@ -7562,7 +7561,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     useCurve: 0
-    defaultMinMax: {x: 0.5, y: 2}
+    defaultMinMax: {x: 1, y: 2}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &3401677938551974219
@@ -8613,7 +8612,7 @@ MonoBehaviour:
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
     knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
+    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
     shooterProjectilesAdd: {x: 1, y: 2}
@@ -8647,7 +8646,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     useCurve: 0
-    defaultMinMax: {x: 0.5, y: 2}
+    defaultMinMax: {x: 1, y: 2}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &4019939872639026237
@@ -9329,11 +9328,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4939500946709195127}
+  m_Father: {fileID: 1366275554965733953}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 130.59003, y: -374.08}
+  m_AnchoredPosition: {x: 130.59007, y: -267.48468}
   m_SizeDelta: {x: 261.19, y: 133.2205}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8409449456103510616
@@ -9780,77 +9779,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressedScale: 0.9
   duration: 0.1
---- !u!1 &4448058578589689684
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2286984618383716447}
-  - component: {fileID: 5887600947518518715}
-  m_Layer: 6
-  m_Name: Upgrade 5
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &2286984618383716447
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4448058578589689684}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 25, y: 25, z: 25}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5526111780517100950}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5887600947518518715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4448058578589689684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Upgrade:
-    powerUpName: Knife - Knife On Hit Stun
-    powerUpDescription: Knife now applies stun effect
-    powerUpObject: {fileID: 4448058578589689684}
-    IsAccessory: 0
-    IsWeapon: 0
-    powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
-    weight: 50
-  nextUpgrade: {fileID: 0}
-  icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
-  upgradeType: 27
-  onCustomAwake:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8955573920365390618}
-        m_TargetAssemblyTypeName: Knife, Grim
-        m_MethodName: EnableOnHitEffectByIndex
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  value: 5
 --- !u!1 &4493435403853585137
 GameObject:
   m_ObjectHideFlags: 0
@@ -10499,7 +10427,7 @@ MonoBehaviour:
     knifeRadiusMult: {x: 1.3, y: 1.5}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
     knifeLifestealAdd: {x: 0.05, y: 0.1}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
+    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
     shooterProjectilesAdd: {x: 1, y: 2}
@@ -10533,7 +10461,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     useCurve: 0
-    defaultMinMax: {x: 0.5, y: 2}
+    defaultMinMax: {x: 1, y: 2}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!114 &8555762351250044580
@@ -11144,9 +11072,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1612001075127765590}
-  - {fileID: 8632082208433075378}
-  - {fileID: 1252546644101757926}
-  - {fileID: 5474245198563873542}
+  - {fileID: 1366275554965733953}
   - {fileID: 39231531255157234}
   - {fileID: 5602326505937274319}
   - {fileID: 2511805252884418071}
@@ -16419,6 +16345,81 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &7787113853861076299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 790577761381833549}
+  - component: {fileID: 7862422910489535703}
+  - component: {fileID: 2466470490285324398}
+  m_Layer: 6
+  m_Name: Panel (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &790577761381833549
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7787113853861076299}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1366275554965733953}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 66.608}
+  m_SizeDelta: {x: 0, y: -133.22}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7862422910489535703
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7787113853861076299}
+  m_CullTransparentMesh: 1
+--- !u!114 &2466470490285324398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7787113853861076299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.31764707}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -5146924611606043671, guid: 888cad938ef07bc4d8a64b6789c3bd3c, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 2.56
 --- !u!1 &7847374846165817178
 GameObject:
   m_ObjectHideFlags: 0
@@ -17790,6 +17791,45 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &8398699470446670896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1366275554965733953}
+  m_Layer: 5
+  m_Name: Twitch Info
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1366275554965733953
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8398699470446670896}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 790577761381833549}
+  - {fileID: 8632082208433075378}
+  - {fileID: 1252546644101757926}
+  - {fileID: 5474245198563873542}
+  m_Father: {fileID: 4939500946709195127}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 130.59, y: 199.43}
+  m_SizeDelta: {x: 261.18, y: 467.31}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8429005387526368443
 GameObject:
   m_ObjectHideFlags: 0
@@ -18386,7 +18426,7 @@ MonoBehaviour:
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
     knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
+    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
     shooterProjectilesAdd: {x: 1, y: 2}
@@ -18420,7 +18460,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     useCurve: 0
-    defaultMinMax: {x: 0.5, y: 2}
+    defaultMinMax: {x: 1, y: 2}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &8503593496250004042
@@ -19173,7 +19213,7 @@ MonoBehaviour:
     IsWeapon: 0
     powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
     weight: 50
-  nextUpgrade: {fileID: 5887600947518518715}
+  nextUpgrade: {fileID: 0}
   icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
   upgradeType: 1
   onCustomAwake:
@@ -19197,7 +19237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1252546644101757926
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19210,11 +19250,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4939500946709195127}
+  m_Father: {fileID: 1366275554965733953}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 130.6, y: -507.3}
+  m_AnchoredPosition: {x: 130.6, y: -400.70468}
   m_SizeDelta: {x: 261.19, y: 133.2205}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6745070518316237324
