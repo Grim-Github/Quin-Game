@@ -104,6 +104,7 @@ public class SimpleHealth : MonoBehaviour
     private int lastDamageTaken = 0;
     private DamageType lastDamageType = DamageType.Physical; // NEW: remember last type
     private Snappy2DController movementController;
+    private readonly System.Text.StringBuilder _statsBuilder = new System.Text.StringBuilder(256);
 
     // Stats UI (now matches Knife.cs pattern)
     // Split into separate parts instead of one giant text block
@@ -215,12 +216,16 @@ public class SimpleHealth : MonoBehaviour
     {
         if (regenRate > 0f && IsAlive && currentHealth < maxHealth)
         {
+            int oldHealthInt = CurrentHealth;
             currentHealth = Mathf.Min(currentHealth + regenRate * Time.deltaTime, maxHealth);
             SyncSlider();
+            if (CurrentHealth != oldHealthInt)
+            {
+                UpdateStatsText();
+            }
         }
 
         UpdateVolume();
-        UpdateStatsText();
     }
 
     public void UpdateStatsText()
@@ -230,13 +235,13 @@ public class SimpleHealth : MonoBehaviour
         // HEALTH
         if (healthStatsText != null)
         {
-            var sb = new System.Text.StringBuilder();
-            sb.AppendLine($"<b>Health</b>");
-            sb.AppendLine($"Max Health: {maxHealth}");
-            sb.AppendLine($"Reserved: {reservedHealth}");
-            sb.AppendLine($"Current: {CurrentHealth}");
-            sb.AppendLine($"Regen: {regenRate:F2}/s");
-            healthStatsText.text = sb.ToString();
+            _statsBuilder.Clear();
+            _statsBuilder.AppendLine($"<b>Health</b>");
+            _statsBuilder.AppendLine($"Max Health: {maxHealth}");
+            _statsBuilder.AppendLine($"Reserved: {reservedHealth}");
+            _statsBuilder.AppendLine($"Current: {CurrentHealth}");
+            _statsBuilder.AppendLine($"Regen: {regenRate:F2}/s");
+            healthStatsText.text = _statsBuilder.ToString();
         }
 
         // DEFENSE
@@ -249,34 +254,38 @@ public class SimpleHealth : MonoBehaviour
                 ? Mathf.Min(evasion / (evasion + evasionScaling * referenceDamage), maxEvasion)
                 : 0f;
 
-            var sb = new System.Text.StringBuilder();
-            sb.AppendLine($"<b>Mitigation</b>");
-            sb.AppendLine($"Armor: {(int)armor}");
-            sb.AppendLine($"Evasion: {(int)evasion}");
-            sb.AppendLine($"Mitigation: {mitigation * 100f:F1}%");
-            sb.AppendLine($"Evasion%: {evasionChance * 100f:F1}%");
-            sb.AppendLine($"Last Hit: {lastDamageTaken} ({lastDamageType})");
-            defenseStatsText.text = sb.ToString();
+            _statsBuilder.Clear();
+            _statsBuilder.AppendLine($"<b>Mitigation</b>");
+            _statsBuilder.AppendLine($"Armor: {(int)armor}");
+            _statsBuilder.AppendLine($"Evasion: {(int)evasion}");
+            _statsBuilder.AppendLine($"Mitigation: {mitigation * 100f:F1}%");
+            _statsBuilder.AppendLine($"Evasion%: {evasionChance * 100f:F1}%");
+            _statsBuilder.AppendLine($"Last Hit: {lastDamageTaken} ({lastDamageType})");
+            defenseStatsText.text = _statsBuilder.ToString();
         }
 
         // RESISTANCES
         if (resistStatsText != null)
         {
-            resistStatsText.text =
-                $"<B>Resists</b>\nFire {fireResist * 100f:F0}%\nCold {coldResist * 100f:F0}%\n" +
-                $"Lightning {lightningResist * 100f:F0}%\nPoison {poisonResist * 100f:F0}%";
+            _statsBuilder.Clear();
+            _statsBuilder.AppendLine($"<B>Resists</b>");
+            _statsBuilder.AppendLine($"Fire {fireResist * 100f:F0}%");
+            _statsBuilder.AppendLine($"Cold {coldResist * 100f:F0}%");
+            _statsBuilder.AppendLine($"Lightning {lightningResist * 100f:F0}%");
+            _statsBuilder.AppendLine($"Poison {poisonResist * 100f:F0}%");
+            resistStatsText.text = _statsBuilder.ToString();
         }
 
         // MOVEMENT
         if (movementStatsText != null && movementController != null)
         {
-            var sb = new System.Text.StringBuilder();
-            sb.AppendLine($"<b>Movement</b>");
-            sb.AppendLine($"Move Speed: {movementController.MoveSpeed:F2}");
-            sb.AppendLine($"Dash Speed: {movementController.DashSpeed:F2}");
-            sb.AppendLine($"Dash Duration: {movementController.DashDuration:F2}s");
-            sb.AppendLine($"Dash Cooldown: {movementController.DashCooldown:F2}s");
-            movementStatsText.text = sb.ToString();
+            _statsBuilder.Clear();
+            _statsBuilder.AppendLine($"<b>Movement</b>");
+            _statsBuilder.AppendLine($"Move Speed: {movementController.MoveSpeed:F2}");
+            _statsBuilder.AppendLine($"Dash Speed: {movementController.DashSpeed:F2}");
+            _statsBuilder.AppendLine($"Dash Duration: {movementController.DashDuration:F2}s");
+            _statsBuilder.AppendLine($"Dash Cooldown: {movementController.DashCooldown:F2}s");
+            movementStatsText.text = _statsBuilder.ToString();
         }
     }
 
@@ -458,6 +467,8 @@ public class SimpleHealth : MonoBehaviour
             FindAnyObjectByType<OrthoScrollZoom>()?.CameraShake(duration, intensity);
         }
 
+        UpdateStatsText();
+
         if (currentHealth <= 0) Die();
         else if (invulnerabilityDuration > 0) StartCoroutine(InvulnerabilityCoroutine());
     }
@@ -514,6 +525,7 @@ public class SimpleHealth : MonoBehaviour
         if (amount <= 0 || currentHealth <= 0) return;
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         SyncSlider();
+        UpdateStatsText();
     }
 
     public void Kill()
@@ -521,6 +533,7 @@ public class SimpleHealth : MonoBehaviour
         if (currentHealth <= 0) return;
         currentHealth = 0;
         SyncSlider();
+        UpdateStatsText();
         Die();
     }
 
@@ -528,6 +541,7 @@ public class SimpleHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         SyncSlider();
+        UpdateStatsText();
     }
 
     private void Die()
@@ -596,7 +610,6 @@ public class SimpleHealth : MonoBehaviour
         if (amount <= 0) return;
         reservedHealth = Mathf.Clamp(reservedHealth + amount, 0, maxHealth);
         IncreaseMaxHealth(-amount);
-        SyncSlider();
     }
 
     public void IncreaseMaxHealth(int amount)
@@ -604,18 +617,21 @@ public class SimpleHealth : MonoBehaviour
         maxHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         SyncSlider();
+        UpdateStatsText();
     }
 
     public void GiveArmor(float amount)
     {
         if (amount == 0f) return;
         armor = Mathf.Max(0f, armor + amount);
+        UpdateStatsText();
     }
 
     public void GiveEvasion(float amount)
     {
         if (amount == 0f) return;
         evasion = Mathf.Max(0f, evasion + amount);
+        UpdateStatsText();
     }
 
     // OPTIONAL HELPERS: adjust resistances at runtime
@@ -629,6 +645,7 @@ public class SimpleHealth : MonoBehaviour
             case DamageType.Lightning: lightningResist = Mathf.Clamp(lightningResist + amount, 0f, 0.95f); break;
             case DamageType.Poison: poisonResist = Mathf.Clamp(poisonResist + amount, 0f, 0.95f); break;
         }
+        UpdateStatsText();
     }
 
     private System.Collections.IEnumerator InvulnerabilityCoroutine()

@@ -119,7 +119,8 @@ public class ChatterStats : MonoBehaviour
         {
             foreach (LootTable2D.AmountOption item in lt2d.amountOptions)
             {
-                item.amount += Mathf.RoundToInt(power / 10);
+                int bonus = Mathf.Min(Mathf.RoundToInt(power / 20f), 3); // cap at +5
+                item.amount += bonus;
             }
         }
 
