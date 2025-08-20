@@ -255,42 +255,42 @@ public class WeaponUpgrades : MonoBehaviour
 
         switch (upgradeType)
         {
-            // ------------- Knife -------------
+            // ------------- Knife (displayed as Melee) -------------
             case UpgradeType.KnifeDamageFlat:
-                Upgrade.powerUpName = $"Knife Damage +{Mathf.RoundToInt(value)}";
-                Upgrade.powerUpDescription = $"Increase Knife damage by {Mathf.RoundToInt(value)}.";
+                Upgrade.powerUpName = $"Melee Damage +{Mathf.RoundToInt(value)}";
+                Upgrade.powerUpDescription = $"Increase Melee damage by {Mathf.RoundToInt(value)}.";
                 break;
             case UpgradeType.KnifeDamagePercent:
-                Upgrade.powerUpName = $"Knife Damage +{value * 100f:F0}%";
-                Upgrade.powerUpDescription = $"Increase Knife damage by {value * 100f:F0}%.";
+                Upgrade.powerUpName = $"Melee Damage +{value * 100f:F0}%";
+                Upgrade.powerUpDescription = $"Increase Melee damage by {value * 100f:F0}%.";
                 break;
             case UpgradeType.KnifeRadiusFlat:
-                Upgrade.powerUpName = $"Knife Range +{value:F2}";
-                Upgrade.powerUpDescription = $"Increase Knife attack radius by {value:F2} units.";
+                Upgrade.powerUpName = $"Melee Range +{value:F2}";
+                Upgrade.powerUpDescription = $"Increase Melee attack radius by {value:F2} units.";
                 break;
             case UpgradeType.KnifeRadiusPercent:
-                Upgrade.powerUpName = $"Knife Range +{value * 100f:F0}%";
-                Upgrade.powerUpDescription = $"Increase Knife attack radius by {value * 100f:F0}%.";
+                Upgrade.powerUpName = $"Melee Range +{value * 100f:F0}%";
+                Upgrade.powerUpDescription = $"Increase Melee attack radius by {value * 100f:F0}%.";
                 break;
             case UpgradeType.KnifeMaxTargetsFlat:
                 Upgrade.powerUpName = $"Multi-Target +{Mathf.RoundToInt(value)}";
-                Upgrade.powerUpDescription = $"Knife can hit {Mathf.RoundToInt(value)} additional target(s) per tick.";
+                Upgrade.powerUpDescription = $"Melee can hit {Mathf.RoundToInt(value)} additional target(s) per tick.";
                 break;
             case UpgradeType.KnifeLifestealFlat:
-                Upgrade.powerUpName = $"Knife Lifesteal +{value * 100f:F0}%";
-                Upgrade.powerUpDescription = $"Adds {value * 100f:F0}% lifesteal to Knife attacks.";
+                Upgrade.powerUpName = $"Melee Lifesteal +{value * 100f:F0}%";
+                Upgrade.powerUpDescription = $"Adds {value * 100f:F0}% lifesteal to Melee attacks.";
                 break;
             case UpgradeType.KnifeLifestealPercent:
                 Upgrade.powerUpName = $"Lifesteal Boost +{value * 100f:F0}%";
-                Upgrade.powerUpDescription = $"Increase current Knife lifesteal by {value * 100f:F0}%.";
+                Upgrade.powerUpDescription = $"Increase current Melee lifesteal by {value * 100f:F0}%.";
                 break;
             case UpgradeType.KnifeCritChanceFlat:
-                Upgrade.powerUpName = $"Knife Crit Chance +{value * 100f:F0}%";
-                Upgrade.powerUpDescription = $"Increase Knife critical hit chance by {value * 100f:F0}%.";
+                Upgrade.powerUpName = $"Melee Crit Chance +{value * 100f:F0}%";
+                Upgrade.powerUpDescription = $"Increase Melee critical hit chance by {value * 100f:F0}%.";
                 break;
             case UpgradeType.KnifeCritMultiplierFlat:
-                Upgrade.powerUpName = $"Knife Crit Multiplier +{value:F2}x";
-                Upgrade.powerUpDescription = $"Increase Knife critical damage multiplier by {value:F2}x.";
+                Upgrade.powerUpName = $"Melee Crit Multiplier +{value:F2}x";
+                Upgrade.powerUpDescription = $"Increase Melee critical damage multiplier by {value:F2}x.";
                 break;
 
             // ------------- Shooter -------------

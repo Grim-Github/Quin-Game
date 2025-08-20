@@ -559,7 +559,15 @@ public class SimpleHealth : MonoBehaviour
             catch (System.Exception e) { Debug.LogWarning($"[SimpleHealth] Loot roll failed on {name}: {e.Message}"); }
         }
 
-        Destroy(gameObject);
+        if (!gameObject.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+
     }
 
     public void SyncSlider()
