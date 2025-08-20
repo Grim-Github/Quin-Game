@@ -15,6 +15,12 @@ public class EnemyChaser : MonoBehaviour
     [Tooltip("How close to the target before stopping.")]
     [SerializeField] private float stoppingDistance = 0.5f;
 
+    [Header("Flee Behavior")]
+    [Tooltip("If enabled, enemy flees when inside stoppingDistance, chases when outside.")]
+    [SerializeField] private bool enableFlee = false;
+    [Tooltip("Dead zone half-width around stoppingDistance where velocity is set to 0 to avoid flip-flopping between chase and flee (only used if flee enabled).")]
+    [SerializeField] private float fleeBuffer = 0.25f;
+
     [Header("Reach Event")]
     [Tooltip("If true, allows the reach event to fire again after the target moves away far enough.")]
     [SerializeField] private bool repeatEvent = false;
@@ -59,18 +65,40 @@ public class EnemyChaser : MonoBehaviour
         Vector2 toTarget = targetPos - currentPos;
         float distance = toTarget.magnitude;
 
-        if (distance <= stoppingDistance)
+        // Determine desired direction based on flee toggle
+        Vector2 desiredDir;
+        if (enableFlee)
         {
-            rb.linearVelocity = Vector2.zero;
-            if (!hasReached)
+            // With flee enabled, use a stop band to avoid oscillation
+            // - distance < stoppingDistance - fleeBuffer: FLEE (away)
+            // - |distance - stoppingDistance| <= fleeBuffer: STOP (zero)
+            // - distance > stoppingDistance + fleeBuffer: CHASE (toward)
+            float buffer = Mathf.Max(0f, fleeBuffer);
+            if (distance < stoppingDistance - buffer)
             {
-                hasReached = true;
-                onReachDestination?.Invoke();
+                desiredDir = (-toTarget).normalized;
             }
-            return;
+            else if (distance > stoppingDistance + buffer)
+            {
+                desiredDir = toTarget.normalized;
+            }
+            else
+            {
+                desiredDir = Vector2.zero;
+            }
+        }
+        else
+        {
+            // Default (flee disabled): chase when outside; stop when inside
+            desiredDir = distance > stoppingDistance ? toTarget.normalized : Vector2.zero;
         }
 
-        Vector2 desiredDir = toTarget.normalized;
+        // Fire reach event when crossing into stopping distance
+        if (distance <= stoppingDistance && !hasReached)
+        {
+            hasReached = true;
+            onReachDestination?.Invoke();
+        }
         if (TryGetComponent<StatusEffectSystem>(out StatusEffectSystem ses))
         {
             if (!ses.HasStatus(StatusEffectSystem.StatusType.Stun))
