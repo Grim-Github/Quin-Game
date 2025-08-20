@@ -126,23 +126,24 @@ public class Knife : MonoBehaviour
         if (statsTextInstance != null)
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            const string numColor = "#8888FF";
 
             sb.AppendLine($"<b>{transform.name} Stats</b>");
-            sb.AppendLine($"Radius: {radius:F2}");
-            sb.AppendLine($"Damage: {damage}");
-            sb.AppendLine($"Splash: {splashRadius:F2} ({splashDamagePercent * 100f:F0}% dmg)");
+            sb.AppendLine($"Radius: <color={numColor}>{radius:F2}</color>");
+            sb.AppendLine($"Damage: <color={numColor}>{damage}</color>");
+            sb.AppendLine($"Splash: <color={numColor}>{splashRadius:F2}</color> (<color={numColor}>{splashDamagePercent * 100f:F0}</color>% dmg)");
 
             if (wt != null)
-                sb.AppendLine($"Attack Delay: {wt.interval:F1}s");
+                sb.AppendLine($"Attack Delay: <color={numColor}>{wt.interval:F1}</color>s");
 
-            sb.AppendLine($"Lifesteal: {(lifestealPercent * 100f):F0}%");
-            sb.AppendLine($"Crit: {(critChance * 100f):F0}% x{critMultiplier:F2}");
-            sb.AppendLine($"Max Targets: {maxTargetsPerTick}");
+            sb.AppendLine($"Lifesteal: <color={numColor}>{(lifestealPercent * 100f):F0}</color>%");
+            sb.AppendLine($"Crit: <color={numColor}>{(critChance * 100f):F0}</color>% x<color={numColor}>{critMultiplier:F2}</color>");
+            sb.AppendLine($"Max Targets: <color={numColor}>{maxTargetsPerTick}</color>");
 
             if (applyStatusEffectOnHit)
             {
-                sb.AppendLine($"Status Effect Chance: {statusApplyChance * 100f:F0}%");
-                sb.AppendLine($"On Hit: {statusEffectOnHit} ({statusEffectDuration:F1}s)");
+                sb.AppendLine($"Status Effect Chance: <color={numColor}>{statusApplyChance * 100f:F0}</color>%");
+                sb.AppendLine($"On Hit: {statusEffectOnHit} (<color={numColor}>{statusEffectDuration:F1}</color>s)");
             }
 
 

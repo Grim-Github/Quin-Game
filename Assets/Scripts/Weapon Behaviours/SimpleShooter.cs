@@ -132,7 +132,8 @@ public class SimpleShooter : MonoBehaviour
         if (statsTextInstance == null) return;
 
         // Compute dynamic fields
-        string delay = wt != null ? $"{wt.interval:F1}s" : "N/A";
+        const string numColor = "#8888FF";
+        string delay = wt != null ? $"<color={numColor}>{wt.interval:F1}</color>s" : "N/A";
 
         string penetrationInfo = "N/A";
         if (bulletPrefab != null)
@@ -140,39 +141,39 @@ public class SimpleShooter : MonoBehaviour
 
             if (bulletPrefab.TryGetComponent<BulletDamageTrigger>(out var bullet))
             {
-                penetrationInfo = bullet.penetration.ToString();
+                penetrationInfo = $"<color={numColor}>{bullet.penetration}</color>";
             }
             else if (bulletPrefab.TryGetComponent<ExplosionDamage2D>(out var explosion))
             {
-                penetrationInfo = $"Radius: {explosion.radius:F1}";
+                penetrationInfo = $"Radius: <color={numColor}>{explosion.radius:F1}</color>";
             }
         }
 
         // Build text (Knife.cs style)
         var sb = new System.Text.StringBuilder();
         sb.AppendLine($"<b>{transform.name} Stats</b>");
-        sb.AppendLine($"Damage: {damage}");
+        sb.AppendLine($"Damage: <color={numColor}>{damage}</color>");
         sb.AppendLine($"Attack Delay: {delay}");
-        sb.AppendLine($"Proj Speed: {shootForce:F1}");
-        sb.AppendLine($"Lifetime: {bulletLifetime:F1}s");
-        sb.AppendLine($"Projectile Count: {Mathf.Max(1, projectileCount)}");
+        sb.AppendLine($"Proj Speed: <color={numColor}>{shootForce:F1}</color>");
+        sb.AppendLine($"Lifetime: <color={numColor}>{bulletLifetime:F1}</color>s");
+        sb.AppendLine($"Projectile Count: <color={numColor}>{Mathf.Max(1, projectileCount)}</color>");
         sb.AppendLine($"Penetration: {penetrationInfo}");
-        sb.AppendLine($"Crit: {(Mathf.Clamp01(critChance) * 100f):F0}% x{critMultiplier:F2}");
+        sb.AppendLine($"Crit: <color={numColor}>{(Mathf.Clamp01(critChance) * 100f):F0}</color>% x<color={numColor}>{critMultiplier:F2}</color>");
 
 
 
 
         if (applyStatusEffectOnHit)
         {
-            sb.AppendLine($"Status Effect Chance: {statusApplyChance * 100f:F0}%");
-            sb.AppendLine($"On Hit: {statusEffectOnHit} ({statusEffectDuration:F1}s)");
+            sb.AppendLine($"Status Effect Chance: <color={numColor}>{statusApplyChance * 100f:F0}</color>%");
+            sb.AppendLine($"On Hit: {statusEffectOnHit} (<color={numColor}>{statusEffectDuration:F1}</color>s)");
         }
 
 
 
         if (bulletPrefab.TryGetComponent<RB2DChainToTag>(out var RB2D))
         {
-            sb.AppendLine($"Can Chain {RB2D.maxChains} Times");
+            sb.AppendLine($"Can Chain <color={numColor}>{RB2D.maxChains}</color> Times");
         }
 
 
