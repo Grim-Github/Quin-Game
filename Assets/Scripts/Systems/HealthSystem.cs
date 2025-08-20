@@ -280,6 +280,66 @@ public class SimpleHealth : MonoBehaviour
         }
     }
 
+    private void TryApplyAilments(StatusEffectSystem ses, DamageType type, int dmg)
+    {
+        if (ses == null || dmg <= 0) return;
+
+        float dmgFrac = Mathf.Clamp01((float)dmg / Mathf.Max(1, maxHealth));
+        int dotDamage = Mathf.Max(1, Mathf.RoundToInt(dmg * 0.10f));
+
+        const float shockMult = 1;
+        const float igniteMult = 1;
+        const float poisonMult = 1;
+        const float bleedMult = 1;
+
+        float roll = Random.value;
+
+        switch (type)
+        {
+            case DamageType.Lightning:
+                {
+                    float chance = Mathf.Clamp01(dmgFrac * shockMult);
+                    Debug.Log($"[Ailment] Lightning hit {dmg} dmg → Shock chance {chance:P1}, roll={roll:F2}");
+                    if (roll < chance)
+                        ses.AddStatus(StatusEffectSystem.StatusType.Shock, 5f, 1f);
+                    break;
+                }
+            case DamageType.Fire:
+                {
+                    float chance = Mathf.Clamp01(dmgFrac * igniteMult);
+                    Debug.Log($"[Ailment] Fire hit {dmg} dmg → Ignite chance {chance:P1}, roll={roll:F2}");
+                    if (roll < chance)
+                    {
+                        ses.AddStatus(StatusEffectSystem.StatusType.Ignite, 5f, 1f);
+                        ses.igniteDamagePerTick = dotDamage;
+                    }
+                    break;
+                }
+            case DamageType.Poison:
+                {
+                    float chance = Mathf.Clamp01(dmgFrac * poisonMult);
+                    Debug.Log($"[Ailment] Poison hit {dmg} dmg → Poison chance {chance:P1}, roll={roll:F2}");
+                    if (roll < chance)
+                    {
+                        ses.AddStatus(StatusEffectSystem.StatusType.Poison, 5f, 1f);
+                        ses.poisonDamagePerTick = dotDamage;
+                    }
+                    break;
+                }
+            case DamageType.Physical:
+                {
+                    float chance = Mathf.Clamp01(dmgFrac * bleedMult);
+                    Debug.Log($"[Ailment] Physical hit {dmg} dmg → Bleed chance {chance:P1}, roll={roll:F2}");
+                    if (roll < chance)
+                    {
+                        ses.AddStatus(StatusEffectSystem.StatusType.Bleeding, 5f, 1f);
+                        ses.bleedingDamagePerTick = dotDamage;
+                    }
+                    break;
+                }
+        }
+    }
+
 
 
     // BACK-COMPAT: original signature forwards to Physical damage type
@@ -289,7 +349,7 @@ public class SimpleHealth : MonoBehaviour
     }
 
     // NEW: main overload with type
-    public void TakeDamage(int amount, DamageType type = DamageType.Physical, bool mitigatable = true)
+    public void TakeDamage(int amount, DamageType type = DamageType.Physical, bool mitigatable = true, bool applyAilments = true)
     {
         if (amount <= 0 || isInvulnerable || currentHealth <= 0) return;
 
@@ -336,11 +396,19 @@ public class SimpleHealth : MonoBehaviour
         lastDamageType = type;
         GetComponent<DPSChecker>()?.RegisterDamage(dmg);
 
+        //ailments
         if (TryGetComponent<StatusEffectSystem>(out StatusEffectSystem ses))
         {
             if (ses.HasStatus(StatusEffectSystem.StatusType.Shock))
-            { dmg *= 2; }
+                dmg *= 2;
+            if (applyAilments)
+            {
+                TryApplyAilments(ses, type, dmg);
+            }
+
         }
+
+
 
 
         currentHealth = Mathf.Clamp(currentHealth - dmg, 0, maxHealth);

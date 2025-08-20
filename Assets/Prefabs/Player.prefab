@@ -13390,6 +13390,14 @@ MonoBehaviour:
     sprite: {fileID: 5985717383883113354, guid: 913d2f739499c9147a0f228a905ab185, type: 3}
   - type: 2
     sprite: {fileID: 3075010726887620817, guid: 0efb3faec8ded214f8715a7dcf1d88e3, type: 3}
+  - type: 4
+    sprite: {fileID: 4184791503642859381, guid: af451950e5e2afa4c8762c805c94eb6b, type: 3}
+  - type: 5
+    sprite: {fileID: -5158998502112543007, guid: 381087096ac25e44792c56958b20be54, type: 3}
+  - type: 6
+    sprite: {fileID: 6695184522474040031, guid: a23ca7aa23835dd48b4a28b61201ffa4, type: 3}
+  - type: 7
+    sprite: {fileID: -507184262331359192, guid: 9799cf05f39e7b74f850ecdfc225c03c, type: 3}
 --- !u!1 &6278243993951913938
 GameObject:
   m_ObjectHideFlags: 0

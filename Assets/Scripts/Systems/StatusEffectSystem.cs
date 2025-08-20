@@ -38,21 +38,21 @@ public class StatusEffectSystem : MonoBehaviour
     [SerializeField] private bool enableBleeding = true;
 
     [Tooltip("Damage applied per tick while Bleeding is active (rounded to int).")]
-    [SerializeField] private float bleedingDamagePerTick = 5f;
+    [SerializeField] public float bleedingDamagePerTick = 5f;
 
     [Header("Ignite")]
     [Tooltip("If true, Ignite ticks will call SimpleHealth.TakeDamage().")]
     [SerializeField] private bool enableIgnite = true;
 
     [Tooltip("Damage applied per tick while Ignite is active (rounded to int).")]
-    [SerializeField] private float igniteDamagePerTick = 5f;
+    [SerializeField] public float igniteDamagePerTick = 5f;
 
     [Header("Poison")]
     [Tooltip("If true, Poison ticks will call SimpleHealth.TakeDamage().")]
     [SerializeField] private bool enablePoison = true;
 
     [Tooltip("Damage applied per tick while Poison is active (rounded to int).")]
-    [SerializeField] private float poisonDamagePerTick = 5f;
+    [SerializeField] public float poisonDamagePerTick = 5f;
 
     [Tooltip("Optional: target health. If not set, auto-finds on this GameObject.")]
     [SerializeField] private SimpleHealth health; // your health system
@@ -232,7 +232,7 @@ public class StatusEffectSystem : MonoBehaviour
                 int dmg = Mathf.Max(1, Mathf.RoundToInt(bleedingDamagePerTick));
                 // Uses your health system's public API:
                 // SimpleHealth.TakeDamage(int amount)
-                health.TakeDamage(dmg, false); // will handle armor, invuln, popup, etc. :contentReference[oaicite:1]{index=1}
+                health.TakeDamage(dmg, SimpleHealth.DamageType.Physical, false, false); // will handle armor, invuln, popup, etc. :contentReference[oaicite:1]{index=1}
             }
             // If no health found, we silently skip (no debug spam).
         }
@@ -244,7 +244,7 @@ public class StatusEffectSystem : MonoBehaviour
                 int dmg = Mathf.Max(1, Mathf.RoundToInt(igniteDamagePerTick));
                 // Uses your health system's public API:
                 // SimpleHealth.TakeDamage(int amount)
-                health.TakeDamage(dmg, SimpleHealth.DamageType.Fire, false);
+                health.TakeDamage(dmg, SimpleHealth.DamageType.Fire, false, false);
             }
             // If no health found, we silently skip (no debug spam).
         }
@@ -256,7 +256,7 @@ public class StatusEffectSystem : MonoBehaviour
                 int dmg = Mathf.Max(1, Mathf.RoundToInt(poisonDamagePerTick));
                 // Uses your health system's public API:
                 // SimpleHealth.TakeDamage(int amount)
-                health.TakeDamage(dmg, SimpleHealth.DamageType.Poison, false);
+                health.TakeDamage(dmg, SimpleHealth.DamageType.Poison, false, false);
             }
             // If no health found, we silently skip (no debug spam).
         }
