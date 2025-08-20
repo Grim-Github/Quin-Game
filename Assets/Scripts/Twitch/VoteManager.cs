@@ -24,7 +24,11 @@ public class VoteEntry
 
 public class VoteManager : MonoBehaviour
 {
-    private const int kOptions = 3;
+    private const int kMaxOptions = 6;
+    [Header("Options")]
+    [Range(2, 6)]
+    [SerializeField] private int configuredOptionCount = 3;
+    [NonSerialized] private int currentOptionCount = 3;
 
     [Header("Pool")]
     [SerializeField] private List<VoteEntry> pool = new();
@@ -44,8 +48,8 @@ public class VoteManager : MonoBehaviour
     public enum Phase { Cooldown, Voting, Resolving }
     [NonSerialized] private Phase phase = Phase.Cooldown;
     [NonSerialized] private float phaseEndTime;
-    [NonSerialized] private VoteEntry[] currentOptions = new VoteEntry[kOptions];
-    [NonSerialized] private int[] tallies = new int[kOptions];
+    [NonSerialized] private VoteEntry[] currentOptions = new VoteEntry[kMaxOptions];
+    [NonSerialized] private int[] tallies = new int[kMaxOptions];
     private readonly Queue<string> recentIds = new();
 
     public event Action<float> OnCooldownStart;// duration
@@ -69,8 +73,8 @@ public class VoteManager : MonoBehaviour
         NormalizePoolIds();
     }
 
-    // Voting keywords are dynamic (top 3 words from chat)
-    private readonly string[] voteKeywords = new string[kOptions];
+    // Voting keywords are dynamic (top words from chat)
+    private readonly string[] voteKeywords = new string[kMaxOptions];
 
     private void OnChatMessage(Chatter chatter)
     {
@@ -87,7 +91,7 @@ public class VoteManager : MonoBehaviour
 
     public bool AcceptVote(int optionIndex)
     {
-        if (phase != Phase.Voting || optionIndex < 0 || optionIndex >= kOptions) return false;
+        if (phase != Phase.Voting || optionIndex < 0 || optionIndex >= currentOptionCount) return false;
         tallies[optionIndex]++;
         return true;
     }
@@ -117,14 +121,16 @@ public class VoteManager : MonoBehaviour
 
     private void RefreshVoteKeywords()
     {
-        string[] fallback = { "LOLW", "ICANT", "ABOBA" };
+        string[] fallback = { "LOLW", "ICANT", "ABOBA", "Pog", "GIGA", "HYPE" };
         var src = TopChatMessagesSimple.Instance;
-        List<string> top = src != null ? src.GetTopWords(kOptions) : null;
-        for (int i = 0; i < kOptions; i++)
+        List<string> top = src != null ? src.GetTopWords(currentOptionCount) : null;
+        for (int i = 0; i < currentOptionCount; i++)
         {
             string v = (top != null && i < top.Count && !string.IsNullOrWhiteSpace(top[i])) ? top[i] : fallback[i];
             voteKeywords[i] = v;
         }
+        // clear any leftover slots
+        for (int i = currentOptionCount; i < kMaxOptions; i++) voteKeywords[i] = string.Empty;
     }
 
     private bool TryParseVote(string message, out int index)
@@ -138,7 +144,7 @@ public class VoteManager : MonoBehaviour
             // strip non-alnum from ends so "aboba!" still matches
             string token = StripNonAlnum(parts[p]);
             if (string.IsNullOrEmpty(token)) continue;
-            for (int i = 0; i < kOptions; i++)
+            for (int i = 0; i < currentOptionCount; i++)
             {
                 if (!string.IsNullOrEmpty(voteKeywords[i]) && string.Equals(token, voteKeywords[i], StringComparison.OrdinalIgnoreCase))
                 {
@@ -168,10 +174,12 @@ public class VoteManager : MonoBehaviour
 
     private void StartVoting()
     {
+        currentOptionCount = Mathf.Clamp(configuredOptionCount, 2, kMaxOptions);
         RefreshVoteKeywords();
         PickOptionsWeightedWithoutReplacement();
 
-        for (int i = 0; i < kOptions; i++) tallies[i] = 0;
+        for (int i = 0; i < currentOptionCount; i++) tallies[i] = 0;
+        for (int i = currentOptionCount; i < kMaxOptions; i++) tallies[i] = 0;
 
         phase = Phase.Voting;
         phaseEndTime = Now + voteSeconds;
@@ -182,55 +190,84 @@ public class VoteManager : MonoBehaviour
     {
         phase = Phase.Resolving;
 
-        // Winner by max votes (random among ties). If no votes, do not select.
-        VoteEntry winner = PickWinnerFromTallies();
+        // Determine max votes and ties
+        int max = 0;
+        for (int i = 0; i < currentOptionCount; i++) if (tallies[i] > max) max = tallies[i];
 
+        if (max <= 0)
+        {
+            // No votes -> no winner
+            OnVoteEnd?.Invoke(null, (int[])tallies.Clone());
+            EnterCooldown();
+            return;
+        }
+
+        List<int> tied = new List<int>(currentOptionCount);
+        for (int i = 0; i < currentOptionCount; i++) if (tallies[i] == max) tied.Add(i);
+
+        if (tied.Count >= 2)
+        {
+            // Tie-break round with only tied options
+            StartTieBreak(tied);
+            return;
+        }
+
+        // Single winner
+        int winnerIdx = tied[0];
+        var winner = currentOptions[winnerIdx];
         if (winner != null)
         {
             try { winner.onWin?.Invoke(); }
             catch (Exception e) { Debug.LogException(e, this); }
-
             OnOptionInvoked?.Invoke(winner);
         }
 
         OnVoteEnd?.Invoke(winner, (int[])tallies.Clone());
 
         // Record shown ids
-        for (int i = 0; i < kOptions; i++) PushRecent(currentOptions[i]?.id);
+        for (int i = 0; i < currentOptionCount; i++) PushRecent(currentOptions[i]?.id);
 
         EnterCooldown();
     }
 
-    private VoteEntry PickWinnerFromTallies()
+    private void StartTieBreak(List<int> tiedIndices)
     {
-        int max = Mathf.Max(tallies[0], Mathf.Max(tallies[1], tallies[2]));
-        if (max <= 0) return null;
+        // Prepare options array with only tied options in leading slots
+        int n = Mathf.Clamp(tiedIndices.Count, 2, kMaxOptions);
+        currentOptionCount = n;
+        for (int i = 0; i < n; i++) currentOptions[i] = currentOptions[tiedIndices[i]];
+        for (int i = n; i < kMaxOptions; i++) currentOptions[i] = null;
+        for (int i = 0; i < kMaxOptions; i++) tallies[i] = 0;
 
-        List<int> tied = new(kOptions);
-        for (int i = 0; i < kOptions; i++) if (tallies[i] == max) tied.Add(i);
-        return currentOptions[tied[Random.Range(0, tied.Count)]];
+        RefreshVoteKeywords();
+
+        phase = Phase.Voting;
+        phaseEndTime = Now + voteSeconds;
+        OnVoteStart?.Invoke(currentOptions, voteSeconds);
     }
+
+    // No direct PickWinner method; handled in Resolve with tie-retry
 
     // ---------- Selection ----------
     private void PickOptionsWeightedWithoutReplacement()
     {
         // Build eligible (exclude recent if possible)
         List<VoteEntry> eligible = BuildEligible(excludeRecent: true);
-        if (eligible.Count < kOptions) eligible = BuildEligible(excludeRecent: false);
+        if (eligible.Count < currentOptionCount) eligible = BuildEligible(excludeRecent: false);
 
         if (eligible.Count == 0)
         {
             // Safe placeholders
-            for (int i = 0; i < kOptions; i++)
+            for (int i = 0; i < currentOptionCount; i++)
                 currentOptions[i] = new VoteEntry { description = "No options", weight = 1f, id = Guid.NewGuid().ToString("N") };
             return;
         }
 
         // Draw without replacement by weight
         var temp = new List<VoteEntry>(eligible);
-        var picked = new List<VoteEntry>(kOptions);
+        var picked = new List<VoteEntry>(currentOptionCount);
 
-        for (int k = 0; k < kOptions && temp.Count > 0; k++)
+        for (int k = 0; k < currentOptionCount && temp.Count > 0; k++)
         {
             float total = 0f;
             for (int i = 0; i < temp.Count; i++) total += Mathf.Max(0f, temp[i].weight);
@@ -252,24 +289,28 @@ public class VoteManager : MonoBehaviour
             temp.Remove(chosen);
         }
 
-        while (picked.Count < kOptions) picked.Add(eligible[Random.Range(0, eligible.Count)]);
+        while (picked.Count < currentOptionCount) picked.Add(eligible[Random.Range(0, eligible.Count)]);
 
-        int assignCount = Mathf.Min(kOptions, picked.Count, currentOptions.Length);
+        int assignCount = Mathf.Min(currentOptionCount, picked.Count, currentOptions.Length);
         for (int i = 0; i < assignCount; i++) currentOptions[i] = picked[i];
+        for (int i = assignCount; i < kMaxOptions; i++) currentOptions[i] = null;
     }
 
     private static VoteEntry PickWeightedAmong(IReadOnlyList<VoteEntry> opts)
     {
-        float w0 = Mathf.Max(0f, opts[0]?.weight ?? 0f);
-        float w1 = Mathf.Max(0f, opts[1]?.weight ?? 0f);
-        float w2 = Mathf.Max(0f, opts[2]?.weight ?? 0f);
-        float total = w0 + w1 + w2;
-        if (total <= 0f) { w0 = w1 = w2 = 1f; total = 3f; }
-
+        // Not used in current flow; kept for completeness
+        float total = 0f;
+        for (int i = 0; i < opts.Count; i++) total += Mathf.Max(0f, opts[i]?.weight ?? 0f);
+        if (total <= 0f) total = opts.Count;
         float r = Random.value * total;
-        int idx = 0;
-        if ((r -= w0) > 0f) { idx = 1; if ((r -= w1) > 0f) idx = 2; }
-        return opts[idx];
+        for (int i = 0; i < opts.Count; i++)
+        {
+            float w = Mathf.Max(0f, opts[i]?.weight ?? 0f);
+            if (total <= opts.Count) w = 1f; // uniform if all non-positive
+            r -= w;
+            if (r <= 0f) return opts[i];
+        }
+        return opts[^1];
     }
 
     private List<VoteEntry> BuildEligible(bool excludeRecent)
@@ -297,13 +338,21 @@ public class VoteManager : MonoBehaviour
         if (phase == Phase.Voting)
         {
             string tt = FormatMMSS(TimeRemaining);
-            int total = tallies[0] + tallies[1] + tallies[2];
-            return
-                $"VOTE! ({tt})\n" +
-                $"[{voteKeywords[0]}] {currentOptions[0]?.description}\n" +
-                $"[{voteKeywords[1]}] {currentOptions[1]?.description}\n" +
-                $"[{voteKeywords[2]}] {currentOptions[2]?.description}\n\n" +
-                $"Votes: {voteKeywords[0]} {tallies[0]}  {voteKeywords[1]} {tallies[1]}  {voteKeywords[2]} {tallies[2]}  |  Total: {total}";
+            int total = 0;
+            for (int i = 0; i < currentOptionCount; i++) total += tallies[i];
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append($"VOTE! ({tt})\n");
+            for (int i = 0; i < currentOptionCount; i++)
+                sb.Append($"[{voteKeywords[i]}] {currentOptions[i]?.description}\n");
+            sb.Append("\n");
+            for (int i = 0; i < currentOptionCount; i++)
+            {
+                if (i > 0) sb.Append("  ");
+                sb.Append($"{voteKeywords[i]} {tallies[i]}");
+            }
+            sb.Append($"  |  Total: {total}");
+            return sb.ToString();
         }
         if (phase == Phase.Cooldown) return $"Next vote in: {FormatMMSS(TimeRemaining)}";
         return "Resolving...";
@@ -318,8 +367,8 @@ public class VoteManager : MonoBehaviour
     // ---------- Internals ----------
     private void EnsureArraySizes()
     {
-        if (currentOptions == null || currentOptions.Length != kOptions) currentOptions = new VoteEntry[kOptions];
-        if (tallies == null || tallies.Length != kOptions) tallies = new int[kOptions];
+        if (currentOptions == null || currentOptions.Length != kMaxOptions) currentOptions = new VoteEntry[kMaxOptions];
+        if (tallies == null || tallies.Length != kMaxOptions) tallies = new int[kMaxOptions];
     }
 
     private void NormalizePoolIds()

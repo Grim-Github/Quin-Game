@@ -16,7 +16,11 @@ public class StatusEffectSystem : MonoBehaviour
         Bleeding = 0,
         Stun = 1,
         Speed = 2,
-        Rush = 3
+        Rush = 3,
+        Ignite = 4,
+        Shock = 5,
+        Poison = 6,
+        Frozen = 7,
         // Add more: Poison, Stunned, Shielded, etc.
     }
 
@@ -35,6 +39,20 @@ public class StatusEffectSystem : MonoBehaviour
 
     [Tooltip("Damage applied per tick while Bleeding is active (rounded to int).")]
     [SerializeField] private float bleedingDamagePerTick = 5f;
+
+    [Header("Ignite")]
+    [Tooltip("If true, Ignite ticks will call SimpleHealth.TakeDamage().")]
+    [SerializeField] private bool enableIgnite = true;
+
+    [Tooltip("Damage applied per tick while Ignite is active (rounded to int).")]
+    [SerializeField] private float igniteDamagePerTick = 5f;
+
+    [Header("Poison")]
+    [Tooltip("If true, Poison ticks will call SimpleHealth.TakeDamage().")]
+    [SerializeField] private bool enablePoison = true;
+
+    [Tooltip("Damage applied per tick while Poison is active (rounded to int).")]
+    [SerializeField] private float poisonDamagePerTick = 5f;
 
     [Tooltip("Optional: target health. If not set, auto-finds on this GameObject.")]
     [SerializeField] private SimpleHealth health; // your health system
@@ -179,6 +197,30 @@ public class StatusEffectSystem : MonoBehaviour
             bleedingDamagePerTick = amount;
     }
 
+    /// <summary>
+    /// Sets ignite damage per tick.
+    /// If the given amount is higher than the current ignite damage, it replaces it.
+    /// </summary>
+    public void SetIgniteDamage(float amount)
+    {
+        if (amount <= 0f) return;
+
+        if (amount > igniteDamagePerTick)
+            igniteDamagePerTick = amount;
+    }
+
+    /// <summary>
+    /// Sets poison damage per tick.
+    /// If the given amount is higher than the current poison damage, it replaces it.
+    /// </summary>
+    public void SetPoisonDamage(float amount)
+    {
+        if (amount <= 0f) return;
+
+        if (amount > poisonDamagePerTick)
+            poisonDamagePerTick = amount;
+    }
+
 
     // ---- Built-in handlers ----
     private void HandleBuiltIn(StatusType type)
@@ -194,10 +236,40 @@ public class StatusEffectSystem : MonoBehaviour
             }
             // If no health found, we silently skip (no debug spam).
         }
+
+        if (type == StatusType.Ignite && enableIgnite && igniteDamagePerTick > 0f)
+        {
+            if (health != null)
+            {
+                int dmg = Mathf.Max(1, Mathf.RoundToInt(igniteDamagePerTick));
+                // Uses your health system's public API:
+                // SimpleHealth.TakeDamage(int amount)
+                health.TakeDamage(dmg, false);
+            }
+            // If no health found, we silently skip (no debug spam).
+        }
+
+        if (type == StatusType.Poison && enablePoison && poisonDamagePerTick > 0f)
+        {
+            if (health != null)
+            {
+                int dmg = Mathf.Max(1, Mathf.RoundToInt(poisonDamagePerTick));
+                // Uses your health system's public API:
+                // SimpleHealth.TakeDamage(int amount)
+                health.TakeDamage(dmg, false);
+            }
+            // If no health found, we silently skip (no debug spam).
+        }
     }
 
 #if UNITY_EDITOR
     [ContextMenu("Test: Add Bleeding (5s, 1s tick)")]
     private void _TestAddBleeding() => AddStatus(StatusType.Bleeding, 5f, 1f);
+
+    [ContextMenu("Test: Add Ignite (5s, 1s tick)")]
+    private void _TestAddIgnite() => AddStatus(StatusType.Ignite, 5f, 1f);
+
+    [ContextMenu("Test: Add Poison (5s, 1s tick)")]
+    private void _TestAddPoison() => AddStatus(StatusType.Poison, 5f, 1f);
 #endif
 }

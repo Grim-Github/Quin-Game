@@ -101,7 +101,7 @@ public class EnemyChaser : MonoBehaviour
         }
         if (TryGetComponent<StatusEffectSystem>(out StatusEffectSystem ses))
         {
-            if (!ses.HasStatus(StatusEffectSystem.StatusType.Stun))
+            if (!ses.HasStatus(StatusEffectSystem.StatusType.Stun) || !ses.HasStatus(StatusEffectSystem.StatusType.Frozen))
             {
                 if (!ses.HasStatus(StatusEffectSystem.StatusType.Speed))
                 {

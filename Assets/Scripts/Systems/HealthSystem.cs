@@ -336,6 +336,13 @@ public class SimpleHealth : MonoBehaviour
         lastDamageType = type;
         GetComponent<DPSChecker>()?.RegisterDamage(dmg);
 
+        if (TryGetComponent<StatusEffectSystem>(out StatusEffectSystem ses))
+        {
+            if (ses.HasStatus(StatusEffectSystem.StatusType.Shock))
+            { dmg *= 2; }
+        }
+
+
         currentHealth = Mathf.Clamp(currentHealth - dmg, 0, maxHealth);
         SyncSlider();
 

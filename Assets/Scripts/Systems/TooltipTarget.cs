@@ -6,6 +6,10 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     [TextArea] public string tooltipMessage;
 
+    [Header("Behaviour")]
+    [Tooltip("Automatically refresh tooltip text every frame while visible.")]
+    [SerializeField] private bool autoUpdate = false; // default = false
+
     [Header("Append From Other Components")]
     [SerializeField] private bool appendExtraFromHealth = true;
     [SerializeField] private bool appendFromInventoryActivator = true;
@@ -19,6 +23,7 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private SimpleHealth health;
     private InventoryButtonActivator invActivator;
+    private bool isShowing;
 
     private void Awake()
     {
@@ -87,12 +92,14 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (string.IsNullOrWhiteSpace(full)) return;
 
         mgr.ShowTooltip(full, this, uiAnchorOverride != null ? uiAnchorOverride : null);
+        isShowing = true;
     }
 
     private void HideTooltipInternal()
     {
         var mgr = TooltipManager.Instance;
         if (mgr != null) mgr.HideTooltip();
+        isShowing = false;
     }
 
     // ===== World objects (needs Collider or Collider2D) =====
@@ -106,4 +113,13 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     // ===== Lifecycle safety =====
     private void OnDisable() => HideTooltipInternal();
     private void OnDestroy() => HideTooltipInternal();
+
+    private void Update()
+    {
+        if (autoUpdate && isShowing)
+        {
+            // Rebuild and re-show to update the text while open
+            ShowTooltipInternal();
+        }
+    }
 }

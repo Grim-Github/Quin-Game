@@ -20,9 +20,9 @@ public class VoteTextUI : MonoBehaviour
         {
             manager.OnVoteStart += HandleUpdate;
             manager.OnVoteTick += HandleUpdate;
-            manager.OnCooldownStart += _ => Refresh();
-            manager.OnCooldownTick += _ => Refresh();
-            manager.OnVoteEnd += (_, __) => Refresh();
+            manager.OnCooldownStart += HandleCooldown;
+            manager.OnCooldownTick += HandleCooldown;
+            manager.OnVoteEnd += HandleVoteEnd;
         }
         Refresh();
     }
@@ -33,9 +33,9 @@ public class VoteTextUI : MonoBehaviour
         {
             manager.OnVoteStart -= HandleUpdate;
             manager.OnVoteTick -= HandleUpdate;
-            manager.OnCooldownStart -= _ => Refresh();
-            manager.OnCooldownTick -= _ => Refresh();
-            manager.OnVoteEnd -= (_, __) => Refresh();
+            manager.OnCooldownStart -= HandleCooldown;
+            manager.OnCooldownTick -= HandleCooldown;
+            manager.OnVoteEnd -= HandleVoteEnd;
         }
     }
 
@@ -47,6 +47,8 @@ public class VoteTextUI : MonoBehaviour
 
     private void HandleUpdate(VoteEntry[] _, float __) => Refresh();
     private void HandleUpdate(float __, int[] ___) => Refresh();
+    private void HandleCooldown(float __) => Refresh();
+    private void HandleVoteEnd(VoteEntry __, int[] ___) => Refresh();
 
     private void Refresh()
     {

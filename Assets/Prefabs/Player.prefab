@@ -647,6 +647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
+  autoUpdate: 0
   appendExtraFromHealth: 0
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -2399,7 +2400,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
-  onHitStatusBlacklist: 
+  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &935738676766603409
 GameObject:
@@ -2965,6 +2966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
+  autoUpdate: 0
   appendExtraFromHealth: 0
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3561,6 +3563,10 @@ MonoBehaviour:
   useUnscaledTime: 0
   enableBleeding: 1
   bleedingDamagePerTick: 5
+  enableIgnite: 1
+  igniteDamagePerTick: 5
+  enablePoison: 1
+  poisonDamagePerTick: 5
   health: {fileID: 0}
   defaultDuration: 5
   defaultTickInterval: 1
@@ -3892,6 +3898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: Inventory
+  autoUpdate: 0
   appendExtraFromHealth: 1
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -4674,6 +4681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
+  autoUpdate: 0
   appendExtraFromHealth: 0
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -6262,6 +6270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
+  autoUpdate: 0
   appendExtraFromHealth: 0
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -6594,7 +6603,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
-  onHitStatusBlacklist: 
+  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!114 &7596382903804138479
 MonoBehaviour:
@@ -7557,7 +7566,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
-  onHitStatusBlacklist: 
+  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &3401677938551974219
 GameObject:
@@ -8642,7 +8651,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
-  onHitStatusBlacklist: 
+  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &4019939872639026237
 GameObject:
@@ -9755,6 +9764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: Reforge Weapons
+  autoUpdate: 0
   appendExtraFromHealth: 1
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -10092,6 +10102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
+  autoUpdate: 0
   appendExtraFromHealth: 0
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -10526,7 +10537,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
-  onHitStatusBlacklist: 
+  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!114 &8555762351250044580
 MonoBehaviour:
@@ -11896,6 +11907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
+  autoUpdate: 0
   appendExtraFromHealth: 0
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -12580,6 +12592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
+  autoUpdate: 0
   appendExtraFromHealth: 0
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -13129,6 +13142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
+  autoUpdate: 0
   appendExtraFromHealth: 0
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -14722,6 +14736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: Weapon Stats
+  autoUpdate: 0
   appendExtraFromHealth: 1
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -15868,6 +15883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39753390addccb94aa07e6efa50fbced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  configuredOptionCount: 2
   pool:
   - description: Reserve 10 Max HP
     onWin:
@@ -15905,26 +15921,8 @@ MonoBehaviour:
           m_CallState: 2
     weight: 25
     id: 
-  - description: Kill
-    onWin:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5791096993671492205}
-          m_TargetAssemblyTypeName: SimpleHealth, Grim
-          m_MethodName: Kill
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 10
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    weight: 25
-    id: 
   cooldownSeconds: 5
-  voteSeconds: 5
+  voteSeconds: 10
   useScaledTime: 1
   recentHistorySize: 6
 --- !u!114 &8928441097085318380
@@ -16653,6 +16651,7 @@ MonoBehaviour:
   tooltipMessage: 'Player Stats
 
 '
+  autoUpdate: 0
   appendExtraFromHealth: 1
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -18417,7 +18416,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
-  onHitStatusBlacklist: 
+  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &8503593496250004042
 GameObject:

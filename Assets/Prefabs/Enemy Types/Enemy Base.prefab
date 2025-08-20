@@ -221,6 +221,8 @@ MonoBehaviour:
   target: {fileID: 0}
   moveSpeed: 1
   stoppingDistance: 0.5
+  enableFlee: 0
+  fleeBuffer: 0.25
   repeatEvent: 1
   resetDistanceBuffer: 1
   onReachDestination:
@@ -246,6 +248,13 @@ MonoBehaviour:
   armor: 0
   armorScaling: 10
   maxMitigation: 0.8
+  evasion: 0
+  evasionScaling: 10
+  maxEvasion: 0.8
+  fireResist: 0
+  coldResist: 0
+  lightningResist: 0
+  poisonResist: 0
   healthSlider: {fileID: 4625923915150811510}
   reservedSlider: {fileID: 0}
   healthText: {fileID: 2445523053030195790}
@@ -253,6 +262,7 @@ MonoBehaviour:
   uiParent: {fileID: 0}
   extraTextField: 
   iconSprite: {fileID: 0}
+  playerVolume: {fileID: 0}
   deathObjects: []
   damageClip:
   - {fileID: 8300000, guid: 9b78a772c2d95074291fb5c3d97ee0d0, type: 3}
@@ -267,7 +277,10 @@ MonoBehaviour:
   damagePopupPrefab: {fileID: 0}
   popupOffset: {x: 0, y: 1, z: 0}
   currentHealth: 0
-  statsTextInstance: {fileID: 0}
+  healthStatsText: {fileID: 0}
+  defenseStatsText: {fileID: 0}
+  resistStatsText: {fileID: 0}
+  movementStatsText: {fileID: 0}
 --- !u!61 &4859893581985587488
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -587,6 +600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
+  autoUpdate: 1
   appendExtraFromHealth: 1
   appendFromInventoryActivator: 0
   textColor: {r: 0.9150943, g: 0.09927912, b: 0.09927912, a: 1}
@@ -1033,6 +1047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1.06
   damage: 10
+  damageType: 0
   targetMask:
     serializedVersion: 2
     m_Bits: 64
