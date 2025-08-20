@@ -1474,6 +1474,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &763878338640954299
 GameObject:
@@ -1633,6 +1634,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 
   healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &819256001971131541
 GameObject:
@@ -2397,6 +2399,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 
   healthSystem: {fileID: 0}
 --- !u!1 &935738676766603409
 GameObject:
@@ -3125,6 +3128,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4378387751809080516}
+  - {fileID: 3167028351569479734}
   - {fileID: 418490534508925026}
   - {fileID: 5432253268087408168}
   - {fileID: 5833988517266502027}
@@ -4329,6 +4333,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 
   healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &1465697286572918320
 GameObject:
@@ -6589,6 +6594,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 
   healthSystem: {fileID: 0}
 --- !u!114 &7596382903804138479
 MonoBehaviour:
@@ -6607,6 +6613,7 @@ MonoBehaviour:
     damagePercentAsFlat: 1
     attackSpeed: 1
     crit: 1
+    enableOnHitRandom: 1
     statusDuration: 1
     statusChance: 1
     hpFlat: 1
@@ -7106,6 +7113,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 
   healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &3190016390325641590
 GameObject:
@@ -7549,6 +7557,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 
   healthSystem: {fileID: 0}
 --- !u!1 &3401677938551974219
 GameObject:
@@ -8633,6 +8642,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 
   healthSystem: {fileID: 0}
 --- !u!1 &4019939872639026237
 GameObject:
@@ -9283,6 +9293,142 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4411844677408709683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5474245198563873542}
+  - component: {fileID: 8409449456103510616}
+  - component: {fileID: 3152013175662757018}
+  m_Layer: 5
+  m_Name: Twitch Vote Message
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5474245198563873542
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4411844677408709683}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4939500946709195127}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 130.59003, y: -374.08}
+  m_SizeDelta: {x: 261.19, y: 133.2205}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8409449456103510616
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4411844677408709683}
+  m_CullTransparentMesh: 1
+--- !u!114 &3152013175662757018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4411844677408709683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'LEVEL 10 '
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8d4db32dfbb302d4195300b724b29022, type: 2}
+  m_sharedMaterial: {fileID: 4919702837162057759, guid: 8d4db32dfbb302d4195300b724b29022, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 2231369727
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.5176471}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 22
+  m_fontSizeBase: 22
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4425359865508176712
 GameObject:
   m_ObjectHideFlags: 0
@@ -10380,6 +10526,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 
   healthSystem: {fileID: 0}
 --- !u!114 &8555762351250044580
 MonoBehaviour:
@@ -10398,6 +10545,7 @@ MonoBehaviour:
     damagePercentAsFlat: 1
     attackSpeed: 1
     crit: 1
+    enableOnHitRandom: 1
     statusDuration: 1
     statusChance: 1
     hpFlat: 1
@@ -10990,6 +11138,7 @@ RectTransform:
   - {fileID: 1612001075127765590}
   - {fileID: 8632082208433075378}
   - {fileID: 1252546644101757926}
+  - {fileID: 5474245198563873542}
   - {fileID: 39231531255157234}
   - {fileID: 5602326505937274319}
   - {fileID: 2511805252884418071}
@@ -13684,6 +13833,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 
   healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &6330886543815198051
 GameObject:
@@ -15669,6 +15819,128 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7529736326371172317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3167028351569479734}
+  - component: {fileID: 1150944337021895763}
+  - component: {fileID: 8928441097085318380}
+  m_Layer: 0
+  m_Name: Vote Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3167028351569479734
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529736326371172317}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4856266244198735824}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1150944337021895763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529736326371172317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39753390addccb94aa07e6efa50fbced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pool:
+  - description: Reserve 10 Max HP
+    onWin:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5791096993671492205}
+          m_TargetAssemblyTypeName: SimpleHealth, Grim
+          m_MethodName: ReserveLife
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 10
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    weight: 25
+    id: 
+  - description: Heal 10 HP
+    onWin:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5791096993671492205}
+          m_TargetAssemblyTypeName: SimpleHealth, Grim
+          m_MethodName: Heal
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 10
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    weight: 25
+    id: 
+  - description: Kill
+    onWin:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5791096993671492205}
+          m_TargetAssemblyTypeName: SimpleHealth, Grim
+          m_MethodName: Kill
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 10
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    weight: 25
+    id: 
+  cooldownSeconds: 5
+  voteSeconds: 5
+  useScaledTime: 1
+  recentHistorySize: 6
+--- !u!114 &8928441097085318380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529736326371172317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 933b065d181a9724e8e8b0ea47732c4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 1150944337021895763}
+  tmp: {fileID: 3152013175662757018}
 --- !u!1 &7666189916886687150
 GameObject:
   m_ObjectHideFlags: 0
@@ -18145,6 +18417,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 
   healthSystem: {fileID: 0}
 --- !u!1 &8503593496250004042
 GameObject:
@@ -18937,7 +19210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 130.59003, y: -374.0841}
+  m_AnchoredPosition: {x: 130.6, y: -507.3}
   m_SizeDelta: {x: 261.19, y: 133.2205}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6745070518316237324
