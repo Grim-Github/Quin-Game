@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1630954423726003653
+--- !u!1001 &4337787904521446068
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,15 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 696766730919106379, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
       propertyPath: m_Name
-      value: Orb 3 Variant
+      value: Codex of Uncertainty
       objectReference: {fileID: 0}
     - target: {fileID: 1374011302086294887, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: -5375736819801899559, guid: 2be7fa6e186d6524aa7acee1a8d33abf, type: 3}
+    - target: {fileID: 1374011302086294887, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
       propertyPath: itemName
-      value: Orb 3
+      value: Codex of Uncertainty
       objectReference: {fileID: 0}
     - target: {fileID: 5647302162978392250, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.896
+      value: 0.6794476
       objectReference: {fileID: 0}
     - target: {fileID: 5647302162978392250, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -55,6 +59,18 @@ PrefabInstance:
     - target: {fileID: 5647302162978392250, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849022761471768151, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -5375736819801899559, guid: 2be7fa6e186d6524aa7acee1a8d33abf, type: 3}
+    - target: {fileID: 8908485871779582437, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908485871779582437, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.96875
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -453,7 +453,11 @@ public class SimpleHealth : MonoBehaviour
         }
 
         if (soundSource != null && damageClip != null && damageClip.Length > 0)
+        {
+            soundSource.pitch = Random.Range(0.9f, 1.1f);
             soundSource.PlayOneShot(damageClip[Random.Range(0, damageClip.Length)]);
+            soundSource.pitch = 1f;
+        }
 
         if (spriteRenderer != null)
         {

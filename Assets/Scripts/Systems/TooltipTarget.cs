@@ -23,6 +23,7 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private SimpleHealth health;
     private InventoryButtonActivator invActivator;
+    private SimpleInventory playerInventory; // cached reference to player's inventory
     private bool isShowing;
 
     private void Awake()
@@ -32,6 +33,23 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
 
     // ===== Shared =====
+    // Lazily find the player's SimpleInventory located as a child of the Player-tagged GameObject
+    private SimpleInventory GetPlayerInventory()
+    {
+        if (playerInventory != null) return playerInventory;
+
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return null;
+
+        // include inactive children when searching
+#if UNITY_2023_1_OR_NEWER
+        playerInventory = player.GetComponentInChildren<SimpleInventory>(true);
+#else
+        playerInventory = player.GetComponentInChildren<SimpleInventory>(true);
+#endif
+        return playerInventory;
+    }
+
     private string BuildTooltipText()
     {
         string full = tooltipMessage;
@@ -66,7 +84,15 @@ public class TooltipTarget : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             string reqName = invActivator.requiredItemName;
             int reqAmt = Mathf.Max(1, invActivator.requiredAmount);
 
-            string reqBlock = $"<b>Requires</b>: {reqName} x{reqAmt}";
+            // Look up how many the player currently has in their inventory
+            int haveAmt = 0;
+            var inv = GetPlayerInventory();
+            if (inv != null && !string.IsNullOrEmpty(reqName))
+            {
+                haveAmt = inv.GetAmount(reqName);
+            }
+
+            string reqBlock = $"<b>Requires</b>: {reqName} x{reqAmt}  (You have: {haveAmt})";
 
             if (!string.IsNullOrWhiteSpace(reqBlock))
             {

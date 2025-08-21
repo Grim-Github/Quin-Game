@@ -364,24 +364,6 @@ public class WeaponRarityController : MonoBehaviour
 
     // ========== NEW #2: Randomly upgrade a tier (towards Tier=1) ==========
 
-    /// <summary>Improves ONE random tier field by steps (toward 1 = strongest). Optionally rerolls one selected stat.</summary>
-    public bool UpgradeRandomTier(int steps = 1, bool rerollOneAppliedStat = true)
-    {
-        steps = Mathf.Max(1, steps);
-
-        // 13 tier slots indexed 0..12
-        // 19 tier slots indexed 0..18
-        int slot = NextInt(rng, 0, 19);
-        bool changed = ImproveTierSlot(slot, steps);
-
-        if (!changed) return false;
-
-        if (rerollOneAppliedStat && applied.Count > 0)
-            RerollRandomStat();
-
-        return true;
-    }
-
     public bool RandomizeRandomTier(bool rerollOneAppliedStat = true)
     {
         // 13 tier slots indexed 0..12
@@ -419,45 +401,7 @@ public class WeaponRarityController : MonoBehaviour
         return true;
     }
 
-
-
-    [ContextMenu("Rarity/Upgrade 1 Random Tier (then reroll 1 stat)")]
-    private void ContextUpgradeOneTier()
-    {
-        if (!UpgradeRandomTier(1, true))
-            Debug.LogWarning($"{name}: Could not upgrade a tier (already at best?).");
-    }
-
     // ===================== Internal helpers =====================
-
-
-    private bool ImproveTierSlot(int slotIndex, int steps)
-    {
-        switch (slotIndex)
-        {
-            case 0: return ClampTier(ref tiers.damagePercent, steps);
-            case 1: return ClampTier(ref tiers.damageFlat, steps);
-            case 2: return ClampTier(ref tiers.attackSpeed, steps);
-            case 3: return ClampTier(ref tiers.critChance, steps);
-            case 4: return ClampTier(ref tiers.critMultiplier, steps);
-            case 5: return ClampTier(ref tiers.knifeRadius, steps);
-            case 6: return ClampTier(ref tiers.knifeSplashRadius, steps);
-            case 7: return ClampTier(ref tiers.knifeLifesteal, steps);
-            case 8: return ClampTier(ref tiers.knifeMaxTargets, steps);
-            case 9: return ClampTier(ref tiers.shooterLifetime, steps);
-            case 10: return ClampTier(ref tiers.shooterForce, steps);
-            case 11: return ClampTier(ref tiers.shooterProjectiles, steps);
-            case 12: return ClampTier(ref tiers.shooterAccuracy, steps);
-            case 13: return ClampTier(ref tiers.hpFlat, steps);
-            case 14: return ClampTier(ref tiers.hpPercent, steps);
-            case 15: return ClampTier(ref tiers.regen, steps);
-            case 16: return ClampTier(ref tiers.armor, steps);
-            case 17: return ClampTier(ref tiers.evasion, steps);
-            case 18: return ClampTier(ref tiers.resist, steps);
-            default: return false;
-        }
-    }
-
     private bool RandomizeTierSlot(int slotIndex)
     {
         int newTier = rng.Next(1, 11); // inclusive 1..10

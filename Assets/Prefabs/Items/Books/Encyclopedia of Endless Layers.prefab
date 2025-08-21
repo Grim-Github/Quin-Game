@@ -10,11 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 696766730919106379, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
       propertyPath: m_Name
-      value: Orb 7 Variant
+      value: Encyclopedia of Endless Layers
       objectReference: {fileID: 0}
     - target: {fileID: 1374011302086294887, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 5540992825214292966, guid: ae3a69ce3f6fc0e42b49c15d72cba43a, type: 3}
+    - target: {fileID: 1374011302086294887, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
       propertyPath: itemName
-      value: Orb 7
+      value: Encyclopedia of Endless Layers
       objectReference: {fileID: 0}
     - target: {fileID: 5647302162978392250, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55,6 +59,18 @@ PrefabInstance:
     - target: {fileID: 5647302162978392250, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849022761471768151, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5540992825214292966, guid: ae3a69ce3f6fc0e42b49c15d72cba43a, type: 3}
+    - target: {fileID: 8908485871779582437, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908485871779582437, guid: 9989898d1030c6b4783342d76c3d1eb4, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.32
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
