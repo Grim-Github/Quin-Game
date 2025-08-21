@@ -100,7 +100,7 @@ public class TwitchListener : MonoBehaviour
 
                 maxSpawnCount += spawnIncreaseAmount;
                 nextSpawnIncreaseTime = elapsedSeconds + spawnIncreaseInterval;
-                Debug.Log($"[TwitchListener] Max spawn count increased to {maxSpawnCount}");
+                //  Debug.Log($"[TwitchListener] Max spawn count increased to {maxSpawnCount}");
             }
 
 

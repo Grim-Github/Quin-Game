@@ -115,7 +115,6 @@ public class SimpleHealth : MonoBehaviour
     // Split into separate parts instead of one giant text block
     [HideInInspector] public TextMeshProUGUI healthStatsText;
     [HideInInspector] public TextMeshProUGUI defenseStatsText;
-    [HideInInspector] public TextMeshProUGUI resistStatsText;
     [HideInInspector] public TextMeshProUGUI movementStatsText;
 
     private Image iconImage;
@@ -160,18 +159,13 @@ public class SimpleHealth : MonoBehaviour
             var go2 = Instantiate(statsTextPrefab, uiParent);
             defenseStatsText = go2.GetComponentInChildren<TextMeshProUGUI>(true);
 
-            // Resistances section
-            var go3 = Instantiate(statsTextPrefab, uiParent);
-            resistStatsText = go3.GetComponentInChildren<TextMeshProUGUI>(true);
-
             // Movement section
-            var go4 = Instantiate(statsTextPrefab, uiParent);
-            movementStatsText = go4.GetComponentInChildren<TextMeshProUGUI>(true);
+            var go3 = Instantiate(statsTextPrefab, uiParent);
+            movementStatsText = go3.GetComponentInChildren<TextMeshProUGUI>(true);
 
             // Clear initial
             if (healthStatsText != null) healthStatsText.text = string.Empty;
             if (defenseStatsText != null) defenseStatsText.text = string.Empty;
-            if (resistStatsText != null) resistStatsText.text = string.Empty;
             if (movementStatsText != null) movementStatsText.text = string.Empty;
 
             // Icon stays optional
@@ -252,7 +246,7 @@ public class SimpleHealth : MonoBehaviour
             healthStatsText.text = _statsBuilder.ToString();
         }
 
-        // DEFENSE
+        // DEFENSE & RESISTANCES
         if (defenseStatsText != null)
         {
             float mitigation = (armor > 0f && armorScaling > 0f)
@@ -263,25 +257,15 @@ public class SimpleHealth : MonoBehaviour
                 : 0f;
 
             _statsBuilder.Clear();
-            _statsBuilder.AppendLine($"<b>Mitigation</b>");
-            _statsBuilder.AppendLine($"Armor: {(int)armor}");
-            _statsBuilder.AppendLine($"Evasion: {(int)evasion}");
-            _statsBuilder.AppendLine($"Mitigation: {mitigation * 100f:F1}%");
-            _statsBuilder.AppendLine($"Evasion%: {evasionChance * 100f:F1}%");
+            _statsBuilder.AppendLine($"<b>Defense</b>");
+            _statsBuilder.AppendLine($"Armor: {(int)armor} (Mitigation: {mitigation * 100f:F1}%)");
+            _statsBuilder.AppendLine($"Evasion: {(int)evasion} (Chance: {evasionChance * 100f:F1}%)");
+            _statsBuilder.AppendLine($"Fire Res: {fireResist * 100f:F0}%");
+            _statsBuilder.AppendLine($"Cold Res: {coldResist * 100f:F0}%");
+            _statsBuilder.AppendLine($"Lightning Res: {lightningResist * 100f:F0}%");
+            _statsBuilder.AppendLine($"Poison Res: {poisonResist * 100f:F0}%");
             _statsBuilder.AppendLine($"Last Hit: {lastDamageTaken} ({lastDamageType})");
             defenseStatsText.text = _statsBuilder.ToString();
-        }
-
-        // RESISTANCES
-        if (resistStatsText != null)
-        {
-            _statsBuilder.Clear();
-            _statsBuilder.AppendLine($"<B>Resists</b>");
-            _statsBuilder.AppendLine($"Fire {fireResist * 100f:F0}%");
-            _statsBuilder.AppendLine($"Cold {coldResist * 100f:F0}%");
-            _statsBuilder.AppendLine($"Lightning {lightningResist * 100f:F0}%");
-            _statsBuilder.AppendLine($"Poison {poisonResist * 100f:F0}%");
-            resistStatsText.text = _statsBuilder.ToString();
         }
 
         // MOVEMENT
@@ -316,7 +300,7 @@ public class SimpleHealth : MonoBehaviour
             case DamageType.Lightning:
                 {
                     float chance = Mathf.Clamp01(dmgFrac * shockMult);
-                    Debug.Log($"[Ailment] Lightning hit {dmg} dmg → Shock chance {chance:P1}, roll={roll:F2}");
+                    // Debug.Log($"[Ailment] Lightning hit {dmg} dmg → Shock chance {chance:P1}, roll={roll:F2}");
                     if (roll < chance)
                         ses.AddStatus(StatusEffectSystem.StatusType.Shock, 5f, 1f);
                     break;
@@ -324,7 +308,7 @@ public class SimpleHealth : MonoBehaviour
             case DamageType.Fire:
                 {
                     float chance = Mathf.Clamp01(dmgFrac * igniteMult);
-                    Debug.Log($"[Ailment] Fire hit {dmg} dmg → Ignite chance {chance:P1}, roll={roll:F2}");
+                    // Debug.Log($"[Ailment] Fire hit {dmg} dmg → Ignite chance {chance:P1}, roll={roll:F2}");
                     if (roll < chance)
                     {
                         ses.AddStatus(StatusEffectSystem.StatusType.Ignite, 5f, 1f);
@@ -332,10 +316,20 @@ public class SimpleHealth : MonoBehaviour
                     }
                     break;
                 }
+            case DamageType.Cold:
+                {
+                    float chance = Mathf.Clamp01(dmgFrac * igniteMult);
+                    // Debug.Log($"[Ailment] Cold hit {dmg} dmg → Cold chance {chance:P1}, roll={roll:F2}");
+                    if (roll < chance)
+                    {
+                        ses.AddStatus(StatusEffectSystem.StatusType.Frozen, 3f, 1f);
+                    }
+                    break;
+                }
             case DamageType.Poison:
                 {
                     float chance = Mathf.Clamp01(dmgFrac * poisonMult);
-                    Debug.Log($"[Ailment] Poison hit {dmg} dmg → Poison chance {chance:P1}, roll={roll:F2}");
+                    //  Debug.Log($"[Ailment] Poison hit {dmg} dmg → Poison chance {chance:P1}, roll={roll:F2}");
                     if (roll < chance)
                     {
                         ses.AddStatus(StatusEffectSystem.StatusType.Poison, 15f, 0.5f);
@@ -346,7 +340,7 @@ public class SimpleHealth : MonoBehaviour
             case DamageType.Physical:
                 {
                     float chance = Mathf.Clamp01(dmgFrac * bleedMult);
-                    Debug.Log($"[Ailment] Physical hit {dmg} dmg → Bleed chance {chance:P1}, roll={roll:F2}");
+                    // Debug.Log($"[Ailment] Physical hit {dmg} dmg → Bleed chance {chance:P1}, roll={roll:F2}");
                     if (roll < chance)
                     {
                         ses.AddStatus(StatusEffectSystem.StatusType.Bleeding, 5f, 1f);

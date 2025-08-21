@@ -15,7 +15,7 @@ public class Rigidbody2DAnimatorMove : MonoBehaviour
     {
         if (animator == null || rb == null) return;
 
-        bool moving = rb.linearVelocity.sqrMagnitude > 0.01f; // small threshold to avoid flickering
+        bool moving = rb.linearVelocity.sqrMagnitude > 0.1f; // small threshold to avoid flickering
         animator.SetBool("isMoving", moving);
     }
 }

@@ -274,12 +274,11 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   hitColor: {r: 1, g: 0.07075471, b: 0.07075471, a: 1}
   hitFlashDuration: 0.5
-  damagePopupPrefab: {fileID: 0}
+  damagePopupPrefab: {fileID: 2924289727893196464, guid: a8aea507684d95a4c8b9545db21cf2cd, type: 3}
   popupOffset: {x: 0, y: 1, z: 0}
   currentHealth: 0
   healthStatsText: {fileID: 0}
   defenseStatsText: {fileID: 0}
-  resistStatsText: {fileID: 0}
   movementStatsText: {fileID: 0}
 --- !u!61 &4859893581985587488
 BoxCollider2D:

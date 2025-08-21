@@ -45,6 +45,11 @@ public class VoteManager : MonoBehaviour
     [Tooltip("How many recently SHOWN ids to remember to reduce repeats (0 disables).")]
     [Min(0)][SerializeField] private int recentHistorySize = 6;
 
+    [Header("Style (hex codes without #)")]
+    public string headingHex = "FFD166"; // yellow
+    public string valueHex = "00AEEF"; // cyan
+    public string noteHex = "9E9E9E"; // gray
+
     public enum Phase { Cooldown, Voting, Resolving }
     [NonSerialized] private Phase phase = Phase.Cooldown;
     [NonSerialized] private float phaseEndTime;
@@ -333,8 +338,15 @@ public class VoteManager : MonoBehaviour
     }
 
     // ---------- Display ----------
+    private static string ColorTag(string hexNoHash) => $"<color=#{hexNoHash}>";
+
     public string GetVoteDisplay()
     {
+        string h = ColorTag(headingHex);
+        string v = ColorTag(valueHex);
+        string n = ColorTag(noteHex);
+        string end = "</color>";
+
         if (phase == Phase.Voting)
         {
             string tt = FormatMMSS(TimeRemaining);
@@ -342,20 +354,27 @@ public class VoteManager : MonoBehaviour
             for (int i = 0; i < currentOptionCount; i++) total += tallies[i];
 
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.Append($"VOTE! ({tt})\n");
+            sb.AppendLine($"{h}<b>VOTE!</b>{end} {n}({tt}){end}");
+
             for (int i = 0; i < currentOptionCount; i++)
-                sb.Append($"[{voteKeywords[i]}] {currentOptions[i]?.description}\n");
-            sb.Append("\n");
+            {
+                sb.AppendLine($"{v}[{voteKeywords[i]}]{end} {currentOptions[i]?.description}");
+            }
+            sb.AppendLine();
+
             for (int i = 0; i < currentOptionCount; i++)
             {
                 if (i > 0) sb.Append("  ");
-                sb.Append($"{voteKeywords[i]} {tallies[i]}");
+                sb.Append($"{v}{voteKeywords[i]} {tallies[i]}{end}");
             }
-            sb.Append($"  |  Total: {total}");
+            sb.Append($"  {n}|{end}  {n}Total:{end} {v}{total}{end}");
             return sb.ToString();
         }
-        if (phase == Phase.Cooldown) return $"Next vote in: {FormatMMSS(TimeRemaining)}";
-        return "Resolving...";
+        if (phase == Phase.Cooldown)
+        {
+            return $"{n}Next vote in:{end} {v}{FormatMMSS(TimeRemaining)}{end}";
+        }
+        return $"{h}Resolving...{end}";
     }
 
     private static string FormatMMSS(float seconds)
