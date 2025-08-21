@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(Knife))]
 public class WeaponSwingAnimator : MonoBehaviour
@@ -18,8 +18,12 @@ public class WeaponSwingAnimator : MonoBehaviour
 
     private GameObject _spriteObject;
     private GameObject _spriteHolder;
+    private SpriteRenderer _weaponRenderer;
     private Coroutine _swingCoroutine;
     private Knife _knife;
+    [Header("Flip Settings")]
+    [Tooltip("Optional: Source SpriteRenderer to mirror flipX from (e.g., player sprite). If not set, will search in parents.")]
+    [SerializeField] private SpriteRenderer playerSpriteRenderer;
 
     void Awake()
     {
@@ -28,6 +32,12 @@ public class WeaponSwingAnimator : MonoBehaviour
 
     void Start()
     {
+        // Try to find a source SpriteRenderer (player) before creating our own
+        if (playerSpriteRenderer == null)
+        {
+            playerSpriteRenderer = GetComponentInParent<SpriteRenderer>();
+        }
+
         _spriteObject = new GameObject("WeaponSwingPivot");
         _spriteObject.transform.SetParent(transform);
         _spriteObject.transform.localPosition = Vector3.zero;
@@ -37,18 +47,34 @@ public class WeaponSwingAnimator : MonoBehaviour
         _spriteHolder.transform.localPosition = spriteOffset;
         _spriteHolder.transform.localScale = Vector3.one * spriteScale;
 
-        var renderer = _spriteHolder.AddComponent<SpriteRenderer>();
+        _weaponRenderer = _spriteHolder.AddComponent<SpriteRenderer>();
         if (_knife.weaponSprite != null)
         {
-            renderer.sprite = _knife.weaponSprite;
+            _weaponRenderer.sprite = _knife.weaponSprite;
         }
         else
         {
             Debug.LogWarning("WeaponSwingAnimator: The referenced Knife script is missing a weaponSprite.", this);
         }
-        renderer.sortingOrder = sortingOrder;
+        _weaponRenderer.sortingOrder = sortingOrder;
 
         _spriteObject.SetActive(false);
+    }
+
+    void LateUpdate()
+    {
+        // Mirror the swing with the player's facing (flipX)
+        if (playerSpriteRenderer != null && _spriteObject != null)
+        {
+            bool flip = !playerSpriteRenderer.flipX;
+            Vector3 ls = _spriteObject.transform.localScale;
+            ls.x = flip ? -1f : 1f;
+            _spriteObject.transform.localScale = ls;
+
+            // Ensure the weapon sprite itself isn't double-flipped
+            if (_weaponRenderer != null)
+                _weaponRenderer.flipX = false;
+        }
     }
 
     public void Swing()
@@ -68,7 +94,7 @@ public class WeaponSwingAnimator : MonoBehaviour
         _spriteObject.SetActive(true);
 
         float halfDuration = swingDuration / 2f;
-        
+
         Quaternion swingStartOffset = Quaternion.Euler(0, 0, swingAngle / 2f);
         Quaternion swingEndOffset = Quaternion.Euler(0, 0, -swingAngle / 2f);
 
@@ -88,7 +114,7 @@ public class WeaponSwingAnimator : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        
+
         _spriteObject.SetActive(false);
         _swingCoroutine = null;
     }

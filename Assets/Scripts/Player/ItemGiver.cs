@@ -58,6 +58,6 @@ public class ItemGiver : MonoBehaviour
             playerInventory.AddItem(itemName, amount);
         }
 
-        Debug.Log($"[ItemGiver] Gave {amount}x {itemName} to player.");
+        // Debug.Log($"[ItemGiver] Gave {amount}x {itemName} to player.");
     }
 }
