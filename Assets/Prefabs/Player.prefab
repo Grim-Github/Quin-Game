@@ -169,6 +169,106 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1.89
+--- !u!1 &92474740053100050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7330306903811395164}
+  - component: {fileID: 6702023497100340280}
+  - component: {fileID: 3074538827380537505}
+  m_Layer: 6
+  m_Name: Upgrade 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7330306903811395164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92474740053100050}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6677789416814697777}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6702023497100340280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92474740053100050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Poison Resist
+    powerUpObject: {fileID: 92474740053100050}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -6028249209390854301, guid: 1c97851b30daf4e4f994364accc37593, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 0}
+--- !u!114 &3074538827380537505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92474740053100050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Poison Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddPoisonResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 3550301659603603574}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &140193031149500494
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,6 +1960,106 @@ MonoBehaviour:
   spriteScale: 3
   sortingOrder: 5
   playerSpriteRenderer: {fileID: 30405735645601086}
+--- !u!1 &727710020117490481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2640588415667534023}
+  - component: {fileID: 3550301659603603574}
+  - component: {fileID: 2055206306013398440}
+  m_Layer: 6
+  m_Name: Upgrade 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2640588415667534023
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727710020117490481}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6677789416814697777}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3550301659603603574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727710020117490481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Poison Resist
+    powerUpObject: {fileID: 727710020117490481}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -6028249209390854301, guid: 1c97851b30daf4e4f994364accc37593, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 4988117049657926950}
+--- !u!114 &2055206306013398440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727710020117490481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Poison Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddPoisonResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 3550301659603603574}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &763878338640954299
 GameObject:
   m_ObjectHideFlags: 0
@@ -1911,7 +2111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AccesoryName: Ring
+  AccesoryName: Life Ring
   AccesoryDescription: +10 Max Health
   icon: {fileID: -3829404428989594871, guid: 143f7645e4c79644ab93253bc2898b96, type: 3}
   onAwake:
@@ -2020,6 +2220,106 @@ MonoBehaviour:
     defaultMinMax: {x: 0.5, y: 2}
   onHitStatusBlacklist: 
   healthSystem: {fileID: 5791096993671492205}
+--- !u!1 &786988859167995833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1200606145204867157}
+  - component: {fileID: 4988117049657926950}
+  - component: {fileID: 1250807271897541648}
+  m_Layer: 6
+  m_Name: Upgrade 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1200606145204867157
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786988859167995833}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6677789416814697777}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4988117049657926950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786988859167995833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Poison Resist
+    powerUpObject: {fileID: 786988859167995833}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -6028249209390854301, guid: 1c97851b30daf4e4f994364accc37593, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 8341230762479610313}
+--- !u!114 &1250807271897541648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786988859167995833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Poison Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddPoisonResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 3550301659603603574}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &819256001971131541
 GameObject:
   m_ObjectHideFlags: 0
@@ -2293,6 +2593,106 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &837067538820061578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3744164824070105184}
+  - component: {fileID: 733382842848037385}
+  - component: {fileID: 4912264357271866277}
+  m_Layer: 6
+  m_Name: Upgrade 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3744164824070105184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837067538820061578}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4692018829585025914}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &733382842848037385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837067538820061578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Cold Resist
+    powerUpObject: {fileID: 837067538820061578}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -7795961845520942047, guid: 9b6ed8614b56ddc48bc4d86f32db2486, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 0}
+--- !u!114 &4912264357271866277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837067538820061578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Cold Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddColdResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 4036439647093142074}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &837130895697689370
 GameObject:
   m_ObjectHideFlags: 0
@@ -5381,6 +5781,106 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressedScale: 0.9
   duration: 0.1
+--- !u!1 &1706348029550636421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4659107174932774565}
+  - component: {fileID: 165601345750180290}
+  - component: {fileID: 7540564925930315326}
+  m_Layer: 6
+  m_Name: Upgrade 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4659107174932774565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706348029550636421}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6127085084844003805}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &165601345750180290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706348029550636421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Lightning Resist
+    powerUpObject: {fileID: 1706348029550636421}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 5851173540246750970, guid: dd1d1a126a95adf4fb3a415d883f957c, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 4160329433764316195}
+--- !u!114 &7540564925930315326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706348029550636421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Lightning Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddLightningResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 165601345750180290}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &1712862820456983879
 GameObject:
   m_ObjectHideFlags: 0
@@ -5788,6 +6288,106 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   value: 0.1
+--- !u!1 &2002651410938345823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6653562365331292592}
+  - component: {fileID: 5853517288930489679}
+  - component: {fileID: 7559588488922019393}
+  m_Layer: 6
+  m_Name: Upgrade 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6653562365331292592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002651410938345823}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6127085084844003805}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5853517288930489679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002651410938345823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Lightning Resist
+    powerUpObject: {fileID: 2002651410938345823}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 5851173540246750970, guid: dd1d1a126a95adf4fb3a415d883f957c, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 7155398759454235565}
+--- !u!114 &7559588488922019393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002651410938345823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Lightning Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddLightningResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 165601345750180290}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &2062737661056430337
 GameObject:
   m_ObjectHideFlags: 0
@@ -5846,6 +6446,165 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   value: 5
+--- !u!1 &2154449798596403422
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6677789416814697777}
+  - component: {fileID: 3924273083453657427}
+  - component: {fileID: 6540307829230205677}
+  m_Layer: 6
+  m_Name: 'Poison Res Ring '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6677789416814697777
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2154449798596403422}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2640588415667534023}
+  - {fileID: 1200606145204867157}
+  - {fileID: 5221863984518689170}
+  - {fileID: 8817196808813898260}
+  - {fileID: 7330306903811395164}
+  m_Father: {fileID: 5432253268087408168}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3924273083453657427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2154449798596403422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring
+  AccesoryDescription: +20% Poison Resist
+  icon: {fileID: -6028249209390854301, guid: 1c97851b30daf4e4f994364accc37593, type: 3}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddPoisonResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 3550301659603603574}
+  statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
+  uiParent: {fileID: 3771470944807517528}
+  statsTextInstance: {fileID: 0}
+--- !u!114 &6540307829230205677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2154449798596403422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollOnAwake: 1
+  rngSeed: 0
+  upgradeWeights: {fileID: 0}
+  current: 0
+  weights:
+    common: 60
+    uncommon: 25
+    rare: 12
+    legendary: 3
+  ranges:
+    damageMult: {x: 1.1, y: 1.3}
+    damageFlatAdd: {x: 3, y: 12}
+    atkSpeedFrac: {x: 0.1, y: 0.25}
+    critChanceAdd: {x: 0.05, y: 0.2}
+    critMultAdd: {x: 0.25, y: 1}
+    statusDurationAdd: {x: 0.1, y: 0.3}
+    statusChance: {x: 0.01, y: 0.3}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
+    knifeRadiusMult: {x: 1.1, y: 1.3}
+    knifeSplashRadiusMult: {x: 1.1, y: 1.3}
+    knifeLifestealAdd: {x: 0.05, y: 0.2}
+    knifeMaxTargetsAdd: {x: 1, y: 3}
+    shooterLifetimeAdd: {x: 0.5, y: 2}
+    shooterForceAdd: {x: 1, y: 4}
+    shooterProjectilesAdd: {x: 1, y: 2}
+    shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
+  tiers:
+    damagePercent: 5
+    damageFlat: 5
+    attackSpeed: 5
+    critChance: 5
+    critMultiplier: 5
+    statusDuration: 5
+    statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
+    knifeRadius: 5
+    knifeSplashRadius: 5
+    knifeLifesteal: 5
+    knifeMaxTargets: 5
+    shooterLifetime: 5
+    shooterForce: 5
+    shooterProjectiles: 5
+    shooterAccuracy: 5
+    multiplierCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
+    defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 
+  healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &2302453346357717577
 GameObject:
   m_ObjectHideFlags: 0
@@ -7874,6 +8633,106 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: b547906ff3f9451468c1b818c9edac1e, type: 2}
+--- !u!1 &3249207026387922227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8154548648119570576}
+  - component: {fileID: 7155398759454235565}
+  - component: {fileID: 7255802030272286230}
+  m_Layer: 6
+  m_Name: Upgrade 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8154548648119570576
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3249207026387922227}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6127085084844003805}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7155398759454235565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3249207026387922227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Lightning Resist
+    powerUpObject: {fileID: 3249207026387922227}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 5851173540246750970, guid: dd1d1a126a95adf4fb3a415d883f957c, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 8264414361972771182}
+--- !u!114 &7255802030272286230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3249207026387922227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Lightning Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddLightningResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 165601345750180290}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &3318086922698768104
 GameObject:
   m_ObjectHideFlags: 0
@@ -8346,6 +9205,106 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &3421744763528224217
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5634543096054424749}
+  - component: {fileID: 8327499080722164276}
+  - component: {fileID: 4358938850181092772}
+  m_Layer: 6
+  m_Name: Upgrade 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5634543096054424749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3421744763528224217}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3403740043649448040}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8327499080722164276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3421744763528224217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Fire Resist
+    powerUpObject: {fileID: 3421744763528224217}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -5804952844029615345, guid: 840f4d57e89cf754083a2065097a1196, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 7781702697946173593}
+--- !u!114 &4358938850181092772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3421744763528224217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Fire Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddFireResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 6179476287787354157}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &3441627948306271923
 GameObject:
   m_ObjectHideFlags: 0
@@ -10087,6 +11046,106 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 3.1
+--- !u!1 &4326588185396638906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5221863984518689170}
+  - component: {fileID: 8341230762479610313}
+  - component: {fileID: 4423823210600553754}
+  m_Layer: 6
+  m_Name: Upgrade 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5221863984518689170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4326588185396638906}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6677789416814697777}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8341230762479610313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4326588185396638906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Poison Resist
+    powerUpObject: {fileID: 4326588185396638906}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -6028249209390854301, guid: 1c97851b30daf4e4f994364accc37593, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 6685637765848078020}
+--- !u!114 &4423823210600553754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4326588185396638906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Poison Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddPoisonResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 3550301659603603574}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &4390313210623104452
 GameObject:
   m_ObjectHideFlags: 0
@@ -11809,6 +12868,106 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &4842793693938137619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1984695905542659062}
+  - component: {fileID: 5633225559556024504}
+  - component: {fileID: 2578111261017501805}
+  m_Layer: 6
+  m_Name: Upgrade 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1984695905542659062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4842793693938137619}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4692018829585025914}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5633225559556024504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4842793693938137619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Cold Resist
+    powerUpObject: {fileID: 4842793693938137619}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -7795961845520942047, guid: 9b6ed8614b56ddc48bc4d86f32db2486, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 3096808596398326719}
+--- !u!114 &2578111261017501805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4842793693938137619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Cold Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddColdResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 4036439647093142074}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &4843226627263068596
 GameObject:
   m_ObjectHideFlags: 0
@@ -12129,6 +13288,106 @@ MonoBehaviour:
   toggleKey: 9
   slowTimeScale: 0.5
   slowMoVolume: {fileID: 4768749160937343259}
+--- !u!1 &4895460048709314821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9201413706584863238}
+  - component: {fileID: 1622410267910504734}
+  - component: {fileID: 209738029428787065}
+  m_Layer: 6
+  m_Name: Upgrade 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &9201413706584863238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4895460048709314821}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3403740043649448040}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1622410267910504734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4895460048709314821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Fire Resist
+    powerUpObject: {fileID: 4895460048709314821}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -5804952844029615345, guid: 840f4d57e89cf754083a2065097a1196, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 7669684583806369584}
+--- !u!114 &209738029428787065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4895460048709314821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Fire Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddFireResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 6179476287787354157}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &4906352248192492447
 GameObject:
   m_ObjectHideFlags: 0
@@ -13034,6 +14293,10 @@ Transform:
   m_Children:
   - {fileID: 5702712710036007540}
   - {fileID: 1420364789606767436}
+  - {fileID: 4692018829585025914}
+  - {fileID: 3403740043649448040}
+  - {fileID: 6677789416814697777}
+  - {fileID: 6127085084844003805}
   - {fileID: 1432232446246633481}
   - {fileID: 9147439597678959549}
   m_Father: {fileID: 4856266244198735824}
@@ -13193,6 +14456,106 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
+--- !u!1 &5595694609798941146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5538907083071939714}
+  - component: {fileID: 4036439647093142074}
+  - component: {fileID: 2818361494263592269}
+  m_Layer: 6
+  m_Name: Upgrade 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5538907083071939714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5595694609798941146}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4692018829585025914}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4036439647093142074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5595694609798941146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Cold Resist
+    powerUpObject: {fileID: 5595694609798941146}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -7795961845520942047, guid: 9b6ed8614b56ddc48bc4d86f32db2486, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 2314000486116733922}
+--- !u!114 &2818361494263592269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5595694609798941146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Cold Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddColdResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 4036439647093142074}
   statsTextPrefab: {fileID: 0}
   uiParent: {fileID: 0}
   statsTextInstance: {fileID: 0}
@@ -13404,6 +14767,165 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 3.1
+--- !u!1 &5841996677559753328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6127085084844003805}
+  - component: {fileID: 4640056499397819691}
+  - component: {fileID: 3679139543241106478}
+  m_Layer: 6
+  m_Name: 'Lighting Res Ring '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6127085084844003805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5841996677559753328}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4659107174932774565}
+  - {fileID: 6773470559672626950}
+  - {fileID: 6653562365331292592}
+  - {fileID: 8154548648119570576}
+  - {fileID: 2219627420290620945}
+  m_Father: {fileID: 5432253268087408168}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4640056499397819691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5841996677559753328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring
+  AccesoryDescription: +20% Lightning Resist
+  icon: {fileID: 5851173540246750970, guid: dd1d1a126a95adf4fb3a415d883f957c, type: 3}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddLightningResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 165601345750180290}
+  statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
+  uiParent: {fileID: 3771470944807517528}
+  statsTextInstance: {fileID: 0}
+--- !u!114 &3679139543241106478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5841996677559753328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollOnAwake: 1
+  rngSeed: 0
+  upgradeWeights: {fileID: 0}
+  current: 0
+  weights:
+    common: 60
+    uncommon: 25
+    rare: 12
+    legendary: 3
+  ranges:
+    damageMult: {x: 1.1, y: 1.3}
+    damageFlatAdd: {x: 3, y: 12}
+    atkSpeedFrac: {x: 0.1, y: 0.25}
+    critChanceAdd: {x: 0.05, y: 0.2}
+    critMultAdd: {x: 0.25, y: 1}
+    statusDurationAdd: {x: 0.1, y: 0.3}
+    statusChance: {x: 0.01, y: 0.3}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
+    knifeRadiusMult: {x: 1.1, y: 1.3}
+    knifeSplashRadiusMult: {x: 1.1, y: 1.3}
+    knifeLifestealAdd: {x: 0.05, y: 0.2}
+    knifeMaxTargetsAdd: {x: 1, y: 3}
+    shooterLifetimeAdd: {x: 0.5, y: 2}
+    shooterForceAdd: {x: 1, y: 4}
+    shooterProjectilesAdd: {x: 1, y: 2}
+    shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
+  tiers:
+    damagePercent: 5
+    damageFlat: 5
+    attackSpeed: 5
+    critChance: 5
+    critMultiplier: 5
+    statusDuration: 5
+    statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
+    knifeRadius: 5
+    knifeSplashRadius: 5
+    knifeLifesteal: 5
+    knifeMaxTargets: 5
+    shooterLifetime: 5
+    shooterForce: 5
+    shooterProjectiles: 5
+    shooterAccuracy: 5
+    multiplierCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
+    defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 
+  healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &5862486877742866835
 GameObject:
   m_ObjectHideFlags: 0
@@ -14857,6 +16379,106 @@ MonoBehaviour:
     defaultMinMax: {x: 0.5, y: 2}
   onHitStatusBlacklist: 
   healthSystem: {fileID: 5791096993671492205}
+--- !u!1 &6329938207393223755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6773470559672626950}
+  - component: {fileID: 4160329433764316195}
+  - component: {fileID: 4565743155932052871}
+  m_Layer: 6
+  m_Name: Upgrade 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6773470559672626950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6329938207393223755}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6127085084844003805}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4160329433764316195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6329938207393223755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Lightning Resist
+    powerUpObject: {fileID: 6329938207393223755}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 5851173540246750970, guid: dd1d1a126a95adf4fb3a415d883f957c, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 5853517288930489679}
+--- !u!114 &4565743155932052871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6329938207393223755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Lightning Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddLightningResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 165601345750180290}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &6330886543815198051
 GameObject:
   m_ObjectHideFlags: 0
@@ -14995,6 +16617,206 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &6348011487605537901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6350059406963331952}
+  - component: {fileID: 7781702697946173593}
+  - component: {fileID: 5040857579700245599}
+  m_Layer: 6
+  m_Name: Upgrade 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6350059406963331952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6348011487605537901}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3403740043649448040}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7781702697946173593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6348011487605537901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Fire Resist
+    powerUpObject: {fileID: 6348011487605537901}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -5804952844029615345, guid: 840f4d57e89cf754083a2065097a1196, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 1622410267910504734}
+--- !u!114 &5040857579700245599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6348011487605537901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Fire Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddFireResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 6179476287787354157}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
+--- !u!1 &6351609203449479223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5930937851035085204}
+  - component: {fileID: 2314000486116733922}
+  - component: {fileID: 4331916148098941207}
+  m_Layer: 6
+  m_Name: Upgrade 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5930937851035085204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6351609203449479223}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4692018829585025914}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2314000486116733922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6351609203449479223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Cold Resist
+    powerUpObject: {fileID: 6351609203449479223}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -7795961845520942047, guid: 9b6ed8614b56ddc48bc4d86f32db2486, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 5633225559556024504}
+--- !u!114 &4331916148098941207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6351609203449479223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Cold Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddColdResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 4036439647093142074}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &6550449892591606263
 GameObject:
   m_ObjectHideFlags: 0
@@ -16719,6 +18541,165 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &6983563826141616389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4692018829585025914}
+  - component: {fileID: 1499925000110016057}
+  - component: {fileID: 2291322387813836490}
+  m_Layer: 6
+  m_Name: 'Cold Res Ring '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4692018829585025914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6983563826141616389}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5538907083071939714}
+  - {fileID: 5930937851035085204}
+  - {fileID: 1984695905542659062}
+  - {fileID: 7618231382153892566}
+  - {fileID: 3744164824070105184}
+  m_Father: {fileID: 5432253268087408168}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1499925000110016057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6983563826141616389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring
+  AccesoryDescription: +20% Cold Resist
+  icon: {fileID: -7795961845520942047, guid: 9b6ed8614b56ddc48bc4d86f32db2486, type: 3}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddColdResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 4036439647093142074}
+  statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
+  uiParent: {fileID: 3771470944807517528}
+  statsTextInstance: {fileID: 0}
+--- !u!114 &2291322387813836490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6983563826141616389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollOnAwake: 1
+  rngSeed: 0
+  upgradeWeights: {fileID: 0}
+  current: 0
+  weights:
+    common: 60
+    uncommon: 25
+    rare: 12
+    legendary: 3
+  ranges:
+    damageMult: {x: 1.1, y: 1.3}
+    damageFlatAdd: {x: 3, y: 12}
+    atkSpeedFrac: {x: 0.1, y: 0.25}
+    critChanceAdd: {x: 0.05, y: 0.2}
+    critMultAdd: {x: 0.25, y: 1}
+    statusDurationAdd: {x: 0.1, y: 0.3}
+    statusChance: {x: 0.01, y: 0.3}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
+    knifeRadiusMult: {x: 1.1, y: 1.3}
+    knifeSplashRadiusMult: {x: 1.1, y: 1.3}
+    knifeLifestealAdd: {x: 0.05, y: 0.2}
+    knifeMaxTargetsAdd: {x: 1, y: 3}
+    shooterLifetimeAdd: {x: 0.5, y: 2}
+    shooterForceAdd: {x: 1, y: 4}
+    shooterProjectilesAdd: {x: 1, y: 2}
+    shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
+  tiers:
+    damagePercent: 5
+    damageFlat: 5
+    attackSpeed: 5
+    critChance: 5
+    critMultiplier: 5
+    statusDuration: 5
+    statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
+    knifeRadius: 5
+    knifeSplashRadius: 5
+    knifeLifesteal: 5
+    knifeMaxTargets: 5
+    shooterLifetime: 5
+    shooterForce: 5
+    shooterProjectiles: 5
+    shooterAccuracy: 5
+    multiplierCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
+    defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 
+  healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &6987822466726327103
 GameObject:
   m_ObjectHideFlags: 0
@@ -17118,6 +19099,106 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &7321992694779779490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2219627420290620945}
+  - component: {fileID: 8264414361972771182}
+  - component: {fileID: 2424035000058656718}
+  m_Layer: 6
+  m_Name: Upgrade 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2219627420290620945
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7321992694779779490}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6127085084844003805}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8264414361972771182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7321992694779779490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Lightning Resist
+    powerUpObject: {fileID: 7321992694779779490}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 5851173540246750970, guid: dd1d1a126a95adf4fb3a415d883f957c, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 0}
+--- !u!114 &2424035000058656718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7321992694779779490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Lightning Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddLightningResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 165601345750180290}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &7487222791868677263
 GameObject:
   m_ObjectHideFlags: 0
@@ -17389,6 +19470,106 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 1150944337021895763}
   tmp: {fileID: 3152013175662757018}
+--- !u!1 &7663087148285191437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6294256577550344479}
+  - component: {fileID: 7669684583806369584}
+  - component: {fileID: 6906840887556706508}
+  m_Layer: 6
+  m_Name: Upgrade 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6294256577550344479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7663087148285191437}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3403740043649448040}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7669684583806369584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7663087148285191437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Fire Resist
+    powerUpObject: {fileID: 7663087148285191437}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -5804952844029615345, guid: 840f4d57e89cf754083a2065097a1196, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 0}
+--- !u!114 &6906840887556706508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7663087148285191437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Fire Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddFireResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 6179476287787354157}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &7666189916886687150
 GameObject:
   m_ObjectHideFlags: 0
@@ -17728,6 +19909,106 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 3.1
+--- !u!1 &7769270466300064961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8817196808813898260}
+  - component: {fileID: 6685637765848078020}
+  - component: {fileID: 6863685928672312266}
+  m_Layer: 6
+  m_Name: Upgrade 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8817196808813898260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7769270466300064961}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6677789416814697777}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6685637765848078020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7769270466300064961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Poison Resist
+    powerUpObject: {fileID: 7769270466300064961}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -6028249209390854301, guid: 1c97851b30daf4e4f994364accc37593, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 6702023497100340280}
+--- !u!114 &6863685928672312266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7769270466300064961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Poison Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddPoisonResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 3550301659603603574}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &7781792269054227649
 GameObject:
   m_ObjectHideFlags: 0
@@ -18194,6 +20475,106 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressedScale: 0.9
   duration: 0.1
+--- !u!1 &7926531410515614286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8844653761754849110}
+  - component: {fileID: 6179476287787354157}
+  - component: {fileID: 693041991488930446}
+  m_Layer: 6
+  m_Name: Upgrade 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8844653761754849110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7926531410515614286}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3403740043649448040}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6179476287787354157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7926531410515614286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Fire Resist
+    powerUpObject: {fileID: 7926531410515614286}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -5804952844029615345, guid: 840f4d57e89cf754083a2065097a1196, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 8327499080722164276}
+--- !u!114 &693041991488930446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7926531410515614286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Fire Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddFireResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 6179476287787354157}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &7952360591557015454
 GameObject:
   m_ObjectHideFlags: 0
@@ -20183,6 +22564,106 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   value: 1
+--- !u!1 &8614662545966625424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7618231382153892566}
+  - component: {fileID: 3096808596398326719}
+  - component: {fileID: 7458400617674158940}
+  m_Layer: 6
+  m_Name: Upgrade 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7618231382153892566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614662545966625424}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4692018829585025914}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3096808596398326719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614662545966625424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Ring Upgrade
+    powerUpDescription: +5% Cold Resist
+    powerUpObject: {fileID: 8614662545966625424}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -7795961845520942047, guid: 9b6ed8614b56ddc48bc4d86f32db2486, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 733382842848037385}
+--- !u!114 &7458400617674158940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614662545966625424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring Upgrade
+  AccesoryDescription: +5% Cold Resist
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddColdResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.05
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 4036439647093142074}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &8747906309377296148
 GameObject:
   m_ObjectHideFlags: 0
@@ -20674,6 +23155,165 @@ MonoBehaviour:
   statsTextPrefab: {fileID: 0}
   uiParent: {fileID: 0}
   statsTextInstance: {fileID: 0}
+--- !u!1 &8877259164749841344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3403740043649448040}
+  - component: {fileID: 6396687477371220293}
+  - component: {fileID: 5768347492953081642}
+  m_Layer: 6
+  m_Name: 'Fire Res Ring  '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3403740043649448040
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8877259164749841344}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8844653761754849110}
+  - {fileID: 5634543096054424749}
+  - {fileID: 6350059406963331952}
+  - {fileID: 9201413706584863238}
+  - {fileID: 6294256577550344479}
+  m_Father: {fileID: 5432253268087408168}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6396687477371220293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8877259164749841344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Ring
+  AccesoryDescription: +20% Fire Resist
+  icon: {fileID: -5804952844029615345, guid: 840f4d57e89cf754083a2065097a1196, type: 3}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: AddFireResist
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0.2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 6179476287787354157}
+  statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
+  uiParent: {fileID: 3771470944807517528}
+  statsTextInstance: {fileID: 0}
+--- !u!114 &5768347492953081642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8877259164749841344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollOnAwake: 1
+  rngSeed: 0
+  upgradeWeights: {fileID: 0}
+  current: 0
+  weights:
+    common: 60
+    uncommon: 25
+    rare: 12
+    legendary: 3
+  ranges:
+    damageMult: {x: 1.1, y: 1.3}
+    damageFlatAdd: {x: 3, y: 12}
+    atkSpeedFrac: {x: 0.1, y: 0.25}
+    critChanceAdd: {x: 0.05, y: 0.2}
+    critMultAdd: {x: 0.25, y: 1}
+    statusDurationAdd: {x: 0.1, y: 0.3}
+    statusChance: {x: 0.01, y: 0.3}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
+    knifeRadiusMult: {x: 1.1, y: 1.3}
+    knifeSplashRadiusMult: {x: 1.1, y: 1.3}
+    knifeLifestealAdd: {x: 0.05, y: 0.2}
+    knifeMaxTargetsAdd: {x: 1, y: 3}
+    shooterLifetimeAdd: {x: 0.5, y: 2}
+    shooterForceAdd: {x: 1, y: 4}
+    shooterProjectilesAdd: {x: 1, y: 2}
+    shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
+  tiers:
+    damagePercent: 5
+    damageFlat: 5
+    attackSpeed: 5
+    critChance: 5
+    critMultiplier: 5
+    statusDuration: 5
+    statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
+    knifeRadius: 5
+    knifeSplashRadius: 5
+    knifeLifesteal: 5
+    knifeMaxTargets: 5
+    shooterLifetime: 5
+    shooterForce: 5
+    shooterProjectiles: 5
+    shooterAccuracy: 5
+    multiplierCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
+    defaultMinMax: {x: 0.5, y: 2}
+  onHitStatusBlacklist: 
+  healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &8892643798934483796
 GameObject:
   m_ObjectHideFlags: 0

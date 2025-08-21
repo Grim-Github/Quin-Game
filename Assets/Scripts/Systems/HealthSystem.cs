@@ -286,7 +286,7 @@ public class SimpleHealth : MonoBehaviour
         if (ses == null || dmg <= 0) return;
 
         float dmgFrac = Mathf.Clamp01((float)dmg / Mathf.Max(1, maxHealth));
-        int dotDamage = Mathf.Max(1, Mathf.RoundToInt(dmg * 0.10f));
+        int dotDamage = Mathf.Max(1, Mathf.RoundToInt(dmg * 0.20f));
 
         const float shockMult = 1;
         const float igniteMult = 1;
@@ -649,6 +649,104 @@ public class SimpleHealth : MonoBehaviour
         }
         UpdateStatsText();
     }
+
+    #region Public Unity Event Helpers
+
+    // --- Health ---
+    public void SetMaxHealth(int value)
+    {
+        maxHealth = Mathf.Max(1, value);
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        SyncSlider();
+        UpdateStatsText();
+    }
+
+    public void AddMaxHealth(int amount)
+    {
+        IncreaseMaxHealth(amount);
+    }
+
+    public void SetHealth(int value)
+    {
+        currentHealth = Mathf.Clamp(value, 0, maxHealth);
+        SyncSlider();
+        UpdateStatsText();
+    }
+
+    public void HealByPercentage(float percentage)
+    {
+        if (percentage <= 0) return;
+        int amountToHeal = Mathf.RoundToInt(maxHealth * percentage / 100f);
+        Heal(amountToHeal);
+    }
+
+    public void TakeDamageByPercentage(float percentage)
+    {
+        if (percentage <= 0) return;
+        int amountToTake = Mathf.RoundToInt(maxHealth * percentage / 100f);
+        TakeDamage(amountToTake, DamageType.Physical, false); // Percentage damage is unmitigatable
+    }
+
+    public void SetHealthByPercentage(float percentage)
+    {
+        currentHealth = Mathf.Clamp(maxHealth * percentage / 100f, 0, maxHealth);
+        SyncSlider();
+        UpdateStatsText();
+    }
+
+    // --- Regeneration ---
+    public void AddRegen(float amount)
+    {
+        regenRate += amount;
+        UpdateStatsText();
+    }
+
+    public void SetRegen(float value)
+    {
+        regenRate = value;
+        UpdateStatsText();
+    }
+
+    // --- Defense ---
+    public void SetArmor(float value)
+    {
+        armor = Mathf.Max(0f, value);
+        UpdateStatsText();
+    }
+
+    public void SetEvasion(float value)
+    {
+        evasion = Mathf.Max(0f, value);
+        UpdateStatsText();
+    }
+
+    // --- Resistances ---
+    public void AddFireResist(float amount) => GiveResistance(DamageType.Fire, amount);
+    public void SetFireResist(float value) { fireResist = Mathf.Clamp(value, 0f, 0.95f); UpdateStatsText(); }
+    public void AddColdResist(float amount) => GiveResistance(DamageType.Cold, amount);
+    public void SetColdResist(float value) { coldResist = Mathf.Clamp(value, 0f, 0.95f); UpdateStatsText(); }
+    public void AddLightningResist(float amount) => GiveResistance(DamageType.Lightning, amount);
+    public void SetLightningResist(float value) { lightningResist = Mathf.Clamp(value, 0f, 0.95f); UpdateStatsText(); }
+    public void AddPoisonResist(float amount) => GiveResistance(DamageType.Poison, amount);
+    public void SetPoisonResist(float value) { poisonResist = Mathf.Clamp(poisonResist + value, 0f, 0.95f); UpdateStatsText(); }
+
+    // --- Invulnerability ---
+    public void SetInvulnerable(float duration)
+    {
+        if (duration > 0)
+        {
+            StartCoroutine(InvulnerabilityCoroutineWithDuration(duration));
+        }
+    }
+
+    private System.Collections.IEnumerator InvulnerabilityCoroutineWithDuration(float duration)
+    {
+        isInvulnerable = true;
+        yield return new WaitForSeconds(duration);
+        isInvulnerable = false;
+    }
+
+    #endregion
 
     private System.Collections.IEnumerator InvulnerabilityCoroutine()
     {

@@ -437,11 +437,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameGUI: {fileID: 4184141167979861600}
   power: 0
-  rarityBiasPerPower: 0.02
-  statRangeMultPerPower: 0.015
+  rarityBiasPerPower: 0.05
+  statRangeMultPerPower: 0.03
   cadenceBoostPerPower: 0.01
-  maxRangeMultiplier: 25
-  maxRarityBiasFactor: 30
+  maxRangeMultiplier: 100
+  maxRarityBiasFactor: 1
 --- !u!114 &-6411856879609721089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rollOnStart: 1
+  rerollWeaponDamageType: 1
   rarity: 0
   weightCommon: 60
   weightUncommon: 25

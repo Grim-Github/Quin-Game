@@ -10,6 +10,7 @@ public class MonsterRarity : MonoBehaviour
 
     [Header("Auto Roll")]
     [SerializeField] private bool rollOnStart = true;
+    [SerializeField] private bool rerollWeaponDamageType = true;
 
     [Header("Current")]
     [SerializeField] private Rarity rarity = Rarity.Common;
@@ -73,6 +74,13 @@ public class MonsterRarity : MonoBehaviour
     private const string C_COM = "#B0B0B0";
     private const string C_LEG = "#FFB347";
 
+    // Damage Type Weights to make Physical more common
+    private const float WEIGHT_PHYSICAL = 90f;
+    private const float WEIGHT_FIRE = 15f;
+    private const float WEIGHT_COLD = 15f;
+    private const float WEIGHT_LIGHTNING = 15f;
+    private const float WEIGHT_POISON = 15f;
+
     private void Awake() => RefreshCachedRefs();
 
     private void Start()
@@ -131,7 +139,7 @@ public class MonsterRarity : MonoBehaviour
 
         // Always apply a randomized damage type to weapons if present
         bool hasWeapons = (knives != null && knives.Length > 0) || (shooters != null && shooters.Length > 0);
-        if (hasWeapons)
+        if (rerollWeaponDamageType && hasWeapons)
             Up_Weapons_DamageType_Reroll();
 
         // Optional extra: cadence tweak across all weapons (60% chance)
@@ -319,17 +327,16 @@ public class MonsterRarity : MonoBehaviour
     // ===== New: Weapon Damage Type Reroll =====
     private void Up_Weapons_DamageType_Reroll()
     {
-        // Pick a damage type at random (including Physical)
-        var types = new[]
-        {
-            SimpleHealth.DamageType.Physical,
-            SimpleHealth.DamageType.Fire,
-            SimpleHealth.DamageType.Cold,
-            SimpleHealth.DamageType.Lightning,
-            SimpleHealth.DamageType.Poison
-        };
-        int idx = UnityEngine.Random.Range(0, types.Length);
-        var chosen = types[idx];
+        // Weighted roll for damage type
+        float total = WEIGHT_PHYSICAL + WEIGHT_FIRE + WEIGHT_COLD + WEIGHT_LIGHTNING + WEIGHT_POISON;
+        float r = UnityEngine.Random.value * Mathf.Max(0.0001f, total);
+
+        SimpleHealth.DamageType chosen;
+        if ((r -= WEIGHT_PHYSICAL) < 0) chosen = SimpleHealth.DamageType.Physical;
+        else if ((r -= WEIGHT_FIRE) < 0) chosen = SimpleHealth.DamageType.Fire;
+        else if ((r -= WEIGHT_COLD) < 0) chosen = SimpleHealth.DamageType.Cold;
+        else if ((r -= WEIGHT_LIGHTNING) < 0) chosen = SimpleHealth.DamageType.Lightning;
+        else chosen = SimpleHealth.DamageType.Poison;
 
         if (knives != null)
             foreach (var k in knives)
