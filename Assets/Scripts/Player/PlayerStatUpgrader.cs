@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerStatUpgrador : MonoBehaviour
+public class PlayerStatUpgrader : MonoBehaviour
 {
     public PowerUp statPowerUp;
 

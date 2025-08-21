@@ -45,20 +45,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Aegis - Shooter Crit Chance +23%
-    powerUpDescription: Increase Shooter critical hit chance by 23%.
+    powerUpName: Phantom Aegis - Damage Up +<color=#8888FF>3</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>3</color>.
     powerUpObject: {fileID: 54310342836127045}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 2413123233239279179, guid: c88de95292f601e45a7201a73044aae7, type: 3}
     weight: 50
   nextUpgrade: {fileID: 0}
-  icon: {fileID: 2413123233239279179, guid: c88de95292f601e45a7201a73044aae7, type: 3}
-  upgradeType: 19
+  upgradeType: 20
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
-  value: 0.23
+  value: 3
 --- !u!1 &68772939556683932
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,6 +779,7 @@ Transform:
   - {fileID: 8513244833514361426}
   - {fileID: 1974706184933083547}
   - {fileID: 9027709624487194995}
+  - {fileID: 3790662233413527961}
   m_Father: {fileID: 5833988517266502027}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5816118974365816501
@@ -1047,6 +1047,7 @@ MonoBehaviour:
   spriteOffset: {x: 0.5, y: 0, z: 0}
   spriteScale: 3
   sortingOrder: 5
+  playerSpriteRenderer: {fileID: 30405735645601086}
 --- !u!1 &414099259750872978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,15 +1093,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Sword - Melee Damage +5
-    powerUpDescription: Increase Melee damage by 5.
+    powerUpName: Sword - Damage Up +<color=#8888FF>5</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>5</color>.
     powerUpObject: {fileID: 414099259750872978}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 5734951662672692488, guid: 8540d4521fd661f499c22750fb5a8984, type: 3}
     weight: 50
   nextUpgrade: {fileID: 0}
-  icon: {fileID: 5734951662672692488, guid: 8540d4521fd661f499c22750fb5a8984, type: 3}
   upgradeType: 1
   onCustomAwake:
     m_PersistentCalls:
@@ -1573,7 +1573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5526111780517100950
 Transform:
   m_ObjectHideFlags: 0
@@ -1589,6 +1589,7 @@ Transform:
   m_Children:
   - {fileID: 5275943110638038707}
   - {fileID: 977729874839342573}
+  - {fileID: 5888137049394460639}
   - {fileID: 893505022041302612}
   - {fileID: 6488690948797804823}
   m_Father: {fileID: 5833988517266502027}
@@ -1858,6 +1859,7 @@ MonoBehaviour:
   spriteOffset: {x: 0.5, y: 0, z: 0}
   spriteScale: 3
   sortingOrder: 5
+  playerSpriteRenderer: {fileID: 30405735645601086}
 --- !u!1 &763878338640954299
 GameObject:
   m_ObjectHideFlags: 0
@@ -3145,15 +3147,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Melee Range +10%
-    powerUpDescription: Increase Melee attack radius by 10%.
+    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>10</color>%
+    powerUpDescription: Increases attack reach by <color=#8888FF>10</color>%.
     powerUpObject: {fileID: 1032309275379302934}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
     weight: 60
   nextUpgrade: {fileID: 8448744338105514670}
-  icon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
   upgradeType: 4
   onCustomAwake:
     m_PersistentCalls:
@@ -3204,15 +3205,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Sword - Melee Crit Chance +30%
-    powerUpDescription: Increase Melee critical hit chance by 30%.
+    powerUpName: Sword - Critical Chance +<color=#8888FF>30</color>%
+    powerUpDescription: Raises chance to critically strike by <color=#8888FF>30</color>%.
     powerUpObject: {fileID: 1064784799497703940}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 5734951662672692488, guid: 8540d4521fd661f499c22750fb5a8984, type: 3}
     weight: 50
   nextUpgrade: {fileID: 3291443988822653172}
-  icon: {fileID: 5734951662672692488, guid: 8540d4521fd661f499c22750fb5a8984, type: 3}
   upgradeType: 8
   onCustomAwake:
     m_PersistentCalls:
@@ -3425,6 +3425,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressedScale: 0.9
   duration: 0.1
+--- !u!1 &1140887522585614596
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5888137049394460639}
+  - component: {fileID: 536879122363180388}
+  m_Layer: 6
+  m_Name: Upgrade 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5888137049394460639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140887522585614596}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5526111780517100950}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &536879122363180388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140887522585614596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Knife - Damage Up +<color=#8888FF>10</color>%
+    powerUpDescription: Increases weapon damage by <color=#8888FF>10</color>%.
+    powerUpObject: {fileID: 1140887522585614596}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 7329696752922098720}
+  upgradeType: 2
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 0.1
 --- !u!1 &1216054553433728835
 GameObject:
   m_ObjectHideFlags: 0
@@ -3546,8 +3604,6 @@ GameObject:
   - component: {fileID: 8273459482374254787}
   - component: {fileID: 1755575790829812756}
   - component: {fileID: 6608178519213617443}
-  - component: {fileID: 2703210912007669065}
-  - component: {fileID: 1605220350274199287}
   - component: {fileID: 3392709203779967207}
   m_Layer: 6
   m_Name: Player
@@ -4017,42 +4073,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227099894277660166}
   m_Enabled: 1
---- !u!114 &2703210912007669065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227099894277660166}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb463273e352b2f458a5d6c6ec317db6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgrades: {fileID: 1605220350274199287}
-  textUI: {fileID: 3219503500321553895}
---- !u!114 &1605220350274199287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1227099894277660166}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe49a8796f35908438a3de5b4acd7097, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modifiers:
-  - target: 0
-    stat: 0
-    add: 25
-    percent: 0
-    clampFinal: 0
-    min: 0
-    max: 0
-  autoApplyOnStart: 1
-  logBuild: 0
 --- !u!169 &3392709203779967207
 AudioLowPassFilter:
   m_ObjectHideFlags: 0
@@ -5184,16 +5204,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Burstfire Bow - Shooter Damage +5
-    powerUpDescription: Increase projectile damage by 5.
+    powerUpName: Burstfire Bow - Damage Up +<color=#8888FF>5</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>5</color>.
     powerUpObject: {fileID: 1617304167826018044}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
     weight: 50
   nextUpgrade: {fileID: 7837450647182704434}
-  icon: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
-  upgradeType: 10
+  upgradeType: 20
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
@@ -5756,20 +5775,77 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Melee Range +10%
-    powerUpDescription: Increase Melee attack radius by 10%.
+    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>10</color>%
+    powerUpDescription: Increases attack reach by <color=#8888FF>10</color>%.
     powerUpObject: {fileID: 1939926413673383864}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
     weight: 60
   nextUpgrade: {fileID: 1708445618590470888}
-  icon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
   upgradeType: 4
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
   value: 0.1
+--- !u!1 &2062737661056430337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3790662233413527961}
+  - component: {fileID: 3468760428863599239}
+  m_Layer: 6
+  m_Name: Upgrade 4 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3790662233413527961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062737661056430337}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7278172175999806099}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3468760428863599239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062737661056430337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Axe - Damage Up +<color=#8888FF>5</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>5</color>.
+    powerUpObject: {fileID: 2062737661056430337}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 6674386295937086461, guid: 314224ddc60daef45ad898b3faea6ff9, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 0}
+  upgradeType: 1
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 5
 --- !u!1 &2302453346357717577
 GameObject:
   m_ObjectHideFlags: 0
@@ -5815,15 +5891,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Demon Aura - Melee Damage +1
-    powerUpDescription: Increase Melee damage by 1.
+    powerUpName: Demon Aura - Damage Up +<color=#8888FF>1</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>1</color>.
     powerUpObject: {fileID: 2302453346357717577}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 3794317029188430971, guid: e95f3c2f1016aca409c82ca77489a1d3, type: 3}
     weight: 50
   nextUpgrade: {fileID: 5835820862633346808}
-  icon: {fileID: 3794317029188430971, guid: e95f3c2f1016aca409c82ca77489a1d3, type: 3}
   upgradeType: 1
   onCustomAwake:
     m_PersistentCalls:
@@ -5874,16 +5949,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Longshot Crossbow - Attack Speed +10%
-    powerUpDescription: Reduce attack interval by 10%.
+    powerUpName: Longshot Crossbow - Damage Up +<color=#8888FF>10</color>%
+    powerUpDescription: Increases weapon damage by <color=#8888FF>10</color>%.
     powerUpObject: {fileID: 2463701314012228658}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 5583272366953621293, guid: 9c929be9fa68d654e999a40812345349, type: 3}
     weight: 50
   nextUpgrade: {fileID: 7702521377397155651}
-  icon: {fileID: 5583272366953621293, guid: 9c929be9fa68d654e999a40812345349, type: 3}
-  upgradeType: 22
+  upgradeType: 21
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
@@ -6307,16 +6381,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: "Blowgun - Spread +-40.0\xB0"
-    powerUpDescription: Increase spread by -40.0 degrees.
+    powerUpName: "Blowgun - Spread +<color=#8888FF>-40.0</color>\xB0"
+    powerUpDescription: "Narrows firing spread by <color=#8888FF>-40.0</color>\xB0."
     powerUpObject: {fileID: 2754739268539261328}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 8463658199986224860, guid: 888d32849b78202429835a9568f223b8, type: 3}
     weight: 50
   nextUpgrade: {fileID: 765475432437154029}
-  icon: {fileID: 8463658199986224860, guid: 888d32849b78202429835a9568f223b8, type: 3}
-  upgradeType: 13
+  upgradeType: 23
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
@@ -7680,16 +7753,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Blowgun - Extra Projectiles +1
-    powerUpDescription: Fire 1 more projectile(s) per shot.
+    powerUpName: Blowgun - Projectile Count +<color=#8888FF>1</color>
+    powerUpDescription: Fires <color=#8888FF>1</color> additional projectile(s).
     powerUpObject: {fileID: 3190016390325641590}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 8463658199986224860, guid: 888d32849b78202429835a9568f223b8, type: 3}
     weight: 50
   nextUpgrade: {fileID: 0}
-  icon: {fileID: 8463658199986224860, guid: 888d32849b78202429835a9568f223b8, type: 3}
-  upgradeType: 12
+  upgradeType: 22
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
@@ -7705,7 +7777,7 @@ GameObject:
   - component: {fileID: 893505022041302612}
   - component: {fileID: 7329696752922098720}
   m_Layer: 6
-  m_Name: Upgrade 3
+  m_Name: Upgrade 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7739,15 +7811,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Knife - Multi-Target +1
-    powerUpDescription: Melee can hit 1 additional target(s) per tick.
+    powerUpName: Knife - Additional Targets +<color=#8888FF>1</color>
+    powerUpDescription: Allows strikes to affect <color=#8888FF>1</color> additional
+      target(s).
     powerUpObject: {fileID: 3203538148253821362}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
     weight: 50
   nextUpgrade: {fileID: 2818028153591757128}
-  icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
   upgradeType: 5
   onCustomAwake:
     m_PersistentCalls:
@@ -7847,15 +7919,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Axe - Multi-Target +1
-    powerUpDescription: Melee can hit 1 additional target(s) per tick.
+    powerUpName: Axe - Additional Targets +<color=#8888FF>1</color>
+    powerUpDescription: Allows strikes to affect <color=#8888FF>1</color> additional
+      target(s).
     powerUpObject: {fileID: 3318086922698768104}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 6674386295937086461, guid: 314224ddc60daef45ad898b3faea6ff9, type: 3}
     weight: 50
   nextUpgrade: {fileID: 7892373115348196174}
-  icon: {fileID: 6674386295937086461, guid: 314224ddc60daef45ad898b3faea6ff9, type: 3}
   upgradeType: 5
   onCustomAwake:
     m_PersistentCalls:
@@ -8592,15 +8664,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Axe - Melee Damage +5
-    powerUpDescription: Increase Melee damage by 5.
+    powerUpName: Axe - Damage Up +<color=#8888FF>5</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>5</color>.
     powerUpObject: {fileID: 3488441713488379910}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 6674386295937086461, guid: 314224ddc60daef45ad898b3faea6ff9, type: 3}
     weight: 50
-  nextUpgrade: {fileID: 0}
-  icon: {fileID: 6674386295937086461, guid: 314224ddc60daef45ad898b3faea6ff9, type: 3}
+  nextUpgrade: {fileID: 3468760428863599239}
   upgradeType: 1
   onCustomAwake:
     m_PersistentCalls:
@@ -8730,6 +8801,106 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 4.42
+--- !u!1 &3745500607999408937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5428185504581503555}
+  - component: {fileID: 115461220870199671}
+  - component: {fileID: 3655621090145072965}
+  m_Layer: 6
+  m_Name: Upgrade 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5428185504581503555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3745500607999408937}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5702712710036007540}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &115461220870199671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3745500607999408937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Extra Armor
+    powerUpDescription: +15 Armor
+    powerUpObject: {fileID: 3745500607999408937}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 52960055443897715, guid: 3827f6494089b5e40816c76b734ebb2c, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 0}
+--- !u!114 &3655621090145072965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3745500607999408937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Armor Upgrade
+  AccesoryDescription: +15 Armor
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Assembly-CSharp
+        m_MethodName: GiveArmor
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 15
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &3810719867447538245
 GameObject:
   m_ObjectHideFlags: 0
@@ -8775,15 +8946,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Sword - Multi-Target +1
-    powerUpDescription: Melee can hit 1 additional target(s) per tick.
+    powerUpName: Sword - Additional Targets +<color=#8888FF>1</color>
+    powerUpDescription: Allows strikes to affect <color=#8888FF>1</color> additional
+      target(s).
     powerUpObject: {fileID: 3810719867447538245}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 5734951662672692488, guid: 8540d4521fd661f499c22750fb5a8984, type: 3}
     weight: 50
   nextUpgrade: {fileID: 1594226970401455821}
-  icon: {fileID: 5734951662672692488, guid: 8540d4521fd661f499c22750fb5a8984, type: 3}
   upgradeType: 5
   onCustomAwake:
     m_PersistentCalls:
@@ -9597,15 +9768,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Melee Range +10%
-    powerUpDescription: Increase Melee attack radius by 10%.
+    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>10</color>%
+    powerUpDescription: Increases attack reach by <color=#8888FF>10</color>%.
     powerUpObject: {fileID: 4041443675930029742}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
     weight: 60
   nextUpgrade: {fileID: 227623854461044620}
-  icon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
   upgradeType: 4
   onCustomAwake:
     m_PersistentCalls:
@@ -9771,7 +9941,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2511805252884418071}
   m_Layer: 6
-  m_Name: Item Stats
+  m_Name: Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10518,15 +10688,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Melee Range +10%
-    powerUpDescription: Increase Melee attack radius by 10%.
+    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>10</color>%
+    powerUpDescription: Increases attack reach by <color=#8888FF>10</color>%.
     powerUpObject: {fileID: 4493435403853585137}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
     weight: 60
   nextUpgrade: {fileID: 3181845477372944175}
-  icon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
   upgradeType: 4
   onCustomAwake:
     m_PersistentCalls:
@@ -11194,6 +11363,106 @@ MonoBehaviour:
     shooterProjectiles: 1
     shooterRange: 1
     shooterAccuracy: 1
+--- !u!1 &4663817971425621555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3218670502317391469}
+  - component: {fileID: 5384659669158054330}
+  - component: {fileID: 6109215687142572846}
+  m_Layer: 6
+  m_Name: Upgrade 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3218670502317391469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4663817971425621555}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5702712710036007540}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5384659669158054330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4663817971425621555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Extra Armor
+    powerUpDescription: +15 Armor
+    powerUpObject: {fileID: 4663817971425621555}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 52960055443897715, guid: 3827f6494089b5e40816c76b734ebb2c, type: 3}
+    weight: 120
+  nextUpgrade: {fileID: 115461220870199671}
+--- !u!114 &6109215687142572846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4663817971425621555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Armor Upgrade
+  AccesoryDescription: +15 Armor
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Assembly-CSharp
+        m_MethodName: GiveArmor
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 15
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &4681122225694396133
 GameObject:
   m_ObjectHideFlags: 0
@@ -11721,16 +11990,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Longshot Crossbow - Shooter Damage +5
-    powerUpDescription: Increase projectile damage by 5.
+    powerUpName: Longshot Crossbow - Damage Up +<color=#8888FF>5</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>5</color>.
     powerUpObject: {fileID: 4863514102701704072}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 5583272366953621293, guid: 9c929be9fa68d654e999a40812345349, type: 3}
     weight: 50
   nextUpgrade: {fileID: 2864675131091241564}
-  icon: {fileID: 5583272366953621293, guid: 9c929be9fa68d654e999a40812345349, type: 3}
-  upgradeType: 10
+  upgradeType: 20
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
@@ -12237,15 +12505,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Axe - Melee Crit Chance +30%
-    powerUpDescription: Increase Melee critical hit chance by 30%.
+    powerUpName: Axe - Critical Chance +<color=#8888FF>30</color>%
+    powerUpDescription: Raises chance to critically strike by <color=#8888FF>30</color>%.
     powerUpObject: {fileID: 4968957011494331475}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 6674386295937086461, guid: 314224ddc60daef45ad898b3faea6ff9, type: 3}
     weight: 50
   nextUpgrade: {fileID: 6900721938385046628}
-  icon: {fileID: 6674386295937086461, guid: 314224ddc60daef45ad898b3faea6ff9, type: 3}
   upgradeType: 8
   onCustomAwake:
     m_PersistentCalls:
@@ -12371,16 +12638,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Longshot Crossbow - Explosions
-    powerUpDescription: The Crossbow now shoots explosive bolts!
+    powerUpName: Longshot Crossbow - Projectile Lifetime +<color=#8888FF>0.1</color>s
+    powerUpDescription: Extends projectile lifetime by <color=#8888FF>0.1</color>s.
     powerUpObject: {fileID: 5175108747474265233}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 5583272366953621293, guid: 9c929be9fa68d654e999a40812345349, type: 3}
     weight: 10
   nextUpgrade: {fileID: 0}
-  icon: {fileID: 5583272366953621293, guid: 9c929be9fa68d654e999a40812345349, type: 3}
-  upgradeType: 27
+  upgradeType: 43
   onCustomAwake:
     m_PersistentCalls:
       m_Calls:
@@ -12649,15 +12915,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Sword - Melee Damage +4
-    powerUpDescription: Increase Melee damage by 4.
+    powerUpName: Sword - Damage Up +<color=#8888FF>4</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>4</color>.
     powerUpObject: {fileID: 5270625494332502256}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 5734951662672692488, guid: 8540d4521fd661f499c22750fb5a8984, type: 3}
     weight: 50
   nextUpgrade: {fileID: 152948157228144700}
-  icon: {fileID: 5734951662672692488, guid: 8540d4521fd661f499c22750fb5a8984, type: 3}
   upgradeType: 1
   onCustomAwake:
     m_PersistentCalls:
@@ -12818,16 +13083,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Longshot Crossbow - Shooter Damage +10
-    powerUpDescription: Increase projectile damage by 10.
+    powerUpName: Longshot Crossbow - Damage Up +<color=#8888FF>1000</color>%
+    powerUpDescription: Increases weapon damage by <color=#8888FF>1000</color>%.
     powerUpObject: {fileID: 5317122567970793903}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 5583272366953621293, guid: 9c929be9fa68d654e999a40812345349, type: 3}
     weight: 50
   nextUpgrade: {fileID: 2890122289841820389}
-  icon: {fileID: 5583272366953621293, guid: 9c929be9fa68d654e999a40812345349, type: 3}
-  upgradeType: 10
+  upgradeType: 21
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
@@ -12885,7 +13149,7 @@ MonoBehaviour:
     IsWeapon: 0
     powerUpIcon: {fileID: 52960055443897715, guid: 3827f6494089b5e40816c76b734ebb2c, type: 3}
     weight: 120
-  nextUpgrade: {fileID: 0}
+  nextUpgrade: {fileID: 5384659669158054330}
 --- !u!114 &1528986905927859907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12977,15 +13241,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Demon Aura - Melee Range +0.50
-    powerUpDescription: Increase Melee attack radius by 0.50 units.
+    powerUpName: Demon Aura - Range Up +<color=#8888FF>0.50</color>
+    powerUpDescription: Increases attack reach by <color=#8888FF>0.50</color>.
     powerUpObject: {fileID: 5614068464345813072}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 3794317029188430971, guid: e95f3c2f1016aca409c82ca77489a1d3, type: 3}
     weight: 50
   nextUpgrade: {fileID: 0}
-  icon: {fileID: 3794317029188430971, guid: e95f3c2f1016aca409c82ca77489a1d3, type: 3}
   upgradeType: 3
   onCustomAwake:
     m_PersistentCalls:
@@ -13570,20 +13833,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Aegis - Shooter Damage +12%
-    powerUpDescription: Increase projectile damage by 12%.
+    powerUpName: Phantom Aegis - Critical Chance +<color=#8888FF>9</color>%
+    powerUpDescription: Raises chance to critically strike by <color=#8888FF>9</color>%.
     powerUpObject: {fileID: 6079404619763886863}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 2413123233239279179, guid: c88de95292f601e45a7201a73044aae7, type: 3}
     weight: 50
   nextUpgrade: {fileID: 793763298106340619}
-  icon: {fileID: 2413123233239279179, guid: c88de95292f601e45a7201a73044aae7, type: 3}
-  upgradeType: 11
+  upgradeType: 29
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
-  value: 0.12
+  value: 0.089549154
 --- !u!1 &6126120192382749192
 GameObject:
   m_ObjectHideFlags: 0
@@ -14030,20 +14292,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Aegis - Shooter Damage +5
-    powerUpDescription: Increase projectile damage by 5.
+    powerUpName: Phantom Aegis - Projectile Speed +<color=#8888FF>47</color>%
+    powerUpDescription: Increases projectile speed by <color=#8888FF>47</color>%.
     powerUpObject: {fileID: 6232033710074107890}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 2413123233239279179, guid: c88de95292f601e45a7201a73044aae7, type: 3}
     weight: 50
   nextUpgrade: {fileID: 7800380701126326079}
-  icon: {fileID: 2413123233239279179, guid: c88de95292f601e45a7201a73044aae7, type: 3}
-  upgradeType: 10
+  upgradeType: 26
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
-  value: 5
+  value: 0.46710935
 --- !u!1 &6236938002615705278
 GameObject:
   m_ObjectHideFlags: 0
@@ -14471,6 +14732,8 @@ Transform:
   m_Children:
   - {fileID: 3884449115556776632}
   - {fileID: 4355301809800684394}
+  - {fileID: 3218670502317391469}
+  - {fileID: 5428185504581503555}
   m_Father: {fileID: 5432253268087408168}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4104966517400091509
@@ -14988,15 +15251,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Axe - Melee Damage +4
-    powerUpDescription: Increase Melee damage by 4.
+    powerUpName: Axe - Damage Up +<color=#8888FF>4</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>4</color>.
     powerUpObject: {fileID: 6624940588092883440}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 6674386295937086461, guid: 314224ddc60daef45ad898b3faea6ff9, type: 3}
     weight: 50
   nextUpgrade: {fileID: 5032476681555639029}
-  icon: {fileID: 6674386295937086461, guid: 314224ddc60daef45ad898b3faea6ff9, type: 3}
   upgradeType: 1
   onCustomAwake:
     m_PersistentCalls:
@@ -15382,6 +15644,7 @@ MonoBehaviour:
   spriteOffset: {x: 0.5, y: 0, z: 0}
   spriteScale: 3
   sortingOrder: 5
+  playerSpriteRenderer: {fileID: 30405735645601086}
 --- !u!1 &6801449437457073045
 GameObject:
   m_ObjectHideFlags: 0
@@ -17721,15 +17984,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Demon Aura - Melee Damage +1
-    powerUpDescription: Increase Melee damage by 1.
+    powerUpName: Demon Aura - Damage Up +<color=#8888FF>1</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>1</color>.
     powerUpObject: {fileID: 7847374846165817178}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 3794317029188430971, guid: e95f3c2f1016aca409c82ca77489a1d3, type: 3}
     weight: 50
   nextUpgrade: {fileID: 7716795965288129474}
-  icon: {fileID: 3794317029188430971, guid: e95f3c2f1016aca409c82ca77489a1d3, type: 3}
   upgradeType: 1
   onCustomAwake:
     m_PersistentCalls:
@@ -17977,15 +18239,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Melee Range +10%
-    powerUpDescription: Increase Melee attack radius by 10%.
+    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>10</color>%
+    powerUpDescription: Increases attack reach by <color=#8888FF>10</color>%.
     powerUpObject: {fileID: 7952360591557015454}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
     weight: 1
   nextUpgrade: {fileID: 0}
-  icon: {fileID: -4123865958783411403, guid: 0a366753cfc322c4fa3a5d298da696f0, type: 3}
   upgradeType: 4
   onCustomAwake:
     m_PersistentCalls:
@@ -18036,16 +18297,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Burstfire Bow - Shooter Damage +5
-    powerUpDescription: Increase projectile damage by 5.
+    powerUpName: Burstfire Bow - Damage Up +<color=#8888FF>5</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>5</color>.
     powerUpObject: {fileID: 8075213717505226598}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
     weight: 50
   nextUpgrade: {fileID: 1901669996297178071}
-  icon: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
-  upgradeType: 10
+  upgradeType: 20
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
@@ -19131,20 +19391,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Knife - Melee Crit Chance +30%
-    powerUpDescription: Increase Melee critical hit chance by 30%.
+    powerUpName: Knife - Damage Up +<color=#8888FF>10</color>%
+    powerUpDescription: Increases weapon damage by <color=#8888FF>10</color>%.
     powerUpObject: {fileID: 8429005387526368443}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
     weight: 50
-  nextUpgrade: {fileID: 7329696752922098720}
-  icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
-  upgradeType: 8
+  nextUpgrade: {fileID: 536879122363180388}
+  upgradeType: 2
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
-  value: 0.3
+  value: 0.1
 --- !u!1 &8429739856138232991
 GameObject:
   m_ObjectHideFlags: 0
@@ -19190,15 +19449,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Knife - Melee Damage +4
-    powerUpDescription: Increase Melee damage by 4.
+    powerUpName: Knife - Damage Up +<color=#8888FF>4</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>4</color>.
     powerUpObject: {fileID: 8429739856138232991}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
     weight: 50
   nextUpgrade: {fileID: 3380080085700406463}
-  icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
   upgradeType: 1
   onCustomAwake:
     m_PersistentCalls:
@@ -19900,16 +20158,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Burstfire Sidearm - Chain Projectiles
-    powerUpDescription: Projectiles now chain.
+    powerUpName: Burstfire Bow - Projectile Lifetime +<color=#8888FF>1.0</color>s
+    powerUpDescription: Extends projectile lifetime by <color=#8888FF>1.0</color>s.
     powerUpObject: {fileID: 8596700537061007026}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
     weight: 50
   nextUpgrade: {fileID: 0}
-  icon: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
-  upgradeType: 27
+  upgradeType: 43
   onCustomAwake:
     m_PersistentCalls:
       m_Calls:
@@ -20428,7 +20685,7 @@ GameObject:
   - component: {fileID: 6488690948797804823}
   - component: {fileID: 2818028153591757128}
   m_Layer: 6
-  m_Name: Upgrade 4
+  m_Name: Upgrade 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20462,15 +20719,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Knife - Melee Damage +5
-    powerUpDescription: Increase Melee damage by 5.
+    powerUpName: Knife - Damage Up +<color=#8888FF>5</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>5</color>.
     powerUpObject: {fileID: 8892643798934483796}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
     weight: 50
   nextUpgrade: {fileID: 0}
-  icon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
   upgradeType: 1
   onCustomAwake:
     m_PersistentCalls:
@@ -20727,8 +20983,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7421385838098957427}
+  m_Children: []
   m_Father: {fileID: 1292039828634639122}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -21372,133 +21627,4 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 811548532155576536, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
   m_PrefabInstance: {fileID: 472765027092829817}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &2030728787442777361
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 288510957997346985}
-    m_Modifications:
-    - target: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_Name
-      value: Player Stats
-      objectReference: {fileID: 0}
-    - target: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2437329178567256084, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_PixelsPerUnitMultiplier
-      value: 1.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 3495743780985061622, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_fontSize
-      value: 26
-      objectReference: {fileID: 0}
-    - target: {fileID: 6093303508278917047, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 320.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 427.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 554.82996
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -213.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 890a4bca294df43468ac696383a99644, type: 3}
---- !u!114 &3219503500321553895 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3495743780985061622, guid: 890a4bca294df43468ac696383a99644, type: 3}
-  m_PrefabInstance: {fileID: 2030728787442777361}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!224 &7421385838098957427 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-  m_PrefabInstance: {fileID: 2030728787442777361}
   m_PrefabAsset: {fileID: 0}
