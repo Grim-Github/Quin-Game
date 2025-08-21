@@ -755,6 +755,7 @@ GameObject:
   - component: {fileID: 3570729368270483169}
   - component: {fileID: 5189756175646396021}
   - component: {fileID: 1667156782506404961}
+  - component: {fileID: 1031026390126303283}
   m_Layer: 6
   m_Name: Axe
   m_TagString: Untagged
@@ -1029,6 +1030,23 @@ MonoBehaviour:
     defaultMinMax: {x: 0.4, y: 1.75}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
+--- !u!114 &1031026390126303283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374135658928197448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3449e7c3fa3c3348ab19cd4ac78624b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swingAngle: 40
+  swingDuration: 0.3
+  spriteOffset: {x: 0.5, y: 0, z: 0}
+  spriteScale: 3
+  sortingOrder: 5
 --- !u!1 &414099259750872978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,13 +1566,14 @@ GameObject:
   - component: {fileID: 8955573920365390618}
   - component: {fileID: 2550362612929724823}
   - component: {fileID: 5912186355098419825}
+  - component: {fileID: 1702872602865300714}
   m_Layer: 6
   m_Name: Knife
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5526111780517100950
 Transform:
   m_ObjectHideFlags: 0
@@ -1822,6 +1841,23 @@ MonoBehaviour:
     defaultMinMax: {x: 0.4, y: 1.75}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
+--- !u!114 &1702872602865300714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703362848269068923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3449e7c3fa3c3348ab19cd4ac78624b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swingAngle: 120
+  swingDuration: 0.3
+  spriteOffset: {x: 0.5, y: 0, z: 0}
+  spriteScale: 3
+  sortingOrder: 5
 --- !u!1 &763878338640954299
 GameObject:
   m_ObjectHideFlags: 0
@@ -15054,6 +15090,7 @@ GameObject:
   - component: {fileID: 8518473475936388659}
   - component: {fileID: 5343019531519531953}
   - component: {fileID: 6907940236970892765}
+  - component: {fileID: 1169816254535209958}
   m_Layer: 6
   m_Name: Sword
   m_TagString: Untagged
@@ -15328,6 +15365,23 @@ MonoBehaviour:
     defaultMinMax: {x: 0.4, y: 1.75}
   onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
+--- !u!114 &1169816254535209958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678805226392397752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3449e7c3fa3c3348ab19cd4ac78624b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swingAngle: 40
+  swingDuration: 0.3
+  spriteOffset: {x: 0.5, y: 0, z: 0}
+  spriteScale: 3
+  sortingOrder: 5
 --- !u!1 &6801449437457073045
 GameObject:
   m_ObjectHideFlags: 0

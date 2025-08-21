@@ -72,6 +72,7 @@ public class Knife : MonoBehaviour
     private AudioSource shootSource;
     private SimpleHealth parentHealth;
     private WeaponTick wt;
+    private WeaponSwingAnimator swingAnimator;
     private PowerUpChooser powerUpChooser;
 
     private void Awake()
@@ -109,6 +110,7 @@ public class Knife : MonoBehaviour
         }
 
         wt = GetComponent<WeaponTick>();
+        swingAnimator = GetComponent<WeaponSwingAnimator>();
         UpdateStatsText();
         UpdateRangeVisual();
     }
@@ -168,6 +170,10 @@ public class Knife : MonoBehaviour
     }
     public void OnKnifeTick()
     {
+        if (swingAnimator != null)
+        {
+            swingAnimator.Swing();
+        }
 
 
         if (selfSfxObject != null)

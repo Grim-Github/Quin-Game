@@ -132,8 +132,6 @@ public class Snappy2DController : MonoBehaviour
                 dashSlider.value = fill; // cooling down → fill growing
         }
 
-
-
         if (isDashing)
         {
             rb.linearVelocity = dashDirection * dashSpeed;
@@ -142,35 +140,36 @@ public class Snappy2DController : MonoBehaviour
             return;
         }
 
+        // First, determine the intended velocity based on input and movement mode
+        Vector2 intendedVelocity;
         if (instant)
         {
-            rb.linearVelocity = targetVelocity;
+            intendedVelocity = targetVelocity;
         }
         else
         {
+            // For smoothed movement, we update the 'velocity' field
             velocity = Vector2.MoveTowards(velocity, targetVelocity, acceleration * Time.fixedDeltaTime);
-            if (TryGetComponent<StatusEffectSystem>(out StatusEffectSystem ses))
-            {
-                // If stunned OR frozen, stop movement
-                if (ses.HasStatus(StatusEffectSystem.StatusType.Stun) ||
-                    ses.HasStatus(StatusEffectSystem.StatusType.Frozen))
-                {
-                    rb.linearVelocity = Vector2.zero;
-                }
-                else
-                {
-                    // Otherwise, apply normal or boosted speed
-                    if (ses.HasStatus(StatusEffectSystem.StatusType.Speed))
-                    {
-                        rb.linearVelocity = velocity * 2;
-                    }
-                    else
-                    {
-                        rb.linearVelocity = velocity;
-                    }
-                }
-            }
-
+            intendedVelocity = velocity;
         }
+
+        // Now, apply status effects to the intended velocity
+        if (TryGetComponent<StatusEffectSystem>(out StatusEffectSystem ses))
+        {
+            // If stunned OR frozen, force velocity to zero
+            if (ses.HasStatus(StatusEffectSystem.StatusType.Stun) ||
+                ses.HasStatus(StatusEffectSystem.StatusType.Frozen))
+            {
+                intendedVelocity = Vector2.zero;
+            }
+            // If hasted, multiply velocity
+            else if (ses.HasStatus(StatusEffectSystem.StatusType.Speed))
+            {
+                intendedVelocity *= 2;
+            }
+        }
+
+        // Finally, apply the calculated velocity to the rigidbody
+        rb.linearVelocity = intendedVelocity;
     }
 }
