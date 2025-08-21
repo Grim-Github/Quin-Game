@@ -106,6 +106,11 @@ public class SimpleHealth : MonoBehaviour
     private Snappy2DController movementController;
     private readonly System.Text.StringBuilder _statsBuilder = new System.Text.StringBuilder(256);
 
+    // Cached components for performance
+    private DPSChecker _dpsChecker;
+    private StatusEffectSystem _statusEffectSystem;
+    private OrthoScrollZoom _orthoScrollZoom;
+
     // Stats UI (now matches Knife.cs pattern)
     // Split into separate parts instead of one giant text block
     [HideInInspector] public TextMeshProUGUI healthStatsText;
@@ -127,10 +132,13 @@ public class SimpleHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(startingHealth, 0, maxHealth);
         SyncSlider();
 
+        // Cache components
         filter = GetComponent<AudioLowPassFilter>();
-
         movementController = GetComponent<Snappy2DController>();
         soundSource = GetComponent<AudioSource>();
+        _dpsChecker = GetComponent<DPSChecker>();
+        _statusEffectSystem = GetComponent<StatusEffectSystem>();
+        _orthoScrollZoom = FindAnyObjectByType<OrthoScrollZoom>(); // Note: Still searches scene once. Consider a singleton or service locator for manager-type objects.
 
         if (spriteRenderer == null)
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -403,16 +411,16 @@ public class SimpleHealth : MonoBehaviour
 
         lastDamageTaken = dmg;
         lastDamageType = type;
-        GetComponent<DPSChecker>()?.RegisterDamage(dmg);
+        _dpsChecker?.RegisterDamage(dmg);
 
         //ailments
-        if (TryGetComponent<StatusEffectSystem>(out StatusEffectSystem ses))
+        if (_statusEffectSystem != null)
         {
-            if (ses.HasStatus(StatusEffectSystem.StatusType.Shock))
+            if (_statusEffectSystem.HasStatus(StatusEffectSystem.StatusType.Shock))
                 dmg *= 2;
             if (applyAilments)
             {
-                TryApplyAilments(ses, type, dmg);
+                TryApplyAilments(_statusEffectSystem, type, dmg);
             }
 
         }
@@ -464,7 +472,7 @@ public class SimpleHealth : MonoBehaviour
             float shakeStrength = Mathf.Clamp01((float)dmg * 3 / maxHealth); // 0..1 based on % HP lost
             float duration = Mathf.Lerp(0.05f, 0.1f, shakeStrength);          // small to big duration
             float intensity = Mathf.Lerp(0.5f, 3f, shakeStrength);             // small to big intensity
-            FindAnyObjectByType<OrthoScrollZoom>()?.CameraShake(duration, intensity);
+            _orthoScrollZoom?.CameraShake(duration, intensity);
         }
 
         UpdateStatsText();
