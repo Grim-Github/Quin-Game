@@ -437,7 +437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameGUI: {fileID: 4184141167979861600}
   power: 0
-  rarityBiasPerPower: 0.05
+  rarityBiasPerPower: 0.02
   statRangeMultPerPower: 0.03
   cadenceBoostPerPower: 0.01
   maxRangeMultiplier: 100
@@ -454,26 +454,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb9065a6616ec8e44bfb41893b50bd5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rollOnStart: 1
+  rollOnStart: 0
   rerollWeaponDamageType: 1
   rarity: 0
   weightCommon: 60
   weightUncommon: 25
   weightRare: 12
   weightLegendary: 3
-  hpFlatAdd: {x: 15, y: 60}
-  hpMult: {x: 1.1, y: 1.35}
-  regenAdd: {x: 0.2, y: 2}
+  hpFlatAdd: {x: 15, y: 50}
+  hpMult: {x: 1.1, y: 1.3}
+  regenAdd: {x: 0.2, y: 1}
   armorAdd: {x: 1, y: 6}
-  moveSpeedAdd: {x: 0.5, y: 2.5}
-  atkSpeedFracAll: {x: 0.08, y: 0.25}
-  KnifeDamageFlat: {x: 2, y: 12}
-  KnifeDamageMult: {x: 1.08, y: 1.3}
+  moveSpeedAdd: {x: 0.5, y: 1}
+  atkSpeedFracAll: {x: 0.08, y: 0.1}
+  KnifeDamageFlat: {x: 2, y: 10}
+  KnifeDamageMult: {x: 1.08, y: 1.1}
   KnifeLifestealAdd: {x: 0.03, y: 0.15}
-  KnifeCritChanceAdd: {x: 0.05, y: 0.2}
-  KnifeCritMultAdd: {x: 0.2, y: 0.8}
-  shooterDamageFlat: {x: 2, y: 12}
-  shooterDamageMult: {x: 1.08, y: 1.3}
+  KnifeCritChanceAdd: {x: 0.05, y: 0.1}
+  KnifeCritMultAdd: {x: 0.2, y: 0.3}
+  shooterDamageFlat: {x: 2, y: 6}
+  shooterDamageMult: {x: 1.08, y: 0.1}
   shooterProjectilesAdd: {x: 1, y: 2}
 --- !u!114 &5771517332839581349
 MonoBehaviour:

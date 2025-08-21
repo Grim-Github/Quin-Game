@@ -23,6 +23,8 @@ public class OrthoScrollZoom : MonoBehaviour
     [SerializeField] private CinemachineBasicMultiChannelPerlin perlin;
     [Tooltip("Frequency used while shaking.")]
     [SerializeField] private float shakeFrequency = 2f;
+    [Tooltip("The maximum duration the camera shake can accumulate to.")]
+    [SerializeField] private float maxShakeDuration = 1;
 
     private float _targetSize;
     private float _currentSize;
@@ -109,7 +111,7 @@ public class OrthoScrollZoom : MonoBehaviour
             return;
         }
 
-        if (duration > 0f) _shakeDuration += duration;
+        if (duration > 0f) _shakeDuration = Mathf.Min(_shakeDuration + duration, maxShakeDuration);
         if (intensity > 0f) _shakeIntensity += intensity;
     }
 }

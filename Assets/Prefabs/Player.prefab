@@ -128,7 +128,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 467.46, y: -19.673706}
+  m_AnchoredPosition: {x: 467.46, y: -19.673645}
   m_SizeDelta: {x: 83.8057, y: -39.349}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &58172944614052687
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1.89
+  m_PixelsPerUnitMultiplier: 4.24
 --- !u!1 &92474740053100050
 GameObject:
   m_ObjectHideFlags: 0
@@ -1706,7 +1706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c98c24205b75b42bc1375d05964c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 0.7
+  interval: 0.5
   startOnAwake: 1
   repeat: 1
   useUnscaledTime: 0
@@ -2112,7 +2112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Life Ring
-  AccesoryDescription: +10 Max Health
+  AccesoryDescription: +25 Max Health
   icon: {fileID: -3829404428989594871, guid: 143f7645e4c79644ab93253bc2898b96, type: 3}
   onAwake:
     m_PersistentCalls:
@@ -2124,7 +2124,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
+          m_IntArgument: 25
           m_FloatArgument: 5
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6497,7 +6497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring
-  AccesoryDescription: +20% Poison Resist
+  AccesoryDescription: +30% Poison Resist
   icon: {fileID: -6028249209390854301, guid: 1c97851b30daf4e4f994364accc37593, type: 3}
   onAwake:
     m_PersistentCalls:
@@ -6510,7 +6510,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.2
+          m_FloatArgument: 0.3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -7821,7 +7821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0.7
-  damage: 2
+  damage: 5
   damageType: 0
   targetMask:
     serializedVersion: 2
@@ -7837,8 +7837,8 @@ MonoBehaviour:
   statusApplyChance: 0.1
   statusEffectOnHit: 0
   statusEffectDuration: 3
-  lifestealPercent: 0.1
-  critChance: 0
+  lifestealPercent: 0
+  critChance: 0.02
   critMultiplier: 2
   nextUpgrade: {fileID: 1155912120430787670}
   shootClip: {fileID: 0}
@@ -7870,8 +7870,8 @@ MonoBehaviour:
   - {fileID: 1622259568897221392}
   - {fileID: 5685144089492879069}
   - {fileID: 7949703235095861557}
-  distance: 1.7
-  speed: 120
+  distance: 2
+  speed: 100
   startAngleDegrees: 0
 --- !u!114 &2487946357741454958
 MonoBehaviour:
@@ -10814,7 +10814,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1.57
+  m_PixelsPerUnitMultiplier: 4.24
 --- !u!1 &4062916075799969645
 GameObject:
   m_ObjectHideFlags: 0
@@ -10928,7 +10928,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -538.25507, y: -12.418945}
+  m_AnchoredPosition: {x: -538.2551, y: -12.419006}
   m_SizeDelta: {x: -1076.5105, y: -24.839}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4154395797457514244
@@ -12075,7 +12075,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 13.333333, y: 13.333333, z: 1}
+  m_LocalScale: {x: 12.666666, y: 12.666666, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1711483935615806107}
@@ -12095,7 +12095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c98c24205b75b42bc1375d05964c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 0.2
+  interval: 0.35
   startOnAwake: 1
   repeat: 1
   useUnscaledTime: 0
@@ -12129,8 +12129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417756cd4c94eef498d4c38e016c552b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
-  damage: 2
+  radius: 1.9
+  damage: 10
   damageType: 0
   targetMask:
     serializedVersion: 2
@@ -14818,7 +14818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring
-  AccesoryDescription: +20% Lightning Resist
+  AccesoryDescription: +30% Lightning Resist
   icon: {fileID: 5851173540246750970, guid: dd1d1a126a95adf4fb3a415d883f957c, type: 3}
   onAwake:
     m_PersistentCalls:
@@ -14831,7 +14831,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.2
+          m_FloatArgument: 0.3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -15428,14 +15428,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 0.392}
+  m_Color: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: -5146924611606043671, guid: 888cad938ef07bc4d8a64b6789c3bd3c, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15444,7 +15444,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 2
 --- !u!114 &6839885664284875798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18592,7 +18592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring
-  AccesoryDescription: +20% Cold Resist
+  AccesoryDescription: +30% Cold Resist
   icon: {fileID: -7795961845520942047, guid: 9b6ed8614b56ddc48bc4d86f32db2486, type: 3}
   onAwake:
     m_PersistentCalls:
@@ -18605,7 +18605,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.2
+          m_FloatArgument: 0.3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -23206,7 +23206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring
-  AccesoryDescription: +20% Fire Resist
+  AccesoryDescription: +30% Fire Resist
   icon: {fileID: -5804952844029615345, guid: 840f4d57e89cf754083a2065097a1196, type: 3}
   onAwake:
     m_PersistentCalls:
@@ -23219,7 +23219,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.2
+          m_FloatArgument: 0.3
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -24113,7 +24113,7 @@ MonoBehaviour:
   clampMargin: {x: 8, y: 8}
   tooltipOffset: {x: 100, y: -50}
   autoHideWhenNoTarget: 1
-  hideDelay: 0.3
+  hideDelay: 0.5
 --- !u!114 &8168550893881944780
 MonoBehaviour:
   m_ObjectHideFlags: 0

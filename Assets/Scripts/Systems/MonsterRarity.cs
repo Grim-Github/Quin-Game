@@ -16,40 +16,40 @@ public class MonsterRarity : MonoBehaviour
     [SerializeField] private Rarity rarity = Rarity.Common;
 
     [Header("Rarity Weights")]
-    [SerializeField] private float weightCommon = 60f;
-    [SerializeField] private float weightUncommon = 25f;
-    [SerializeField] private float weightRare = 12f;
-    [SerializeField] private float weightLegendary = 3f;
+    [SerializeField] public float weightCommon = 60f;
+    [SerializeField] public float weightUncommon = 25f;
+    [SerializeField] public float weightRare = 12f;
+    [SerializeField] public float weightLegendary = 3f;
 
     // === Enemy (SimpleHealth) roll ranges ===
     [Header("Enemy Health & Defense Rolls")]
-    [SerializeField] private Vector2Int hpFlatAdd = new Vector2Int(15, 60);
-    [SerializeField] private Vector2 hpMult = new Vector2(1.10f, 1.35f);
-    [SerializeField] private Vector2 regenAdd = new Vector2(0.2f, 2.0f);
-    [SerializeField] private Vector2 armorAdd = new Vector2(1f, 6f);
+    [SerializeField] public Vector2Int hpFlatAdd = new Vector2Int(15, 60);
+    [SerializeField] public Vector2 hpMult = new Vector2(1.10f, 1.35f);
+    [SerializeField] public Vector2 regenAdd = new Vector2(0.2f, 2.0f);
+    [SerializeField] public Vector2 armorAdd = new Vector2(1f, 6f);
 
     // === Movement (EnemyChaser) ===
     [Header("Chase / Movement Rolls")]
-    [SerializeField] private Vector2 moveSpeedAdd = new Vector2(0.5f, 2.5f);
+    [SerializeField] public Vector2 moveSpeedAdd = new Vector2(0.5f, 2.5f);
 
     // === Global cadence (WeaponTick) ===
     [Header("Global Attack Cadence (WeaponTick)")]
-    [SerializeField] private Vector2 atkSpeedFracAll = new Vector2(0.08f, 0.25f);
+    [SerializeField] public Vector2 atkSpeedFracAll = new Vector2(0.08f, 0.25f);
 
     // === Knife rolls (public fields) ===
     [Header("Knife Rolls")]
-    [SerializeField] private Vector2Int KnifeDamageFlat = new Vector2Int(2, 12);
-    [SerializeField] private Vector2 KnifeDamageMult = new Vector2(1.08f, 1.30f);
-    [SerializeField] private Vector2 KnifeLifestealAdd = new Vector2(0.03f, 0.15f);
+    [SerializeField] public Vector2Int KnifeDamageFlat = new Vector2Int(2, 12);
+    [SerializeField] public Vector2 KnifeDamageMult = new Vector2(1.08f, 1.30f);
+    [SerializeField] public Vector2 KnifeLifestealAdd = new Vector2(0.03f, 0.15f);
     // NOTE: removed KnifeMaxTargetsAdd (per request)
-    [SerializeField] private Vector2 KnifeCritChanceAdd = new Vector2(0.05f, 0.20f);
-    [SerializeField] private Vector2 KnifeCritMultAdd = new Vector2(0.20f, 0.80f);
+    [SerializeField] public Vector2 KnifeCritChanceAdd = new Vector2(0.05f, 0.20f);
+    [SerializeField] public Vector2 KnifeCritMultAdd = new Vector2(0.20f, 0.80f);
 
     // === Shooter rolls (public fields) ===
     [Header("Shooter Rolls")]
-    [SerializeField] private Vector2Int shooterDamageFlat = new Vector2Int(2, 12);
-    [SerializeField] private Vector2 shooterDamageMult = new Vector2(1.08f, 1.30f);
-    [SerializeField] private Vector2Int shooterProjectilesAdd = new Vector2Int(1, 2);
+    [SerializeField] public Vector2Int shooterDamageFlat = new Vector2Int(2, 12);
+    [SerializeField] public Vector2 shooterDamageMult = new Vector2(1.08f, 1.30f);
+    [SerializeField] public Vector2Int shooterProjectilesAdd = new Vector2Int(1, 2);
 
     // Cached refs
     private SimpleHealth health;        // needs public: int maxHealth, int currentHealth, float regenRate, float armor;
@@ -85,8 +85,12 @@ public class MonsterRarity : MonoBehaviour
 
     private void Start()
     {
-        if (rollOnStart)
+        // If a ChatterStats component is present, it will handle the initial roll
+        // to ensure power scaling is applied first.
+        if (rollOnStart && GetComponent<ChatterStats>() == null)
+        {
             RerollRarity();
+        }
     }
 
     private void OnTransformChildrenChanged() => RefreshCachedRefs();

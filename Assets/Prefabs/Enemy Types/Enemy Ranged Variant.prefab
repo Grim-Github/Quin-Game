@@ -151,7 +151,7 @@ MonoBehaviour:
   statusEffectOnHit: 0
   statusEffectDuration: 3
   projectileCount: 1
-  spreadAngle: 0
+  spreadAngle: 10
   shootClip: {fileID: 8300000, guid: 28098e249b2b44641bec4d77c19f97ce, type: 3}
   statsTextPrefab: {fileID: 0}
   uiParent: {fileID: 0}
@@ -357,7 +357,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8129514716054302165, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2659867389249366696, guid: 1d85ce27048d219438f8e55222ed1e2e, type: 3}
       insertIndex: -1
