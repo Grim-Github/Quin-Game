@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: df2074a13925ba248b5f0f1f6cb3ad75
+AssetOrigin:
+  serializedVersion: 1
+  productId: 303181
+  packageName: "Wingman - Your Inspector\u2019s Best Friend"
+  packageVersion: 1.2.1
+  assetPath: Assets/Wingman/WingmanIcons.png
+  uploadId: 762200
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -141,10 +148,3 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 303181
-  packageName: "Wingman - Your Inspector\u2019s Best Friend"
-  packageVersion: 1.2.1
-  assetPath: Assets/Wingman/WingmanIcons.png
-  uploadId: 762200

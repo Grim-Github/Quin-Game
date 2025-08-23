@@ -51,6 +51,7 @@ public class UIInventory : MonoBehaviour
             // Find UI components (first in children)
             Image iconImage = entry.transform.GetChild(1).GetComponent<Image>();
             TextMeshProUGUI amountText = entry.GetComponentInChildren<TextMeshProUGUI>(true);
+            Button button = entry.GetComponentInChildren<Button>(true);
 
             if (iconImage != null)
             {
@@ -61,6 +62,14 @@ public class UIInventory : MonoBehaviour
 
             if (amountText != null)
                 amountText.text = $"{item.itemName} x{item.amount}";
+
+            // Assign UnityEvent from item to the UI button
+            if (button != null)
+            {
+                button.onClick.RemoveAllListeners();
+                string capturedName = item.itemName;
+                button.onClick.AddListener(() => inventory.InvokeItemEvent(capturedName));
+            }
         }
     }
 }

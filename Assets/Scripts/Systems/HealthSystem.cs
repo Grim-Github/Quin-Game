@@ -131,6 +131,7 @@ public class SimpleHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(startingHealth, 0, maxHealth);
         SyncSlider();
 
+
         // Cache components
         filter = GetComponent<AudioLowPassFilter>();
         movementController = GetComponent<Snappy2DController>();
@@ -226,7 +227,7 @@ public class SimpleHealth : MonoBehaviour
                 UpdateStatsText();
             }
         }
-
+        if (currentHealth <= 0) Die();
         UpdateVolume();
     }
 
@@ -488,6 +489,7 @@ public class SimpleHealth : MonoBehaviour
 
         UpdateStatsText();
 
+        // New rule: reaching 0 HP always dies, even if there is reserve
         if (currentHealth <= 0) Die();
         else if (invulnerabilityDuration > 0) StartCoroutine(InvulnerabilityCoroutine());
     }
@@ -545,6 +547,12 @@ public class SimpleHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         SyncSlider();
         UpdateStatsText();
+        // If reservation fully consumes capacity, die immediately
+        if (reservedHealth >= maxHealth)
+        {
+            currentHealth = 0;
+            Die();
+        }
     }
 
     public void Kill()
@@ -558,9 +566,17 @@ public class SimpleHealth : MonoBehaviour
 
     public void ResetHealth()
     {
-        currentHealth = maxHealth;
+        // Effective max is maxHealth minus reserved portion
+        int effectiveMax = Mathf.Max(0, maxHealth - Mathf.Clamp(reservedHealth, 0, maxHealth));
+        currentHealth = effectiveMax;
         SyncSlider();
         UpdateStatsText();
+        // If reservation fully consumes capacity, die immediately
+        if (reservedHealth >= maxHealth)
+        {
+            currentHealth = 0;
+            Die();
+        }
     }
 
     private void Die()
@@ -615,20 +631,31 @@ public class SimpleHealth : MonoBehaviour
         if (healthSlider != null)
         {
             healthSlider.minValue = 0;
-            healthSlider.maxValue = Mathf.Max(0, maxHealth);
+            // Health slider shows effective max = maxHealth - reserved
+            int effectiveMax = Mathf.Max(0, maxHealth - Mathf.Clamp(reservedHealth, 0, maxHealth));
+            healthSlider.maxValue = effectiveMax;
             // Show actual current health on the slider; reserved is shown separately
             healthSlider.value = Mathf.Clamp(currentHealth, 0, healthSlider.maxValue);
         }
 
         if (healthText != null)
-            healthText.text = $"{Mathf.RoundToInt(currentHealth)}/{maxHealth}";
+        {
+            int effectiveMax = Mathf.Max(0, maxHealth - Mathf.Clamp(reservedHealth, 0, maxHealth));
+            healthText.text = $"{Mathf.RoundToInt(currentHealth)}/{effectiveMax}";
+        }
     }
 
     public void ReserveLife(int amount)
     {
         if (amount <= 0) return;
         reservedHealth = Mathf.Clamp(reservedHealth + amount, 0, maxHealth);
-        IncreaseMaxHealth(-amount);
+        // Do not change underlying maxHealth; reserve just reduces effective max.
+        // Clamp current health to new effective max.
+        int effectiveMax = Mathf.Max(0, maxHealth - reservedHealth);
+        currentHealth = Mathf.Clamp(currentHealth, 0, effectiveMax);
+        SyncSlider();
+        UpdateStatsText();
+
     }
 
     public void IncreaseMaxHealth(int amount)
@@ -637,6 +664,7 @@ public class SimpleHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         SyncSlider();
         UpdateStatsText();
+
     }
 
     public void GiveArmor(float amount)
@@ -644,6 +672,7 @@ public class SimpleHealth : MonoBehaviour
         if (amount == 0f) return;
         armor = Mathf.Max(0f, armor + amount);
         UpdateStatsText();
+
     }
 
     public void GiveEvasion(float amount)
@@ -651,6 +680,7 @@ public class SimpleHealth : MonoBehaviour
         if (amount == 0f) return;
         evasion = Mathf.Max(0f, evasion + amount);
         UpdateStatsText();
+
     }
 
     // OPTIONAL HELPERS: adjust resistances at runtime
@@ -665,6 +695,7 @@ public class SimpleHealth : MonoBehaviour
             case DamageType.Poison: poisonResist = Mathf.Clamp(poisonResist + amount, 0f, 0.95f); break;
         }
         UpdateStatsText();
+
     }
 
     #region Public Unity Event Helpers
@@ -676,6 +707,7 @@ public class SimpleHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         SyncSlider();
         UpdateStatsText();
+
     }
 
     public void AddMaxHealth(int amount)
@@ -688,6 +720,7 @@ public class SimpleHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(value, 0, maxHealth);
         SyncSlider();
         UpdateStatsText();
+
     }
 
     public void HealByPercentage(float percentage)
@@ -709,6 +742,7 @@ public class SimpleHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(maxHealth * percentage / 100f, 0, maxHealth);
         SyncSlider();
         UpdateStatsText();
+
     }
 
     // --- Regeneration ---
@@ -716,12 +750,14 @@ public class SimpleHealth : MonoBehaviour
     {
         regenRate += amount;
         UpdateStatsText();
+
     }
 
     public void SetRegen(float value)
     {
         regenRate = value;
         UpdateStatsText();
+
     }
 
     // --- Defense ---
@@ -729,12 +765,14 @@ public class SimpleHealth : MonoBehaviour
     {
         armor = Mathf.Max(0f, value);
         UpdateStatsText();
+
     }
 
     public void SetEvasion(float value)
     {
         evasion = Mathf.Max(0f, value);
         UpdateStatsText();
+
     }
 
     // --- Resistances ---

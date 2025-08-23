@@ -3,10 +3,10 @@ using UnityEngine;
 public class ItemGiver : MonoBehaviour
 {
     [Header("Item Settings")]
-    [SerializeField] private string itemName = "Orb 1";
-    [Min(1)][SerializeField] private int minAmount = 1;
-    [Min(1)][SerializeField] private int maxAmount = 1;
-    [SerializeField] private Sprite icon; // Optional, only if your InventoryItem supports icons
+    [SerializeField] public string itemName = "Orb 1";
+    [Min(1)][SerializeField] public int minAmount = 1;
+    [Min(1)][SerializeField] public int maxAmount = 1;
+    [SerializeField] public Sprite icon; // Optional, only if your InventoryItem supports icons
 
     [Header("Inventory Target")]
     [SerializeField] private SimpleInventory playerInventory;

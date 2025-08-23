@@ -6264,7 +6264,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 800c606759b78c54e80d7563b7318dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - itemName: Test
+    amount: 6
+    icon: {fileID: 5033363782937324378, guid: ddec99c198bb924459b3778a8889b8d7, type: 3}
+    onClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5791096993671492205}
+          m_TargetAssemblyTypeName: SimpleHealth, Grim
+          m_MethodName: ReserveLife
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 20
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   OnInventoryChanged:
     m_PersistentCalls:
       m_Calls: []

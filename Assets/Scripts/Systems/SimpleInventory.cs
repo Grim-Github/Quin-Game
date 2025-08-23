@@ -8,7 +8,9 @@ public class InventoryItem
 {
     public string itemName;
     public int amount;
-    public Sprite icon; // optional; ignore if you don’t use icons
+    public Sprite icon; // optional; ignore if you don't use icons
+    [Tooltip("Invoked when this item is clicked/used from UI.")]
+    public UnityEngine.Events.UnityEvent onClick = new UnityEngine.Events.UnityEvent();
 
     public InventoryItem(string name, int amount, Sprite icon = null)
     {
@@ -95,6 +97,26 @@ public class SimpleInventory : MonoBehaviour
         return true;
     }
 
-    /// <summary>Returns *live* list; don’t modify from outside.</summary>
+    /// <summary>Returns *live* list; don't modify from outside.</summary>
     public List<InventoryItem> GetItems() => items;
+
+    // Helper to invoke an item's UnityEvent by name.
+    public void InvokeItemEvent(string itemName)
+    {
+        var it = items.Find(i => i.itemName == itemName);
+        if (it == null) return;
+
+        // Only consume and invoke when there are listeners assigned
+        if (it.onClick != null && it.onClick.GetPersistentEventCount() > 0)
+        {
+            if (it.amount > 0)
+            {
+                it.amount -= 1;
+                if (it.amount < 0) it.amount = 0;
+            }
+            // Notify first so UI updates amount immediately
+            NotifyChanged();
+            it.onClick.Invoke();
+        }
+    }
 }
