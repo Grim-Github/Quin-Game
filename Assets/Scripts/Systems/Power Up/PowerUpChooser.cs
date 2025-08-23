@@ -250,6 +250,26 @@ public class PowerUpChooser : MonoBehaviour
             $"Accessories: {CurrentAccessories}/{MaxAccessories}\n" +
             $"Weapons: {CurrentWeapons}/{MaxWeapons}";
     }
+
+    /// <summary>
+    /// Adjusts the maximum number of weapons by a delta (can be negative).
+    /// Clamps the result to be non-negative and refreshes the UI.
+    /// </summary>
+    public void AddMaxWeapons(int delta)
+    {
+        maxWeapons += delta;
+        RefreshStatsText();
+    }
+
+    /// <summary>
+    /// Adjusts the maximum number of accessories by a delta (can be negative).
+    /// Clamps the result to be non-negative and refreshes the UI.
+    /// </summary>
+    public void AddMaxAccessories(int delta)
+    {
+        maxAccessories += delta;
+        RefreshStatsText();
+    }
 }
 
 /// <summary>

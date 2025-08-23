@@ -430,8 +430,8 @@ public class SimpleHealth : MonoBehaviour
         if (damagePopupPrefab != null)
         {
             GameObject popup = Instantiate(damagePopupPrefab, transform.position + popupOffset, Quaternion.identity);
-            // Determine color based on whether this is the Player
-            Color popupColor = transform.CompareTag("Player") ? Color.red : Color.white;
+            // Determine color based on damage type
+            Color popupColor = GetDamageColor(type);
 
             if (popup.TryGetComponent<TextMeshPro>(out var tmpWorld))
             {
@@ -528,6 +528,25 @@ public class SimpleHealth : MonoBehaviour
         resist = Mathf.Clamp(resist, 0f, 0.95f);
         float reduced = rawDamage * (1f - resist);
         return Mathf.Max(0, Mathf.RoundToInt(reduced));
+    }
+
+    // Map damage types to popup colors
+    private Color GetDamageColor(DamageType type)
+    {
+        switch (type)
+        {
+            case DamageType.Fire:
+                return new Color(1f, 0.4f, 0f);        // orange-red
+            case DamageType.Cold:
+                return new Color(0.3f, 0.7f, 1f);      // icy blue
+            case DamageType.Lightning:
+                return new Color(1f, 1f, 0.3f);        // yellow
+            case DamageType.Poison:
+                return new Color(0.5f, 1f, 0.5f);      // green
+            case DamageType.Physical:
+            default:
+                return Color.white;
+        }
     }
 
     private System.Collections.IEnumerator FlashRedCoroutine()

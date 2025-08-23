@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,7 +31,20 @@ public class XpSystem : MonoBehaviour
     [Serializable] public class LevelUpEvent : UnityEvent<int> { }
     public LevelUpEvent OnLevelUp;
 
-    private GameObject playerObject;
+    [Serializable]
+    public class LevelUnityEvent
+    {
+        [Min(1)] public int level = 1;
+        public UnityEvent onReached;
+        public bool fireOnce = true;
+
+        [HideInInspector] public bool fired;
+    }
+
+    [Header("Level Events")]
+    [Tooltip("Events that trigger when reaching specific levels.")]
+    public List<LevelUnityEvent> levelEvents = new List<LevelUnityEvent>();
+
     private PowerUpSelectionUI PUSUI;
 
     // Selection queue machinery
@@ -42,13 +56,12 @@ public class XpSystem : MonoBehaviour
     public int XpNeededThisLevel => GetXpRequiredForNextLevel(currentLevel);
     public float Progress01 => XpNeededThisLevel > 0 ? (float)currentXpInLevel / XpNeededThisLevel : 1f;
     public bool IsMaxLevel => currentLevel >= maxLevel;
+    public int RemainingXpThisLevel => Mathf.Max(0, GetXpRequiredForNextLevel(currentLevel) - currentXpInLevel);
 
     private void Awake()
     {
         var gc = GameObject.FindGameObjectWithTag("GameController");
         if (gc != null) PUSUI = gc.GetComponent<PowerUpSelectionUI>();
-
-        playerObject = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
@@ -61,7 +74,7 @@ public class XpSystem : MonoBehaviour
     /// </summary>
     public void LevelUp()
     {
-
+        // Put custom reward logic here
     }
 
     /// <summary>
@@ -74,6 +87,7 @@ public class XpSystem : MonoBehaviour
 
         int levelsGained = 0;
         int safety = 1000;
+        int prevLevel = currentLevel;
 
         while (amount > 0 && !IsMaxLevel && safety-- > 0)
         {
@@ -97,6 +111,8 @@ public class XpSystem : MonoBehaviour
             levelsGained++;
             OnLevelUp?.Invoke(currentLevel);
             LevelUp();
+
+            InvokeLevelEvents(currentLevel);
         }
 
         if (IsMaxLevel) currentXpInLevel = 0;
@@ -115,11 +131,20 @@ public class XpSystem : MonoBehaviour
 
     public void SetLevel(int level, bool resetXpInLevel = true)
     {
+        int oldLevel = currentLevel;
+
         currentLevel = Mathf.Clamp(level, 1, maxLevel);
         if (resetXpInLevel)
             currentXpInLevel = 0;
         else
             currentXpInLevel = Mathf.Clamp(currentXpInLevel, 0, GetXpRequiredForNextLevel(currentLevel));
+
+        // Fire events for levels crossed
+        if (currentLevel > oldLevel)
+        {
+            for (int L = oldLevel + 1; L <= currentLevel; L++)
+                InvokeLevelEvents(L);
+        }
 
         UpdateXpUI();
     }
@@ -159,12 +184,43 @@ public class XpSystem : MonoBehaviour
     private void UpdateXpUI()
     {
         if (levelText != null)
-            levelText.text = "Level " + currentLevel;
+        {
+            if (IsMaxLevel)
+            {
+                levelText.text = $"Level {currentLevel} (MAX)";
+            }
+            else
+            {
+                int needed = XpNeededThisLevel;
+                int have = currentXpInLevel;
+                int remain = RemainingXpThisLevel;
+                float pct = needed > 0 ? (have / (float)needed) : 1f;
+
+                levelText.text = $"Level {currentLevel} - {have}/{needed} XP ({pct:P0}) - {remain} XP to next";
+            }
+        }
 
         if (xpSliderUI != null)
         {
             xpSliderUI.maxValue = XpNeededThisLevel;
             xpSliderUI.value = currentXpInLevel;
+        }
+    }
+
+    private void InvokeLevelEvents(int reachedLevel)
+    {
+        if (levelEvents == null) return;
+
+        foreach (var ev in levelEvents)
+        {
+            if (ev == null) continue;
+            if (ev.level == reachedLevel)
+            {
+                if (ev.fireOnce && ev.fired) continue;
+
+                ev.onReached?.Invoke();
+                ev.fired = true;
+            }
         }
     }
 
@@ -181,7 +237,6 @@ public class XpSystem : MonoBehaviour
         {
             if (PUSUI != null)
             {
-                // Open selection (ShowSelection pauses timeScale = 0)
                 PUSUI.ShowSelection();
 
                 // Wait while open (paused)

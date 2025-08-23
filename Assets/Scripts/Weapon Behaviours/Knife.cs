@@ -129,10 +129,21 @@ public class Knife : MonoBehaviour
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             const string numColor = "#8888FF";
+            WeaponUpgrades[] wu = GetComponentsInChildren<WeaponUpgrades>(true);
 
             sb.AppendLine($"<b>{transform.name} Stats</b>");
-            sb.AppendLine($"Radius: <color={numColor}>{radius:F2}</color>");
+
+            // ✅ Count enabled upgrades vs total
+            int enabledCount = 0;
+            foreach (var upgrade in wu)
+            {
+                if (upgrade != null && upgrade.gameObject.activeInHierarchy && upgrade.enabled)
+                    enabledCount++;
+            }
+            sb.AppendLine($"Upgrades: <color={numColor}>{enabledCount}</color>/<color={numColor}>{wu.Length}</color>");
+
             sb.AppendLine($"Damage: <color={numColor}>{damage}</color>");
+            sb.AppendLine($"Radius: <color={numColor}>{radius:F2}</color>");
             sb.AppendLine($"Splash: <color={numColor}>{splashRadius:F2}</color> (<color={numColor}>{splashDamagePercent * 100f:F0}</color>% dmg)");
 
             if (wt != null)
@@ -149,12 +160,14 @@ public class Knife : MonoBehaviour
             }
 
 
+
             if (!string.IsNullOrWhiteSpace(extraTextField))
                 sb.AppendLine(extraTextField);
 
             statsTextInstance.text = sb.ToString();
         }
     }
+
 
     public void RemoveStatsText()
     {

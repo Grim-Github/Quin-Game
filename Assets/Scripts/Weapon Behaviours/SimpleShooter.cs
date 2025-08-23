@@ -138,7 +138,6 @@ public class SimpleShooter : MonoBehaviour
         string penetrationInfo = "N/A";
         if (bulletPrefab != null)
         {
-
             if (bulletPrefab.TryGetComponent<BulletDamageTrigger>(out var bullet))
             {
                 penetrationInfo = $"<color={numColor}>{bullet.penetration}</color>";
@@ -152,6 +151,19 @@ public class SimpleShooter : MonoBehaviour
         // Build text (Knife.cs style)
         var sb = new System.Text.StringBuilder();
         sb.AppendLine($"<b>{transform.name} Stats</b>");
+
+        // ✅ Upgrades: enabled / total (in children)
+        var allUpgrades = GetComponentsInChildren<WeaponUpgrades>(true);
+        int enabledUpgrades = 0;
+        for (int i = 0; i < allUpgrades.Length; i++)
+        {
+            var u = allUpgrades[i];
+            if (u != null && u.enabled && u.gameObject.activeInHierarchy)
+                enabledUpgrades++;
+        }
+        sb.AppendLine($"Upgrades: <color={numColor}>{enabledUpgrades}</color>/<color={numColor}>{allUpgrades.Length}</color>");
+
+
         sb.AppendLine($"Damage: <color={numColor}>{damage}</color>");
         sb.AppendLine($"Attack Delay: {delay}");
         sb.AppendLine($"Proj Speed: <color={numColor}>{shootForce:F1}</color>");
@@ -159,9 +171,6 @@ public class SimpleShooter : MonoBehaviour
         sb.AppendLine($"Projectile Count: <color={numColor}>{Mathf.Max(1, projectileCount)}</color>");
         sb.AppendLine($"Penetration: {penetrationInfo}");
         sb.AppendLine($"Crit: <color={numColor}>{(Mathf.Clamp01(critChance) * 100f):F0}</color>% x<color={numColor}>{critMultiplier:F2}</color>");
-
-
-
 
         if (applyStatusEffectOnHit)
         {
@@ -171,18 +180,18 @@ public class SimpleShooter : MonoBehaviour
 
 
 
-        if (bulletPrefab.TryGetComponent<RB2DChainToTag>(out var RB2D))
+        // Chain info (guarded)
+        if (bulletPrefab != null && bulletPrefab.TryGetComponent<RB2DChainToTag>(out var RB2D))
         {
             sb.AppendLine($"Can Chain <color={numColor}>{RB2D.maxChains}</color> Times");
         }
-
-
 
         if (!string.IsNullOrWhiteSpace(extraTextField))
             sb.AppendLine(extraTextField);
 
         statsTextInstance.text = sb.ToString();
     }
+
 
 
 

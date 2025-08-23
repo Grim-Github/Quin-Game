@@ -440,7 +440,7 @@ MonoBehaviour:
   rarityBiasPerPower: 0.02
   statRangeMultPerPower: 0.03
   cadenceBoostPerPower: 0.01
-  maxRangeMultiplier: 100
+  maxRangeMultiplier: 10
   maxRarityBiasFactor: 1
 --- !u!114 &-6411856879609721089
 MonoBehaviour:

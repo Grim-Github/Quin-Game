@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68f67e5972936042a0e6a1eeb7e7b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mergeRadius: 25
+  mergeRadius: 5
   itemLayer:
     serializedVersion: 2
     m_Bits: 0

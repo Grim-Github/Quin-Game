@@ -33,9 +33,34 @@ public class Trigger2DEvent : MonoBehaviour
         GameObject.FindGameObjectWithTag("GameController").GetComponent<XpSystem>().AddExperience(Random.Range(value, value * 2));
     }
 
-    public void Hearth(int value)
+    public void Hearth(float value)
     {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<SimpleHealth>().Heal(Random.Range(value / 2, value));
+        var player = GameObject.FindGameObjectWithTag("Player").GetComponent<SimpleHealth>();
+        if (player == null) return;
+
+        int healAmount = Mathf.CeilToInt(player.maxHealth * value); // 10% of max health
+        player.Heal(healAmount);
+    }
+
+    public void Speed()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player").GetComponent<SimpleHealth>();
+        if (player == null) return;
+        player.GetComponent<StatusEffectSystem>().ApplyStatusEffect_Int(2);
+    }
+
+
+    public void Magnet(float value)
+    {
+        FollowNearestOptimized[] fnp = FindObjectsByType<FollowNearestOptimized>(sortMode: FindObjectsSortMode.None);
+
+        foreach (var item in fnp)
+        {
+            if (item.transform.name.Contains("Xp"))
+            {
+                item.searchRadius = value;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

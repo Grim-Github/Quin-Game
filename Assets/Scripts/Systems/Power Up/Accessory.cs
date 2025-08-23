@@ -116,11 +116,25 @@ public class Accessory : MonoBehaviour
         string title = string.IsNullOrWhiteSpace(AccesoryName) ? name : AccesoryName;
         sb.AppendLine($"<b>{title}</b>");
 
+        // ✅ Accessories upgrades: enabled / total
+        var allUpgrades = GetComponentsInChildren<AccessoriesUpgrades>(true);
+        int enabledUpgrades = 0;
+        for (int i = 0; i < allUpgrades.Length; i++)
+        {
+            var u = allUpgrades[i];
+            if (u != null && u.enabled && u.gameObject.activeInHierarchy)
+                enabledUpgrades++;
+        }
+        sb.AppendLine($"Upgrades: <color=#8888FF>{enabledUpgrades}</color>/<color=#8888FF>{allUpgrades.Length}</color>");
+
         if (!string.IsNullOrWhiteSpace(extraTextField))
             sb.AppendLine(extraTextField);
 
+
+
         statsTextInstance.text = sb.ToString();
     }
+
 
     public void RemoveStatsText()
     {
