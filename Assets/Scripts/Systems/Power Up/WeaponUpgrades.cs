@@ -14,6 +14,7 @@ public class WeaponUpgrades : MonoBehaviour
         // --- Knife ---
         KnifeDamageFlat,
         KnifeDamagePercent,
+        KnifeDamageTypeIndex,
         KnifeRadiusFlat,
         KnifeRadiusPercent,
         KnifeMaxTargetsFlat,
@@ -35,6 +36,7 @@ public class WeaponUpgrades : MonoBehaviour
         // --- Shooter ---
         ShooterDamageFlat,
         ShooterDamagePercent,
+        ShooterDamageTypeIndex,
         ShooterProjectileCount,
         ShooterSpreadAngleFlat,
         ShooterSpreadAnglePercent,
@@ -217,6 +219,7 @@ public class WeaponUpgrades : MonoBehaviour
             // Knife-only
             case UpgradeType.KnifeDamageFlat:
             case UpgradeType.KnifeDamagePercent:
+            case UpgradeType.KnifeDamageTypeIndex:
             case UpgradeType.KnifeRadiusFlat:
             case UpgradeType.KnifeRadiusPercent:
             case UpgradeType.KnifeMaxTargetsFlat:
@@ -239,6 +242,7 @@ public class WeaponUpgrades : MonoBehaviour
             // Shooter-only
             case UpgradeType.ShooterDamageFlat:
             case UpgradeType.ShooterDamagePercent:
+            case UpgradeType.ShooterDamageTypeIndex:
             case UpgradeType.ShooterProjectileCount:
             case UpgradeType.ShooterSpreadAngleFlat:
             case UpgradeType.ShooterSpreadAnglePercent:
@@ -291,6 +295,13 @@ public class WeaponUpgrades : MonoBehaviour
                 Upgrade.powerUpName = $"Damage Up +{C((value * 100f).ToString("F0"))}%";
                 Upgrade.powerUpDescription = $"Increases weapon damage by {C((value * 100f).ToString("F0"))}%.";
                 break;
+            case UpgradeType.KnifeDamageTypeIndex:
+                {
+                    var dt = ClampToDamageType(Mathf.RoundToInt(value));
+                    Upgrade.powerUpName = $"Damage Type: {dt}";
+                    Upgrade.powerUpDescription = $"Changes this weapon's damage type to {dt}.";
+                    break;
+                }
             case UpgradeType.KnifeRadiusFlat:
                 Upgrade.powerUpName = $"Range Up +{C(value.ToString("F2"))}";
                 Upgrade.powerUpDescription = $"Increases attack reach by {C(value.ToString("F2"))}.";
@@ -369,6 +380,13 @@ public class WeaponUpgrades : MonoBehaviour
                 Upgrade.powerUpName = $"Damage Up +{C((value * 100f).ToString("F0"))}%";
                 Upgrade.powerUpDescription = $"Increases weapon damage by {C((value * 100f).ToString("F0"))}%.";
                 break;
+            case UpgradeType.ShooterDamageTypeIndex:
+                {
+                    var dt = ClampToDamageType(Mathf.RoundToInt(value));
+                    Upgrade.powerUpName = $"Damage Type: {dt}";
+                    Upgrade.powerUpDescription = $"Changes this weapon's damage type to {dt}.";
+                    break;
+                }
             case UpgradeType.ShooterProjectileCount:
                 Upgrade.powerUpName = $"Projectile Count +{C(Mathf.RoundToInt(value).ToString())}";
                 Upgrade.powerUpDescription = $"Fires {C(Mathf.RoundToInt(value).ToString())} additional projectile(s).";
@@ -579,6 +597,10 @@ public class WeaponUpgrades : MonoBehaviour
                 case UpgradeType.KnifeStatusEffectIndex:
                     knife.EnableOnHitEffectByIndex(Mathf.RoundToInt(value));
                     break;
+
+                case UpgradeType.KnifeDamageTypeIndex:
+                    knife.damageType = ClampToDamageType(Mathf.RoundToInt(value));
+                    break;
             }
         }
 
@@ -654,6 +676,10 @@ public class WeaponUpgrades : MonoBehaviour
                 case UpgradeType.ShooterStatusEffectIndex:
                     shooter.EnableOnHitEffectByIndex(Mathf.RoundToInt(value));
                     break;
+
+                case UpgradeType.ShooterDamageTypeIndex:
+                    shooter.damageType = ClampToDamageType(Mathf.RoundToInt(value));
+                    break;
             }
         }
 
@@ -687,6 +713,14 @@ public class WeaponUpgrades : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private static SimpleHealth.DamageType ClampToDamageType(int rawIndex)
+    {
+        // Ensure value maps into enum range 0..4
+        if (rawIndex < 0) rawIndex = 0;
+        if (rawIndex > 4) rawIndex = 4;
+        return (SimpleHealth.DamageType)rawIndex;
     }
 
 #if UNITY_EDITOR

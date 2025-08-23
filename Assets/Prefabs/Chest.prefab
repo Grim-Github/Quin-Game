@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -8484210179184922262, guid: 18bbd68cb92da97429f04a7fb324df5b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -173,7 +173,8 @@ MonoBehaviour:
   playerVolume: {fileID: 0}
   deathObjects: []
   damageClip: []
-  deathClip: []
+  deathClip:
+  - {fileID: 8300000, guid: 795b705f6fc8c7244948ee0ab67204bc, type: 3}
   bloodSFX: {fileID: 0}
   loot: {fileID: 5827871723406216359}
   spriteRenderer: {fileID: 0}

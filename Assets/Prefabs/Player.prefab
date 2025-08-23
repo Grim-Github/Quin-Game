@@ -45,15 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Aegis - Damage Up +<color=#8888FF>3</color>
-    powerUpDescription: Increases weapon damage by <color=#8888FF>3</color>.
+    powerUpName: Phantom Aegis - No Upgrade
+    powerUpDescription: This upgrade slot is empty.
     powerUpObject: {fileID: 54310342836127045}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 2413123233239279179, guid: c88de95292f601e45a7201a73044aae7, type: 3}
     weight: 50
   nextUpgrade: {fileID: 0}
-  upgradeType: 20
+  upgradeType: 0
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
@@ -596,10 +596,10 @@ RectTransform:
   - {fileID: 360904604133583349}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 327.885, y: -176.98228}
+  m_SizeDelta: {x: 653.15, y: 49.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3723150730366642734
 CanvasRenderer:
@@ -2177,8 +2177,8 @@ MonoBehaviour:
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
-    armorAdd: {x: 1, y: 6}
-    evasionAdd: {x: 2, y: 12}
+    armorAdd: {x: 3, y: 12}
+    evasionAdd: {x: 3, y: 12}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -3547,8 +3547,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>10</color>%
-    powerUpDescription: Increases attack reach by <color=#8888FF>10</color>%.
+    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>0.10</color>
+    powerUpDescription: Increases attack reach by <color=#8888FF>0.10</color>.
     powerUpObject: {fileID: 1032309275379302934}
     IsAccessory: 0
     IsWeapon: 0
@@ -3605,8 +3605,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Sword - Critical Chance +<color=#8888FF>30</color>%
-    powerUpDescription: Raises chance to critically strike by <color=#8888FF>30</color>%.
+    powerUpName: Sword - Lifesteal Up +<color=#8888FF>30</color>%
+    powerUpDescription: Further empowers lifesteal by <color=#8888FF>30</color>%.
     powerUpObject: {fileID: 1064784799497703940}
     IsAccessory: 0
     IsWeapon: 0
@@ -3656,10 +3656,10 @@ RectTransform:
   - {fileID: 1749874623983533180}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 327.885, y: -226.78229}
+  m_SizeDelta: {x: 653.15, y: 49.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4074725629246888460
 CanvasRenderer:
@@ -5158,8 +5158,8 @@ MonoBehaviour:
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
-    armorAdd: {x: 1, y: 6}
-    evasionAdd: {x: 2, y: 12}
+    armorAdd: {x: 3, y: 12}
+    evasionAdd: {x: 3, y: 12}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -5390,10 +5390,10 @@ RectTransform:
   - {fileID: 6159125347764133184}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 327.885, y: -77.38229}
+  m_SizeDelta: {x: 653.15, y: 49.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2498857686562003061
 CanvasRenderer:
@@ -5604,15 +5604,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Burstfire Bow - Damage Up +<color=#8888FF>5</color>
-    powerUpDescription: Increases weapon damage by <color=#8888FF>5</color>.
+    powerUpName: Burstfire Bow - No Upgrade
+    powerUpDescription: This upgrade slot is empty.
     powerUpObject: {fileID: 1617304167826018044}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
     weight: 50
   nextUpgrade: {fileID: 7837450647182704434}
-  upgradeType: 20
+  upgradeType: 0
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
@@ -6109,9 +6109,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Accessories: 0/3
+  m_text: 'Accessories: 0/1
 
-    Weapons: 0/2'
+    Weapons: 0/1'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d4db32dfbb302d4195300b724b29022, type: 2}
   m_sharedMaterial: {fileID: 4919702837162057759, guid: 8d4db32dfbb302d4195300b724b29022, type: 2}
@@ -6293,8 +6293,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>10</color>%
-    powerUpDescription: Increases attack reach by <color=#8888FF>10</color>%.
+    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>0.10</color>
+    powerUpDescription: Increases attack reach by <color=#8888FF>0.10</color>.
     powerUpObject: {fileID: 1939926413673383864}
     IsAccessory: 0
     IsWeapon: 0
@@ -6580,8 +6580,8 @@ MonoBehaviour:
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
-    armorAdd: {x: 1, y: 6}
-    evasionAdd: {x: 2, y: 12}
+    armorAdd: {x: 3, y: 12}
+    evasionAdd: {x: 3, y: 12}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -6726,8 +6726,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Longshot Crossbow - Damage Up +<color=#8888FF>10</color>%
-    powerUpDescription: Increases weapon damage by <color=#8888FF>10</color>%.
+    powerUpName: Longshot Crossbow - Damage Up +<color=#8888FF>0</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>0</color>.
     powerUpObject: {fileID: 2463701314012228658}
     IsAccessory: 0
     IsWeapon: 0
@@ -7158,8 +7158,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: "Blowgun - Spread +<color=#8888FF>-40.0</color>\xB0"
-    powerUpDescription: "Narrows firing spread by <color=#8888FF>-40.0</color>\xB0."
+    powerUpName: 'Blowgun - Damage Type: Physical'
+    powerUpDescription: Changes this weapon's damage type to Physical.
     powerUpObject: {fileID: 2754739268539261328}
     IsAccessory: 0
     IsWeapon: 0
@@ -7227,8 +7227,8 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 201.6, y: 354.8}
-  m_Spacing: {x: 73.9, y: 58.7}
+  m_CellSize: {x: 220.4, y: 369.7}
+  m_Spacing: {x: 42.2, y: 58.7}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &2871657824479263378
@@ -7481,10 +7481,10 @@ RectTransform:
   - {fileID: 491513941130106179}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 327.885, y: -27.582296}
+  m_SizeDelta: {x: 653.15, y: 49.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2200026841810741719
 CanvasRenderer:
@@ -8442,8 +8442,8 @@ MonoBehaviour:
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
-    armorAdd: {x: 1, y: 6}
-    evasionAdd: {x: 2, y: 12}
+    armorAdd: {x: 3, y: 12}
+    evasionAdd: {x: 3, y: 12}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -8530,8 +8530,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Blowgun - Projectile Count +<color=#8888FF>1</color>
-    powerUpDescription: Fires <color=#8888FF>1</color> additional projectile(s).
+    powerUpName: Blowgun - Damage Up +<color=#8888FF>100</color>%
+    powerUpDescription: Increases weapon damage by <color=#8888FF>100</color>%.
     powerUpObject: {fileID: 3190016390325641590}
     IsAccessory: 0
     IsWeapon: 0
@@ -8588,9 +8588,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Knife - Additional Targets +<color=#8888FF>1</color>
-    powerUpDescription: Allows strikes to affect <color=#8888FF>1</color> additional
-      target(s).
+    powerUpName: Knife - Range Up +<color=#8888FF>100</color>%
+    powerUpDescription: Increases attack reach by <color=#8888FF>100</color>%.
     powerUpObject: {fileID: 3203538148253821362}
     IsAccessory: 0
     IsWeapon: 0
@@ -8796,9 +8795,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Axe - Additional Targets +<color=#8888FF>1</color>
-    powerUpDescription: Allows strikes to affect <color=#8888FF>1</color> additional
-      target(s).
+    powerUpName: Axe - Range Up +<color=#8888FF>100</color>%
+    powerUpDescription: Increases attack reach by <color=#8888FF>100</color>%.
     powerUpObject: {fileID: 3318086922698768104}
     IsAccessory: 0
     IsWeapon: 0
@@ -9923,9 +9921,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Sword - Additional Targets +<color=#8888FF>1</color>
-    powerUpDescription: Allows strikes to affect <color=#8888FF>1</color> additional
-      target(s).
+    powerUpName: Sword - Range Up +<color=#8888FF>100</color>%
+    powerUpDescription: Increases attack reach by <color=#8888FF>100</color>%.
     powerUpObject: {fileID: 3810719867447538245}
     IsAccessory: 0
     IsWeapon: 0
@@ -10745,8 +10742,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>10</color>%
-    powerUpDescription: Increases attack reach by <color=#8888FF>10</color>%.
+    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>0.10</color>
+    powerUpDescription: Increases attack reach by <color=#8888FF>0.10</color>.
     powerUpObject: {fileID: 4041443675930029742}
     IsAccessory: 0
     IsWeapon: 0
@@ -11765,8 +11762,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>10</color>%
-    powerUpDescription: Increases attack reach by <color=#8888FF>10</color>%.
+    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>0.10</color>
+    powerUpDescription: Increases attack reach by <color=#8888FF>0.10</color>.
     powerUpObject: {fileID: 4493435403853585137}
     IsAccessory: 0
     IsWeapon: 0
@@ -11817,10 +11814,10 @@ RectTransform:
   - {fileID: 2965144522027759990}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 327.885, y: -127.1823}
+  m_SizeDelta: {x: 653.15, y: 49.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &695081399239090769
 CanvasRenderer:
@@ -12693,7 +12690,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6843857821109585707
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13167,15 +13164,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Longshot Crossbow - Damage Up +<color=#8888FF>5</color>
-    powerUpDescription: Increases weapon damage by <color=#8888FF>5</color>.
+    powerUpName: Longshot Crossbow - No Upgrade
+    powerUpDescription: This upgrade slot is empty.
     powerUpObject: {fileID: 4863514102701704072}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 5583272366953621293, guid: 9c929be9fa68d654e999a40812345349, type: 3}
     weight: 50
   nextUpgrade: {fileID: 2864675131091241564}
-  upgradeType: 20
+  upgradeType: 0
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
@@ -13782,8 +13779,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Axe - Critical Chance +<color=#8888FF>30</color>%
-    powerUpDescription: Raises chance to critically strike by <color=#8888FF>30</color>%.
+    powerUpName: Axe - Lifesteal Up +<color=#8888FF>30</color>%
+    powerUpDescription: Further empowers lifesteal by <color=#8888FF>30</color>%.
     powerUpObject: {fileID: 4968957011494331475}
     IsAccessory: 0
     IsWeapon: 0
@@ -13915,8 +13912,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Longshot Crossbow - Projectile Lifetime +<color=#8888FF>0.1</color>s
-    powerUpDescription: Extends projectile lifetime by <color=#8888FF>0.1</color>s.
+    powerUpName: "Longshot Crossbow - Burst Delay \u2212<color=#8888FF>0.10</color>s"
+    powerUpDescription: Reduces delay between burst shots by <color=#8888FF>0.10</color>s.
     powerUpObject: {fileID: 5175108747474265233}
     IsAccessory: 0
     IsWeapon: 0
@@ -13978,10 +13975,10 @@ RectTransform:
   - {fileID: 6848453330417983158}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 327.885, y: -326.3823}
+  m_SizeDelta: {x: 653.15, y: 49.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9209299288882247878
 CanvasRenderer:
@@ -14364,8 +14361,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Longshot Crossbow - Damage Up +<color=#8888FF>1000</color>%
-    powerUpDescription: Increases weapon damage by <color=#8888FF>1000</color>%.
+    powerUpName: Longshot Crossbow - Damage Up +<color=#8888FF>0</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>0</color>.
     powerUpObject: {fileID: 5317122567970793903}
     IsAccessory: 0
     IsWeapon: 0
@@ -14376,7 +14373,7 @@ MonoBehaviour:
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
-  value: 10
+  value: 0.1
 --- !u!1 &5472763446034239500
 GameObject:
   m_ObjectHideFlags: 0
@@ -14630,7 +14627,7 @@ MonoBehaviour:
     powerUpIcon: {fileID: 3794317029188430971, guid: e95f3c2f1016aca409c82ca77489a1d3, type: 3}
     weight: 50
   nextUpgrade: {fileID: 0}
-  upgradeType: 3
+  upgradeType: 4
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
@@ -14901,8 +14898,8 @@ MonoBehaviour:
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
-    armorAdd: {x: 1, y: 6}
-    evasionAdd: {x: 2, y: 12}
+    armorAdd: {x: 3, y: 12}
+    evasionAdd: {x: 3, y: 12}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -14982,10 +14979,10 @@ RectTransform:
   - {fileID: 5072668526965699590}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 327.885, y: -376.18228}
+  m_SizeDelta: {x: 653.15, y: 49.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7395233620441092726
 CanvasRenderer:
@@ -15373,8 +15370,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Aegis - Critical Chance +<color=#8888FF>9</color>%
-    powerUpDescription: Raises chance to critically strike by <color=#8888FF>9</color>%.
+    powerUpName: Phantom Aegis - Projectile Lifetime +<color=#8888FF>0.1</color>s
+    powerUpDescription: Extends projectile lifetime by <color=#8888FF>0.1</color>s.
     powerUpObject: {fileID: 6079404619763886863}
     IsAccessory: 0
     IsWeapon: 0
@@ -15531,10 +15528,10 @@ RectTransform:
   - {fileID: 4760720284868463301}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 327.885, y: -276.5823}
+  m_SizeDelta: {x: 653.15, y: 49.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7121845835245431989
 CanvasRenderer:
@@ -15832,8 +15829,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Aegis - Projectile Speed +<color=#8888FF>47</color>%
-    powerUpDescription: Increases projectile speed by <color=#8888FF>47</color>%.
+    powerUpName: Phantom Aegis - Spread +<color=#8888FF>47</color>%
+    powerUpDescription: Narrows firing spread by <color=#8888FF>47</color>%.
     powerUpObject: {fileID: 6232033710074107890}
     IsAccessory: 0
     IsWeapon: 0
@@ -16354,8 +16351,8 @@ MonoBehaviour:
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
-    armorAdd: {x: 1, y: 6}
-    evasionAdd: {x: 2, y: 12}
+    armorAdd: {x: 3, y: 12}
+    evasionAdd: {x: 3, y: 12}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -18675,8 +18672,8 @@ MonoBehaviour:
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
-    armorAdd: {x: 1, y: 6}
-    evasionAdd: {x: 2, y: 12}
+    armorAdd: {x: 3, y: 12}
+    evasionAdd: {x: 3, y: 12}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -20638,8 +20635,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>10</color>%
-    powerUpDescription: Increases attack reach by <color=#8888FF>10</color>%.
+    powerUpName: Phantom Demonis - Range Up +<color=#8888FF>0.10</color>
+    powerUpDescription: Increases attack reach by <color=#8888FF>0.10</color>.
     powerUpObject: {fileID: 7952360591557015454}
     IsAccessory: 0
     IsWeapon: 0
@@ -20696,15 +20693,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Burstfire Bow - Damage Up +<color=#8888FF>5</color>
-    powerUpDescription: Increases weapon damage by <color=#8888FF>5</color>.
+    powerUpName: Burstfire Bow - No Upgrade
+    powerUpDescription: This upgrade slot is empty.
     powerUpObject: {fileID: 8075213717505226598}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: -7772435429642446462, guid: 2e3079208581f0947a2cf32672dfcad8, type: 3}
     weight: 50
   nextUpgrade: {fileID: 1901669996297178071}
-  upgradeType: 20
+  upgradeType: 0
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
@@ -21197,7 +21194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &485175691147957765
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22557,8 +22554,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Burstfire Bow - Projectile Lifetime +<color=#8888FF>1.0</color>s
-    powerUpDescription: Extends projectile lifetime by <color=#8888FF>1.0</color>s.
+    powerUpName: "Burstfire Bow - Burst Delay \u2212<color=#8888FF>1.00</color>s"
+    powerUpDescription: Reduces delay between burst shots by <color=#8888FF>1.00</color>s.
     powerUpObject: {fileID: 8596700537061007026}
     IsAccessory: 0
     IsWeapon: 0
@@ -23289,8 +23286,8 @@ MonoBehaviour:
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
-    armorAdd: {x: 1, y: 6}
-    evasionAdd: {x: 2, y: 12}
+    armorAdd: {x: 3, y: 12}
+    evasionAdd: {x: 3, y: 12}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -23377,19 +23374,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Knife - Damage Up +<color=#8888FF>5</color>
-    powerUpDescription: Increases weapon damage by <color=#8888FF>5</color>.
+    powerUpName: 'Knife - Damage Type: Poison'
+    powerUpDescription: Changes this weapon's damage type to Poison.
     powerUpObject: {fileID: 8892643798934483796}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 761100573506273824, guid: 10f26e97524846a49b9bd2a662980489, type: 3}
     weight: 50
   nextUpgrade: {fileID: 0}
-  upgradeType: 1
+  upgradeType: 3
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
-  value: 5
+  value: 4
 --- !u!1 &8939499174338337965
 GameObject:
   m_ObjectHideFlags: 0
@@ -23641,8 +23638,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4198677149637497082}
+  m_Children: []
   m_Father: {fileID: 1292039828634639122}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -24286,106 +24282,4 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 811548532155576536, guid: 00f7328bd6e2cef4da883d67c70df6a0, type: 3}
   m_PrefabInstance: {fileID: 472765027092829817}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &4653384536965392792
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 288510957997346985}
-    m_Modifications:
-    - target: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_Name
-      value: Weapon Stat
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -71.862274
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -19.879395
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 890a4bca294df43468ac696383a99644, type: 3}
---- !u!224 &4198677149637497082 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8849738245390432610, guid: 890a4bca294df43468ac696383a99644, type: 3}
-  m_PrefabInstance: {fileID: 4653384536965392792}
   m_PrefabAsset: {fileID: 0}

@@ -165,6 +165,8 @@ public class SimpleShooter : MonoBehaviour
 
 
         sb.AppendLine($"Damage: <color={numColor}>{damage}</color>");
+        string dtColor = GetDamageTypeHex(damageType);
+        sb.AppendLine($"Damage Type: <color={dtColor}>{damageType}</color>");
         sb.AppendLine($"Attack Delay: {delay}");
         sb.AppendLine($"Proj Speed: <color={numColor}>{shootForce:F1}</color>");
         sb.AppendLine($"Lifetime: <color={numColor}>{bulletLifetime:F1}</color>s");
@@ -283,6 +285,19 @@ public class SimpleShooter : MonoBehaviour
         }
     }
 
+
+    private static string GetDamageTypeHex(SimpleHealth.DamageType type)
+    {
+        switch (type)
+        {
+            case SimpleHealth.DamageType.Fire: return "#FF6600";       // orange-red
+            case SimpleHealth.DamageType.Cold: return "#4DB2FF";       // icy blue
+            case SimpleHealth.DamageType.Lightning: return "#FFFF4D";  // yellow
+            case SimpleHealth.DamageType.Poison: return "#80FF80";     // green
+            case SimpleHealth.DamageType.Physical:
+            default: return "#FFFFFF";                                // white
+        }
+    }
 
     // --- Debug Helpers ---
     private void OnDrawGizmos()

@@ -143,6 +143,8 @@ public class Knife : MonoBehaviour
             sb.AppendLine($"Upgrades: <color={numColor}>{enabledCount}</color>/<color={numColor}>{wu.Length}</color>");
 
             sb.AppendLine($"Damage: <color={numColor}>{damage}</color>");
+            string dtColor = GetDamageTypeHex(damageType);
+            sb.AppendLine($"Damage Type: <color={dtColor}>{damageType}</color>");
             sb.AppendLine($"Radius: <color={numColor}>{radius:F2}</color>");
             sb.AppendLine($"Splash: <color={numColor}>{splashRadius:F2}</color> (<color={numColor}>{splashDamagePercent * 100f:F0}</color>% dmg)");
 
@@ -341,6 +343,19 @@ public class Knife : MonoBehaviour
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, splashRadius);
+        }
+    }
+
+    private static string GetDamageTypeHex(SimpleHealth.DamageType type)
+    {
+        switch (type)
+        {
+            case SimpleHealth.DamageType.Fire: return "#FF6600";       // orange-red
+            case SimpleHealth.DamageType.Cold: return "#4DB2FF";       // icy blue
+            case SimpleHealth.DamageType.Lightning: return "#FFFF4D";  // yellow
+            case SimpleHealth.DamageType.Poison: return "#80FF80";     // green
+            case SimpleHealth.DamageType.Physical:
+            default: return "#FFFFFF";                                // white
         }
     }
 }

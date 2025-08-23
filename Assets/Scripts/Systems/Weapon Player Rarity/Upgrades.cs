@@ -97,9 +97,9 @@ public sealed class ArmorUpgrade : IUpgrade
     public Action Apply(WeaponContext c, StringBuilder notes)
     {
         var r = c.tiers.Scale(c.ranges.armorAdd, c.tiers.armor);
-        float add = Mathf.Max(0f, UnityEngine.Random.Range(r.x, r.y));
+        int add = Mathf.Max(0, Mathf.RoundToInt(UnityEngine.Random.Range(r.x, r.y)));
         c.health.Armor = Mathf.Max(0f, c.health.Armor + add);
-        notes.AppendLine($"+{add:F1} Armor (Tier {c.Roman(c.tiers.armor)})");
+        notes.AppendLine($"+{add} Armor (Tier {c.Roman(c.tiers.armor)})");
         return () => c.health.Armor = Mathf.Max(0f, c.health.Armor - add);
     }
 }
@@ -110,9 +110,9 @@ public sealed class EvasionUpgrade : IUpgrade
     public Action Apply(WeaponContext c, StringBuilder notes)
     {
         var r = c.tiers.Scale(c.ranges.evasionAdd, c.tiers.evasion);
-        float add = Mathf.Max(0f, UnityEngine.Random.Range(r.x, r.y));
+        int add = Mathf.Max(0, Mathf.RoundToInt(UnityEngine.Random.Range(r.x, r.y)));
         c.health.Evasion = Mathf.Max(0f, c.health.Evasion + add);
-        notes.AppendLine($"+{add:F1} Evasion (Tier {c.Roman(c.tiers.evasion)})");
+        notes.AppendLine($"+{add} Evasion (Tier {c.Roman(c.tiers.evasion)})");
         return () => c.health.Evasion = Mathf.Max(0f, c.health.Evasion - add);
     }
 }

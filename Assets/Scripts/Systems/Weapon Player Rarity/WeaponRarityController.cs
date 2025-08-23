@@ -556,6 +556,10 @@ public class WeaponRarityController : MonoBehaviour
     {
         return v.x + "–" + v.y;
     }
+    private static string RngInt(Vector2 v)
+    {
+        return Mathf.RoundToInt(v.x) + "–" + Mathf.RoundToInt(v.y);
+    }
     private static string PctFromFrac(Vector2 v, int d = 0)
     {
         return (v.x * 100f).ToString("F" + d) + "%–" + (v.y * 100f).ToString("F" + d) + "%";
@@ -648,13 +652,13 @@ public class WeaponRarityController : MonoBehaviour
             if (up is ArmorUpgrade)
             {
                 var r = tiers.Scale(ranges.armorAdd, tiers.armor);
-                sb.AppendLine("+Armor: " + RngF(r, 1));
+                sb.AppendLine("+Armor: " + RngInt(r));
                 continue;
             }
             if (up is EvasionUpgrade)
             {
                 var r = tiers.Scale(ranges.evasionAdd, tiers.evasion);
-                sb.AppendLine("+Evasion: " + RngF(r, 1));
+                sb.AppendLine("+Evasion: " + RngInt(r));
                 continue;
             }
             if (up is FireResistUpgrade || up is ColdResistUpgrade || up is LightningResistUpgrade || up is PoisonResistUpgrade)
