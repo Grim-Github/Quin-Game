@@ -6,6 +6,8 @@ public class PlayerStatUpgrader : MonoBehaviour
 
     private PowerUpChooser powerUpChooser;
 
+
+
     private void Awake()
     {
         powerUpChooser = GameObject.FindAnyObjectByType<PowerUpChooser>();

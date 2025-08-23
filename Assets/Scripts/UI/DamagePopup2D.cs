@@ -11,13 +11,11 @@ public class DamagePopup2D : MonoBehaviour
 
     private TextMeshProUGUI tmp;
     private float age;
-    private Color baseColor;
 
     void Awake()
     {
         tmp = GetComponent<TextMeshProUGUI>() ?? GetComponentInChildren<TextMeshProUGUI>();
         if (tmp == null) { Debug.LogWarning("DamagePopup2D: no TextMeshProUGUI found."); enabled = false; return; }
-        baseColor = tmp.color;
     }
 
     void Update()
@@ -33,7 +31,7 @@ public class DamagePopup2D : MonoBehaviour
         if (tLeft <= fadeStart)
         {
             float a = Mathf.Clamp01(tLeft / Mathf.Max(0.0001f, fadeStart));
-            tmp.color = new Color(baseColor.r, baseColor.g, baseColor.b, a);
+            tmp.color = new Color(tmp.color.r, tmp.color.g, tmp.color.b, a);
         }
 
         if (age >= lifetime) Destroy(gameObject);

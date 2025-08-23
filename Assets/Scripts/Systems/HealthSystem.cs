@@ -429,20 +429,33 @@ public class SimpleHealth : MonoBehaviour
         if (damagePopupPrefab != null)
         {
             GameObject popup = Instantiate(damagePopupPrefab, transform.position + popupOffset, Quaternion.identity);
+            // Determine color based on whether this is the Player
+            Color popupColor = transform.CompareTag("Player") ? Color.red : Color.white;
+
             if (popup.TryGetComponent<TextMeshPro>(out var tmpWorld))
             {
                 tmpWorld.text = dmg.ToString();
+                tmpWorld.color = popupColor;
             }
             else if (popup.TryGetComponent<TextMeshProUGUI>(out var tmpUI))
             {
                 tmpUI.text = dmg.ToString();
+                tmpUI.color = popupColor;
             }
             else
             {
                 var childWorld = popup.GetComponentInChildren<TextMeshPro>();
-                if (childWorld != null) childWorld.text = dmg.ToString();
+                if (childWorld != null)
+                {
+                    childWorld.text = dmg.ToString();
+                    childWorld.color = popupColor;
+                }
                 var childUI = popup.GetComponentInChildren<TextMeshProUGUI>();
-                if (childUI != null) childUI.text = dmg.ToString();
+                if (childUI != null)
+                {
+                    childUI.text = dmg.ToString();
+                    childUI.color = popupColor;
+                }
             }
         }
 

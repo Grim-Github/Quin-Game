@@ -34,6 +34,11 @@ public class PowerUpSelectionUI : MonoBehaviour
 
     private int[] shownIndices;
     private bool warnedNoDefault;
+    [Header("Behavior")]
+    [SerializeField] private bool isFirstSelection = true; // first selection shows weapons only
+
+    // Optional: number of choices for the first selection
+    [SerializeField] private int firstSelectionCount = 3;
 
     private void Awake()
     {
@@ -95,10 +100,22 @@ public class PowerUpSelectionUI : MonoBehaviour
 
         // Build eligible candidates strictly by caps/type rules
         List<int> candidates = new List<int>();
-        for (int i = 0; i < powerUpChooser.powerUps.Count; i++)
+        if (isFirstSelection)
         {
-            if (powerUpChooser.CanSelectByIndex(i))
-                candidates.Add(i);
+            // First selection: force weapons only
+            for (int i = 0; i < powerUpChooser.powerUps.Count; i++)
+            {
+                if (powerUpChooser.CanSelectByIndex(i) && powerUpChooser.powerUps[i].IsWeapon)
+                    candidates.Add(i);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < powerUpChooser.powerUps.Count; i++)
+            {
+                if (powerUpChooser.CanSelectByIndex(i))
+                    candidates.Add(i);
+            }
         }
 
 
@@ -115,8 +132,13 @@ public class PowerUpSelectionUI : MonoBehaviour
         if (selectionPanel != null) selectionPanel.SetActive(true);
         PlaySFX(openSFX);
 
-        int slotCount = Mathf.Min(3, selectButtons.Length, candidates.Count);
+        int desired = isFirstSelection ? Mathf.Max(1, firstSelectionCount) : 3;
+        int slotCount = Mathf.Min(desired, selectButtons.Length, candidates.Count);
         shownIndices = PickRandomUnique(candidates, slotCount);
+
+        // After first presentation, subsequent selections are normal
+        if (isFirstSelection)
+            isFirstSelection = false;
 
         if (defaultIcon == null && !warnedNoDefault)
         {
