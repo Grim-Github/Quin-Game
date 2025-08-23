@@ -150,7 +150,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   startingHealth: 10
-  reservedHealth: 0
   invulnerabilityDuration: 0.2
   regenRate: 0
   armor: 0
@@ -164,7 +163,6 @@ MonoBehaviour:
   lightningResist: 0
   poisonResist: 0
   healthSlider: {fileID: 0}
-  reservedSlider: {fileID: 0}
   healthText: {fileID: 0}
   statsTextPrefab: {fileID: 0}
   uiParent: {fileID: 0}
@@ -209,15 +207,9 @@ MonoBehaviour:
     weight: 2
   - prefab: {fileID: 3862261898208802303, guid: e4b53848a82c4ae4080bbaad77ff9343, type: 3}
     weight: 0.2
-  - prefab: {fileID: 3215298938506285162, guid: d5ded94da70b29747b2cbaa5103ad9a2, type: 3}
-    weight: 0.2
-  - prefab: {fileID: 2236382248246182542, guid: a50ddf1031d63764fba58985569a04b2, type: 3}
-    weight: 0.2
   - prefab: {fileID: 3311286103904245963, guid: 498eeab022f68694c81ab068bd17436f, type: 3}
     weight: 0.2
   - prefab: {fileID: 1664933255656998650, guid: d12c4dc40ef507a498eefad1b919068b, type: 3}
-    weight: 0.2
-  - prefab: {fileID: 4958957446344376012, guid: 89781d9b0d94a4c4dbcb271736421ca8, type: 3}
     weight: 0.2
   - prefab: {fileID: 3159515348617586657, guid: 91fe20a0428f2ff4bb8c314995771acd, type: 3}
     weight: 0.2

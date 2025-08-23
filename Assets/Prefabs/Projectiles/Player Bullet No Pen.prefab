@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2541408419839992180}
   - component: {fileID: 5626916910881332538}
   m_Layer: 8
-  m_Name: Player Bullet Blue
+  m_Name: Player Bullet No Pen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35edd2b63bd7f0d4086f5deff7204947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageType: 0
   damageAmount: 50
   penetration: 1
   damageLayers:
@@ -173,7 +174,8 @@ MonoBehaviour:
     m_Bits: 128
   destroyOnTouchLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
+  allowMultipleHits: 0
   applyStatusEffectOnHit: 0
   statusApplyChance: 1
   statusEffectOnHit: 0

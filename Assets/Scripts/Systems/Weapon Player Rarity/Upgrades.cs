@@ -320,23 +320,11 @@ public sealed class ShooterRangeUpgrade : IUpgrade
     public bool IsApplicable(WeaponContext c) => c.shooter != null;
     public Action Apply(WeaponContext c, StringBuilder notes)
     {
-        bool lifetime = UnityEngine.Random.value < 0.5f;
-        if (lifetime)
-        {
-            var r = c.tiers.Scale(c.ranges.shooterLifetimeAdd, c.tiers.shooterLifetime);
-            float add = Mathf.Max(0f, UnityEngine.Random.Range(r.x, r.y));
-            c.shooter.BulletLifetime += add;
-            notes.AppendLine($"+{add:F1}s Projectile Lifetime ({c.Roman(c.tiers.shooterLifetime)})");
-            return () => c.shooter.BulletLifetime -= add;
-        }
-        else
-        {
-            var r = c.tiers.Scale(c.ranges.shooterForceAdd, c.tiers.shooterForce);
-            float add = Mathf.Max(0f, UnityEngine.Random.Range(r.x, r.y));
-            c.shooter.ShootForce += add;
-            notes.AppendLine($"+{add:F1} Projectile Speed ({c.Roman(c.tiers.shooterForce)})");
-            return () => c.shooter.ShootForce -= add;
-        }
+        var r = c.tiers.Scale(c.ranges.shooterForceAdd, c.tiers.shooterForce);
+        float add = Mathf.Max(0f, UnityEngine.Random.Range(r.x, r.y));
+        c.shooter.ShootForce += add;
+        notes.AppendLine($"+{add:F1} Projectile Speed ({c.Roman(c.tiers.shooterForce)})");
+        return () => c.shooter.ShootForce -= add;
     }
 }
 

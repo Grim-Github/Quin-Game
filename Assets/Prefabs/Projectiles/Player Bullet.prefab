@@ -166,14 +166,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35edd2b63bd7f0d4086f5deff7204947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageType: 0
   damageAmount: 50
-  penetration: 1
+  penetration: 2
   damageLayers:
     serializedVersion: 2
     m_Bits: 128
   destroyOnTouchLayers:
     serializedVersion: 2
     m_Bits: 1
+  allowMultipleHits: 0
   applyStatusEffectOnHit: 0
   statusApplyChance: 1
   statusEffectOnHit: 0
