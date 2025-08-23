@@ -366,15 +366,38 @@ public class WeaponRarityController : MonoBehaviour
 
     public bool RandomizeRandomTier(bool rerollOneAppliedStat = true)
     {
-        // 13 tier slots indexed 0..12
-        // 19 tier slots indexed 0..18
-        int slot = NextInt(rng, 0, 19);
-        bool changed = RandomizeTierSlot(slot);
+        // Build a list of tier slots that are actually used by currently selected upgrades
+        var candidateSlots = new List<int>();
+        for (int i = 0; i < applied.Count; i++)
+        {
+            CollectSlotsForUpgrade(applied[i].upgrade, candidateSlots);
+        }
 
+        if (candidateSlots.Count == 0)
+            return false; // nothing selected to improve
+
+        // Pick one of the selected-related tier slots
+        int slot = candidateSlots[NextInt(rng, 0, candidateSlots.Count)];
+
+        // Improve the chosen tier by 1 step (towards Tier=1)
+        bool changed = ImproveTierSlot(slot, 1);
         if (!changed) return false;
 
+        // Optionally re-roll one of the applied upgrades that uses this tier to reflect the improvement.
         if (rerollOneAppliedStat && applied.Count > 0)
-            RerollStatAt(NextInt(rng, 0, applied.Count), true); // reroll stat range using new tier
+        {
+            int targetIndex = FindAppliedIndexUsingSlot(slot);
+            if (targetIndex >= 0)
+            {
+                // Re-roll the value using the new tier WITHOUT re-rolling all tiers
+                RerollStatAt(targetIndex, rerollTiers: false);
+            }
+            else
+            {
+                // Fallback: reroll a random applied stat without tier re-roll
+                RerollStatAt(NextInt(rng, 0, applied.Count), rerollTiers: false);
+            }
+        }
 
         return true;
     }
@@ -428,6 +451,68 @@ public class WeaponRarityController : MonoBehaviour
             case 18: return SetTier(ref tiers.resist, newTier);
             default: return false;
         }
+    }
+
+    private bool ImproveTierSlot(int slotIndex, int steps)
+    {
+        switch (slotIndex)
+        {
+            case 0: return ClampTier(ref tiers.damagePercent, steps);
+            case 1: return ClampTier(ref tiers.damageFlat, steps);
+            case 2: return ClampTier(ref tiers.attackSpeed, steps);
+            case 3: return ClampTier(ref tiers.critChance, steps);
+            case 4: return ClampTier(ref tiers.critMultiplier, steps);
+            case 5: return ClampTier(ref tiers.knifeRadius, steps);
+            case 6: return ClampTier(ref tiers.knifeSplashRadius, steps);
+            case 7: return ClampTier(ref tiers.knifeLifesteal, steps);
+            case 8: return ClampTier(ref tiers.knifeMaxTargets, steps);
+            case 9: return ClampTier(ref tiers.shooterLifetime, steps);
+            case 10: return ClampTier(ref tiers.shooterForce, steps);
+            case 11: return ClampTier(ref tiers.shooterProjectiles, steps);
+            case 12: return ClampTier(ref tiers.shooterAccuracy, steps);
+            case 13: return ClampTier(ref tiers.hpFlat, steps);
+            case 14: return ClampTier(ref tiers.hpPercent, steps);
+            case 15: return ClampTier(ref tiers.regen, steps);
+            case 16: return ClampTier(ref tiers.armor, steps);
+            case 17: return ClampTier(ref tiers.evasion, steps);
+            case 18: return ClampTier(ref tiers.resist, steps);
+            default: return false;
+        }
+    }
+
+    private int FindAppliedIndexUsingSlot(int slotIndex)
+    {
+        for (int i = 0; i < applied.Count; i++)
+        {
+            var list = new List<int>(2);
+            CollectSlotsForUpgrade(applied[i].upgrade, list);
+            for (int j = 0; j < list.Count; j++)
+                if (list[j] == slotIndex) return i;
+        }
+        return -1;
+    }
+
+    private static void CollectSlotsForUpgrade(IUpgrade up, List<int> into)
+    {
+        if (up == null || into == null) return;
+        // Map upgrade type -> related tier slot indices
+        if (up is DamageFlatUpgrade) into.Add(1);
+        else if (up is DamagePercentAsFlatUpgrade) into.Add(0);
+        else if (up is AttackSpeedUpgrade) into.Add(2);
+        else if (up is CritUpgrade) { into.Add(3); into.Add(4); }
+        else if (up is KnifeRadiusUpgrade) into.Add(5);
+        else if (up is KnifeSplashUpgrade) into.Add(6);
+        else if (up is KnifeLifestealUpgrade) into.Add(7);
+        else if (up is KnifeMaxTargetsUpgrade) into.Add(8);
+        else if (up is ShooterRangeUpgrade) { into.Add(9); into.Add(10); }
+        else if (up is ShooterProjectilesUpgrade) into.Add(11);
+        else if (up is ShooterAccuracyUpgrade) into.Add(12);
+        else if (up is HpFlatUpgrade) into.Add(13);
+        else if (up is HpPercentUpgrade) into.Add(14);
+        else if (up is RegenUpgrade) into.Add(15);
+        else if (up is ArmorUpgrade) into.Add(16);
+        else if (up is EvasionUpgrade) into.Add(17);
+        else if (up is FireResistUpgrade || up is ColdResistUpgrade || up is LightningResistUpgrade || up is PoisonResistUpgrade) into.Add(18);
     }
 
     private static bool SetTier(ref int tierField, int newValue)
