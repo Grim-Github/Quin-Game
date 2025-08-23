@@ -264,7 +264,7 @@ public class Knife : MonoBehaviour
                             if (splashHealth != null && splashHealth.IsAlive && !splashHealth.IsInvulnerable)
                             {
                                 int splashDamage = Mathf.RoundToInt(dealt * splashDamagePercent);
-                                splashHealth.TakeDamage(splashDamage, SimpleHealth.DamageType.Physical);
+                                splashHealth.TakeDamage(splashDamage, damageType);
                             }
                         }
                     }

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using TMPro; // optional, only if you show labels with TMP
 using UnityEngine;
 using UnityEngine.Events;
@@ -25,8 +24,7 @@ public class WeaponRerollUIHelper : MonoBehaviour
     private readonly List<WeaponRarityController> controllers = new List<WeaponRarityController>();
     private int index = -1;
 
-    // Track CTRL display state to avoid unnecessary UI churn
-    private bool lastCtrlHeld = false;
+    // CTRL overlay removed; no toggle state needed
 
     private void Awake()
     {
@@ -64,17 +62,7 @@ public class WeaponRerollUIHelper : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        // Detect CTRL state (either left or right)
-        bool ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
-        if (ctrl != lastCtrlHeld)
-        {
-            lastCtrlHeld = ctrl;
-            // Rebuild the selection UI text according to the new CTRL state
-            UpdateSelectionUI();
-        }
-    }
+    // CTRL functionality removed; no per-frame input checks needed
 
     [ContextMenu("Refresh Controllers")]
     public void RefreshControllers()
@@ -133,7 +121,6 @@ public class WeaponRerollUIHelper : MonoBehaviour
     private void UpdateSelectionUI()
     {
         var target = CurrentTarget();
-        bool ctrl = lastCtrlHeld;
 
         // --- Labels ---
         if (selectedNameLabel != null)
@@ -147,8 +134,8 @@ public class WeaponRerollUIHelper : MonoBehaviour
             }
             else
             {
-                // CTRL held => rarity + ranges overlay; otherwise show the weapon's own extra text
-                selectedExtraLabel.text = ctrl ? GetCtrlOverlayText(target) : GetExtraText(target);
+                // Always show the weapon's own extra text
+                selectedExtraLabel.text = GetExtraText(target);
             }
         }
 
@@ -204,65 +191,7 @@ public class WeaponRerollUIHelper : MonoBehaviour
         }
     }
 
-    private string GetCtrlOverlayText(WeaponRarityController controller)
-    {
-        // Rarity + ranges (ranges come from controller.GetRollableRangesSummary()).
-        // Rarity is fetched by reflection (controller keeps it private).
-        string rarity = GetRarityText(controller);
-        string ranges = SafeGetRangesSummary(controller);
-
-        if (!string.IsNullOrEmpty(rarity) && !string.IsNullOrEmpty(ranges))
-            return $"<b>Rarity:</b> {rarity}\n{ranges}";
-        if (!string.IsNullOrEmpty(rarity))
-            return $"<b>Rarity:</b> {rarity}";
-        return ranges ?? "";
-    }
-
-    private string SafeGetRangesSummary(WeaponRarityController controller)
-    {
-        if (!controller) return "";
-        try
-        {
-            // Requires the public API you added on the controller
-            return controller.GetRollableRangesSummary();
-        }
-        catch
-        {
-            // If not present, fall back to nothing
-            return "";
-        }
-    }
-
-    private string GetRarityText(WeaponRarityController controller)
-    {
-        if (!controller) return "";
-        try
-        {
-            var field = typeof(WeaponRarityController)
-                .GetField("current", BindingFlags.Instance | BindingFlags.NonPublic);
-            if (field != null)
-            {
-                var val = field.GetValue(controller);
-                if (val != null)
-                {
-                    // Use your existing rarity formatter so colors match rarity type
-                    var method = typeof(WeaponContext)
-                        .GetMethod("FormatRarity", BindingFlags.Public | BindingFlags.Static);
-                    if (method != null)
-                    {
-                        return (string)method.Invoke(null, new object[] { val }) ?? "";
-                    }
-                    else
-                    {
-                        // Fallback: just return the enum name
-                        return val.ToString();
-                    }
-                }
-            }
-        }
-        catch { }
-        return "";
-    }
+    // CTRL overlay helpers removed
 
 
 

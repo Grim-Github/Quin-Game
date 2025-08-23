@@ -215,13 +215,10 @@ public class SimpleHealth : MonoBehaviour
             int oldHealthInt = CurrentHealth;
             currentHealth = Mathf.Min(currentHealth + regenRate * Time.deltaTime, maxHealth);
             SyncSlider();
-            if (CurrentHealth != oldHealthInt)
-            {
-                UpdateStatsText();
-            }
         }
         if (currentHealth <= 0) Die();
         UpdateVolume();
+        UpdateStatsText();
     }
 
     public void UpdateStatsText()
@@ -455,14 +452,6 @@ public class SimpleHealth : MonoBehaviour
         {
             if (_flashRoutine != null) StopCoroutine(_flashRoutine);
             _flashRoutine = StartCoroutine(FlashRedCoroutine());
-        }
-
-        if (transform.CompareTag("Player"))
-        {
-            float shakeStrength = Mathf.Clamp01((float)dmg * 3 / maxHealth); // 0..1 based on % HP lost
-            float duration = Mathf.Lerp(0.05f, 0.1f, shakeStrength);          // small to big duration
-            float intensity = Mathf.Lerp(0.5f, 3f, shakeStrength);             // small to big intensity
-            _orthoScrollZoom?.CameraShake(duration, intensity);
         }
 
         UpdateStatsText();

@@ -3,38 +3,38 @@ using UnityEngine;
 [System.Serializable]
 public class TierSystem
 {
-    [Header("Tier (1 = strongest, 10 = weakest)")]
-    [Range(1, 10)] public int damagePercent = 5;
-    [Range(1, 10)] public int damageFlat = 5;
-    [Range(1, 10)] public int attackSpeed = 5;
-    [Range(1, 10)] public int critChance = 5;
-    [Range(1, 10)] public int critMultiplier = 5;
-    [Range(1, 10)] public int statusDuration = 5;
-    [Range(1, 10)] public int statusTickChance = 5;
+[Header("Tier (1 = strongest, 5 = weakest)")]
+[Range(1, 5)] public int damagePercent = 5;
+[Range(1, 5)] public int damageFlat = 5;
+[Range(1, 5)] public int attackSpeed = 5;
+[Range(1, 5)] public int critChance = 5;
+[Range(1, 5)] public int critMultiplier = 5;
+[Range(1, 5)] public int statusDuration = 5;
+[Range(1, 5)] public int statusTickChance = 5;
 
-    [Header("Health / Defense (1=best, 10=worst)")]
-    [Range(1, 10)] public int hpFlat = 5;
-    [Range(1, 10)] public int hpPercent = 5;
-    [Range(1, 10)] public int regen = 5;
-    [Range(1, 10)] public int armor = 5;
-    [Range(1, 10)] public int evasion = 5;
-    [Range(1, 10)] public int resist = 5;
+[Header("Health / Defense (1=best, 5=worst)")]
+[Range(1, 5)] public int hpFlat = 5;
+[Range(1, 5)] public int hpPercent = 5;
+[Range(1, 5)] public int regen = 5;
+[Range(1, 5)] public int armor = 5;
+[Range(1, 5)] public int evasion = 5;
+[Range(1, 5)] public int resist = 5;
 
 
     [Header("Knife")]
-    [Range(1, 10)] public int knifeRadius = 5;
-    [Range(1, 10)] public int knifeSplashRadius = 5;
-    [Range(1, 10)] public int knifeLifesteal = 5;
-    [Range(1, 10)] public int knifeMaxTargets = 5;
+    [Range(1, 5)] public int knifeRadius = 5;
+    [Range(1, 5)] public int knifeSplashRadius = 5;
+    [Range(1, 5)] public int knifeLifesteal = 5;
+    [Range(1, 5)] public int knifeMaxTargets = 5;
 
     [Header("Shooter")]
-    [Range(1, 10)] public int shooterLifetime = 5;
-    [Range(1, 10)] public int shooterForce = 5;
-    [Range(1, 10)] public int shooterProjectiles = 5;
-    [Range(1, 10)] public int shooterAccuracy = 5;
+    [Range(1, 5)] public int shooterLifetime = 5;
+    [Range(1, 5)] public int shooterForce = 5;
+    [Range(1, 5)] public int shooterProjectiles = 5;
+    [Range(1, 5)] public int shooterAccuracy = 5;
 
     [Header("Curve (optional)")]
-    public AnimationCurve multiplierCurve; // X: 0=Tier10..1=Tier1, Y: mult
+    public AnimationCurve multiplierCurve; // X: 0=Tier5..1=Tier1, Y: mult
     public bool useCurve = false;
     public Vector2 defaultMinMax = new Vector2(0.5f, 2.0f);
 
@@ -68,13 +68,13 @@ public class TierSystem
 
     public float Mult(int tier)
     {
-        tier = Mathf.Clamp(tier, 1, 10);
+        tier = Mathf.Clamp(tier, 1, 5);
         if (useCurve && multiplierCurve != null && multiplierCurve.length > 0)
         {
-            float x = (10 - tier) / 9f; // 0..1 (10->0, 1->1)
+            float x = (5 - tier) / 4f; // 0..1 (5->0, 1->1)
             return Mathf.Max(0f, multiplierCurve.Evaluate(x));
         }
-        float t = (10 - tier) / 9f;
+        float t = (5 - tier) / 4f;
         return Mathf.Lerp(Mathf.Max(0f, defaultMinMax.x), Mathf.Max(0f, defaultMinMax.y), t);
     }
 
@@ -103,5 +103,5 @@ public class TierSystem
         return new Vector2(a, b);
     }
 
-    static int Roll(System.Random rng) => rng.Next(1, 11);
+    static int Roll(System.Random rng) => rng.Next(1, 6);
 }

@@ -242,7 +242,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 40
   startingHealth: 40
-  reservedHealth: 0
   invulnerabilityDuration: 0
   regenRate: 0
   armor: 0
@@ -256,7 +255,6 @@ MonoBehaviour:
   lightningResist: 0
   poisonResist: 0
   healthSlider: {fileID: 4625923915150811510}
-  reservedSlider: {fileID: 0}
   healthText: {fileID: 2445523053030195790}
   statsTextPrefab: {fileID: 0}
   uiParent: {fileID: 0}
@@ -465,7 +463,6 @@ MonoBehaviour:
   hpMult: {x: 1.1, y: 1.3}
   regenAdd: {x: 0.2, y: 1}
   armorAdd: {x: 1, y: 6}
-  moveSpeedAdd: {x: 0.5, y: 1}
   atkSpeedFracAll: {x: 0.08, y: 0.1}
   KnifeDamageFlat: {x: 2, y: 10}
   KnifeDamageMult: {x: 1.08, y: 1.1}
@@ -493,21 +490,21 @@ MonoBehaviour:
   - prefab: {fileID: 1878305132109642921, guid: 62f80dc1511c5de468a8dbdaf172c2cc, type: 3}
     weight: 2
   - prefab: {fileID: 3862261898208802303, guid: e4b53848a82c4ae4080bbaad77ff9343, type: 3}
-    weight: 0.2
+    weight: 0.35
   - prefab: {fileID: 3215298938506285162, guid: d5ded94da70b29747b2cbaa5103ad9a2, type: 3}
-    weight: 0.2
+    weight: 0.35
   - prefab: {fileID: 2236382248246182542, guid: a50ddf1031d63764fba58985569a04b2, type: 3}
-    weight: 0.2
+    weight: 0.35
   - prefab: {fileID: 3311286103904245963, guid: 498eeab022f68694c81ab068bd17436f, type: 3}
-    weight: 0.2
+    weight: 0.35
   - prefab: {fileID: 1664933255656998650, guid: d12c4dc40ef507a498eefad1b919068b, type: 3}
-    weight: 0.2
+    weight: 0.35
   - prefab: {fileID: 4958957446344376012, guid: 89781d9b0d94a4c4dbcb271736421ca8, type: 3}
-    weight: 0.2
+    weight: 0.35
   - prefab: {fileID: 3159515348617586657, guid: 91fe20a0428f2ff4bb8c314995771acd, type: 3}
-    weight: 0.2
+    weight: 0.35
   - prefab: {fileID: 1459730382762690446, guid: 73bc9308489134641b4dc7828c6b5087, type: 3}
-    weight: 0.2
+    weight: 0.35
   amountOptions:
   - amount: 1
     weight: 1
