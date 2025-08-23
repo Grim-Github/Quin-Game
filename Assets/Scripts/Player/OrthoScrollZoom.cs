@@ -85,7 +85,8 @@ public class OrthoScrollZoom : MonoBehaviour
 
                 // Decay both by Time.deltaTime
                 float dt = Time.deltaTime;
-                _shakeDuration = Mathf.Max(0f, _shakeDuration - dt);
+                _shakeDuration = Mathf.Clamp(_shakeDuration - dt, 0f, maxShakeDuration);
+
                 _shakeIntensity = Mathf.Max(0f, _shakeIntensity - dt);
             }
         }

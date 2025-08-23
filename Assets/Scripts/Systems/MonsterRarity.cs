@@ -28,9 +28,7 @@ public class MonsterRarity : MonoBehaviour
     [SerializeField] public Vector2 regenAdd = new Vector2(0.2f, 2.0f);
     [SerializeField] public Vector2 armorAdd = new Vector2(1f, 6f);
 
-    // === Movement (EnemyChaser) ===
-    [Header("Chase / Movement Rolls")]
-    [SerializeField] public Vector2 moveSpeedAdd = new Vector2(0.5f, 2.5f);
+    // (Removed) Movement speed upgrade
 
     // === Global cadence (WeaponTick) ===
     [Header("Global Attack Cadence (WeaponTick)")]
@@ -55,7 +53,7 @@ public class MonsterRarity : MonoBehaviour
     private SimpleHealth health;        // needs public: int maxHealth, int currentHealth, float regenRate, float armor;
                                         // public UnityEngine.UI.Slider healthSlider; public TMPro.TextMeshProUGUI healthText;
                                         // public string extraTextField; public void Heal(int amt); public void UpdateStatsText();
-    private EnemyChaser chaser;         // needs public: float moveSpeed;
+    // (Removed) private EnemyChaser chaser;  // movement speed upgrade removed
     private Knife[] knives;             // must have public fields used below
     private SimpleShooter[] shooters;   // must have public fields used below
     private WeaponTick[] ticks;         // needs public: float interval; public void ResetAndStart();
@@ -98,7 +96,6 @@ public class MonsterRarity : MonoBehaviour
     private void RefreshCachedRefs()
     {
         health = GetComponent<SimpleHealth>();
-        chaser = GetComponent<EnemyChaser>();
         knives = GetComponentsInChildren<Knife>(true);
         shooters = GetComponentsInChildren<SimpleShooter>(true);
         ticks = GetComponentsInChildren<WeaponTick>(true);
@@ -172,10 +169,7 @@ public class MonsterRarity : MonoBehaviour
             list.Add(Up_Armor_Add);
         }
 
-        if (chaser)
-        {
-            list.Add(Up_MoveSpeed_Add);
-        }
+        // Movement speed upgrade removed
 
         bool hasKnives = knives != null && knives.Length > 0;
         if (hasKnives)
@@ -242,14 +236,7 @@ public class MonsterRarity : MonoBehaviour
         EN("Armor", $"+{add:F1}");
     }
 
-    // ===== Movement (EnemyChaser) =====
-    private void Up_MoveSpeed_Add()
-    {
-        if (!chaser) return;
-        float add = UnityEngine.Random.Range(moveSpeedAdd.x, moveSpeedAdd.y);
-        chaser.moveSpeed = Mathf.Max(0f, chaser.moveSpeed + add);
-        EN("Move Speed", $"+{add:F1}");
-    }
+    // (Removed) Movement speed upgrade implementation
 
     // ===== Global cadence =====
     private void Upgrade_AllWeaponAttackSpeed()

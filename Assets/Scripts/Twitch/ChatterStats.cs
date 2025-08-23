@@ -82,9 +82,6 @@ public class ChatterStats : MonoBehaviour
         mr.regenAdd = ScaleV2(mr.regenAdd, rangeMul);
         mr.armorAdd = ScaleV2(mr.armorAdd, rangeMul);
 
-        // --- Movement
-        mr.moveSpeedAdd = ScaleV2(mr.moveSpeedAdd, rangeMul);
-
         // --- Global cadence (give it extra oomph if desired)
         float cadenceMul = Mathf.Clamp(rangeMul * (1f + p * cadenceBoostPerPower), 1f, maxRangeMultiplier);
         mr.atkSpeedFracAll = ScaleV2(mr.atkSpeedFracAll, cadenceMul);
