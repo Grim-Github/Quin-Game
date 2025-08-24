@@ -115,6 +115,38 @@ public sealed class EvasionUpgrade : IUpgrade
     }
 }
 
+public sealed class ArmorPercentUpgrade : IUpgrade
+{
+    public bool IsApplicable(WeaponContext c) => c.health != null && c.health.Armor > 0f;
+    public Action Apply(WeaponContext c, StringBuilder notes)
+    {
+        var r = c.tiers.ScaleMultiplierLike(c.ranges.armorMult, c.tiers.armorPercent);
+        float mult = UnityEngine.Random.Range(r.x, r.y);
+        float before = Mathf.Max(0f, c.health.Armor);
+        if (before <= 0f) { notes.AppendLine("+0% Armor (no base)"); return () => { }; }
+        float delta = before * (mult - 1f);
+        c.health.Armor = Mathf.Max(0f, before + delta);
+        notes.AppendLine($"+{(mult - 1f) * 100f:F0}% Armor ({c.Roman(c.tiers.armorPercent)})");
+        return () => c.health.Armor = Mathf.Max(0f, c.health.Armor - delta);
+    }
+}
+
+public sealed class EvasionPercentUpgrade : IUpgrade
+{
+    public bool IsApplicable(WeaponContext c) => c.health != null && c.health.Evasion > 0f;
+    public Action Apply(WeaponContext c, StringBuilder notes)
+    {
+        var r = c.tiers.ScaleMultiplierLike(c.ranges.evasionMult, c.tiers.evasionPercent);
+        float mult = UnityEngine.Random.Range(r.x, r.y);
+        float before = Mathf.Max(0f, c.health.Evasion);
+        if (before <= 0f) { notes.AppendLine("+0% Evasion (no base)"); return () => { }; }
+        float delta = before * (mult - 1f);
+        c.health.Evasion = Mathf.Max(0f, before + delta);
+        notes.AppendLine($"+{(mult - 1f) * 100f:F0}% Evasion ({c.Roman(c.tiers.evasionPercent)})");
+        return () => c.health.Evasion = Mathf.Max(0f, c.health.Evasion - delta);
+    }
+}
+
 public abstract class ResistUpgradeBase : IUpgrade
 {
     public abstract string Label { get; }

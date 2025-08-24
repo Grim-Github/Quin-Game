@@ -16,6 +16,8 @@ public class TierSystem
     [Range(1, 5)] public int regen = 5;
     [Range(1, 5)] public int armor = 5;
     [Range(1, 5)] public int evasion = 5;
+    [Range(1, 5)] public int armorPercent = 5;
+    [Range(1, 5)] public int evasionPercent = 5;
     [Range(1, 5)] public int resist = 5;
 
 
@@ -49,6 +51,8 @@ public class TierSystem
         regen = Roll(rng);
         armor = Roll(rng);
         evasion = Roll(rng);
+        armorPercent = Roll(rng);
+        evasionPercent = Roll(rng);
         resist = Roll(rng);
 
         knifeRadius = Roll(rng);

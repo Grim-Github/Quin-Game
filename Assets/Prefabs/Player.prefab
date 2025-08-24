@@ -146,7 +146,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 83719897620725757}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1072,23 +1072,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.3, y: 0.5}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 1, y: 6}
     evasionAdd: {x: 2, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -1104,13 +1104,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -1129,6 +1129,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
+  applied: []
 --- !u!114 &1031026390126303283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1883,23 +1884,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.3, y: 0.5}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 1, y: 6}
     evasionAdd: {x: 2, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -1915,13 +1916,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -1940,6 +1941,8 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
+  applied:
+  - note: 
 --- !u!114 &1702872602865300714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2160,23 +2163,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.01, y: 0.3}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 3, y: 12}
     evasionAdd: {x: 3, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -2192,13 +2195,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -2217,6 +2220,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
   healthSystem: {fileID: 5791096993671492205}
+  applied: []
 --- !u!1 &786988859167995833
 GameObject:
   m_ObjectHideFlags: 0
@@ -3124,23 +3128,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.3, y: 0.5}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 1, y: 6}
     evasionAdd: {x: 2, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -3156,13 +3160,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -3181,6 +3185,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
+  applied: []
 --- !u!1 &935738676766603409
 GameObject:
   m_ObjectHideFlags: 0
@@ -3423,6 +3428,106 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &985994560293212420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7640776562212995191}
+  - component: {fileID: 298437339841741852}
+  - component: {fileID: 5601390871689250602}
+  m_Layer: 6
+  m_Name: Upgrade 2 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7640776562212995191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985994560293212420}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1432232446246633481}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &298437339841741852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985994560293212420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Extra Armor
+    powerUpDescription: +10 Armor
+    powerUpObject: {fileID: 985994560293212420}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -8639265281806335974, guid: a767dfe450289bc449574b956acd63cf, type: 3}
+    weight: 30
+  nextUpgrade: {fileID: 0}
+--- !u!114 &5601390871689250602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985994560293212420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Armor Upgrade
+  AccesoryDescription: +10 Armor
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Assembly-CSharp
+        m_MethodName: GiveArmor
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 10
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &996962631917125617
 GameObject:
   m_ObjectHideFlags: 0
@@ -5311,23 +5416,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.01, y: 0.3}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 3, y: 12}
     evasionAdd: {x: 3, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -5343,13 +5448,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -5368,6 +5473,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
   healthSystem: {fileID: 5791096993671492205}
+  applied: []
 --- !u!1 &1465697286572918320
 GameObject:
   m_ObjectHideFlags: 0
@@ -6888,23 +6994,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.01, y: 0.3}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 3, y: 12}
     evasionAdd: {x: 3, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -6920,13 +7026,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -6945,6 +7051,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
   healthSystem: {fileID: 5791096993671492205}
+  applied: []
 --- !u!1 &2302453346357717577
 GameObject:
   m_ObjectHideFlags: 0
@@ -8288,23 +8395,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 7596382903804138479}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 1, y: 4}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.3, y: 0.5}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 1, y: 6}
     evasionAdd: {x: 2, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.3, y: 1.5}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -8320,13 +8427,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -8345,6 +8452,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
+  applied: []
 --- !u!114 &7596382903804138479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8362,14 +8470,13 @@ MonoBehaviour:
     damagePercentAsFlat: 1
     attackSpeed: 1
     crit: 1
-    enableOnHitRandom: 1
-    statusDuration: 1
-    statusChance: 1
     hpFlat: 1
     hpPercent: 1
     hpRegen: 1
     armor: 1
     evasion: 1
+    armorPercent: 1
+    evasionPercent: 1
     fireResist: 0.5
     coldResist: 0.5
     lightningResist: 0.5
@@ -8740,7 +8847,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3112790596934991934}
+  - {fileID: 7640776562212995191}
   m_Father: {fileID: 5432253268087408168}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6680414583333143163
@@ -8806,23 +8915,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.01, y: 0.3}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 3, y: 12}
     evasionAdd: {x: 3, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -8838,13 +8947,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -8863,6 +8972,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
   healthSystem: {fileID: 5791096993671492205}
+  applied: []
 --- !u!1 &3190016390325641590
 GameObject:
   m_ObjectHideFlags: 0
@@ -9405,23 +9515,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.3, y: 0.5}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 1, y: 6}
     evasionAdd: {x: 2, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -9437,13 +9547,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -9462,6 +9572,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
+  applied: []
 --- !u!1 &3401677938551974219
 GameObject:
   m_ObjectHideFlags: 0
@@ -10805,23 +10916,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.3, y: 0.5}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 1, y: 6}
     evasionAdd: {x: 2, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -10837,13 +10948,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -10862,6 +10973,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
+  applied: []
 --- !u!1 &4019939872639026237
 GameObject:
   m_ObjectHideFlags: 0
@@ -11148,7 +11260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3671500682441700444
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11322,6 +11434,106 @@ RectTransform:
   m_AnchoredPosition: {x: -538.2551, y: -12.418945}
   m_SizeDelta: {x: -1076.5105, y: -24.839}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &4130351785870363393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3112790596934991934}
+  - component: {fileID: 590828710596015504}
+  - component: {fileID: 5149346043121443665}
+  m_Layer: 6
+  m_Name: Upgrade 1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3112790596934991934
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4130351785870363393}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1432232446246633481}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &590828710596015504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4130351785870363393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b806bdaa3bdd8f4588c37a6e0de273c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Extra Armour
+    powerUpDescription: +10 Armor
+    powerUpObject: {fileID: 4130351785870363393}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: -8639265281806335974, guid: a767dfe450289bc449574b956acd63cf, type: 3}
+    weight: 30
+  nextUpgrade: {fileID: 298437339841741852}
+--- !u!114 &5149346043121443665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4130351785870363393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b325a2515afac4e899a190a295fe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AccesoryName: Armor Upgrade
+  AccesoryDescription: +10 Armor
+  icon: {fileID: 0}
+  onAwake:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Assembly-CSharp
+        m_MethodName: GiveArmor
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 10
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8305401705832053989}
+        m_TargetAssemblyTypeName: Accessory, Grim
+        m_MethodName: RefreshUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  nextUpgrade: {fileID: 0}
+  statsTextPrefab: {fileID: 0}
+  uiParent: {fileID: 0}
+  statsTextInstance: {fileID: 0}
 --- !u!1 &4154395797457514244
 GameObject:
   m_ObjectHideFlags: 0
@@ -12726,23 +12938,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 8555762351250044580}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 1, y: 4}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.3, y: 0.5}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 1, y: 6}
     evasionAdd: {x: 2, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.3, y: 1.5}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -12758,13 +12970,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -12783,6 +12995,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
+  applied: []
 --- !u!114 &8555762351250044580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12800,14 +13013,13 @@ MonoBehaviour:
     damagePercentAsFlat: 1
     attackSpeed: 1
     crit: 1
-    enableOnHitRandom: 1
-    statusDuration: 1
-    statusChance: 1
     hpFlat: 1
     hpPercent: 1
     hpRegen: 1
     armor: 1
     evasion: 1
+    armorPercent: 1
+    evasionPercent: 1
     fireResist: 0.5
     coldResist: 0.5
     lightningResist: 0.5
@@ -15235,23 +15447,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.01, y: 0.3}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 3, y: 12}
     evasionAdd: {x: 3, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -15267,13 +15479,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -15292,6 +15504,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
   healthSystem: {fileID: 5791096993671492205}
+  applied: []
 --- !u!1 &5862486877742866835
 GameObject:
   m_ObjectHideFlags: 0
@@ -16745,23 +16958,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.01, y: 0.3}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 3, y: 12}
     evasionAdd: {x: 3, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -16777,13 +16990,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -16802,6 +17015,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
   healthSystem: {fileID: 5791096993671492205}
+  applied: []
 --- !u!1 &6329938207393223755
 GameObject:
   m_ObjectHideFlags: 0
@@ -17873,23 +18087,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.3, y: 0.5}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 1, y: 6}
     evasionAdd: {x: 2, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -17905,13 +18119,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -17930,6 +18144,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
+  applied: []
 --- !u!114 &1169816254535209958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19123,23 +19338,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.01, y: 0.3}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 3, y: 12}
     evasionAdd: {x: 3, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -19155,13 +19370,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -19180,6 +19395,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
   healthSystem: {fileID: 5791096993671492205}
+  applied: []
 --- !u!1 &6987822466726327103
 GameObject:
   m_ObjectHideFlags: 0
@@ -20253,23 +20469,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.3, y: 0.5}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 1, y: 6}
     evasionAdd: {x: 2, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -20285,13 +20501,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -20310,6 +20526,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
+  applied: []
 --- !u!114 &7090157329932107271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23186,23 +23403,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.3, y: 0.5}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 1, y: 6}
     evasionAdd: {x: 2, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -23218,13 +23435,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -23243,6 +23460,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
+  applied: []
 --- !u!1 &8503593496250004042
 GameObject:
   m_ObjectHideFlags: 0
@@ -24141,23 +24359,23 @@ MonoBehaviour:
   upgradeWeights: {fileID: 0}
   current: 0
   weights:
-    common: 60
+    common: 40
     uncommon: 25
     rare: 12
-    legendary: 3
+    legendary: 5
   ranges:
     damageMult: {x: 1.1, y: 1.3}
     damageFlatAdd: {x: 3, y: 12}
     atkSpeedFrac: {x: 0.1, y: 0.25}
     critChanceAdd: {x: 0.05, y: 0.2}
     critMultAdd: {x: 0.25, y: 1}
-    statusDurationAdd: {x: 0.1, y: 0.3}
-    statusChance: {x: 0.01, y: 0.3}
     hpFlatAdd: {x: 15, y: 60}
     hpMult: {x: 1.05, y: 1.25}
     regenAdd: {x: 0.1, y: 1.5}
     armorAdd: {x: 3, y: 12}
     evasionAdd: {x: 3, y: 12}
+    armorMult: {x: 1.05, y: 1.25}
+    evasionMult: {x: 1.05, y: 1.25}
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
@@ -24173,13 +24391,13 @@ MonoBehaviour:
     attackSpeed: 5
     critChance: 5
     critMultiplier: 5
-    statusDuration: 5
-    statusTickChance: 5
     hpFlat: 5
     hpPercent: 5
     regen: 5
     armor: 5
     evasion: 5
+    armorPercent: 5
+    evasionPercent: 5
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
@@ -24198,6 +24416,7 @@ MonoBehaviour:
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
   healthSystem: {fileID: 5791096993671492205}
+  applied: []
 --- !u!1 &8892643798934483796
 GameObject:
   m_ObjectHideFlags: 0

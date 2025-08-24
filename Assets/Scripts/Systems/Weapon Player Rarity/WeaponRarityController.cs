@@ -36,14 +36,15 @@ public class WeaponRarityController : MonoBehaviour
     private System.Random rng;
 
     // ===== Selected Upgrades Tracking =====
+    [System.Serializable]
     private sealed class AppliedUpgrade
     {
-        public readonly IUpgrade upgrade;   // upgrade behavior
-        public readonly Action undo;        // undo action
-        public readonly string note;        // human-readable line(s) for UI
+        public IUpgrade upgrade;   // upgrade behavior
+        public Action undo;        // undo action
+        public string note;        // human-readable line(s) for UI
         public AppliedUpgrade(IUpgrade u, Action un, string n) { upgrade = u; undo = un; note = n; }
     }
-    private readonly List<AppliedUpgrade> applied = new();
+    [SerializeField] private List<AppliedUpgrade> applied = new();
 
     public int SelectedUpgradeCount => applied.Count;
 
@@ -442,6 +443,8 @@ public class WeaponRarityController : MonoBehaviour
             case 16: return SetTier(ref tiers.armor, newTier);
             case 17: return SetTier(ref tiers.evasion, newTier);
             case 18: return SetTier(ref tiers.resist, newTier);
+            case 19: return SetTier(ref tiers.armorPercent, newTier);
+            case 20: return SetTier(ref tiers.evasionPercent, newTier);
             default: return false;
         }
     }
@@ -469,6 +472,8 @@ public class WeaponRarityController : MonoBehaviour
             case 16: return ClampTier(ref tiers.armor, steps);
             case 17: return ClampTier(ref tiers.evasion, steps);
             case 18: return ClampTier(ref tiers.resist, steps);
+            case 19: return ClampTier(ref tiers.armorPercent, steps);
+            case 20: return ClampTier(ref tiers.evasionPercent, steps);
             default: return false;
         }
     }
@@ -577,6 +582,8 @@ public class WeaponRarityController : MonoBehaviour
             Add(true, new RegenUpgrade(), UpgradeType.HpRegen);
             Add(true, new ArmorUpgrade(), UpgradeType.Armor);
             Add(true, new EvasionUpgrade(), UpgradeType.Evasion);
+            Add(c.health.Armor > 0f, new ArmorPercentUpgrade(), UpgradeType.ArmorPercent);
+            Add(c.health.Evasion > 0f, new EvasionPercentUpgrade(), UpgradeType.EvasionPercent);
             Add(true, new FireResistUpgrade(), UpgradeType.FireResist);
             Add(true, new ColdResistUpgrade(), UpgradeType.ColdResist);
             Add(true, new LightningResistUpgrade(), UpgradeType.LightningResist);
@@ -621,6 +628,13 @@ public class WeaponRarityController : MonoBehaviour
         }
 
         WriteUIBlock(lines);
+    }
+
+    public void OnDestroy()
+    {
+        UndoAllApplied();
+        applied.Clear();
+        applied = null;
     }
 
     private void WriteUIBlock(IReadOnlyList<string> lines)

@@ -17,6 +17,8 @@ public enum UpgradeType
     HpRegen,
     Armor,
     Evasion,
+    ArmorPercent,
+    EvasionPercent,
     FireResist,
     ColdResist,
     LightningResist,
@@ -49,6 +51,8 @@ public class UpgradeWeightTable
     [Min(0f)] public float hpRegen = 1f;
     [Min(0f)] public float armor = 1f;
     [Min(0f)] public float evasion = 1f;
+    [Min(0f)] public float armorPercent = 1f;
+    [Min(0f)] public float evasionPercent = 1f;
     [Min(0f)] public float fireResist = 0.5f;
     [Min(0f)] public float coldResist = 0.5f;
     [Min(0f)] public float lightningResist = 0.5f;
@@ -76,6 +80,8 @@ public class UpgradeWeightTable
         UpgradeType.HpRegen => hpRegen,
         UpgradeType.Armor => armor,
         UpgradeType.Evasion => evasion,
+        UpgradeType.ArmorPercent => armorPercent,
+        UpgradeType.EvasionPercent => evasionPercent,
         UpgradeType.FireResist => fireResist,
         UpgradeType.ColdResist => coldResist,
         UpgradeType.LightningResist => lightningResist,

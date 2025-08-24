@@ -16,6 +16,8 @@ public class UpgradeRanges
     public Vector2 regenAdd = new Vector2(0.10f, 1.50f);
     public Vector2 armorAdd = new Vector2(1.0f, 6.0f);
     public Vector2 evasionAdd = new Vector2(2.0f, 12.0f);
+    public Vector2 armorMult = new Vector2(1.05f, 1.25f);
+    public Vector2 evasionMult = new Vector2(1.05f, 1.25f);
     public Vector2 resistAdd = new Vector2(0.05f, 0.20f);
 
 
