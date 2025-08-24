@@ -362,43 +362,40 @@ public class WeaponRarityController : MonoBehaviour
             Debug.LogWarning($"{name}: No alternative upgrade type available.");
     }
 
-    // ========== NEW #2: Randomly upgrade a tier (towards Tier=1) ==========
+    // ========== NEW #2: Reroll all tiers ==========
 
+    /// <summary>
+    /// Rerolls ALL tier values, then re-applies all current upgrades to reflect the new tiers.
+    /// The parameter is ignored; kept for compatibility with existing UI wiring.
+    /// </summary>
     public bool RandomizeRandomTier(bool rerollOneAppliedStat = true)
     {
-        // Build a list of tier slots that are actually used by currently selected upgrades
-        var candidateSlots = new List<int>();
+        // Simplified: reroll ALL tiers at once, then reapply all current upgrades.
+        tiers.RollAll(rng);
+
+        if (applied.Count == 0)
+        {
+            // No applied upgrades to re-roll values for, but still refresh UI to reflect new tiers.
+            RebuildUIFromApplied();
+            tick?.ResetAndStartIfPlaying();
+            return true;
+        }
+
+        var ctx = BuildContext();
+
+        // Re-apply each selected upgrade with the new tiers (no additional tier rerolls).
         for (int i = 0; i < applied.Count; i++)
         {
-            CollectSlotsForUpgrade(applied[i].upgrade, candidateSlots);
+            var prev = applied[i];
+            prev.undo?.Invoke();
+
+            var sb = new StringBuilder();
+            var undo = prev.upgrade.Apply(ctx, sb);
+            applied[i] = new AppliedUpgrade(prev.upgrade, undo, sb.ToString().Trim());
         }
 
-        if (candidateSlots.Count == 0)
-            return false; // nothing selected to improve
-
-        // Pick one of the selected-related tier slots
-        int slot = candidateSlots[NextInt(rng, 0, candidateSlots.Count)];
-
-        // Improve the chosen tier by 1 step (towards Tier=1)
-        bool changed = ImproveTierSlot(slot, 1);
-        if (!changed) return false;
-
-        // Optionally re-roll one of the applied upgrades that uses this tier to reflect the improvement.
-        if (rerollOneAppliedStat && applied.Count > 0)
-        {
-            int targetIndex = FindAppliedIndexUsingSlot(slot);
-            if (targetIndex >= 0)
-            {
-                // Re-roll the value using the new tier WITHOUT re-rolling all tiers
-                RerollStatAt(targetIndex, rerollTiers: false);
-            }
-            else
-            {
-                // Fallback: reroll a random applied stat without tier re-roll
-                RerollStatAt(NextInt(rng, 0, applied.Count), rerollTiers: false);
-            }
-        }
-
+        RebuildUIFromApplied();
+        tick?.ResetAndStartIfPlaying();
         return true;
     }
 

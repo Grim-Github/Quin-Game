@@ -216,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Poison Resist
+    powerUpDescription: +8% Poison Resist
     powerUpObject: {fileID: 92474740053100050}
     IsAccessory: 0
     IsWeapon: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Poison Resist
+  AccesoryDescription: +8% Poison Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -249,7 +249,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -598,8 +598,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -176.98228}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchoredPosition: {x: 327.885, y: -135.68228}
+  m_SizeDelta: {x: 653.31, y: 66.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3723150730366642734
 CanvasRenderer:
@@ -746,7 +746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
-  autoUpdate: 0
+  autoUpdate: 1
   appendExtraFromHealth: 0
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -2007,7 +2007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Poison Resist
+    powerUpDescription: +8% Poison Resist
     powerUpObject: {fileID: 727710020117490481}
     IsAccessory: 0
     IsWeapon: 0
@@ -2027,7 +2027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Poison Resist
+  AccesoryDescription: +8% Poison Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -2040,7 +2040,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -2267,7 +2267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Poison Resist
+    powerUpDescription: +8% Poison Resist
     powerUpObject: {fileID: 786988859167995833}
     IsAccessory: 0
     IsWeapon: 0
@@ -2287,7 +2287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Poison Resist
+  AccesoryDescription: +8% Poison Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -2300,7 +2300,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -2640,7 +2640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Cold Resist
+    powerUpDescription: +8% Cold Resist
     powerUpObject: {fileID: 837067538820061578}
     IsAccessory: 0
     IsWeapon: 0
@@ -2660,7 +2660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Cold Resist
+  AccesoryDescription: +8% Cold Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -2673,7 +2673,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -3716,8 +3716,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -226.78229}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchoredPosition: {x: 327.885, y: -201.8823}
+  m_SizeDelta: {x: 653.31, y: 66.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4074725629246888460
 CanvasRenderer:
@@ -3864,7 +3864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
-  autoUpdate: 0
+  autoUpdate: 1
   appendExtraFromHealth: 0
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -4554,6 +4554,64 @@ AudioLowPassFilter:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1244901908908516245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6810225094241270124}
+  - component: {fileID: 4174703045141603566}
+  m_Layer: 6
+  m_Name: Upgrade 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6810225094241270124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244901908908516245}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4222350344232283328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4174703045141603566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244901908908516245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Lightning Strikes - Damage Up +<color=#8888FF>10</color>%
+    powerUpDescription: Increases weapon damage by <color=#8888FF>10</color>%.
+    powerUpObject: {fileID: 1244901908908516245}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 1781937086033352542, guid: 7ee4e681aa5aa8a44b2221fd0625bba9, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 7830486028192498809}
+  upgradeType: 2
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 0.1
 --- !u!1 &1247444226582579560
 GameObject:
   m_ObjectHideFlags: 0
@@ -5095,7 +5153,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 653.15, y: 49.8}
+  m_CellSize: {x: 653.31, y: 66.2}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -5487,7 +5545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5929917122124812510
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5504,10 +5562,10 @@ RectTransform:
   - {fileID: 6159125347764133184}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -77.38229}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2498857686562003061
 CanvasRenderer:
@@ -6000,7 +6058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Lightning Resist
+    powerUpDescription: +8% Lightning Resist
     powerUpObject: {fileID: 1706348029550636421}
     IsAccessory: 0
     IsWeapon: 0
@@ -6020,7 +6078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Lightning Resist
+  AccesoryDescription: +8% Lightning Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -6033,7 +6091,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -6565,7 +6623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Lightning Resist
+    powerUpDescription: +8% Lightning Resist
     powerUpObject: {fileID: 2002651410938345823}
     IsAccessory: 0
     IsWeapon: 0
@@ -6585,7 +6643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Lightning Resist
+  AccesoryDescription: +8% Lightning Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -6598,7 +6656,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -7811,8 +7869,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -27.582296}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchoredPosition: {x: 327.885, y: -69.48229}
+  m_SizeDelta: {x: 653.31, y: 66.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2200026841810741719
 CanvasRenderer:
@@ -7959,7 +8017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
-  autoUpdate: 0
+  autoUpdate: 1
   appendExtraFromHealth: 0
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -8615,8 +8673,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.76
-  m_fontSizeBase: 20.76
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9025,7 +9083,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Lightning Resist
+    powerUpDescription: +8% Lightning Resist
     powerUpObject: {fileID: 3249207026387922227}
     IsAccessory: 0
     IsWeapon: 0
@@ -9045,7 +9103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Lightning Resist
+  AccesoryDescription: +8% Lightning Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -9058,7 +9116,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -9596,7 +9654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Fire Resist
+    powerUpDescription: +8% Fire Resist
     powerUpObject: {fileID: 3421744763528224217}
     IsAccessory: 0
     IsWeapon: 0
@@ -9616,7 +9674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Fire Resist
+  AccesoryDescription: +8% Fire Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -9629,7 +9687,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -9878,8 +9936,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21
-  m_fontSizeBase: 21
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -11304,6 +11362,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5526111780517100950}
+  - {fileID: 4222350344232283328}
   - {fileID: 7278172175999806099}
   - {fileID: 7262086574399655167}
   - {fileID: 4105205200030717801}
@@ -11436,7 +11495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Poison Resist
+    powerUpDescription: +8% Poison Resist
     powerUpObject: {fileID: 4326588185396638906}
     IsAccessory: 0
     IsWeapon: 0
@@ -11456,7 +11515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Poison Resist
+  AccesoryDescription: +8% Poison Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -11469,7 +11528,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -12125,7 +12184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8737996194798201594
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12142,10 +12201,10 @@ RectTransform:
   - {fileID: 2965144522027759990}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -127.1823}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -127.182304}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &695081399239090769
 CanvasRenderer:
@@ -13181,6 +13240,52 @@ MonoBehaviour:
   statsTextPrefab: {fileID: 0}
   uiParent: {fileID: 0}
   statsTextInstance: {fileID: 0}
+--- !u!1 &4816191166205337379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4355974749485442311}
+  - component: {fileID: 6873689500673814246}
+  m_Layer: 6
+  m_Name: Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4355974749485442311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4816191166205337379}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4222350344232283328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6873689500673814246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4816191166205337379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10f8c21ebeae9142a276dd62b323637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 5
+  centerPoint: {fileID: 4222350344232283328}
 --- !u!1 &4821376071138364741
 GameObject:
   m_ObjectHideFlags: 0
@@ -13264,7 +13369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Cold Resist
+    powerUpDescription: +8% Cold Resist
     powerUpObject: {fileID: 4842793693938137619}
     IsAccessory: 0
     IsWeapon: 0
@@ -13284,7 +13389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Cold Resist
+  AccesoryDescription: +8% Cold Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -13297,7 +13402,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -13684,7 +13789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Fire Resist
+    powerUpDescription: +8% Fire Resist
     powerUpObject: {fileID: 4895460048709314821}
     IsAccessory: 0
     IsWeapon: 0
@@ -13704,7 +13809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Fire Resist
+  AccesoryDescription: +8% Fire Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -13717,7 +13822,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -14292,7 +14397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1092392353808560237
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14308,10 +14413,10 @@ RectTransform:
   - {fileID: 6848453330417983158}
   m_Father: {fileID: 2392473150351630289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -326.3823}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -301.48227}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9209299288882247878
 CanvasRenderer:
@@ -14854,7 +14959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Cold Resist
+    powerUpDescription: +8% Cold Resist
     powerUpObject: {fileID: 5595694609798941146}
     IsAccessory: 0
     IsWeapon: 0
@@ -14874,7 +14979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Cold Resist
+  AccesoryDescription: +8% Cold Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -14887,7 +14992,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -15239,8 +15344,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -376.18228}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchoredPosition: {x: 327.885, y: -334.2823}
+  m_SizeDelta: {x: 653.31, y: 66.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7395233620441092726
 CanvasRenderer:
@@ -15387,7 +15492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
-  autoUpdate: 0
+  autoUpdate: 1
   appendExtraFromHealth: 0
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -15583,6 +15688,64 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 836.7195, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &6052749279316705842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 808158516967343236}
+  - component: {fileID: 45470013195072904}
+  m_Layer: 6
+  m_Name: Upgrade 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &808158516967343236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6052749279316705842}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4222350344232283328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &45470013195072904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6052749279316705842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: 'Lightning Strikes - Damage Type: Poison'
+    powerUpDescription: Changes this weapon's damage type to Poison.
+    powerUpObject: {fileID: 6052749279316705842}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 1781937086033352542, guid: 7ee4e681aa5aa8a44b2221fd0625bba9, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 0}
+  upgradeType: 3
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 4
 --- !u!1 &6079404619763886863
 GameObject:
   m_ObjectHideFlags: 0
@@ -15788,8 +15951,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327.885, y: -276.5823}
-  m_SizeDelta: {x: 653.15, y: 49.8}
+  m_AnchoredPosition: {x: 327.885, y: -268.08228}
+  m_SizeDelta: {x: 653.31, y: 66.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7121845835245431989
 CanvasRenderer:
@@ -15936,7 +16099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: 
-  autoUpdate: 0
+  autoUpdate: 1
   appendExtraFromHealth: 0
   appendFromInventoryActivator: 1
   textColor: {r: 1, g: 1, b: 1, a: 1}
@@ -16699,7 +16862,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Lightning Resist
+    powerUpDescription: +8% Lightning Resist
     powerUpObject: {fileID: 6329938207393223755}
     IsAccessory: 0
     IsWeapon: 0
@@ -16719,7 +16882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Lightning Resist
+  AccesoryDescription: +8% Lightning Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -16732,7 +16895,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -16846,8 +17009,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21
-  m_fontSizeBase: 21
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16937,7 +17100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Fire Resist
+    powerUpDescription: +8% Fire Resist
     powerUpObject: {fileID: 6348011487605537901}
     IsAccessory: 0
     IsWeapon: 0
@@ -16957,7 +17120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Fire Resist
+  AccesoryDescription: +8% Fire Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -16970,7 +17133,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -16990,6 +17153,64 @@ MonoBehaviour:
   statsTextPrefab: {fileID: 0}
   uiParent: {fileID: 0}
   statsTextInstance: {fileID: 0}
+--- !u!1 &6349933226817274902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2196908659800466620}
+  - component: {fileID: 7830486028192498809}
+  m_Layer: 6
+  m_Name: Upgrade 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2196908659800466620
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6349933226817274902}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4222350344232283328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7830486028192498809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6349933226817274902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Lightning Strikes - Damage Up +<color=#8888FF>10</color>%
+    powerUpDescription: Increases weapon damage by <color=#8888FF>10</color>%.
+    powerUpObject: {fileID: 6349933226817274902}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 1781937086033352542, guid: 7ee4e681aa5aa8a44b2221fd0625bba9, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 7484713645453142842}
+  upgradeType: 2
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 0.1
 --- !u!1 &6351609203449479223
 GameObject:
   m_ObjectHideFlags: 0
@@ -17037,7 +17258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Cold Resist
+    powerUpDescription: +8% Cold Resist
     powerUpObject: {fileID: 6351609203449479223}
     IsAccessory: 0
     IsWeapon: 0
@@ -17057,7 +17278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Cold Resist
+  AccesoryDescription: +8% Cold Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -17070,7 +17291,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -19420,7 +19641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Lightning Resist
+    powerUpDescription: +8% Lightning Resist
     powerUpObject: {fileID: 7321992694779779490}
     IsAccessory: 0
     IsWeapon: 0
@@ -19440,7 +19661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Lightning Resist
+  AccesoryDescription: +8% Lightning Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -19453,7 +19674,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -19636,6 +19857,64 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &7526051705179256464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 522081217894998920}
+  - component: {fileID: 7484713645453142842}
+  m_Layer: 6
+  m_Name: Upgrade 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &522081217894998920
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7526051705179256464}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4222350344232283328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7484713645453142842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7526051705179256464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Lightning Strikes - Range Up +<color=#8888FF>100</color>%
+    powerUpDescription: Increases attack reach by <color=#8888FF>100</color>%.
+    powerUpObject: {fileID: 7526051705179256464}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 1781937086033352542, guid: 7ee4e681aa5aa8a44b2221fd0625bba9, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 45470013195072904}
+  upgradeType: 5
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 1
 --- !u!1 &7529736326371172317
 GameObject:
   m_ObjectHideFlags: 0
@@ -19699,7 +19978,7 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 10
-            m_FloatArgument: 0.25
+            m_FloatArgument: 25
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -19744,6 +20023,327 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 1150944337021895763}
   tmp: {fileID: 3152013175662757018}
+--- !u!1 &7596130138076833886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4222350344232283328}
+  - component: {fileID: 6873270333062620889}
+  - component: {fileID: 6585297972381571741}
+  - component: {fileID: 5105785412917021092}
+  - component: {fileID: 5333109639313984154}
+  - component: {fileID: 7090157329932107271}
+  m_Layer: 6
+  m_Name: Lightning Strikes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4222350344232283328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7596130138076833886}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8480695387296935730}
+  - {fileID: 6810225094241270124}
+  - {fileID: 2196908659800466620}
+  - {fileID: 522081217894998920}
+  - {fileID: 808158516967343236}
+  - {fileID: 4355974749485442311}
+  m_Father: {fileID: 5833988517266502027}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6873270333062620889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7596130138076833886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c98c24205b75b42bc1375d05964c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interval: 2
+  startOnAwake: 1
+  repeat: 1
+  useUnscaledTime: 0
+  burstEnabled: 1
+  burstCount: 3
+  burstSpacing: 0.1
+  onTick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6585297972381571741}
+        m_TargetAssemblyTypeName: Knife, Grim
+        m_MethodName: OnKnifeTick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6873689500673814246}
+        m_TargetAssemblyTypeName: RandomTarget2D, Grim
+        m_MethodName: MoveToRandomLocation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6585297972381571741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7596130138076833886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 417756cd4c94eef498d4c38e016c552b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.44
+  damage: 20
+  damageType: 0
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 128
+  maxTargetsPerTick: 1
+  hitOrigins:
+  - {fileID: 4355974749485442311}
+  splashRadius: 0
+  splashDamagePercent: 0.5
+  applyStatusEffectOnHit: 0
+  statusApplyChance: 0.1
+  statusEffectOnHit: 0
+  statusEffectDuration: 3
+  lifestealPercent: 0
+  critChance: 0.5
+  critMultiplier: 1.5
+  nextUpgrade: {fileID: 1359543406603662476}
+  shootClip: {fileID: 8300000, guid: b1abb9547cde4ba43bbf932cdc804719, type: 3}
+  stabClip: {fileID: 8300000, guid: 95c906fdaf654834fb592c668a587250, type: 3}
+  slashEffect: {fileID: 2990082284754955125, guid: 3c7fa9ceb543b3b4e874935cce42a793, type: 3}
+  selfSfxObject: {fileID: 0}
+  statsTextPrefab: {fileID: 1969562480182966257, guid: 890a4bca294df43468ac696383a99644, type: 3}
+  uiParent: {fileID: 3771470944807517528}
+  extraTextField: 
+  weaponSprite: {fileID: 1781937086033352542, guid: 7ee4e681aa5aa8a44b2221fd0625bba9, type: 3}
+  rangeRenderer: {fileID: 0}
+  visualPadding: 0
+  autoScaleRangeVisual: 1
+  statsTextInstance: {fileID: 0}
+--- !u!82 &5105785412917021092
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7596130138076833886}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5333109639313984154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7596130138076833886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb6ec8c105e6194d9d86c4118cb1227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollOnAwake: 1
+  rngSeed: 0
+  upgradeWeights: {fileID: 0}
+  current: 0
+  weights:
+    common: 60
+    uncommon: 25
+    rare: 12
+    legendary: 3
+  ranges:
+    damageMult: {x: 1.1, y: 1.3}
+    damageFlatAdd: {x: 3, y: 12}
+    atkSpeedFrac: {x: 0.1, y: 0.25}
+    critChanceAdd: {x: 0.05, y: 0.2}
+    critMultAdd: {x: 0.25, y: 1}
+    statusDurationAdd: {x: 0.1, y: 0.3}
+    statusChance: {x: 0.3, y: 0.5}
+    hpFlatAdd: {x: 15, y: 60}
+    hpMult: {x: 1.05, y: 1.25}
+    regenAdd: {x: 0.1, y: 1.5}
+    armorAdd: {x: 1, y: 6}
+    evasionAdd: {x: 2, y: 12}
+    resistAdd: {x: 0.05, y: 0.2}
+    knifeRadiusMult: {x: 1.1, y: 1.3}
+    knifeSplashRadiusMult: {x: 1.1, y: 1.3}
+    knifeLifestealAdd: {x: 0.05, y: 0.2}
+    knifeMaxTargetsAdd: {x: 1, y: 2}
+    shooterLifetimeAdd: {x: 0.5, y: 2}
+    shooterForceAdd: {x: 1, y: 4}
+    shooterProjectilesAdd: {x: 1, y: 2}
+    shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
+  tiers:
+    damagePercent: 5
+    damageFlat: 5
+    attackSpeed: 5
+    critChance: 5
+    critMultiplier: 5
+    statusDuration: 5
+    statusTickChance: 5
+    hpFlat: 5
+    hpPercent: 5
+    regen: 5
+    armor: 5
+    evasion: 5
+    resist: 5
+    knifeRadius: 5
+    knifeSplashRadius: 5
+    knifeLifesteal: 5
+    knifeMaxTargets: 5
+    shooterLifetime: 5
+    shooterForce: 5
+    shooterProjectiles: 5
+    shooterAccuracy: 5
+    multiplierCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    useCurve: 0
+    defaultMinMax: {x: 0.4, y: 1.75}
+  onHitStatusBlacklist: 0300000002000000
+  healthSystem: {fileID: 0}
+--- !u!114 &7090157329932107271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7596130138076833886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3449e7c3fa3c3348ab19cd4ac78624b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swingAngle: 120
+  swingDuration: 0.3
+  spriteOffset: {x: 0.5, y: 0, z: 0}
+  spriteScale: 3
+  sortingOrder: 5
+  playerSpriteRenderer: {fileID: 30405735645601086}
 --- !u!1 &7663087148285191437
 GameObject:
   m_ObjectHideFlags: 0
@@ -19791,7 +20391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Fire Resist
+    powerUpDescription: +8% Fire Resist
     powerUpObject: {fileID: 7663087148285191437}
     IsAccessory: 0
     IsWeapon: 0
@@ -19811,7 +20411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Fire Resist
+  AccesoryDescription: +8% Fire Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -19824,7 +20424,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -20230,7 +20830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Poison Resist
+    powerUpDescription: +8% Poison Resist
     powerUpObject: {fileID: 7769270466300064961}
     IsAccessory: 0
     IsWeapon: 0
@@ -20250,7 +20850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Poison Resist
+  AccesoryDescription: +8% Poison Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -20263,7 +20863,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -20796,7 +21396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Fire Resist
+    powerUpDescription: +8% Fire Resist
     powerUpObject: {fileID: 7926531410515614286}
     IsAccessory: 0
     IsWeapon: 0
@@ -20816,7 +21416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Fire Resist
+  AccesoryDescription: +8% Fire Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -20829,7 +21429,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -20907,6 +21507,64 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   value: 0.1
+--- !u!1 &7960842276395549136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8480695387296935730}
+  - component: {fileID: 1359543406603662476}
+  m_Layer: 6
+  m_Name: 'Upgrade 1 '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8480695387296935730
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7960842276395549136}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4222350344232283328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1359543406603662476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7960842276395549136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Lightning Strikes - Damage Up +<color=#8888FF>4</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>4</color>.
+    powerUpObject: {fileID: 7960842276395549136}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 1781937086033352542, guid: 7ee4e681aa5aa8a44b2221fd0625bba9, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 4174703045141603566}
+  upgradeType: 1
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 4
 --- !u!1 &8075213717505226598
 GameObject:
   m_ObjectHideFlags: 0
@@ -21424,7 +22082,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Reroll the <color=#7FB77E><b>tier</b></color> level of one <b>random</b>
+  m_text: "Rerolls the <color=#7FB77E><b>tier</b></color> levels of all <b>random</b>
     <color=#C6A664><b>modifier</b></color> \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d4db32dfbb302d4195300b724b29022, type: 2}
@@ -21452,8 +22110,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21
-  m_fontSizeBase: 21
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -22855,7 +23513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Upgrade:
     powerUpName: Ring Upgrade
-    powerUpDescription: +5% Cold Resist
+    powerUpDescription: +8% Cold Resist
     powerUpObject: {fileID: 8614662545966625424}
     IsAccessory: 0
     IsWeapon: 0
@@ -22875,7 +23533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Ring Upgrade
-  AccesoryDescription: +5% Cold Resist
+  AccesoryDescription: +8% Cold Resist
   icon: {fileID: 0}
   onAwake:
     m_PersistentCalls:
@@ -22888,7 +23546,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 10
-          m_FloatArgument: 0.05
+          m_FloatArgument: 0.08
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -23255,8 +23913,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21
-  m_fontSizeBase: 21
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
