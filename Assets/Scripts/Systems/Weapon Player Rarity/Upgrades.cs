@@ -21,12 +21,10 @@ public sealed class WeaponContext
     public ICritModule crit;
     public IAttackSpeedModule attack;
     public IKnifeModule knife;
-    public IStatusTickModule status;
     public IShooterModule shooter;
     public IHealthModule health;
     public IUITextSink ui;                     // sink to write rarity block
     public TickAdapter tickAdapter;            // to reset tick cleanly
-    public StatusEffectSystem.StatusType[] statusBlacklist; // which statuses cannot be rolled
 
     public string Roman(int n)
     {

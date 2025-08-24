@@ -1128,7 +1128,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
-  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!114 &1031026390126303283
 MonoBehaviour:
@@ -1940,7 +1939,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
-  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!114 &1702872602865300714
 MonoBehaviour:
@@ -2218,7 +2216,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
-  onHitStatusBlacklist: 
   healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &786988859167995833
 GameObject:
@@ -3151,7 +3148,7 @@ MonoBehaviour:
     knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
+    shooterProjectilesAdd: {x: 1, y: 1}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -3183,7 +3180,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
-  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &935738676766603409
 GameObject:
@@ -5371,7 +5367,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
-  onHitStatusBlacklist: 
   healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &1465697286572918320
 GameObject:
@@ -6949,7 +6944,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
-  onHitStatusBlacklist: 
   healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &2302453346357717577
 GameObject:
@@ -8350,7 +8344,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
-  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!114 &7596382903804138479
 MonoBehaviour:
@@ -8869,7 +8862,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
-  onHitStatusBlacklist: 
   healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &3190016390325641590
 GameObject:
@@ -9469,7 +9461,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
-  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &3401677938551974219
 GameObject:
@@ -10870,7 +10861,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
-  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &4019939872639026237
 GameObject:
@@ -12792,7 +12782,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
-  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!114 &8555762351250044580
 MonoBehaviour:
@@ -15302,7 +15291,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
-  onHitStatusBlacklist: 
   healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &5862486877742866835
 GameObject:
@@ -16813,7 +16801,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
-  onHitStatusBlacklist: 
   healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &6329938207393223755
 GameObject:
@@ -17942,7 +17929,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
-  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!114 &1169816254535209958
 MonoBehaviour:
@@ -19193,7 +19179,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
-  onHitStatusBlacklist: 
   healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &6987822466726327103
 GameObject:
@@ -20324,7 +20309,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
-  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!114 &7090157329932107271
 MonoBehaviour:
@@ -23258,7 +23242,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.4, y: 1.75}
-  onHitStatusBlacklist: 0300000002000000
   healthSystem: {fileID: 0}
 --- !u!1 &8503593496250004042
 GameObject:
@@ -24214,7 +24197,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     useCurve: 0
     defaultMinMax: {x: 0.5, y: 2}
-  onHitStatusBlacklist: 
   healthSystem: {fileID: 5791096993671492205}
 --- !u!1 &8892643798934483796
 GameObject:

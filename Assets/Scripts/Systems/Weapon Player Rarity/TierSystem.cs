@@ -3,22 +3,20 @@ using UnityEngine;
 [System.Serializable]
 public class TierSystem
 {
-[Header("Tier (1 = strongest, 5 = weakest)")]
-[Range(1, 5)] public int damagePercent = 5;
-[Range(1, 5)] public int damageFlat = 5;
-[Range(1, 5)] public int attackSpeed = 5;
-[Range(1, 5)] public int critChance = 5;
-[Range(1, 5)] public int critMultiplier = 5;
-[Range(1, 5)] public int statusDuration = 5;
-[Range(1, 5)] public int statusTickChance = 5;
+    [Header("Tier (1 = strongest, 5 = weakest)")]
+    [Range(1, 5)] public int damagePercent = 5;
+    [Range(1, 5)] public int damageFlat = 5;
+    [Range(1, 5)] public int attackSpeed = 5;
+    [Range(1, 5)] public int critChance = 5;
+    [Range(1, 5)] public int critMultiplier = 5;
 
-[Header("Health / Defense (1=best, 5=worst)")]
-[Range(1, 5)] public int hpFlat = 5;
-[Range(1, 5)] public int hpPercent = 5;
-[Range(1, 5)] public int regen = 5;
-[Range(1, 5)] public int armor = 5;
-[Range(1, 5)] public int evasion = 5;
-[Range(1, 5)] public int resist = 5;
+    [Header("Health / Defense (1=best, 5=worst)")]
+    [Range(1, 5)] public int hpFlat = 5;
+    [Range(1, 5)] public int hpPercent = 5;
+    [Range(1, 5)] public int regen = 5;
+    [Range(1, 5)] public int armor = 5;
+    [Range(1, 5)] public int evasion = 5;
+    [Range(1, 5)] public int resist = 5;
 
 
     [Header("Knife")]
@@ -45,8 +43,6 @@ public class TierSystem
         attackSpeed = Roll(rng);
         critChance = Roll(rng);
         critMultiplier = Roll(rng);
-        statusDuration = Roll(rng);
-        statusTickChance = Roll(rng);
 
         hpFlat = Roll(rng);
         hpPercent = Roll(rng);

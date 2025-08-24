@@ -22,10 +22,6 @@ public class WeaponRarityController : MonoBehaviour
     [Header("Tiers")]
     [SerializeField] private TierSystem tiers = new TierSystem();
 
-    [Header("Status Rolls")]
-    [Tooltip("Blacklist of status effects that will never be rolled by the 'Enable On-Hit' upgrade.")]
-    [SerializeField] private StatusEffectSystem.StatusType[] onHitStatusBlacklist = System.Array.Empty<StatusEffectSystem.StatusType>();
-
     [Header("References")]
     [SerializeField] private SimpleHealth healthSystem; // optional explicit reference (falls back to parent)
 
@@ -555,8 +551,6 @@ public class WeaponRarityController : MonoBehaviour
             health = health,
             ui = uiSink,
             tickAdapter = tick,
-            status = (IStatusTickModule)(object)(knife ?? (object)shooter ?? null),
-            statusBlacklist = onHitStatusBlacklist
         };
     }
 

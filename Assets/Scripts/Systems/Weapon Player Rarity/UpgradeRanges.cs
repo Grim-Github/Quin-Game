@@ -9,8 +9,6 @@ public class UpgradeRanges
     public Vector2 atkSpeedFrac = new Vector2(0.10f, 0.25f);
     public Vector2 critChanceAdd = new Vector2(0.05f, 0.20f);
     public Vector2 critMultAdd = new Vector2(0.25f, 1.00f);
-    public Vector2 statusDurationAdd = new Vector2(0.1f, 0.30f); // +5% to +20%
-    public Vector2 statusChance = new Vector2(0.01f, 0.30f); // reduce interval by 10%..30%
 
     [Header("Health / Defense")]
     public Vector2Int hpFlatAdd = new Vector2Int(15, 60);
