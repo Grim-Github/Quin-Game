@@ -27,6 +27,7 @@ public class MonsterRarity : MonoBehaviour
     [SerializeField] public Vector2 hpMult = new Vector2(1.10f, 1.35f);
     [SerializeField] public Vector2 regenAdd = new Vector2(0.2f, 2.0f);
     [SerializeField] public Vector2 armorAdd = new Vector2(1f, 6f);
+    [SerializeField] public Vector2 evasionAdd = new Vector2(1f, 6f);
 
     // (Removed) Movement speed upgrade
 
@@ -167,6 +168,7 @@ public class MonsterRarity : MonoBehaviour
             list.Add(Up_HP_Mult);
             list.Add(Up_Regen_Add);
             list.Add(Up_Armor_Add);
+            list.Add(Up_Evasion_Add);
         }
 
         // Movement speed upgrade removed
@@ -234,6 +236,15 @@ public class MonsterRarity : MonoBehaviour
         float add = UnityEngine.Random.Range(armorAdd.x, armorAdd.y);
         health.armor = Mathf.Max(0f, health.armor + add);
         EN("Armor", $"+{add:F1}");
+    }
+
+    private void Up_Evasion_Add()
+    {
+        if (!health) return;
+        float add = UnityEngine.Random.Range(evasionAdd.x, evasionAdd.y);
+        health.evasion = Mathf.Max(0f, health.evasion + add);
+        EN("Evasion", $"+{add:F1}");
+        health.UpdateStatsText();
     }
 
     // (Removed) Movement speed upgrade implementation
