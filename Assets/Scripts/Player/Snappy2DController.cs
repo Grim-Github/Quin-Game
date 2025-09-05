@@ -22,6 +22,14 @@ public class Snappy2DController : MonoBehaviour
     [SerializeField] private float dashDuration = 0.15f;
     [SerializeField] private float dashCooldown = 0.5f;
 
+    [Header("Blink")]
+    [Tooltip("If true, pressing dash will blink (teleport) instead of dashing.")]
+    [SerializeField] private bool dashIsBlink = false;
+    [Tooltip("Blink distance when dash is set to blink mode.")]
+    [SerializeField] private float blinkDistance = 5f;
+    [Tooltip("Layers that block blink. Configure which colliders stop the teleport.")]
+    [SerializeField] private LayerMask blinkBlockingLayers = ~0;
+
     [Header("Visuals")]
     [SerializeField] private SpriteRenderer spriteRenderer;
     [Tooltip("If true, flips the sprite in the opposite direction.")]
@@ -38,6 +46,7 @@ public class Snappy2DController : MonoBehaviour
     private float nextDashTime;
     private Vector2 dashDirection;
     private AudioSource playerSource;
+    private Collider2D bodyCollider;
 
     public float MoveSpeed => moveSpeed;
     public float DashSpeed => dashSpeed;
@@ -54,6 +63,8 @@ public class Snappy2DController : MonoBehaviour
 
         if (spriteRenderer == null)
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        bodyCollider = GetComponent<Collider2D>();
     }
 
     private void Update()
@@ -67,10 +78,43 @@ public class Snappy2DController : MonoBehaviour
                 {
                     playerSource.PlayOneShot(dashClip);
                 }
-                isDashing = true;
-                dashDirection = input.normalized;
-                dashEndTime = Time.time + dashDuration;
-                nextDashTime = Time.time + dashCooldown;
+                if (dashIsBlink)
+                {
+                    // Perform blink (teleport) with a safety linecast to avoid blinking into obstacles
+                    Vector2 start = rb.position;
+                    Vector2 dir = input.normalized;
+                    Vector2 end = start + dir * blinkDistance;
+
+                    int mask = blinkBlockingLayers;
+                    RaycastHit2D[] hits = Physics2D.LinecastAll(start, end, mask);
+
+                    float maxDist = blinkDistance;
+                    if (hits != null && hits.Length > 0)
+                    {
+                        for (int i = 0; i < hits.Length; i++)
+                        {
+                            var hit = hits[i];
+                            if (hit.collider == null) continue;
+                            if (bodyCollider != null && hit.collider == bodyCollider) continue; // ignore self
+                            float allowed = hit.distance - 0.05f; // small skin so we don't end up inside the collider
+                            if (allowed < 0f) allowed = 0f;
+                            maxDist = Mathf.Min(maxDist, allowed);
+                            break; // hits are sorted by distance; first valid is our stop
+                        }
+                    }
+
+                    Vector2 finalPos = start + dir * maxDist;
+                    rb.position = finalPos;
+                    rb.linearVelocity = Vector2.zero;
+                    nextDashTime = Time.time + dashCooldown;
+                }
+                else
+                {
+                    isDashing = true;
+                    dashDirection = input.normalized;
+                    dashEndTime = Time.time + dashDuration;
+                    nextDashTime = Time.time + dashCooldown;
+                }
             }
         }
 
@@ -117,6 +161,22 @@ public class Snappy2DController : MonoBehaviour
     {
         if (amount == 0f) return;
         dashCooldown = Mathf.Max(0f, dashCooldown + amount);
+    }
+
+    // UnityEvent-compatible toggles for blink mode
+    public void EnableBlink()
+    {
+        dashIsBlink = true;
+    }
+
+    public void DisableBlink()
+    {
+        dashIsBlink = false;
+    }
+
+    public void SetBlinkMode(bool enabled)
+    {
+        dashIsBlink = enabled;
     }
 
     private void FixedUpdate()
