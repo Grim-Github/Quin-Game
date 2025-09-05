@@ -26,8 +26,18 @@ public class SimpleHealth : MonoBehaviour
     [SerializeField] private float invulnerabilityDuration = 1f;
 
     [BoxGroup("Regeneration")]
-    [Tooltip("Health regenerated per second. Can be fractional.")]
+    [Tooltip("Health regenerated per second. Can be fractional. Does not grant temporary health.")]
     [SerializeField] public float regenRate = 0f;
+
+    [BoxGroup("Temporary Health")]
+    [Tooltip("If true, healing past max health grants a temporary, decaying health shield.")]
+    [SerializeField] private bool enableTemporaryHealth = true;
+    [BoxGroup("Temporary Health")]
+    [Tooltip("How fast temporary health depletes per second.")]
+    [SerializeField] private float tempHealthDecayRate = 5f;
+    [BoxGroup("Temporary Health")]
+    [Tooltip("How long to wait after gaining temp health before it starts decaying.")]
+    [SerializeField] private float tempHealthDecayDelay = 1.5f;
 
     [BoxGroup("Armor (Small-hit mitigation)")]
     [Tooltip("Flat armor rating. More armor = more mitigation on small hits.")]
@@ -93,6 +103,8 @@ public class SimpleHealth : MonoBehaviour
 
     private AudioSource soundSource;
     [HideInInspector] public float currentHealth;
+    [HideInInspector] public float currentTemporaryHealth;
+    private float tempHealthDecayTimer;
     private bool isInvulnerable;
 
     private Color _originalColor;
@@ -116,7 +128,7 @@ public class SimpleHealth : MonoBehaviour
     private Image iconImage;
     private AudioLowPassFilter filter;
 
-    public bool IsAlive => currentHealth > 0f;
+    public bool IsAlive => currentHealth > 0f || (enableTemporaryHealth && currentTemporaryHealth > 0f);
     public bool IsInvulnerable => isInvulnerable;
     public int CurrentHealth => Mathf.RoundToInt(currentHealth);
     public int MaxHealth => maxHealth;
@@ -210,15 +222,37 @@ public class SimpleHealth : MonoBehaviour
 
     private void Update()
     {
-        if (regenRate > 0f && IsAlive && currentHealth < maxHealth)
+        // Health Regeneration (does NOT grant temporary health)
+        if (regenRate > 0f && currentHealth > 0f && currentHealth < maxHealth)
         {
-            int oldHealthInt = CurrentHealth;
             currentHealth = Mathf.Min(currentHealth + regenRate * Time.deltaTime, maxHealth);
-            SyncSlider();
         }
-        if (currentHealth <= 0) Die();
+
+        // Temporary Health Decay Logic
+        if (enableTemporaryHealth && currentTemporaryHealth > 0)
+        {
+            if (tempHealthDecayTimer > 0)
+            {
+                tempHealthDecayTimer -= Time.deltaTime;
+            }
+            else
+            {
+                currentTemporaryHealth -= tempHealthDecayRate * Time.deltaTime;
+                if (currentTemporaryHealth < 0)
+                {
+                    currentTemporaryHealth = 0;
+                }
+            }
+        }
+
+        if (currentHealth <= 0 && (!enableTemporaryHealth || currentTemporaryHealth <= 0))
+        {
+            Die();
+        }
+
         UpdateVolume();
         UpdateStatsText();
+        SyncSlider(); // Sync slider every frame to show decay
     }
 
     public void UpdateStatsText()
@@ -231,7 +265,12 @@ public class SimpleHealth : MonoBehaviour
             _statsBuilder.Clear();
             _statsBuilder.AppendLine($"<b>Health</b>");
             _statsBuilder.AppendLine($"Max Health: {maxHealth}");
-            _statsBuilder.AppendLine($"Current: {CurrentHealth}");
+            _statsBuilder.Append($"Current: {CurrentHealth}");
+            if (enableTemporaryHealth && currentTemporaryHealth > 0)
+            {
+                _statsBuilder.Append($" <color=#64C8FF>+{Mathf.RoundToInt(currentTemporaryHealth)}</color>");
+            }
+            _statsBuilder.AppendLine(); // New line
             _statsBuilder.AppendLine($"Regen: {regenRate:F2}/s");
             healthStatsText.text = _statsBuilder.ToString();
         }
@@ -345,9 +384,29 @@ public class SimpleHealth : MonoBehaviour
     // NEW: main overload with type
     public void TakeDamage(int amount, DamageType type = DamageType.Physical, bool mitigatable = true, bool applyAilments = true)
     {
-        if (amount <= 0 || isInvulnerable || currentHealth <= 0) return;
+        if (amount <= 0 || isInvulnerable || !IsAlive) return;
 
-        int dmg = amount;
+        int incomingDamage = amount;
+
+        // Absorb damage with temporary health first
+        if (enableTemporaryHealth && currentTemporaryHealth > 0)
+        {
+            float damageAbsorbedByTemp = Mathf.Min(incomingDamage, currentTemporaryHealth);
+            currentTemporaryHealth -= damageAbsorbedByTemp;
+            incomingDamage -= (int)damageAbsorbedByTemp;
+
+            if (incomingDamage <= 0)
+            {
+                SyncSlider();
+                UpdateStatsText();
+                // Optional: You could show a different colored damage popup for absorbed damage here.
+                return;
+            }
+        }
+
+        if (currentHealth <= 0) return; // Don't continue if only temp health was left
+
+        int dmg = incomingDamage;
 
         if (mitigatable)
         {
@@ -456,7 +515,7 @@ public class SimpleHealth : MonoBehaviour
 
         UpdateStatsText();
 
-        if (currentHealth <= 0) Die();
+        if (!IsAlive) Die();
         else if (invulnerabilityDuration > 0) StartCoroutine(InvulnerabilityCoroutine());
     }
 
@@ -529,15 +588,36 @@ public class SimpleHealth : MonoBehaviour
     public void Heal(int amount)
     {
         if (amount <= 0 || currentHealth <= 0) return;
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+
+        if (enableTemporaryHealth)
+        {
+            float oldHealth = currentHealth;
+            currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+
+            float healedAmount = currentHealth - oldHealth;
+            float overHeal = amount - healedAmount;
+
+            if (overHeal > 0)
+            {
+                currentTemporaryHealth += overHeal;
+                tempHealthDecayTimer = tempHealthDecayDelay;
+            }
+        }
+        else
+        {
+            // If feature is disabled, just heal to max and stop.
+            currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        }
+
         SyncSlider();
         UpdateStatsText();
     }
 
     public void Kill()
     {
-        if (currentHealth <= 0) return;
+        if (!IsAlive) return;
         currentHealth = 0;
+        if (enableTemporaryHealth) currentTemporaryHealth = 0;
         SyncSlider();
         UpdateStatsText();
         Die();
@@ -546,6 +626,7 @@ public class SimpleHealth : MonoBehaviour
     public void ResetHealth()
     {
         currentHealth = maxHealth;
+        if (enableTemporaryHealth) currentTemporaryHealth = 0;
         SyncSlider();
         UpdateStatsText();
     }
@@ -600,7 +681,14 @@ public class SimpleHealth : MonoBehaviour
 
         if (healthText != null)
         {
-            healthText.text = $"{Mathf.RoundToInt(currentHealth)}/{maxHealth}";
+            if (enableTemporaryHealth && currentTemporaryHealth > 0)
+            {
+                healthText.text = $"{Mathf.RoundToInt(currentHealth)}<color=#64C8FF>+{Mathf.RoundToInt(currentTemporaryHealth)}</color>/{maxHealth}";
+            }
+            else
+            {
+                healthText.text = $"{Mathf.RoundToInt(currentHealth)}/{maxHealth}";
+            }
         }
     }
 

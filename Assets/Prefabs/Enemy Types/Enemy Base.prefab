@@ -144,6 +144,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -165,6 +167,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -244,6 +247,9 @@ MonoBehaviour:
   startingHealth: 40
   invulnerabilityDuration: 0
   regenRate: 0
+  enableTemporaryHealth: 0
+  tempHealthDecayRate: 5
+  tempHealthDecayDelay: 1.5
   armor: 0
   armorScaling: 10
   maxMitigation: 0.8
@@ -275,6 +281,7 @@ MonoBehaviour:
   damagePopupPrefab: {fileID: 2924289727893196464, guid: a8aea507684d95a4c8b9545db21cf2cd, type: 3}
   popupOffset: {x: 0, y: 1, z: 0}
   currentHealth: 0
+  currentTemporaryHealth: 0
   healthStatsText: {fileID: 0}
   defenseStatsText: {fileID: 0}
   movementStatsText: {fileID: 0}
@@ -463,6 +470,7 @@ MonoBehaviour:
   hpMult: {x: 1.1, y: 1.3}
   regenAdd: {x: 0.2, y: 1}
   armorAdd: {x: 1, y: 6}
+  evasionAdd: {x: 1, y: 6}
   atkSpeedFracAll: {x: 0.08, y: 0.1}
   KnifeDamageFlat: {x: 2, y: 10}
   KnifeDamageMult: {x: 1.08, y: 1.1}
