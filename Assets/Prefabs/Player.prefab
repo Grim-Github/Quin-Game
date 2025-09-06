@@ -5384,7 +5384,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Boots
-  AccesoryDescription: +0.3 Move Speed
+  AccesoryDescription: '+0.3 Move Speed
+
+    +5 Evasion'
   icon: {fileID: -4499610800817194292, guid: 56f49ca85e719464aad70d75aae56889, type: 3}
   onAwake:
     m_PersistentCalls:
@@ -5410,6 +5412,18 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5791096993671492205}
+        m_TargetAssemblyTypeName: SimpleHealth, Grim
+        m_MethodName: GiveEvasion
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 5
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -16941,7 +16955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccesoryName: Armor
-  AccesoryDescription: +10 Armor
+  AccesoryDescription: +20 Armor
   icon: {fileID: 52960055443897715, guid: 3827f6494089b5e40816c76b734ebb2c, type: 3}
   onAwake:
     m_PersistentCalls:
@@ -16954,7 +16968,7 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 10
+          m_FloatArgument: 20
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2

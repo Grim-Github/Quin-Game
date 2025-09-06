@@ -46,7 +46,7 @@ public class Trigger2DEvent : MonoBehaviour
     {
         var player = GameObject.FindGameObjectWithTag("Player").GetComponent<SimpleHealth>();
         if (player == null) return;
-        player.GetComponent<StatusEffectSystem>().ApplyStatusEffect_Int(2);
+        player.GetComponent<StatusEffectSystem>().ApplyStatusEffect_Int(2, 10);
     }
 
 

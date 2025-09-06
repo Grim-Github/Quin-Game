@@ -45,6 +45,13 @@ public class TopChatMessagesSimple : MonoBehaviour
             .ToList();
     }
 
+    // Clear all tracked words and refresh UI (used when a voting round ends)
+    public void ResetTopWords()
+    {
+        counts.Clear();
+        UpdateUI();
+    }
+
     private void OnChatMessage(Chatter c)
     {
         string raw = c?.message ?? string.Empty;

@@ -123,6 +123,12 @@ public class StatusEffectSystem : MonoBehaviour
         AddStatus(type, defaultDuration, defaultTickInterval);
     }
 
+    public void ApplyStatusEffect_Int(int statusTypeInt, float time)
+    {
+        var type = (StatusType)Mathf.Clamp(statusTypeInt, 0, Enum.GetNames(typeof(StatusType)).Length - 1);
+        AddStatus(type, time, defaultTickInterval);
+    }
+
 
     /// <summary>
     /// Adds or REFRESHES a status effect.

@@ -203,6 +203,9 @@ public class VoteManager : MonoBehaviour
         {
             // No votes -> no winner
             OnVoteEnd?.Invoke(null, (int[])tallies.Clone());
+            // Reset top chat words at end of round
+            if (TopChatMessagesSimple.Instance != null)
+                TopChatMessagesSimple.Instance.ResetTopWords();
             EnterCooldown();
             return;
         }
@@ -232,6 +235,9 @@ public class VoteManager : MonoBehaviour
         // Record shown ids
         for (int i = 0; i < currentOptionCount; i++) PushRecent(currentOptions[i]?.id);
 
+        // Reset top chat words at end of round
+        if (TopChatMessagesSimple.Instance != null)
+            TopChatMessagesSimple.Instance.ResetTopWords();
         EnterCooldown();
     }
 
