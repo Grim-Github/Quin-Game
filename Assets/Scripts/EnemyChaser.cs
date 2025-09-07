@@ -106,6 +106,10 @@ public class EnemyChaser : MonoBehaviour
 
     private float GetMoveMultiplier(StatusEffectSystem ses)
     {
+        // If there's no StatusEffectSystem on this GameObject, treat it as having no statuses.
+        if (ses == null)
+            return 1f;
+
         if (ses.HasStatus(StatusEffectSystem.StatusType.Stun) || ses.HasStatus(StatusEffectSystem.StatusType.Frozen))
             return 0f;
 

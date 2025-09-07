@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3850681648043881143, guid: 8d812acf147e7524f9c2742ce37992f2, type: 3}
       propertyPath: onTriggerEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
-      value: 50
+      value: 9999
       objectReference: {fileID: 0}
     - target: {fileID: 5423390447233415856, guid: 8d812acf147e7524f9c2742ce37992f2, type: 3}
       propertyPath: m_LocalPosition.x
