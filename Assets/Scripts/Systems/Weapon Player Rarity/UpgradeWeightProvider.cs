@@ -23,11 +23,9 @@ public enum UpgradeType
     ColdResist,
     LightningResist,
     PoisonResist,
-    KnifeLifesteal,
     KnifeRadius,
     KnifeSplash,
-    KnifeMaxTargets,
-    ShooterProjectiles,
+    
     ShooterRange,
     ShooterAccuracy
 }
@@ -59,13 +57,11 @@ public class UpgradeWeightTable
     [Min(0f)] public float poisonResist = 0.5f;
 
     [Header("Knife")]
-    [Min(0f)] public float knifeLifesteal = 1f;
     [Min(0f)] public float knifeRadius = 1f;
     [Min(0f)] public float knifeSplash = 1f;
-    [Min(0f)] public float knifeMaxTargets = 1f;
+    
 
     [Header("Shooter")]
-    [Min(0f)] public float shooterProjectiles = 1f;
     [Min(0f)] public float shooterRange = 1f;        // covers lifetime/force branch
     [Min(0f)] public float shooterAccuracy = 1f;
 
@@ -86,11 +82,9 @@ public class UpgradeWeightTable
         UpgradeType.ColdResist => coldResist,
         UpgradeType.LightningResist => lightningResist,
         UpgradeType.PoisonResist => poisonResist,
-        UpgradeType.KnifeLifesteal => knifeLifesteal,
         UpgradeType.KnifeRadius => knifeRadius,
         UpgradeType.KnifeSplash => knifeSplash,
-        UpgradeType.KnifeMaxTargets => knifeMaxTargets,
-        UpgradeType.ShooterProjectiles => shooterProjectiles,
+        
         UpgradeType.ShooterRange => shooterRange,
         UpgradeType.ShooterAccuracy => shooterAccuracy,
         _ => 0f

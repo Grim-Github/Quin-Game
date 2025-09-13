@@ -24,13 +24,10 @@ public class TierSystem
     [Header("Knife")]
     [Range(1, 5)] public int knifeRadius = 5;
     [Range(1, 5)] public int knifeSplashRadius = 5;
-    [Range(1, 5)] public int knifeLifesteal = 5;
-    [Range(1, 5)] public int knifeMaxTargets = 5;
 
     [Header("Shooter")]
     [Range(1, 5)] public int shooterLifetime = 5;
     [Range(1, 5)] public int shooterForce = 5;
-    [Range(1, 5)] public int shooterProjectiles = 5;
     [Range(1, 5)] public int shooterAccuracy = 5;
 
     [Header("Curve (optional)")]
@@ -57,12 +54,9 @@ public class TierSystem
 
         knifeRadius = Roll(rng);
         knifeSplashRadius = Roll(rng);
-        knifeLifesteal = Roll(rng);
-        knifeMaxTargets = Roll(rng);
 
         shooterLifetime = Roll(rng);
         shooterForce = Roll(rng);
-        shooterProjectiles = Roll(rng);
         shooterAccuracy = Roll(rng);
     }
 

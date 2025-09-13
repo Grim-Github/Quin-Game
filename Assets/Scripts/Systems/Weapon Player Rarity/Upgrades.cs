@@ -276,18 +276,6 @@ public sealed class CritUpgrade : IUpgrade
     }
 }
 
-public sealed class KnifeLifestealUpgrade : IUpgrade
-{
-    public bool IsApplicable(WeaponContext c) => c.knife != null;
-    public Action Apply(WeaponContext c, StringBuilder notes)
-    {
-        var r = c.tiers.Scale(c.ranges.knifeLifestealAdd, c.tiers.knifeLifesteal);
-        float add = Mathf.Clamp01(UnityEngine.Random.Range(r.x, r.y));
-        c.knife.LifestealPercent = Mathf.Clamp01(c.knife.LifestealPercent + add);
-        notes.AppendLine($"+{add * 100f:F0}% Lifesteal ({c.Roman(c.tiers.knifeLifesteal)})");
-        return () => c.knife.LifestealPercent = Mathf.Clamp01(c.knife.LifestealPercent - add);
-    }
-}
 
 public sealed class KnifeRadiusUpgrade : IUpgrade
 {
@@ -319,31 +307,7 @@ public sealed class KnifeSplashUpgrade : IUpgrade
     }
 }
 
-public sealed class KnifeMaxTargetsUpgrade : IUpgrade
-{
-    public bool IsApplicable(WeaponContext c) => c.knife != null;
-    public Action Apply(WeaponContext c, StringBuilder notes)
-    {
-        var r = c.tiers.Scale(c.ranges.knifeMaxTargetsAdd, c.tiers.knifeMaxTargets, 1);
-        int add = Mathf.Max(1, UnityEngine.Random.Range(r.x, r.y + 1));
-        c.knife.MaxTargetsPerTick += add;
-        notes.AppendLine($"+{add} Max Targets ({c.Roman(c.tiers.knifeMaxTargets)})");
-        return () => c.knife.MaxTargetsPerTick -= add;
-    }
-}
 
-public sealed class ShooterProjectilesUpgrade : IUpgrade
-{
-    public bool IsApplicable(WeaponContext c) => c.shooter != null;
-    public Action Apply(WeaponContext c, StringBuilder notes)
-    {
-        var r = c.tiers.Scale(c.ranges.shooterProjectilesAdd, c.tiers.shooterProjectiles, 1);
-        int add = Mathf.Max(1, UnityEngine.Random.Range(r.x, r.y + 1));
-        c.shooter.ProjectileCount += add;
-        notes.AppendLine($"+{add} Projectiles ({c.Roman(c.tiers.shooterProjectiles)})");
-        return () => c.shooter.ProjectileCount -= add;
-    }
-}
 
 public sealed class ShooterRangeUpgrade : IUpgrade
 {

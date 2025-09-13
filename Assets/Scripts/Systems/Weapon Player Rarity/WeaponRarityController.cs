@@ -112,8 +112,8 @@ public class WeaponRarityController : MonoBehaviour
         {
             Rarity.Common => 1,
             Rarity.Uncommon => 2,
-            Rarity.Rare => 4,
-            Rarity.Legendary => 5,
+            Rarity.Rare => 3,
+            Rarity.Legendary => 4,
             _ => 1
         };
 
@@ -431,11 +431,10 @@ public class WeaponRarityController : MonoBehaviour
             case 4: return SetTier(ref tiers.critMultiplier, newTier);
             case 5: return SetTier(ref tiers.knifeRadius, newTier);
             case 6: return SetTier(ref tiers.knifeSplashRadius, newTier);
-            case 7: return SetTier(ref tiers.knifeLifesteal, newTier);
-            case 8: return SetTier(ref tiers.knifeMaxTargets, newTier);
+            // removed lifesteal and max targets
             case 9: return SetTier(ref tiers.shooterLifetime, newTier);
             case 10: return SetTier(ref tiers.shooterForce, newTier);
-            case 11: return SetTier(ref tiers.shooterProjectiles, newTier);
+            // removed shooter projectiles
             case 12: return SetTier(ref tiers.shooterAccuracy, newTier);
             case 13: return SetTier(ref tiers.hpFlat, newTier);
             case 14: return SetTier(ref tiers.hpPercent, newTier);
@@ -460,11 +459,10 @@ public class WeaponRarityController : MonoBehaviour
             case 4: return ClampTier(ref tiers.critMultiplier, steps);
             case 5: return ClampTier(ref tiers.knifeRadius, steps);
             case 6: return ClampTier(ref tiers.knifeSplashRadius, steps);
-            case 7: return ClampTier(ref tiers.knifeLifesteal, steps);
-            case 8: return ClampTier(ref tiers.knifeMaxTargets, steps);
+            // removed lifesteal and max targets
             case 9: return ClampTier(ref tiers.shooterLifetime, steps);
             case 10: return ClampTier(ref tiers.shooterForce, steps);
-            case 11: return ClampTier(ref tiers.shooterProjectiles, steps);
+            // removed shooter projectiles
             case 12: return ClampTier(ref tiers.shooterAccuracy, steps);
             case 13: return ClampTier(ref tiers.hpFlat, steps);
             case 14: return ClampTier(ref tiers.hpPercent, steps);
@@ -500,10 +498,7 @@ public class WeaponRarityController : MonoBehaviour
         else if (up is CritUpgrade) { into.Add(3); into.Add(4); }
         else if (up is KnifeRadiusUpgrade) into.Add(5);
         else if (up is KnifeSplashUpgrade) into.Add(6);
-        else if (up is KnifeLifestealUpgrade) into.Add(7);
-        else if (up is KnifeMaxTargetsUpgrade) into.Add(8);
         else if (up is ShooterRangeUpgrade) { into.Add(9); into.Add(10); }
-        else if (up is ShooterProjectilesUpgrade) into.Add(11);
         else if (up is ShooterAccuracyUpgrade) into.Add(12);
         else if (up is HpFlatUpgrade) into.Add(13);
         else if (up is HpPercentUpgrade) into.Add(14);
@@ -592,15 +587,12 @@ public class WeaponRarityController : MonoBehaviour
 
         if (c.knife != null)
         {
-            Add(true, new KnifeLifestealUpgrade(), UpgradeType.KnifeLifesteal);
             Add(true, new KnifeSplashUpgrade(), UpgradeType.KnifeSplash);
             Add(true, new KnifeRadiusUpgrade(), UpgradeType.KnifeRadius);
-            Add(true, new KnifeMaxTargetsUpgrade(), UpgradeType.KnifeMaxTargets);
         }
 
         if (c.shooter != null)
         {
-            Add(true, new ShooterProjectilesUpgrade(), UpgradeType.ShooterProjectiles);
             Add(true, new ShooterRangeUpgrade(), UpgradeType.ShooterRange);
             Add(true, new ShooterAccuracyUpgrade(), UpgradeType.ShooterAccuracy);
         }
@@ -749,8 +741,8 @@ public class WeaponRarityController : MonoBehaviour
     {
         Rarity.Common => 1,
         Rarity.Uncommon => 2,
-        Rarity.Rare => 4,
-        Rarity.Legendary => 5,
+        Rarity.Rare => 3,
+        Rarity.Legendary => 4,
         _ => 1
     };
 

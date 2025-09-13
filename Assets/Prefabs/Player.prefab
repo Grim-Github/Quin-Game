@@ -1093,11 +1093,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -1115,11 +1112,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -1911,11 +1905,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -1933,11 +1924,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -2190,11 +2178,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -2212,11 +2197,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -3157,11 +3139,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 1}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -3179,11 +3158,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -3223,11 +3199,8 @@ MonoBehaviour:
     coldResist: 0.5
     lightningResist: 0.5
     poisonResist: 0.5
-    knifeLifesteal: 1
     knifeRadius: 1
     knifeSplash: 1
-    knifeMaxTargets: 1
-    shooterProjectiles: 0.1
     shooterRange: 1
     shooterAccuracy: 0.5
 --- !u!1 &935738676766603409
@@ -5506,11 +5479,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -5528,11 +5498,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -7145,11 +7112,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -7167,11 +7131,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -8546,11 +8507,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.3, y: 1.5}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.1}
-    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -8568,11 +8526,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -8612,11 +8567,8 @@ MonoBehaviour:
     coldResist: 0.5
     lightningResist: 0.5
     poisonResist: 0.5
-    knifeLifesteal: 1
     knifeRadius: 1
     knifeSplash: 0
-    knifeMaxTargets: 0
-    shooterProjectiles: 1
     shooterRange: 1
     shooterAccuracy: 1
 --- !u!1 &3040772308018294999
@@ -9066,11 +9018,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -9088,11 +9037,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -9668,11 +9614,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -9690,11 +9633,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -9734,11 +9674,8 @@ MonoBehaviour:
     coldResist: 0.5
     lightningResist: 0.5
     poisonResist: 0.5
-    knifeLifesteal: 1
     knifeRadius: 1
     knifeSplash: 1
-    knifeMaxTargets: 1
-    shooterProjectiles: 0.1
     shooterRange: 1
     shooterAccuracy: 0.5
 --- !u!1 &3401677938551974219
@@ -10857,7 +10794,7 @@ GameObject:
   - component: {fileID: 510655762241045428}
   - component: {fileID: 2276651533655993843}
   - component: {fileID: 3623756317604507379}
-  - component: {fileID: 1731195885919690537}
+  - component: {fileID: 4824809872291108999}
   m_Layer: 6
   m_Name: Phantom Aegis
   m_TagString: Untagged
@@ -11086,7 +11023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rollOnAwake: 1
   rngSeed: 0
-  upgradeWeights: {fileID: 1731195885919690537}
+  upgradeWeights: {fileID: 4824809872291108999}
   current: 0
   weights:
     common: 40
@@ -11109,11 +11046,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -11131,11 +11065,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -11147,7 +11078,7 @@ MonoBehaviour:
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
   applied: []
---- !u!114 &1731195885919690537
+--- !u!114 &4824809872291108999
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11175,11 +11106,8 @@ MonoBehaviour:
     coldResist: 0.5
     lightningResist: 0.5
     poisonResist: 0.5
-    knifeLifesteal: 1
     knifeRadius: 1
     knifeSplash: 1
-    knifeMaxTargets: 1
-    shooterProjectiles: 0.1
     shooterRange: 1
     shooterAccuracy: 1
 --- !u!1 &4019939872639026237
@@ -13169,11 +13097,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.3, y: 1.5}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.1}
-    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -13191,11 +13116,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -13235,11 +13157,8 @@ MonoBehaviour:
     coldResist: 0.5
     lightningResist: 0.5
     poisonResist: 0.5
-    knifeLifesteal: 1
     knifeRadius: 1
     knifeSplash: 0
-    knifeMaxTargets: 0
-    shooterProjectiles: 1
     shooterRange: 1
     shooterAccuracy: 1
 --- !u!1 &4663817971425621555
@@ -15678,11 +15597,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -15700,11 +15616,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -17195,11 +17108,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -17217,11 +17127,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -18126,13 +18033,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c98c24205b75b42bc1375d05964c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 1
+  interval: 1.2
   startOnAwake: 1
   repeat: 1
   useUnscaledTime: 0
-  burstEnabled: 0
-  burstCount: 3
-  burstSpacing: 0.1
+  burstEnabled: 1
+  burstCount: 2
+  burstSpacing: 0.3
   onTick:
     m_PersistentCalls:
       m_Calls:
@@ -18324,11 +18231,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -18346,11 +18250,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -19578,11 +19479,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -19600,11 +19498,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -20426,8 +20321,8 @@ MonoBehaviour:
           m_CallState: 2
     weight: 25
     id: 
-  cooldownSeconds: 25
-  voteSeconds: 10
+  cooldownSeconds: 60
+  voteSeconds: 15
   useScaledTime: 1
   recentHistorySize: 6
   headingHex: FFD166
@@ -20712,11 +20607,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -20734,11 +20626,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -23648,11 +23537,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 2}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -23670,11 +23556,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
@@ -23714,11 +23597,8 @@ MonoBehaviour:
     coldResist: 0.5
     lightningResist: 0.5
     poisonResist: 0.5
-    knifeLifesteal: 1
     knifeRadius: 1
     knifeSplash: 1
-    knifeMaxTargets: 1
-    shooterProjectiles: 0.1
     shooterRange: 1
     shooterAccuracy: 0.5
 --- !u!1 &8503593496250004042
@@ -24639,11 +24519,8 @@ MonoBehaviour:
     resistAdd: {x: 0.05, y: 0.2}
     knifeRadiusMult: {x: 1.1, y: 1.3}
     knifeSplashRadiusMult: {x: 1.1, y: 1.3}
-    knifeLifestealAdd: {x: 0.05, y: 0.2}
-    knifeMaxTargetsAdd: {x: 1, y: 3}
     shooterLifetimeAdd: {x: 0.5, y: 2}
     shooterForceAdd: {x: 1, y: 4}
-    shooterProjectilesAdd: {x: 1, y: 2}
     shooterSpreadReduceFrac: {x: 0.1, y: 0.35}
   tiers:
     damagePercent: 5
@@ -24661,11 +24538,8 @@ MonoBehaviour:
     resist: 5
     knifeRadius: 5
     knifeSplashRadius: 5
-    knifeLifesteal: 5
-    knifeMaxTargets: 5
     shooterLifetime: 5
     shooterForce: 5
-    shooterProjectiles: 5
     shooterAccuracy: 5
     multiplierCurve:
       serializedVersion: 2
