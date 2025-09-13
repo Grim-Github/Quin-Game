@@ -880,6 +880,7 @@ Transform:
   - {fileID: 1974706184933083547}
   - {fileID: 9027709624487194995}
   - {fileID: 3790662233413527961}
+  - {fileID: 6562003881475236303}
   m_Father: {fileID: 5833988517266502027}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5816118974365816501
@@ -2926,6 +2927,7 @@ GameObject:
   - component: {fileID: 4878801837443715330}
   - component: {fileID: 5121767651809893251}
   - component: {fileID: 1737309924204432557}
+  - component: {fileID: 3463532754529198309}
   m_Layer: 6
   m_Name: Longshot Crossbow
   m_TagString: Untagged
@@ -3005,6 +3007,7 @@ MonoBehaviour:
   damage: 30
   damageType: 0
   bulletLifetime: 5
+  penetration: 3
   critChance: 0.25
   critMultiplier: 3
   applyStatusEffectOnHit: 0
@@ -3131,7 +3134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rollOnAwake: 1
   rngSeed: 0
-  upgradeWeights: {fileID: 0}
+  upgradeWeights: {fileID: 3463532754529198309}
   current: 0
   weights:
     common: 40
@@ -3192,6 +3195,41 @@ MonoBehaviour:
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
   applied: []
+--- !u!114 &3463532754529198309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884068369506667744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0780ab3dbacd07c4183b2f8b09cd390c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Grim::UpgradeWeightProvider
+  weights:
+    damageFlat: 1
+    damagePercentAsFlat: 1
+    attackSpeed: 1
+    crit: 1
+    hpFlat: 1
+    hpPercent: 1
+    hpRegen: 1
+    armor: 1
+    evasion: 1
+    armorPercent: 1
+    evasionPercent: 1
+    fireResist: 0.5
+    coldResist: 0.5
+    lightningResist: 0.5
+    poisonResist: 0.5
+    knifeLifesteal: 1
+    knifeRadius: 1
+    knifeSplash: 1
+    knifeMaxTargets: 1
+    shooterProjectiles: 0.1
+    shooterRange: 1
+    shooterAccuracy: 0.5
 --- !u!1 &935738676766603409
 GameObject:
   m_ObjectHideFlags: 0
@@ -6915,19 +6953,77 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Axe - Damage Up +<color=#8888FF>5</color>
-    powerUpDescription: Increases weapon damage by <color=#8888FF>5</color>.
+    powerUpName: Axe - Damage Up +<color=#8888FF>7</color>
+    powerUpDescription: Increases weapon damage by <color=#8888FF>7</color>.
     powerUpObject: {fileID: 2062737661056430337}
     IsAccessory: 0
     IsWeapon: 0
     powerUpIcon: {fileID: 6674386295937086461, guid: 314224ddc60daef45ad898b3faea6ff9, type: 3}
     weight: 50
-  nextUpgrade: {fileID: 0}
+  nextUpgrade: {fileID: 5788137164413349612}
   upgradeType: 1
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
-  value: 5
+  value: 7
+--- !u!1 &2113846961265830872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6562003881475236303}
+  - component: {fileID: 5788137164413349612}
+  m_Layer: 6
+  m_Name: Upgrade 6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6562003881475236303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113846961265830872}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 25, y: 25, z: 25}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7278172175999806099}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5788137164413349612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113846961265830872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 984185c5437e76441b24dff4e0353965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Upgrade:
+    powerUpName: Axe - Splash Radius +<color=#8888FF>15</color>%
+    powerUpDescription: Widens splash reach by <color=#8888FF>15</color>%.
+    powerUpObject: {fileID: 2113846961265830872}
+    IsAccessory: 0
+    IsWeapon: 0
+    powerUpIcon: {fileID: 6674386295937086461, guid: 314224ddc60daef45ad898b3faea6ff9, type: 3}
+    weight: 50
+  nextUpgrade: {fileID: 0}
+  upgradeType: 12
+  onCustomAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  value: 0.15
 --- !u!1 &2154449798596403422
 GameObject:
   m_ObjectHideFlags: 0
@@ -9318,8 +9414,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Axe - Range Up +<color=#8888FF>100</color>%
-    powerUpDescription: Increases attack reach by <color=#8888FF>100</color>%.
+    powerUpName: Axe - Range Up +<color=#8888FF>50</color>%
+    powerUpDescription: Increases attack reach by <color=#8888FF>50</color>%.
     powerUpObject: {fileID: 3318086922698768104}
     IsAccessory: 0
     IsWeapon: 0
@@ -9330,7 +9426,7 @@ MonoBehaviour:
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
-  value: 1
+  value: 0.5
 --- !u!1 &3383175445945189892
 GameObject:
   m_ObjectHideFlags: 0
@@ -9344,6 +9440,7 @@ GameObject:
   - component: {fileID: 4084026499351623075}
   - component: {fileID: 3858332326528905797}
   - component: {fileID: 5573656500350240030}
+  - component: {fileID: 8768150668089000964}
   m_Layer: 6
   m_Name: Blowgun
   m_TagString: Untagged
@@ -9420,7 +9517,8 @@ MonoBehaviour:
   shootForce: 20
   damage: 10
   damageType: 0
-  bulletLifetime: 3
+  bulletLifetime: 1
+  penetration: 1
   critChance: 0
   critMultiplier: 2
   applyStatusEffectOnHit: 0
@@ -9547,7 +9645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rollOnAwake: 1
   rngSeed: 0
-  upgradeWeights: {fileID: 0}
+  upgradeWeights: {fileID: 8768150668089000964}
   current: 0
   weights:
     common: 40
@@ -9608,6 +9706,41 @@ MonoBehaviour:
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
   applied: []
+--- !u!114 &8768150668089000964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3383175445945189892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0780ab3dbacd07c4183b2f8b09cd390c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Grim::UpgradeWeightProvider
+  weights:
+    damageFlat: 1
+    damagePercentAsFlat: 1
+    attackSpeed: 1
+    crit: 1
+    hpFlat: 1
+    hpPercent: 1
+    hpRegen: 1
+    armor: 1
+    evasion: 1
+    armorPercent: 1
+    evasionPercent: 1
+    fireResist: 0.5
+    coldResist: 0.5
+    lightningResist: 0.5
+    poisonResist: 0.5
+    knifeLifesteal: 1
+    knifeRadius: 1
+    knifeSplash: 1
+    knifeMaxTargets: 1
+    shooterProjectiles: 0.1
+    shooterRange: 1
+    shooterAccuracy: 0.5
 --- !u!1 &3401677938551974219
 GameObject:
   m_ObjectHideFlags: 0
@@ -10724,6 +10857,7 @@ GameObject:
   - component: {fileID: 510655762241045428}
   - component: {fileID: 2276651533655993843}
   - component: {fileID: 3623756317604507379}
+  - component: {fileID: 1731195885919690537}
   m_Layer: 6
   m_Name: Phantom Aegis
   m_TagString: Untagged
@@ -10805,7 +10939,8 @@ MonoBehaviour:
   shootForce: 12
   damage: 11
   damageType: 0
-  bulletLifetime: 5
+  bulletLifetime: 3
+  penetration: 1
   critChance: 0.05
   critMultiplier: 2
   applyStatusEffectOnHit: 0
@@ -10951,7 +11086,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rollOnAwake: 1
   rngSeed: 0
-  upgradeWeights: {fileID: 0}
+  upgradeWeights: {fileID: 1731195885919690537}
   current: 0
   weights:
     common: 40
@@ -11012,6 +11147,41 @@ MonoBehaviour:
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
   applied: []
+--- !u!114 &1731195885919690537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3988581583061731246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0780ab3dbacd07c4183b2f8b09cd390c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Grim::UpgradeWeightProvider
+  weights:
+    damageFlat: 1
+    damagePercentAsFlat: 1
+    attackSpeed: 1
+    crit: 1
+    hpFlat: 1
+    hpPercent: 1
+    hpRegen: 1
+    armor: 1
+    evasion: 1
+    armorPercent: 1
+    evasionPercent: 1
+    fireResist: 0.5
+    coldResist: 0.5
+    lightningResist: 0.5
+    poisonResist: 0.5
+    knifeLifesteal: 1
+    knifeRadius: 1
+    knifeSplash: 1
+    knifeMaxTargets: 1
+    shooterProjectiles: 0.1
+    shooterRange: 1
+    shooterAccuracy: 1
 --- !u!1 &4019939872639026237
 GameObject:
   m_ObjectHideFlags: 0
@@ -14459,8 +14629,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Upgrade:
-    powerUpName: Axe - Lifesteal Up +<color=#8888FF>30</color>%
-    powerUpDescription: Increases lifesteal by <color=#8888FF>30</color>%.
+    powerUpName: Axe - Lifesteal Up +<color=#8888FF>5</color>%
+    powerUpDescription: Increases lifesteal by <color=#8888FF>5</color>%.
     powerUpObject: {fileID: 4968957011494331475}
     IsAccessory: 0
     IsWeapon: 0
@@ -14471,7 +14641,7 @@ MonoBehaviour:
   onCustomAwake:
     m_PersistentCalls:
       m_Calls: []
-  value: 0.3
+  value: 0.05
 --- !u!1 &5049089134884609721
 GameObject:
   m_ObjectHideFlags: 0
@@ -19236,7 +19406,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6954913475967393510}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -23249,6 +23419,7 @@ GameObject:
   - component: {fileID: 1635838341153099583}
   - component: {fileID: 6140848450053751762}
   - component: {fileID: 4334082768228367615}
+  - component: {fileID: 5767565618239840008}
   m_Layer: 6
   m_Name: Burstfire Bow
   m_TagString: Untagged
@@ -23292,8 +23463,8 @@ MonoBehaviour:
   repeat: 1
   useUnscaledTime: 0
   burstEnabled: 1
-  burstCount: 2
-  burstSpacing: 0.12
+  burstCount: 3
+  burstSpacing: 0.1
   onTick:
     m_PersistentCalls:
       m_Calls:
@@ -23326,7 +23497,8 @@ MonoBehaviour:
   shootForce: 15
   damage: 15
   damageType: 0
-  bulletLifetime: 5
+  bulletLifetime: 3
+  penetration: 1
   critChance: 0.3
   critMultiplier: 2
   applyStatusEffectOnHit: 0
@@ -23453,7 +23625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rollOnAwake: 1
   rngSeed: 0
-  upgradeWeights: {fileID: 0}
+  upgradeWeights: {fileID: 5767565618239840008}
   current: 0
   weights:
     common: 40
@@ -23514,6 +23686,41 @@ MonoBehaviour:
     defaultMinMax: {x: 0.4, y: 1.75}
   healthSystem: {fileID: 0}
   applied: []
+--- !u!114 &5767565618239840008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8497159287504080187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0780ab3dbacd07c4183b2f8b09cd390c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Grim::UpgradeWeightProvider
+  weights:
+    damageFlat: 1
+    damagePercentAsFlat: 1
+    attackSpeed: 1
+    crit: 1
+    hpFlat: 1
+    hpPercent: 1
+    hpRegen: 1
+    armor: 1
+    evasion: 1
+    armorPercent: 1
+    evasionPercent: 1
+    fireResist: 0.5
+    coldResist: 0.5
+    lightningResist: 0.5
+    poisonResist: 0.5
+    knifeLifesteal: 1
+    knifeRadius: 1
+    knifeSplash: 1
+    knifeMaxTargets: 1
+    shooterProjectiles: 0.1
+    shooterRange: 1
+    shooterAccuracy: 0.5
 --- !u!1 &8503593496250004042
 GameObject:
   m_ObjectHideFlags: 0

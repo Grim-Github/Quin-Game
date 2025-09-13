@@ -12,6 +12,7 @@ public class SimpleShooter : MonoBehaviour
     public int damage = 15;
     [SerializeField] public SimpleHealth.DamageType damageType;
     public float bulletLifetime = 5f;
+    public int penetration = 1; // How many enemies the bullet can pass through before being destroyed
 
     [Header("Criticals")]
     [Range(0f, 1f)] public float critChance = 0f;
@@ -135,19 +136,6 @@ public class SimpleShooter : MonoBehaviour
         const string numColor = "#8888FF";
         string delay = wt != null ? $"<color={numColor}>{wt.interval:F1}</color>s" : "N/A";
 
-        string penetrationInfo = "N/A";
-        if (bulletPrefab != null)
-        {
-            if (bulletPrefab.TryGetComponent<BulletDamageTrigger>(out var bullet))
-            {
-                penetrationInfo = $"<color={numColor}>{bullet.penetration}</color>";
-            }
-            else if (bulletPrefab.TryGetComponent<ExplosionDamage2D>(out var explosion))
-            {
-                penetrationInfo = $"Radius: <color={numColor}>{explosion.radius:F1}</color>";
-            }
-        }
-
         // Build text (Knife.cs style)
         var sb = new System.Text.StringBuilder();
         sb.AppendLine($"<b>{transform.name} Stats</b>");
@@ -171,7 +159,7 @@ public class SimpleShooter : MonoBehaviour
         sb.AppendLine($"Proj Speed: <color={numColor}>{shootForce:F1}</color>");
         sb.AppendLine($"Lifetime: <color={numColor}>{bulletLifetime:F1}</color>s");
         sb.AppendLine($"Projectile Count: <color={numColor}>{Mathf.Max(1, projectileCount)}</color>");
-        sb.AppendLine($"Penetration: {penetrationInfo}");
+        sb.AppendLine($"Penetration: {penetration}");
         sb.AppendLine($"Crit: <color={numColor}>{(Mathf.Clamp01(critChance) * 100f):F0}</color>% x<color={numColor}>{critMultiplier:F2}</color>");
 
         if (applyStatusEffectOnHit)
@@ -268,6 +256,7 @@ public class SimpleShooter : MonoBehaviour
                 {
                     bulletDamage.damageAmount = finalDamage;
                     bulletDamage.damageType = damageType;
+                    bulletDamage.penetration = penetration;
                     bulletDamage.statusApplyChance = statusApplyChance;
                     bulletDamage.applyStatusEffectOnHit = applyStatusEffectOnHit;
                     bulletDamage.statusEffectOnHit = statusEffectOnHit;

@@ -9,6 +9,7 @@ public class SimpleSceneRestarter : MonoBehaviour
     {
         if (Input.GetKeyDown(restartKey))
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }

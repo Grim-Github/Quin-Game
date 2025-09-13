@@ -14,6 +14,10 @@ public class TwitchListener : MonoBehaviour
 
         [Min(0f)] public float weight = 1f;
 
+        [Header("Power Cost")]
+        [Tooltip("How much of the chatter's power budget this prefab consumes per spawn.")]
+        [Min(1)] public int power = 1;
+
         [Header("Spawn Gate")]
         [Tooltip("Seconds since start before this prefab can be selected to spawn.")]
         [MinMaxSlider(0, 600f)] public Vector2 timeSpawn = new Vector2(0, 600); // eligibility time
@@ -25,19 +29,16 @@ public class TwitchListener : MonoBehaviour
     [SerializeField] private float minSpawnDistance = 1.5f;
     [SerializeField] private float maxSpawnDistance = 3.5f;
 
-    [Header("Limits")]
-    [SerializeField, Min(1)] public int maxSpawnCount = 20;
-
-    [Tooltip("How often to increase max spawn count (seconds)")]
+    [Header("Power Progression")]
+    [Tooltip("How often to attempt increasing global min power (seconds)")]
     [SerializeField, Min(0f)] public float spawnIncreaseInterval = 60f;
 
-    [Tooltip("How much to increase max spawn count each interval")]
-    [SerializeField, Min(1)] public int spawnIncreaseAmount = 1;
-
-    public int minPower = 0; // Minimum power level for chatters to spawn
+    public int minPower = 0; // Minimum power level (also drives global cap)
+    [Tooltip("Global max active spawns = minPower * ratio")]
+    [Min(1)] public int maxSpawnPerPowerRatio = 3;
     public float chanceToUpgradeMinPower = 0.6f; // Chance to upgrade chatter power on spawn
 
-    // Track time for next increase
+    // Track time for next power increase attempt
     private float nextSpawnIncreaseTime = 0f;
 
     [Header("Collision Check")]
@@ -90,17 +91,15 @@ public class TwitchListener : MonoBehaviour
         {
             elapsedSeconds += Time.deltaTime;
 
-            // Check if it's time to increase spawn cap
+            // Periodically attempt to increase global min power
             if (spawnIncreaseInterval > 0f && elapsedSeconds >= nextSpawnIncreaseTime)
             {
-                if (Random.value < chanceToUpgradeMinPower)
+                if (UnityEngine.Random.value < chanceToUpgradeMinPower)
                 {
                     minPower++;
                 }
-
-                maxSpawnCount += spawnIncreaseAmount;
                 nextSpawnIncreaseTime = elapsedSeconds + spawnIncreaseInterval;
-                //  Debug.Log($"[TwitchListener] Max spawn count increased to {maxSpawnCount}");
+                //  Debug.Log($"[TwitchListener] Min power increased to {minPower}");
             }
 
 
@@ -154,10 +153,10 @@ public class TwitchListener : MonoBehaviour
         {
             safetyCounter++;
 
-            float angle = Random.value * Mathf.PI * 2f;
+            float angle = UnityEngine.Random.value * Mathf.PI * 2f;
             float r = Mathf.Sqrt(Mathf.Lerp(minSpawnDistance * minSpawnDistance,
                                             maxSpawnDistance * maxSpawnDistance,
-                                            Random.value));
+                                            UnityEngine.Random.value));
             Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * r;
             spawnPos = player.position + offset;
 
@@ -186,40 +185,64 @@ public class TwitchListener : MonoBehaviour
     private void OnChatMessage(Chatter chatter)
     {
         if (player == null) return;
-        if (spawnedChatters.Count >= maxSpawnCount) return;
         chatters.Add(chatter);
-        var prefab = PickWeightedPrefab();
-        if (prefab == null) return;
 
-        // Use displayName (lowercased) as unique key
-        string nameKey = (chatter?.tags?.displayName ?? string.Empty).ToLowerInvariant();
-        if (string.IsNullOrEmpty(nameKey)) return;
+        var entry = PickWeightedEntry();
+        if (entry == null || entry.prefab == null) return;
 
-        // --- NEW: Prevent duplicate chatter spawns ---
-        if (spawnedChatters.Any(c => c != null &&
-                                     c.name.Equals(chatter.tags.displayName,
-                                                   System.StringComparison.OrdinalIgnoreCase)))
+        int budget = GetChatterPowerBudget(chatter);
+        int cost = Mathf.Max(1, entry.power);
+        int unitsByBudget = budget / cost;
+
+        // Enforce GLOBAL max active cap = minPower * ratio
+        int globalMaxAllowed = Mathf.Max(0, minPower * Mathf.Max(1, maxSpawnPerPowerRatio));
+        int globalRemaining = Mathf.Max(0, globalMaxAllowed - spawnedChatters.Count);
+
+        int unitsToSpawn = Mathf.Min(unitsByBudget, globalRemaining);
+        for (int i = 0; i < unitsToSpawn; i++)
         {
-            Debug.Log($"Chatter {chatter.tags.displayName} already spawned, skipping.");
-            return;
+            string nameOverride = i == 0 ? null : $"{chatter.tags.displayName} ({i + 1})";
+            TrySpawnChatter(chatter, entry.prefab, nameOverride);
         }
+    }
+
+
+    private int GetChatterPowerBudget(Chatter chatter)
+    {
+        int budget = minPower;
+        foreach (ChatterBadge b in chatter.tags.badges)
+        {
+            if (b.id == "subscriber" && int.TryParse(b.version, out int months) && months < 100)
+            {
+                budget += months;
+            }
+        }
+        return Mathf.Max(0, budget);
+    }
+
+    private bool TrySpawnChatter(Chatter chatter, GameObject prefab, string displayNameOverride = null)
+    {
+        if (player == null) return false;
+        if (prefab == null) return false;
+        // Use displayName as the base name
+        string baseName = chatter?.tags?.displayName ?? string.Empty;
+        if (string.IsNullOrEmpty(baseName)) return false;
+
         // Find a valid spawn position
         Vector3? spawnPosNullable = FindValidSpawnPosition();
-        if (!spawnPosNullable.HasValue)
-            return;
-
+        if (!spawnPosNullable.HasValue) return false;
         Vector3 spawnPos = spawnPosNullable.Value;
 
-        GameObject instantiatedChatter = Instantiate(prefab, spawnPos, Quaternion.identity);
-        instantiatedChatter.transform.name = chatter.tags.displayName;
+        string finalName = string.IsNullOrEmpty(displayNameOverride) ? baseName : displayNameOverride;
 
-        // --- NEW: Keep track ---
+        GameObject instantiatedChatter = Instantiate(prefab, spawnPos, Quaternion.identity);
+        instantiatedChatter.transform.name = finalName;
         spawnedChatters.Add(instantiatedChatter);
 
         var stats = instantiatedChatter.GetComponent<ChatterStats>();
         if (stats != null)
         {
-            stats.nameGUI.text = chatter.tags.displayName;
+            stats.nameGUI.text = finalName;
             stats.nameGUI.color = chatter.GetNameColor();
             foreach (ChatterBadge b in chatter.tags.badges)
             {
@@ -229,18 +252,18 @@ public class TwitchListener : MonoBehaviour
                 }
             }
             stats.power += minPower;
-
         }
 
-        var chatterMessage = instantiatedChatter.GetComponent<ChatterMessagePopups>();
-        if (chatterMessage != null)
-            chatterMessage.ShowMessage(chatter.message);
+        //var chatterMessage = instantiatedChatter.GetComponent<ChatterMessagePopups>();
+        //if (chatterMessage != null)
+        //    chatterMessage.ShowMessage(chatter.message);
 
-        Debug.Log($"<color=#fef83e><b>[MESSAGE]</b></color> Spawned ({prefab.name}) for {chatter.tags.displayName} at {spawnPos}");
+        Debug.Log($"<color=#fef83e><b>[MESSAGE]</b></color> Spawned ({prefab.name}) for {finalName} at {spawnPos}");
+        return true;
     }
 
 
-    private GameObject PickWeightedPrefab()
+    private ChatterSpawnEntry PickWeightedEntry()
     {
         float now = elapsedSeconds; // stopwatch time
 
@@ -254,7 +277,7 @@ public class TwitchListener : MonoBehaviour
         if (total <= 0f) return null; // nothing eligible at this time
 
         // 2) Weighted roll among only eligible entries
-        float roll = Random.value * total;
+        float roll = UnityEngine.Random.value * total;
         float acc = 0f;
 
         foreach (var e in chatterPrefabs)
@@ -264,14 +287,14 @@ public class TwitchListener : MonoBehaviour
 
             acc += e.weight;
             if (roll <= acc)
-                return e.prefab;
+                return e;
         }
 
         // 3) Fallback (shouldn't happen if total>0, but safe)
         foreach (var e in chatterPrefabs)
         {
             if (e?.prefab != null && IsEligibleByTime(now, e.timeSpawn))
-                return e.prefab;
+                return e;
         }
         return null;
     }

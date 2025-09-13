@@ -46,23 +46,21 @@ public class TwitchSpawnMiniDisplay : MonoBehaviour
         string n = ColorTag(noteHex);
 
         int cur = Mathf.Max(0, listener.spawnedChatters.Count);
-        int cap = Mathf.Max(0, listener.maxSpawnCount);
         float interval = Mathf.Max(0f, listener.spawnIncreaseInterval);
-        int inc = Mathf.Max(0, listener.spawnIncreaseAmount);
+        int cap = Mathf.Max(0, listener.minPower * Mathf.Max(1, listener.maxSpawnPerPowerRatio));
 
-        // --- Current spawns vs cap + growth rules ---
+        // --- Current spawns vs global cap ---
         sb.AppendLine($"{h}<b>Spawns:</b></color> {v}{cur}</color> / {v}{cap}</color>");
-        if (interval > 0f && inc > 0)
-            sb.AppendLine($"{n}Grows by</color> {v}{inc}</color> {n}every</color> {v}{interval:0}s</color>");
-        else
-            sb.AppendLine($"{n}Spawn cap growth:</color> {v}disabled</color>");
 
         sb.AppendLine();
 
         // --- Min power and upgrade chance ---
         float chance = Mathf.Clamp01(listener.chanceToUpgradeMinPower);
         sb.AppendLine($"{h}<b>Power:</b></color> {v}{listener.minPower}</color>");
-        sb.AppendLine($"{n}Chance to +1 each growth:</color> {v}{chance * 100f:0}%</color>");
+        if (interval > 0f)
+            sb.AppendLine($"{n}Chance to +1 every {interval:0}s:</color> {v}{chance * 100f:0}%</color>");
+        else
+            sb.AppendLine($"{n}Power growth:</color> {v}disabled</color>");
 
         return sb.ToString();
     }
