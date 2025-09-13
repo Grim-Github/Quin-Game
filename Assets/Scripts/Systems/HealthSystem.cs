@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
-
+using System.Collections.Generic;
 public class SimpleHealth : MonoBehaviour
 {
     // NEW: Damage types
@@ -127,6 +127,9 @@ public class SimpleHealth : MonoBehaviour
 
     private Image iconImage;
     private AudioLowPassFilter filter;
+    // Cache the currently active damage popup's text to accumulate values
+    // Active damage popups per damage type for accumulation
+    private readonly Dictionary<DamageType, TMP_Text> _activeDamagePopups = new Dictionary<DamageType, TMP_Text>();
 
     public bool IsAlive => currentHealth > 0f || (enableTemporaryHealth && currentTemporaryHealth > 0f);
     public bool IsInvulnerable => isInvulnerable;
@@ -419,7 +422,8 @@ public class SimpleHealth : MonoBehaviour
                 // Show "Dodged" popup
                 if (damagePopupPrefab != null)
                 {
-                    GameObject popup = Instantiate(damagePopupPrefab, transform.position + popupOffset, Quaternion.identity);
+                    GameObject popup = Instantiate(damagePopupPrefab, transform);
+                popup.transform.localPosition = popupOffset;
                     var tmpUI = popup.GetComponentInChildren<TextMeshProUGUI>();
                     if (tmpUI != null)
                     {
@@ -460,41 +464,42 @@ public class SimpleHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth - dmg, 0, maxHealth);
         SyncSlider();
 
-        // Damage popup
+                        // Damage popup (accumulate if an existing one is active) — per damage type
         if (damagePopupPrefab != null)
         {
-            GameObject popup = Instantiate(damagePopupPrefab, transform.position + popupOffset, Quaternion.identity);
-            // Determine color based on damage type
             Color popupColor = GetDamageColor(type);
 
-            if (popup.TryGetComponent<TextMeshPro>(out var tmpWorld))
+            _activeDamagePopups.TryGetValue(type, out var activeText);
+            if (activeText != null)
             {
-                tmpWorld.text = dmg.ToString();
-                tmpWorld.color = popupColor;
-            }
-            else if (popup.TryGetComponent<TextMeshProUGUI>(out var tmpUI))
-            {
-                tmpUI.text = dmg.ToString();
-                tmpUI.color = popupColor;
+                int currentVal = 0;
+                if (!int.TryParse(activeText.text, out currentVal)) currentVal = 0;
+                currentVal += dmg;
+                activeText.text = currentVal.ToString();
+                activeText.color = popupColor;
             }
             else
             {
-                var childWorld = popup.GetComponentInChildren<TextMeshPro>();
-                if (childWorld != null)
+                GameObject popup = Instantiate(damagePopupPrefab, transform);
+                popup.transform.localPosition = popupOffset;
+                TMP_Text tmp = null;
+                if (!popup.TryGetComponent<TMP_Text>(out tmp))
                 {
-                    childWorld.text = dmg.ToString();
-                    childWorld.color = popupColor;
+                    tmp = popup.GetComponentInChildren<TMP_Text>();
                 }
-                var childUI = popup.GetComponentInChildren<TextMeshProUGUI>();
-                if (childUI != null)
+                if (tmp == null)
                 {
-                    childUI.text = dmg.ToString();
-                    childUI.color = popupColor;
+                    if (popup.TryGetComponent<TextMeshPro>(out var tmpWorld)) tmp = tmpWorld;
+                    else if (popup.TryGetComponent<TextMeshProUGUI>(out var tmpUI)) tmp = tmpUI;
+                }
+                if (tmp != null)
+                {
+                    tmp.text = dmg.ToString();
+                    tmp.color = popupColor;
+                    _activeDamagePopups[type] = tmp;
                 }
             }
-        }
-
-        if (bloodSFX != null)
+        }if (bloodSFX != null)
         {
             Quaternion randomRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
             Instantiate(bloodSFX, transform.position, randomRotation);
@@ -833,3 +838,8 @@ public class SimpleHealth : MonoBehaviour
         isInvulnerable = false;
     }
 }
+
+
+
+
+

@@ -65,8 +65,21 @@ public class TierSystem
         tier = Mathf.Clamp(tier, 1, 5);
         if (useCurve && multiplierCurve != null && multiplierCurve.length > 0)
         {
-            float x = (5 - tier) / 4f; // 0..1 (5->0, 1->1)
-            return Mathf.Max(0f, multiplierCurve.Evaluate(x));
+            // Enforce monotonicity across tiers: Tier 1 >= Tier 2 >= ... >= Tier 5
+            // Sample all tiers from the curve, then fix any inversions.
+            // x maps 5->0 .. 1->1
+            float[] raw = new float[6]; // 1..5
+            for (int ti = 1; ti <= 5; ti++)
+            {
+                float x = (5 - ti) / 4f;
+                raw[ti] = Mathf.Max(0f, multiplierCurve.Evaluate(x));
+            }
+            // Make non-increasing as tier number increases (1 best)
+            for (int ti = 4; ti >= 1; ti--)
+            {
+                if (raw[ti] < raw[ti + 1]) raw[ti] = raw[ti + 1];
+            }
+            return raw[tier];
         }
         float t = (5 - tier) / 4f;
         return Mathf.Lerp(Mathf.Max(0f, defaultMinMax.x), Mathf.Max(0f, defaultMinMax.y), t);

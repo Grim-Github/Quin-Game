@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 0.8
-  floatSpeed: 1.5
+  floatSpeed: 1
   fadeStart: 0.3
 --- !u!1 &5360523489210618444
 GameObject:

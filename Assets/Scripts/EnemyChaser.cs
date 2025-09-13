@@ -1,4 +1,4 @@
-// EnemyChaser.cs
+﻿// EnemyChaser.cs
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -29,12 +29,16 @@ public class EnemyChaser : MonoBehaviour
     public UnityEvent onReachDestination;
 
     private Rigidbody2D rb;
+    private StatusEffectSystem cachedStatusEffects;
+    private SimpleHealth cachedHealth;
     private bool hasReached;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
+        TryGetComponent(out cachedStatusEffects);
+        TryGetComponent(out cachedHealth);
 
         if (target == null)
         {
@@ -52,8 +56,13 @@ public class EnemyChaser : MonoBehaviour
     public void InstantiateExplosion(GameObject explosion)
     {
         GameObject exploder = Instantiate(explosion, transform.position, Quaternion.identity);
-        exploder.GetComponent<ExplosionDamage2D>().baseDamage = GetComponent<SimpleHealth>().maxHealth / 3;
-        exploder.GetComponent<ExplosionDamage2D>().DoExplosion();
+        var explosionComp = exploder.GetComponent<ExplosionDamage2D>();
+        if (explosionComp != null)
+        {
+            int maxHp = cachedHealth != null ? cachedHealth.maxHealth : (TryGetComponent(out cachedHealth) ? cachedHealth.maxHealth : 0);
+            explosionComp.baseDamage = maxHp / 3;
+            explosionComp.DoExplosion();
+        }
     }
 
     private void FixedUpdate()
@@ -63,45 +72,65 @@ public class EnemyChaser : MonoBehaviour
         Vector2 currentPos = rb.position;
         Vector2 targetPos = target.position;
         Vector2 toTarget = targetPos - currentPos;
-        float distance = toTarget.magnitude;
+        float distSqr = toTarget.sqrMagnitude;
 
-        // Decide desired direction (flee/approach with deadband)
-        Vector2 desiredDir;
+        // Decide desired direction (flee/approach with deadband) using squared distances
+        Vector2 desiredDir = Vector2.zero;
+        bool needsMove = false;
         if (enableFlee)
         {
             float buffer = Mathf.Max(0f, fleeBuffer);
-            if (distance < stoppingDistance - buffer) desiredDir = (-toTarget).normalized;  // flee
-            else if (distance > stoppingDistance + buffer) desiredDir = toTarget.normalized;     // chase
-            else desiredDir = Vector2.zero;            // hold
+            float lower = Mathf.Max(0f, stoppingDistance - buffer);
+            float upper = stoppingDistance + buffer;
+            float lowerSqr = lower * lower;
+            float upperSqr = upper * upper;
+
+            if (distSqr < lowerSqr)
+            {
+                needsMove = true;
+                float distance = Mathf.Sqrt(distSqr);
+                if (distance > 1e-6f) desiredDir = (-toTarget) / distance; // flee
+            }
+            else if (distSqr > upperSqr)
+            {
+                needsMove = true;
+                float distance = Mathf.Sqrt(distSqr);
+                if (distance > 1e-6f) desiredDir = toTarget / distance; // chase
+            }
         }
         else
         {
-            desiredDir = distance > stoppingDistance ? toTarget.normalized : Vector2.zero;
+            float stopSqr = stoppingDistance * stoppingDistance;
+            if (distSqr > stopSqr)
+            {
+                needsMove = true;
+                float distance = Mathf.Sqrt(distSqr);
+                if (distance > 1e-6f) desiredDir = toTarget / distance;
+            }
         }
 
         // Fire reach event on first entry
-        if (distance <= stoppingDistance && !hasReached)
+        if (distSqr <= stoppingDistance * stoppingDistance && !hasReached)
         {
             hasReached = true;
             onReachDestination?.Invoke();
         }
 
-        // Movement multiplier from status effects
-        StatusEffectSystem ses = null;
-        TryGetComponent(out ses);
-        float mult = GetMoveMultiplier(ses); // 0 if Stun/Frozen, 2 if Speed, else 1
+        // Movement multiplier from status effects (cached component)
+        float mult = GetMoveMultiplier(cachedStatusEffects); // 0 if Stun/Frozen, 2 if Speed, else 1
 
         // Apply velocity
         float speed = moveSpeed * mult;
-        rb.linearVelocity = desiredDir * speed;
+        rb.linearVelocity = needsMove ? (desiredDir * speed) : Vector2.zero;
 
-        ResetReachedIfFar(distance);
+        ResetReachedIfFar(distSqr);
     }
 
-    private void ResetReachedIfFar(float distance)
+    private void ResetReachedIfFar(float distSqr)
     {
-        if (hasReached && repeatEvent && distance > stoppingDistance + resetDistanceBuffer)
-            hasReached = false;
+        if (!hasReached || !repeatEvent) return;
+        float resetRadius = stoppingDistance + resetDistanceBuffer;
+        if (distSqr > resetRadius * resetRadius) hasReached = false;
     }
 
     private float GetMoveMultiplier(StatusEffectSystem ses)

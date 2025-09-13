@@ -1,9 +1,23 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI; // For Image
+using System.Collections.Generic;
+
+// Targeting preference options for selecting enemies.
+public enum TargetingMode
+{
+    Closest,
+    Furthest,
+    MoreHP,
+    LessHP,
+    Random
+}
 
 public class Knife : MonoBehaviour
 {
+    [Header("Targeting")]
+    [SerializeField, Tooltip("How to prioritize targets within the radius.")]
+    public TargetingMode targetingMode = TargetingMode.Closest;
     [Header("AOE Damage")]
     [SerializeField, Tooltip("Main hit radius for selecting enemies.")]
     public float radius = 1f;
@@ -201,6 +215,8 @@ public class Knife : MonoBehaviour
 
         bool anyHit = false;
         int targetsHit = 0;
+        int targetCap = (maxTargetsPerTick > 0) ? maxTargetsPerTick : int.MaxValue;
+        HashSet<int> processed = new HashSet<int>();
 
         for (int oi = 0; oi < origins.Length; oi++)
         {
@@ -209,16 +225,21 @@ public class Knife : MonoBehaviour
 
             Collider2D[] hits = Physics2D.OverlapCircleAll(origin.position, radius, targetMask);
 
-            if (hits.Length > 0 && !anyHit)
+            // Order/select targets based on targeting mode and remaining capacity
+            List<Collider2D> selected = OrderTargets(hits, origin, targetingMode, processed, targetCap - targetsHit);
+
+            if (selected.Count > 0 && !anyHit)
             {
                 anyHit = true;
                 if (stabClip != null) shootSource?.PlayOneShot(stabClip);
             }
 
-            for (int hi = 0; hi < hits.Length; hi++)
+            for (int hi = 0; hi < selected.Count; hi++)
             {
-                var col = hits[hi];
-                if (col == null || col.gameObject == gameObject) continue;
+                var col = selected[hi];
+                if (col == null) continue;
+
+                processed.Add(col.GetInstanceID());
 
                 if (slashEffect != null)
                     Instantiate(slashEffect, col.transform.position, Quaternion.identity);
@@ -226,17 +247,14 @@ public class Knife : MonoBehaviour
                 SimpleHealth health = col.GetComponent<SimpleHealth>();
                 StatusEffectSystem splashStatus = col.GetComponent<StatusEffectSystem>();
 
-                // status on hit (safe-guard health != null)
-                if (splashStatus != null && health != null && health.IsAlive && !health.IsInvulnerable)
+                if (health != null && health.IsAlive && !health.IsInvulnerable)
                 {
-                    if (applyStatusEffectOnHit && Random.Range(0f, 1f) <= statusApplyChance)
+                    // status on hit
+                    if (splashStatus != null && applyStatusEffectOnHit && Random.Range(0f, 1f) <= statusApplyChance)
                     {
                         splashStatus.AddStatus(statusEffectOnHit, statusEffectDuration, 1f);
                     }
-                }
 
-                if (health != null && health.IsAlive && !health.IsInvulnerable)
-                {
                     // main hit
                     bool isCrit = Random.value < Mathf.Clamp01(critChance);
                     float mult = isCrit ? Mathf.Max(1f, critMultiplier) : 1f;
@@ -270,7 +288,7 @@ public class Knife : MonoBehaviour
                     }
 
                     targetsHit++;
-                    if (maxTargetsPerTick > 0 && targetsHit >= maxTargetsPerTick)
+                    if (targetsHit >= targetCap)
                         return; // stop after cap reached
                 }
             }
@@ -357,5 +375,68 @@ public class Knife : MonoBehaviour
             case SimpleHealth.DamageType.Physical:
             default: return "#FFFFFF";                                // white
         }
+    }
+
+    // Orders and selects targets from hits based on the chosen mode.
+    private List<Collider2D> OrderTargets(Collider2D[] hits, Transform origin, TargetingMode mode, HashSet<int> alreadyChosen, int takeCount)
+    {
+        List<(Collider2D col, SimpleHealth hp, float dist)> candidates = new List<(Collider2D, SimpleHealth, float)>();
+        Vector3 o = origin != null ? origin.position : transform.position;
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            var c = hits[i];
+            if (c == null || c.gameObject == gameObject) continue;
+            if (alreadyChosen != null && alreadyChosen.Contains(c.GetInstanceID())) continue;
+
+            SimpleHealth h = c.GetComponent<SimpleHealth>();
+            if (h == null || !h.IsAlive || h.IsInvulnerable) continue;
+
+            float d = Vector2.Distance(o, c.transform.position);
+            candidates.Add((c, h, d));
+        }
+
+        // Sort by mode
+        switch (mode)
+        {
+            case TargetingMode.Closest:
+                candidates.Sort((a, b) => a.dist.CompareTo(b.dist));
+                break;
+            case TargetingMode.Furthest:
+                candidates.Sort((a, b) => b.dist.CompareTo(a.dist));
+                break;
+            case TargetingMode.MoreHP:
+                candidates.Sort((a, b) =>
+                {
+                    int cmp = b.hp.CurrentHealth.CompareTo(a.hp.CurrentHealth);
+                    if (cmp != 0) return cmp;
+                    return a.dist.CompareTo(b.dist);
+                });
+                break;
+            case TargetingMode.LessHP:
+                candidates.Sort((a, b) =>
+                {
+                    int cmp = a.hp.CurrentHealth.CompareTo(b.hp.CurrentHealth);
+                    if (cmp != 0) return cmp;
+                    return a.dist.CompareTo(b.dist);
+                });
+                break;
+            case TargetingMode.Random:
+                // Fisher-Yates shuffle
+                for (int i = candidates.Count - 1; i > 0; i--)
+                {
+                    int j = Random.Range(0, i + 1);
+                    var tmp = candidates[i];
+                    candidates[i] = candidates[j];
+                    candidates[j] = tmp;
+                }
+                break;
+        }
+
+        int toTake = Mathf.Clamp(takeCount <= 0 ? int.MaxValue : takeCount, 0, candidates.Count);
+        List<Collider2D> result = new List<Collider2D>(toTake);
+        for (int i = 0; i < toTake; i++)
+            result.Add(candidates[i].col);
+        return result;
     }
 }
