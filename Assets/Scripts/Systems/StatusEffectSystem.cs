@@ -21,6 +21,7 @@ public class StatusEffectSystem : MonoBehaviour
         Shock = 5,
         Poison = 6,
         Frozen = 7,
+        Regeneration = 8,
         // Add more: Poison, Stunned, Shielded, etc.
     }
 
@@ -56,6 +57,13 @@ public class StatusEffectSystem : MonoBehaviour
 
     [Tooltip("Optional: target health. If not set, auto-finds on this GameObject.")]
     [SerializeField] private SimpleHealth health; // your health system
+
+    [Header("Regeneration")]
+    [Tooltip("If true, Regeneration ticks will call SimpleHealth.Heal().")]
+    [SerializeField] private bool enableRegeneration = true;
+
+    [Tooltip("Healing applied per tick while Regeneration is active (rounded to int).")]
+    [SerializeField] public float regenerationPerTick = 5f;
 
     [Header("UnityEvent Defaults")]
     [SerializeField, Min(0.01f)] private float defaultDuration = 5f;
@@ -227,6 +235,18 @@ public class StatusEffectSystem : MonoBehaviour
             poisonDamagePerTick = amount;
     }
 
+    /// <summary>
+    /// Sets regeneration heal per tick.
+    /// If the given amount is higher than the current regeneration amount, it replaces it.
+    /// </summary>
+    public void SetRegenerationAmount(float amount)
+    {
+        if (amount <= 0f) return;
+
+        if (amount > regenerationPerTick)
+            regenerationPerTick = amount;
+    }
+
 
     // ---- Built-in handlers ----
     private void HandleBuiltIn(StatusType type)
@@ -266,6 +286,18 @@ public class StatusEffectSystem : MonoBehaviour
             }
             // If no health found, we silently skip (no debug spam).
         }
+
+        if (type == StatusType.Regeneration && enableRegeneration && regenerationPerTick > 0f)
+        {
+            if (health != null)
+            {
+                int heal = Mathf.Max(1, Mathf.RoundToInt(regenerationPerTick));
+                // Uses your health system's public API:
+                // SimpleHealth.Heal(int amount)
+                health.Heal(heal);
+            }
+            // If no health found, we silently skip (no debug spam).
+        }
     }
 
 #if UNITY_EDITOR
@@ -277,5 +309,8 @@ public class StatusEffectSystem : MonoBehaviour
 
     [ContextMenu("Test: Add Poison (5s, 1s tick)")]
     private void _TestAddPoison() => AddStatus(StatusType.Poison, 5f, 1f);
+
+    [ContextMenu("Test: Add Regeneration (5s, 1s tick)")]
+    private void _TestAddRegen() => AddStatus(StatusType.Regeneration, 5f, 1f);
 #endif
 }

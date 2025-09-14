@@ -54,7 +54,7 @@ public class MonsterRarity : MonoBehaviour
     private SimpleHealth health;        // needs public: int maxHealth, int currentHealth, float regenRate, float armor;
                                         // public UnityEngine.UI.Slider healthSlider; public TMPro.TextMeshProUGUI healthText;
                                         // public string extraTextField; public void Heal(int amt); public void UpdateStatsText();
-    // (Removed) private EnemyChaser chaser;  // movement speed upgrade removed
+                                        // (Removed) private EnemyChaser chaser;  // movement speed upgrade removed
     private Knife[] knives;             // must have public fields used below
     private SimpleShooter[] shooters;   // must have public fields used below
     private WeaponTick[] ticks;         // needs public: float interval; public void ResetAndStart();
@@ -129,8 +129,8 @@ public class MonsterRarity : MonoBehaviour
         {
             Rarity.Common => 1,
             Rarity.Uncommon => 2,
-            Rarity.Rare => 4,
-            Rarity.Legendary => 5,
+            Rarity.Rare => 3,
+            Rarity.Legendary => 4,
             _ => 1
         };
 
@@ -347,8 +347,6 @@ public class MonsterRarity : MonoBehaviour
         if (shooters != null)
             foreach (var s in shooters)
                 if (s) s.damageType = chosen;
-
-        WN("Damage Type", chosen.ToString());
     }
 
     // ===== Rarity & UI =====
@@ -369,7 +367,7 @@ public class MonsterRarity : MonoBehaviour
         var sb = new StringBuilder();
 
         // Header
-        sb.AppendLine($"<b>{C(C_LABEL, "Rarity:")} {FormatRarity(rarity)}</b>");
+        // sb.AppendLine($"<b>{C(C_LABEL, "Rarity:")} {FormatRarity(rarity)}</b>");
 
         // Enemy section
         if (notesEnemy.Count > 0)

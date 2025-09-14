@@ -929,6 +929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417756cd4c94eef498d4c38e016c552b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetingMode: 0
   radius: 2.5
   damage: 35
   damageType: 0
@@ -1741,6 +1742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417756cd4c94eef498d4c38e016c552b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetingMode: 0
   radius: 2
   damage: 15
   damageType: 0
@@ -4422,7 +4424,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.65, y: 1}
   m_EdgeRadius: 0
 --- !u!82 &4683568674584910072
 AudioSource:
@@ -4649,6 +4651,8 @@ MonoBehaviour:
   enablePoison: 1
   poisonDamagePerTick: 5
   health: {fileID: 0}
+  enableRegeneration: 1
+  regenerationPerTick: 3
   defaultDuration: 5
   defaultTickInterval: 1
 --- !u!81 &6608178519213617443
@@ -8417,6 +8421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417756cd4c94eef498d4c38e016c552b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetingMode: 0
   radius: 0.7
   damage: 5
   damageType: 0
@@ -12875,6 +12880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417756cd4c94eef498d4c38e016c552b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetingMode: 0
   radius: 1.9
   damage: 10
   damageType: 0
@@ -16682,6 +16688,8 @@ MonoBehaviour:
     sprite: {fileID: 6695184522474040031, guid: a23ca7aa23835dd48b4a28b61201ffa4, type: 3}
   - type: 7
     sprite: {fileID: -507184262331359192, guid: 9799cf05f39e7b74f850ecdfc225c03c, type: 3}
+  - type: 8
+    sprite: {fileID: -7252421338754634560, guid: 411652de91e329549901bf7e0db02e9b, type: 3}
 --- !u!1 &6278243993951913938
 GameObject:
   m_ObjectHideFlags: 0
@@ -18067,6 +18075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417756cd4c94eef498d4c38e016c552b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetingMode: 0
   radius: 5.25
   damage: 20
   damageType: 0
@@ -20442,6 +20451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417756cd4c94eef498d4c38e016c552b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetingMode: 0
   radius: 0.44
   damage: 20
   damageType: 0
