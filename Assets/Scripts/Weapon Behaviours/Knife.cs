@@ -53,8 +53,6 @@ public class Knife : MonoBehaviour
     [Range(0f, 1f)] public float critChance = 0f;
     [Min(1f)] public float critMultiplier = 2f;
 
-    [Header("Upgrades")]
-    public WeaponUpgrades nextUpgrade;
 
     [Header("SFX")]
     [SerializeField] private AudioClip shootClip;
@@ -92,10 +90,6 @@ public class Knife : MonoBehaviour
     private void Awake()
     {
         powerUpChooser = GameObject.FindAnyObjectByType<PowerUpChooser>();
-        if (nextUpgrade != null && powerUpChooser != null)
-        {
-            powerUpChooser.powerUps.Add(nextUpgrade.Upgrade);
-        }
 
         shootSource = GetComponent<AudioSource>();
 
@@ -143,18 +137,8 @@ public class Knife : MonoBehaviour
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             const string numColor = "#8888FF";
-            WeaponUpgrades[] wu = GetComponentsInChildren<WeaponUpgrades>(true);
 
             sb.AppendLine($"<b>{transform.name} Stats</b>");
-
-            // ✅ Count enabled upgrades vs total
-            int enabledCount = 0;
-            foreach (var upgrade in wu)
-            {
-                if (upgrade != null && upgrade.gameObject.activeInHierarchy && upgrade.enabled)
-                    enabledCount++;
-            }
-            sb.AppendLine($"Upgrades: <color={numColor}>{enabledCount}</color>/<color={numColor}>{wu.Length}</color>");
 
             sb.AppendLine($"Damage: <color={numColor}>{damage}</color>");
             string dtColor = GetDamageTypeHex(damageType);

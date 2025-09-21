@@ -18,8 +18,6 @@ public class Accessory : MonoBehaviour
     [Header("Event to trigger on Awake")]
     public UnityEvent onAwake;
 
-    [Header("Upgrades")]
-    [HideInInspector] public AccessoriesUpgrades nextUpgrade;
     private PowerUpChooser powerUpChooser;
 
     // --- UI (mirrors Knife) ---
@@ -36,11 +34,6 @@ public class Accessory : MonoBehaviour
     {
         // Queue accessory upgrade into PowerUpChooser
         powerUpChooser = GameObject.FindAnyObjectByType<PowerUpChooser>();
-        if (nextUpgrade == null)
-            nextUpgrade = GetComponentInChildren<AccessoriesUpgrades>(true);
-
-        if (nextUpgrade != null && powerUpChooser != null)
-            powerUpChooser.powerUps.Add(nextUpgrade.Upgrade);
 
         // Instantiate UI like Knife
         if (statsTextPrefab != null && uiParent != null)
@@ -115,17 +108,6 @@ public class Accessory : MonoBehaviour
         var sb = new StringBuilder();
         string title = string.IsNullOrWhiteSpace(AccesoryName) ? name : AccesoryName;
         sb.AppendLine($"<b>{title}</b>");
-
-        // ✅ Accessories upgrades: enabled / total
-        var allUpgrades = GetComponentsInChildren<AccessoriesUpgrades>(true);
-        int enabledUpgrades = 0;
-        for (int i = 0; i < allUpgrades.Length; i++)
-        {
-            var u = allUpgrades[i];
-            if (u != null && u.enabled && u.gameObject.activeInHierarchy)
-                enabledUpgrades++;
-        }
-        sb.AppendLine($"Upgrades: <color=#8888FF>{enabledUpgrades}</color>/<color=#8888FF>{allUpgrades.Length}</color>");
 
         if (!string.IsNullOrWhiteSpace(extraTextField))
             sb.AppendLine(extraTextField);
