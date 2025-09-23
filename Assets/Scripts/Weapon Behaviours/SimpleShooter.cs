@@ -46,12 +46,20 @@ public class SimpleShooter : MonoBehaviour
     private Image iconImage;
     private AudioSource shootSource;
     private GameObject statsGameobjectInstance;
+    public WeaponUpgrades nextUpgrade;
     PowerUpChooser powerUpChooser;
 
     private void Awake()
     {
         shootSource = GetComponent<AudioSource>();
         powerUpChooser = GameObject.FindAnyObjectByType<PowerUpChooser>();
+
+        // Enqueue once, safely
+        if (nextUpgrade != null && nextUpgrade.Upgrade != null && powerUpChooser != null && powerUpChooser.powerUps != null)
+        {
+            if (!powerUpChooser.powerUps.Contains(nextUpgrade.Upgrade))
+                powerUpChooser.powerUps.Add(nextUpgrade.Upgrade);
+        }
 
         if (statsTextPrefab != null && uiParent != null)
         {
@@ -131,6 +139,18 @@ public class SimpleShooter : MonoBehaviour
         // Build text (Knife.cs style)
         var sb = new System.Text.StringBuilder();
         sb.AppendLine($"<b>{transform.name} Stats</b>");
+
+        // ✅ Upgrades: enabled / total (in children)
+        var allUpgrades = GetComponentsInChildren<WeaponUpgrades>(true);
+        int enabledUpgrades = 0;
+        for (int i = 0; i < allUpgrades.Length; i++)
+        {
+            var u = allUpgrades[i];
+            if (u != null && u.enabled && u.gameObject.activeInHierarchy)
+                enabledUpgrades++;
+        }
+        sb.AppendLine($"Upgrades: <color={numColor}>{enabledUpgrades}</color>/<color={numColor}>{allUpgrades.Length}</color>");
+
 
         sb.AppendLine($"Damage: <color={numColor}>{damage}</color>");
         string dtColor = GetDamageTypeHex(damageType);

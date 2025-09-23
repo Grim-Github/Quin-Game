@@ -1,4 +1,4 @@
-using NaughtyAttributes;
+﻿using NaughtyAttributes;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -82,33 +82,6 @@ public class PowerUpChooser : MonoBehaviour
 
     public bool CanSelectByIndex(int index) =>
         index >= 0 && index < powerUps.Count && CanSelect(powerUps[index]);
-
-    /// <summary>
-    /// Adds a power-up definition to the available pool at runtime.
-    /// Returns false if the reference is null or already tracked.
-    /// Optionally inserts at a specific index and can sync active instances.
-    /// </summary>
-    public bool TryAddPowerUp(PowerUp newPowerUp, int insertIndex = -1, bool syncActiveInstance = true)
-    {
-        if (newPowerUp == null) return false;
-        if (powerUps.Contains(newPowerUp) || selectedPowerUps.Contains(newPowerUp))
-            return false;
-
-        if (insertIndex < 0 || insertIndex > powerUps.Count)
-            insertIndex = powerUps.Count;
-
-        if (insertIndex == powerUps.Count)
-            powerUps.Add(newPowerUp);
-        else
-            powerUps.Insert(insertIndex, newPowerUp);
-
-        if (syncActiveInstance)
-            SyncActiveToSelected();
-        else
-            RefreshStatsText();
-
-        return true;
-    }
 
     /// <summary>
     /// Choose the power-up at index. Spawns/enables its object,
@@ -313,5 +286,3 @@ static class ListPool<T>
         pool.Push(list);
     }
 }
-
-
